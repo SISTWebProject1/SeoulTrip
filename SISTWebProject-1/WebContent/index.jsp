@@ -119,7 +119,7 @@
 <!-- End header Area -->
 
 <!-- Start content Area ============================================================================= -->
-	<jsp:include page="${ main_jsp }"></jsp:include>
+ 	<jsp:include page="${main_jsp}"/>
 <!-- End content Area =============================================================================== -->
 
 <!-- start footer Area -->
