@@ -7,14 +7,14 @@ $(document).ready(function() {
     header_height_static = $(".site-header.static").outerHeight(),
     fitscreen = window_height - header_height;
 
-  $(".fullscreen").css("height", window_height);
+  $(".fullscreen").css("height", 300);
   $(".fitscreen").css("height", fitscreen);
 
   if (document.getElementById("default-select")) {
     $("select").niceSelect();
   }
 
-  // Initiate superfish on nav menu
+  // Initiate superfish on nav menud
   $(".nav-menu").superfish({
     animation: {
       opacity: "show"
@@ -153,8 +153,8 @@ $(document).ready(function() {
     nav: true,
     // autoplay: 2500,
     navText: [
-      "<span class='lnr lnr-arrow-up'></span>",
-      "<span class='lnr lnr-arrow-down'></span>"
+    	"<span class='lnr lnr-arrow-down'></span>",
+    	"<span class='lnr lnr-arrow-up'></span>"
     ]
   });
 
