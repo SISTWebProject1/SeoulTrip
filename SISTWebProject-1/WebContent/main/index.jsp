@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -22,17 +23,17 @@
 	<!--
 			CSS
 			============================================= -->
-	<link rel="stylesheet" href="css/linearicons.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<link rel="stylesheet" href="css/magnific-popup.css">
-	<link rel="stylesheet" href="css/nice-select.css">
-	<link rel="stylesheet" href="css/animate.min.css">
-	<link rel="stylesheet" href="css/owl.carousel.css">
+	<link rel="stylesheet" href="../css/linearicons.css">
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/bootstrap.css">
+	<link rel="stylesheet" href="../css/magnific-popup.css">
+	<link rel="stylesheet" href="../css/nice-select.css">
+	<link rel="stylesheet" href="../css/animate.min.css">
+	<link rel="stylesheet" href="../css/owl.carousel.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="../css/main.css">
 	
 	<script type="text/javascript">
 		document.addEventListener('scroll',()=>{
@@ -55,12 +56,15 @@
 
 <body>
 
+	
+	<div class="row d-flex" style="height: 100px; background-color: #8050fa;"></div>
+
 <!-- Start header Area -->
 	<header id="header">
 		<div class="container-fluid box_1170 main-menu">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="main.jsp">서행 : 서울 여행</a>
+					<a href="main.jsp"><img src="../img/logo.png" width="100" height="60"></a>
 				</div>
 				
 				<div class="single-widget search-widget" style="display: none;">
@@ -73,19 +77,15 @@
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
 						<li class="menu-active"><a href="main.jsp">Home</a></li>
-						<li><a href="category.html">Category</a></li>
-						<li><a href="archive.html">Archive</a></li>
-						<li class="menu-has-children"><a href="">Pages</a>
+						<li><a href="category.html">명소</a></li>
+						<li><a href="archive.html">음식점</a></li>
+						<li><a href="archive.html">축제</a></li>
+						<li class="menu-has-children"><a href="">마이페이지</a>
 							<ul>
-								<li><a href="elements.html">Elements</a></li>
+								<li><a href="blog-details.html">위시리스트</a></li>
+								<li><a href="blog-details.html">예약내역</a></li>
 							</ul>
 						</li>
-						<li class="menu-has-children"><a href="">Blog</a>
-							<ul>
-								<li><a href="blog-details.html">Blog Details</a></li>
-							</ul>
-						</li>
-						<li><a href="contact.html">Contact</a></li>
 						<li><a href="javascript:login_show()">Login</a></li>
 					</ul>
 				</nav>
@@ -115,6 +115,12 @@
 		<div class="login_back" onclick="login_hide()"></div>
 	</div>
 	<!-- End login Area -->
+	
+	<!-- Start banner Area -->
+			<c:if test="${ banner_on == true }">
+				<jsp:include page="main_banner.jsp"/>
+			</c:if>
+	<!-- Start banner Area -->
 	
 <!-- End header Area -->
 
@@ -187,21 +193,21 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</footer>
 <!-- End footer Area -->
 
-<script src="js/vendor/jquery-2.2.4.min.js"></script>
+<script src="../js/vendor/jquery-2.2.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
  crossorigin="anonymous"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
+<script src="../js/vendor/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-<script src="js/easing.min.js"></script>
-<script src="js/hoverIntent.js"></script>
-<script src="js/superfish.min.js"></script>
-<script src="js/jquery.ajaxchimp.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/jquery.nice-select.min.js"></script>
-<script src="js/waypoints.min.js"></script>
-<script src="js/mail-script.js"></script>
-<script src="js/main.js"></script>
+<script src="../js/easing.min.js"></script>
+<script src="../js/hoverIntent.js"></script>
+<script src="../js/superfish.min.js"></script>
+<script src="../js/jquery.ajaxchimp.min.js"></script>
+<script src="../js/jquery.magnific-popup.min.js"></script>
+<script src="../js/owl.carousel.min.js"></script>
+<script src="../js/jquery.nice-select.min.js"></script>
+<script src="../js/waypoints.min.js"></script>
+<script src="../js/mail-script.js"></script>
+<script src="../js/main.js"></script>
 
 </body>
 </html>

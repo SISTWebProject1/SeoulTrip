@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<section class="banner-area">
+<section class="banner-area main-banner">
 	<div class="container box_1170">
 		<div class="row fullscreen d-flex align-items-center justify-content-center">
 			<div class="banner-content text-center col-lg-8">
