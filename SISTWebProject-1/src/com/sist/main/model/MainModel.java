@@ -12,7 +12,7 @@ public class MainModel {
 	@RequestMapping("main/main.do")
 	public String main_main(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "main_content.jsp");
-		//request.setAttribute("banner_on", true);
+		request.setAttribute("banner_on", true);
 		
 		return "index.jsp";
 	}
