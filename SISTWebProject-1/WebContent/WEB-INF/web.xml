@@ -10,13 +10,13 @@
   	<init-param>
 		<param-name>contextConfigLocation</param-name>
 		
-		<param-value>C:\Users\sist\git\SISTWebProject-111\SISTWebProject-1\WebContent\WEB-INF\app.xml</param-value>
+		<param-value>C:\Users\sist\git\SISTWebProject-frm\SISTWebProject-1\WebContent\WEB-INF\app.xml</param-value>
 	</init-param>
 	
 	<init-param>
 		<param-name>defaultPath</param-name>
 		
-		<param-value>C:\Users\sist\git\SISTWebProject-111\SISTWebProject-1\src</param-value>
+		<param-value>C:\Users\sist\git\SISTWebProject-frm\SISTWebProject-1\src</param-value>
 	</init-param>
   </servlet>
   
