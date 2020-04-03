@@ -56,9 +56,6 @@
 
 <body>
 
-	
-	<div class="row d-flex" style="height: 100px; background-color: #8050fa;"></div>
-
 <!-- Start header Area -->
 	<header id="header">
 		<div class="container-fluid box_1170 main-menu">
