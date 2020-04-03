@@ -5,12 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>profile</title>
-
-<!-- 
+<link
+	href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500"
+	rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Lato:400,500,900'
+	rel='stylesheet' type='text/css'>
+<!--
 			CSS
-			============================================= 
- -->
-
+			============================================= -->
 <link rel="stylesheet" href="../css/linearicons.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/bootstrap.css">
@@ -23,7 +25,6 @@
 <link rel="stylesheet" href="../css/profile_Instar.css">
 <link rel="stylesheet" href="../css/upload.css">
 <link rel="stylesheet" href="../css/dropdown.css">
-
 
 <style type="text/css">
 .body {
@@ -47,30 +48,44 @@
 	background-color: white;
 	margin: 40px;
 }
-.nav-menu > li{
-margin: 15px;
+
+.nav-menu>li {
+	margin: 15px;
 }
-.nav-menu > li > a{
-font-size: 15px;
+
+.nav-menu>li>a {
+	font-size: 15px;
 }
 </style>
 
-<!--  
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
+
 <script type="text/javascript">
 	function upload() {
 		window.open("upload.jsp", "upload",
 				"width=800,height=500 scrollbars=yes");
 	}
 </script>
-
--->
 </head>
 <body>
-	<!-- start banner Area -->
+	<!-- Start banner Area -->
+	<section class="banner-area relative">
+		<div class="overlay overlay-bg"></div>
+		<div class="container box_1170">
+			<div class="row d-flex align-items-center justify-content-center">
+				<div class="about-content col-md-4" style="text-align: center">
+					<div >
+						<h1 class="text-white">사진 추가</h1>
+						<input type="file" />
+					</div>
 
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End banner Area -->
 
 	<!-- blog Area -->
 	<div class="container" style="margin: 10px;">
@@ -116,6 +131,7 @@ font-size: 15px;
 		</div>
 		<!-- End of profile section -->
 		<!-- Modal -->
+		<jsp:include page="modal.jsp"></jsp:include>
 		<!-- Modal end-->
 	</div>
 	<!-- End of container -->
@@ -125,7 +141,7 @@ font-size: 15px;
 			<li><a href="find_review.jsp">활동 피드</a></li>
 			<li><a href="wishlist.jsp">여행</a></li>
 			<li><a href="#">사진</a></li>
-			<li><a href="">예약정보</a></li>
+			<li><a href="#">예약정보</a></li>
 		</ul>
 	</nav>
 
@@ -174,9 +190,10 @@ font-size: 15px;
 			</div>
 		</div>
 	</div>
-	
+	<!-- Blog Area -->
+
 	<!-- End footer Area -->
-	<!-- 
+
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -195,7 +212,6 @@ font-size: 15px;
 	<script src="js/waypoints.min.js"></script>
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
-	
- -->
+
 </body>
 </html>
