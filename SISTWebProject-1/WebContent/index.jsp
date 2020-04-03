@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -22,6 +25,7 @@
 	<!--
 			CSS
 			============================================= -->
+			
 	<link rel="stylesheet" href="css/linearicons.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
@@ -29,6 +33,7 @@
 	<link rel="stylesheet" href="css/nice-select.css">
 	<link rel="stylesheet" href="css/animate.min.css">
 	<link rel="stylesheet" href="css/owl.carousel.css">
+	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -60,7 +65,7 @@
 		<div class="container-fluid box_1170 main-menu">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="main.jsp">서행 : 서울 여행</a>
+					<a href="main.do">서행 : 서울 여행</a>
 				</div>
 				
 				<div class="single-widget search-widget" style="display: none;">
@@ -77,7 +82,7 @@
 						<li><a href="archive.html">Archive</a></li>
 						<li class="menu-has-children"><a href="">Pages</a>
 							<ul>
-								<li><a href="elements.html">Elements</a></li>
+								<li><a href="mypage/elements.html">Elements</a></li>
 							</ul>
 						</li>
 						<li class="menu-has-children"><a href="">Blog</a>
@@ -86,6 +91,7 @@
 							</ul>
 						</li>
 						<li><a href="contact.html">Contact</a></li>
+						<li><a href="mypage/profile.do">profile</a></li>
 						<li><a href="javascript:login_show()">Login</a></li>
 					</ul>
 				</nav>

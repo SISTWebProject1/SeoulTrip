@@ -26,14 +26,14 @@
 <!--
 			CSS
 			============================================= -->
-<link rel="stylesheet" href="css/linearicons.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/magnific-popup.css">
-<link rel="stylesheet" href="css/nice-select.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="../css/linearicons.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/nice-select.css">
+<link rel="stylesheet" href="../css/animate.min.css">
+<link rel="stylesheet" href="../css/owl.carousel.css">
+<link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -55,7 +55,7 @@
 				</div>
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="index.html">Home</a></li>
+						<li class="menu-active"><a href="../main.do">Home</a></li>
 						<li><a href="category.html">Category</a></li>
 						<li><a href="archive.html">Archive</a></li>
 						<li class="menu-has-children"><a href="">Pages</a>
@@ -99,29 +99,29 @@
 		<div class="row" style="margin: 50px;">
 			<div class="col-md-4">
 				<div class="thumbnail">
-					<a href="img/banner_1.jpg" target="_blank"> <img
-						src="img/banner_1.jpg" alt="Lights" style="width: 100%">
+					<a href="../img/mypage/banner_1.jpg" target="_blank"> <img
+						src="../img/mypage/banner_1.jpg" alt="Lights" style="width: 100%">
 					</a>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="thumbnail">
-					<a href="img/banner_1.jpg" target="_blank"> <img
-						src="img/banner_1.jpg" alt="Nature" style="width: 100%">
+					<a href="../img/mypage/banner_1.jpg" target="_blank"> <img
+						src="../img/mypage/banner_1.jpg" alt="Nature" style="width: 100%">
 					</a>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="thumbnail">
-					<a href="img/banner_1.jpg" target="_blank"> <img
-						src="img/banner_1.jpg" alt="Fjords" style="width: 100%">
+					<a href="../img/mypage/banner_1.jpg" target="_blank"> <img
+						src="../img/mypage/banner_1.jpg" alt="Fjords" style="width: 100%">
 					</a>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="thumbnail">
-					<a href="img/banner_1.jpg" target="_blank"> <img
-						src="img/banner_1.jpg" alt="Nature" style="width: 100%">
+					<a href="../img/mypage/banner_1.jpg" target="_blank"> <img
+						src="../img/mypage/banner_1.jpg" alt="Nature" style="width: 100%">
 					</a>
 				</div>
 			</div>

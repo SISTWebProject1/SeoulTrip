@@ -5,23 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>profile</title>
-<link
-	href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500"
-	rel="stylesheet">
-<!--
+
+<!-- 
 			CSS
-			============================================= -->
+			============================================= 
+ -->
+
 <link rel="stylesheet" href="../css/linearicons.css">
 <link rel="stylesheet" href="../css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/bootstrap.css">
 <link rel="stylesheet" href="../css/magnific-popup.css">
-<link rel="stylesheet" href="css/nice-select.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="css/owl.carousel.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/profile_Instar.css">
-<link rel="stylesheet" href="css/upload.css">
-<link rel="stylesheet" href="css/dropdown.css">
+<link rel="stylesheet" href="../css/nice-select.css">
+<link rel="stylesheet" href="../css/animate.min.css">
+<link rel="stylesheet" href="../css/owl.carousel.css">
+<link rel="stylesheet" href="../css/main.css">
+
+<link rel="stylesheet" href="../css/profile_Instar.css">
+<link rel="stylesheet" href="../css/upload.css">
+<link rel="stylesheet" href="../css/dropdown.css">
+
 
 <style type="text/css">
 .body {
@@ -53,30 +55,22 @@ font-size: 15px;
 }
 </style>
 
-<link href='https://fonts.googleapis.com/css?family=Lato:400,500,900'
-	rel='stylesheet' type='text/css'>
+<!--  
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+ 
 <script type="text/javascript">
 	function upload() {
 		window.open("upload.jsp", "upload",
 				"width=800,height=500 scrollbars=yes");
 	}
 </script>
+
+-->
 </head>
 <body>
 	<!-- start banner Area -->
-	<section class="banner-area relative">
-		<div class="overlay overlay-bg"></div>
-		<div class="container">
-			<div class="row d-flex align-items-center justify-content-center">
-				<div class="about-content col-lg-12">
-					<input type="file" value="사진 추가">
-				</div>
-			</div>
-		</div>
-	</section>
+
 
 	<!-- blog Area -->
 	<div class="container" style="margin: 10px;">
@@ -122,7 +116,6 @@ font-size: 15px;
 		</div>
 		<!-- End of profile section -->
 		<!-- Modal -->
-		<jsp:include page="modal.jsp"></jsp:include>
 		<!-- Modal end-->
 	</div>
 	<!-- End of container -->
@@ -132,7 +125,7 @@ font-size: 15px;
 			<li><a href="find_review.jsp">활동 피드</a></li>
 			<li><a href="wishlist.jsp">여행</a></li>
 			<li><a href="#">사진</a></li>
-			<li><a href="#">예약정보</a></li>
+			<li><a href="">예약정보</a></li>
 		</ul>
 	</nav>
 
@@ -183,7 +176,7 @@ font-size: 15px;
 	</div>
 	
 	<!-- End footer Area -->
-
+	<!-- 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -202,6 +195,7 @@ font-size: 15px;
 	<script src="js/waypoints.min.js"></script>
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
-
+	
+ -->
 </body>
 </html>
