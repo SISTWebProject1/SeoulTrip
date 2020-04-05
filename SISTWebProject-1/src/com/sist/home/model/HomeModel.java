@@ -9,12 +9,12 @@ import com.sist.controller.RequestMapping;
 @Controller
 public class HomeModel {
 	
-	@RequestMapping("main/home.do")
+	@RequestMapping("home/home.do")
 	public String main_main(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../home/home.jsp");
 		request.setAttribute("banner_on", true);
 		
-		return "index.jsp";
+		return "../main/index.jsp";
 	}
 
 }

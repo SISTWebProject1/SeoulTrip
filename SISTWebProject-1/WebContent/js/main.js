@@ -271,4 +271,36 @@ $(document).ready(function() {
       .find("form")
       .ajaxChimp();
   });
+  
+  $(document).ready(function(){
+	  $('#login input[type="login"]').click(function(){
+		  $.ajax({
+			  url : '../login_ok.do',
+			  type : 'POST',
+			  data : {
+				  email : $('#login #email').val(),
+				  password : $('#login #password').val()
+			  },
+			  success : function(login_ok_msg) {
+				  if(login_ok_msg.startsWith('NOID')) {
+					  alert('ID가 존재하지 않습니다.');
+				  } else if(login_ok_msg.statsWith('NOPWD')) {
+					  alert('비밀번호가 일치하지 않습니다.')
+				  } else if(login_ok_msg.startsWith('SUCCESS')) {
+					  var photo = login_ok_msg.split('|')[1];
+					  var name = login_ok_msg.split('|')[2];
+					  
+					  var list = $('#header .nav-menu');
+					  list.children().last().remove();
+					  list.append('<li><a href="#">Logout</a></li>');
+					  list.append('<li><a href="#"><img src="'+photo+'">'+name+'님 환영합니다.</a></li>');
+					  location.reload();
+				  } else {
+					  alert('오류');
+				  }
+			  }
+		  });
+	  });
+  });
+  
 });

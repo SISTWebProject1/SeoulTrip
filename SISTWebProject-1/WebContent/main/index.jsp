@@ -83,7 +83,16 @@
 								<li><a href="blog-details.html">예약내역</a></li>
 							</ul>
 						</li>
-						<li><a href="javascript:login_show()">Login</a></li>
+						<c:choose>
+							<c:when test="${ not empty ss_member }">
+								<li><a href="#">Logout</a></li>
+								<li><a href="#"><img src="${ ss_member.photo }">${ ss_member.name }님 환영합니다.</a></li>
+							</c:when>
+							
+							<c:otherwise>
+								<li><a href="javascript:login_show()">Login</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</nav>
 			</div>
@@ -93,7 +102,7 @@
 	<!-- Start login Area -->	
 	<div id="login" class="text-center">
 		<div class="login_content">
-			<form method="post" action="login_ok.jsp" target="_blank">
+			<form method="post" action="../login_ok.do" target="_blank">
 			  <div class="input-group">
 			    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 			    <input id="email" type="text" class="form-control" name="email" placeholder="ID">
@@ -103,7 +112,7 @@
 			    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
 			  </div>
 			  <div class="input-group">
-			    <input type="submit" class="btn btn-sm btn-primary" value="login">
+			    <input type="login" class="btn btn-sm btn-primary" value="login">
 				<input type="reset" class="btn btn-sm btn-danger" value="cancel" onclick="login_hide()">
 			  </div>
 			</form>
@@ -114,9 +123,9 @@
 	<!-- End login Area -->
 	
 	<!-- Start banner Area -->
-			<c:if test="${ banner_on == true }">
-				<jsp:include page="main_banner.jsp"/>
-			</c:if>
+	<c:if test="${ banner_on == true }">
+		<jsp:include page="main_banner.jsp"/>
+	</c:if>
 	<!-- Start banner Area -->
 	
 <!-- End header Area -->

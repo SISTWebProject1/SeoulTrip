@@ -2776,6 +2776,11 @@ body.mobile-nav-active #mobile-nav-toggle {
 	right: 10px;
 }
 
+#header #nav-menu-container li a img {
+	width: 30px !important;
+	border-radius: 5px;
+}
+
 #login {
 	display: none;
 	z-index: 5;
