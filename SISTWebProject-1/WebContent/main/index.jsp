@@ -89,7 +89,7 @@
 						</li>
 						<c:choose>
 							<c:when test="${ not empty ss_member }">
-								<li><a href="#">Logout</a></li>
+								<li><a href="../logout_ok.do">Logout</a></li>
 								<li><a href="#"><img src="${ ss_member.photo }">${ ss_member.name }님 환영합니다.</a></li>
 							</c:when>
 							
@@ -201,7 +201,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			</div>
 		</div>
 		
-		<input id="memberInfo" type="text" value="asdf"/>
+		<input id="memberInfo" type="hidden" value="asdf"/>
 		
 	</footer>
 <!-- End footer Area -->

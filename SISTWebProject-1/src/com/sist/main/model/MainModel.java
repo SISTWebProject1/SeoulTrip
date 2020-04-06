@@ -48,5 +48,46 @@ public class MainModel {
 		
 		return "main/login_ok.jsp";
 	}
+	
+	@RequestMapping("logout_ok.do")
+	public String logout_ok(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().removeAttribute("ss_member");
+		
+		return "redirect:home/home.do";
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
