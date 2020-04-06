@@ -5,31 +5,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+    <link rel="stylesheet" href="../css/linearicons.css" />
+    <link rel="stylesheet" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.css" />
+    <link rel="stylesheet" href="../css/magnific-popup.css" />
+    <link rel="stylesheet" href="../css/nice-select.css" />
+    <link rel="stylesheet" href="../css/animate.min.css" />
+    <link rel="stylesheet" href="../css/owl.carousel.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/detail.css"/>
 </head>
 <body>
-<%-- <!-- Start home_calendar Area -->
-	<jsp:include page="../home/home_calendar.jsp"></jsp:include>
-<!-- Start home_calendar Area -->
-
-<!-- Start body Area -->
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-xs-9 home_content">
-				<!-- Start content Area -->
-					<jsp:include page="../home/home_content.jsp"></jsp:include>
-				<!-- End content Area -->			
-			</div>
-			<div class="col-xs-3 home_side">
-				<!-- Start side Area -->
-				<div style="position: sticky; top: 130px;">
-					<jsp:include page="../home/home_side.jsp"></jsp:include>
-				</div>
-				<!-- End side Area -->
-			</div>
-		</div>
-	</div> --%>
-<!-- End body Area -->
-<!-- Detail Bottom Area -->
  <jsp:include page="../detail/detail_info.jsp"></jsp:include>
  <jsp:include page="../detail/detail_review.jsp"></jsp:include>
  <jsp:include page="../detail/detail_bottom.jsp"></jsp:include>
