@@ -73,18 +73,29 @@
 				
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="main.jsp">Home</a></li>
-						<li><a href="category.html">명소</a></li>
-						<li><a href="archive.html">음식점</a></li>
-						<li><a href="archive.html">축제</a></li>
-						<li><a href="../detail/detail.do">test</a>
+						<li class="menu-active"><a href="../home/home.do">Home</a></li>
+						<li><a href="../category/tourplace.do">명소</a></li>
+						<li><a href="../category/food.do">음식점</a></li>
+						<li><a href="../category/festival.do">축제</a></li>
+            <li><a href="../detail/detail.do">DetailTest</a>
+            <li><a href="../reservation/reservation.do">ReservationTest</a>
 						<li class="menu-has-children"><a href="">마이페이지</a>
 							<ul>
-								<li><a href="blog-details.html">위시리스트</a></li>
-								<li><a href="blog-details.html">예약내역</a></li>
+								<li><a href="../mypage/profile.do">프로필</a></li>
+								<li><a href="../mypage/wishlist.do">위시리스트</a></li>
+								<li><a href="../mypage/reservation.do">예약내역</a></li>
 							</ul>
 						</li>
-						<li><a href="javascript:login_show()">Login</a></li>
+						<c:choose>
+							<c:when test="${ not empty ss_member }">
+								<li><a href="#">Logout</a></li>
+								<li><a href="#"><img src="${ ss_member.photo }">${ ss_member.name }님 환영합니다.</a></li>
+							</c:when>
+							
+							<c:otherwise>
+								<li><a href="javascript:login_show()">Login</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 				</nav>
 			</div>
@@ -94,7 +105,7 @@
 	<!-- Start login Area -->	
 	<div id="login" class="text-center">
 		<div class="login_content">
-			<form method="post" action="login_ok.jsp" target="_blank">
+			<form method="post" action="../login_ok.do" target="_blank">
 			  <div class="input-group">
 			    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 			    <input id="email" type="text" class="form-control" name="email" placeholder="ID">
@@ -104,7 +115,7 @@
 			    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
 			  </div>
 			  <div class="input-group">
-			    <input type="submit" class="btn btn-sm btn-primary" value="login">
+			    <input type="login" class="btn btn-sm btn-primary" value="login">
 				<input type="reset" class="btn btn-sm btn-danger" value="cancel" onclick="login_hide()">
 			  </div>
 			</form>
@@ -115,9 +126,9 @@
 	<!-- End login Area -->
 	
 	<!-- Start banner Area -->
-			<c:if test="${ banner_on == true }">
-				<jsp:include page="main_banner.jsp"/>
-			</c:if>
+	<c:if test="${ banner_on == true }">
+		<jsp:include page="main_banner.jsp"/>
+	</c:if>
 	<!-- Start banner Area -->
 	
 <!-- End header Area -->
@@ -188,6 +199,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 			</div>
 		</div>
+		
+		<input id="memberInfo" type="text" value="asdf"/>
+		
 	</footer>
 <!-- End footer Area -->
 
