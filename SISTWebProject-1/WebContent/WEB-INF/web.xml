@@ -5,6 +5,7 @@
   <servlet>
   	<servlet-name>mvc</servlet-name>
   	
+  	
   	<servlet-class>com.sist.controller.DispatcherServlet</servlet-class>
   	
   	<init-param>

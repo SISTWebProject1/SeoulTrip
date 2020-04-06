@@ -74,7 +74,7 @@
 				<div id="logo">
 					<a href="main.do">서행 : 서울 여행</a>
 				</div>
-
+<!-- 232323232 -->
 				<div class="single-widget search-widget" style="display: none;">
 					<form class="example" action="#"
 						style="margin: auto; max-width: 300px">
