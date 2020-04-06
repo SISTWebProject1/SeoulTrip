@@ -270,27 +270,6 @@ $(document).ready(function() {
     $("#mc_embed_signup")
       .find("form")
       .ajaxChimp();
-    
-    $('#memberInfo').change(function(){
-		  var memberInfo = $('#memberInfo').val();
-		  alert(memberInfo);
-		  
-		  if(memberInfo.startsWith('NOID')) {
-			  alert('ID가 존재하지 않습니다.');
-		  } else if(memberInfo.statsWith('NOPWD')) {
-			  alert('비밀번호가 일치하지 않습니다.');
-		  } else if(memberInfo.startsWith('SUCCESS')) {
-			  var photo = memberInfo.split('|')[1];
-			  var name = memberInfo.split('|')[2];
-			  
-			  var list = $('#header .nav-menu');
-			  list.children().last().remove();
-			  list.append('<li><a href="#">Logout</a></li>');
-			  list.append('<li><a href="#"><img src="'+photo+'">'+name+'님 환영합니다.</a></li>');
-		  } else {
-			  alert('오류');
-		  }
-	  });
 	  
 	  $('#login input[type="login"]').click(function(){
 		  $.ajax({
@@ -302,11 +281,32 @@ $(document).ready(function() {
 			  },
 			  success : function(login_ok_msg) {
 				  login_hide();
-				  var memInfo = $('#memberInfo');
-				  memInfo.val(login_ok_msg);
-				  memInfo.trigger('change');
+				  var membInfo = $('#memberInfo');
+				  membInfo.val(login_ok_msg);
+				  membInfo.trigger('click');
 			  }
 		  });
+	  });
+	  
+	  $('#memberInfo').bind('click', function(){
+		  var memberInfo = $('#memberInfo').val();
+		  
+		  if(memberInfo.startsWith('NOID')) {
+			  alert('ID가 존재하지 않습니다.');
+		  } else if(memberInfo.startsWith('NOPWD')) {
+			  alert('비밀번호가 일치하지 않습니다.');
+		  } else if(memberInfo.startsWith('SUCCESS')) {
+			  var memberInfo = memberInfo.split('|');
+			  var memberPhoto = memberInfo[1];
+			  var memberName = memberInfo[2];
+			  
+			  var list = $('#header .nav-menu');
+			  list.children().last().remove();
+			  list.append('<li><a href="../logout_ok.do">Logout</a></li>');
+			  list.append('<li><a href="#"><img src="'+memberPhoto+'">&nbsp;&nbsp;'+memberName+'님 환영합니다.</a></li>');
+		  } else {
+			  alert('오류');
+		  }
 	  });
   });
   
