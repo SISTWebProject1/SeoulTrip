@@ -61,7 +61,7 @@
 		<div class="container-fluid box_1170 main-menu">
 			<div class="row align-items-center justify-content-between d-flex">
 				<div id="logo">
-					<a href="main.jsp"><img src="../img/logo.png" width="100" height="60"></a>
+					<a href="../home/home.do"><img src="../img/logo.png" width="100" height="60"></a>
 				</div>
 				
 				<div class="single-widget search-widget" style="display: none;">
@@ -77,6 +77,8 @@
 						<li><a href="../category/tourplace.do">명소</a></li>
 						<li><a href="../category/food.do">음식점</a></li>
 						<li><a href="../category/festival.do">축제</a></li>
+            <li><a href="../detail/detail.do">DetailTest</a>
+            <li><a href="../reservation/reservation.do">ReservationTest</a>
 						<li class="menu-has-children"><a href="">마이페이지</a>
 							<ul>
 								<li><a href="../mypage/profile.do">프로필</a></li>
@@ -218,6 +220,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../js/waypoints.min.js"></script>
 <script src="../js/mail-script.js"></script>
 <script src="../js/main.js"></script>
-
+<script src="../js/detail/imageGallery.js"></script>
+<script src="../js/detail/scrolling.js"></script>
+<script src="../js/detail/selectBoard.js"></script>
 </body>
 </html>
