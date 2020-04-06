@@ -73,14 +73,15 @@
 				
 				<nav id="nav-menu-container">
 					<ul class="nav-menu">
-						<li class="menu-active"><a href="main.jsp">Home</a></li>
-						<li><a href="category.html">명소</a></li>
-						<li><a href="archive.html">음식점</a></li>
-						<li><a href="archive.html">축제</a></li>
+						<li class="menu-active"><a href="../home/home.do">Home</a></li>
+						<li><a href="../category/tourplace.do">명소</a></li>
+						<li><a href="../category/food.do">음식점</a></li>
+						<li><a href="../category/festival.do">축제</a></li>
 						<li class="menu-has-children"><a href="">마이페이지</a>
 							<ul>
-								<li><a href="blog-details.html">위시리스트</a></li>
-								<li><a href="blog-details.html">예약내역</a></li>
+								<li><a href="../mypage/profile.do">프로필</a></li>
+								<li><a href="../mypage/wishlist.do">위시리스트</a></li>
+								<li><a href="../mypage/reservation.do">예약내역</a></li>
 							</ul>
 						</li>
 						<c:choose>
@@ -196,6 +197,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 			</div>
 		</div>
+		
+		<input id="memberInfo" type="text" value="asdf"/>
+		
 	</footer>
 <!-- End footer Area -->
 
