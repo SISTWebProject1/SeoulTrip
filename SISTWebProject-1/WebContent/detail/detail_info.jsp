@@ -93,17 +93,17 @@
             <div class="col-lg-6 col-md-6">
               <div class="single-post-item short">
                 <div class="main-image">
-                <img src="./img/gallery/1.jpg" alt="image1" id="current" />
+                <img src="../img/detail/1.jpg" alt="image1" id="current" />
               </div>
               <div class="imgs">
-                <img src="./img/detail/1.jpg" />
-                <img src="./img/detail/2.jpg" />
-                <img src="./img/detail/3.jpg" />
-                <img src="./img/detail/4.jpg" />
-                <img src="./img/detail/5.jpg" />
-                <img src="./img/detail/6.jpg" />
-                <img src="./img/detail/7.jpg" />
-                <img src="./img/detail/8.jpg" />
+                <img src="../img/detail/1.jpg" />
+                <img src="../img/detail/2.jpg" />
+                <img src="../img/detail/3.jpg" />
+                <img src="../img/detail/4.jpg" />
+                <img src="../img/detail/5.jpg" />
+                <img src="../img/detail/6.jpg" />
+                <img src="../img/detail/7.jpg" />
+                <img src="../img/detail/8.jpg" />
               </div>
             </div>
           </div>
