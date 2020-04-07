@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+     Connection
+ -->
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!-- 
+      (typeAliases?, 
+       environments?,
+       mappers?)
+ -->
+  <typeAliases>
+    <typeAlias type="com.sist.vo.RestaurantVO" alias="RestaurantVO"/>
+  </typeAliases>
+  <environments default="development">
+    <environment id="development">
+       <transactionManager type="JDBC"></transactionManager><!-- commit,rollback -->
+       <!-- 
+           UNPOOLED
+           POOLED
+        -->
+       <dataSource type="POOLED"> <!-- 오라클 정보 -->
+         <!-- 
+               PooledDataSource p=new PooledDataSource();
+               p.setDriver(value값)
+               
+               getConnection(p.getUrl(),p.getUsername(),p.getPassword()),disConnection()
+          -->
+         <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+         <property name="url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
+         <property name="username" value="hr"/>
+         <property name="password" value="happy"/>
+       </dataSource>
+    </environment>
+  </environments>
+  <!-- 
+       <!ENTITY mapper 'board-mapper.xml'>
+       
+       => &nbsp;
+       => &mapper; => include
+   -->
+  <mappers>
+    <mapper resource="com/sist/mapper/recipe-mapper.xml"/>
+    <mapper resource="com/sist/mapper/main-mapper.xml"/>
+    <mapper resource="com/sist/mapper/member-mapper.xml"/>
+  </mappers>
+  
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
