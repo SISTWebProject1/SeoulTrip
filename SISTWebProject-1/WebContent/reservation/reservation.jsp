@@ -64,9 +64,9 @@
 		<div class="section-center">
 			<div class="container" >
 			
-				<div class="row" style="width:100%; border:1px solid red;">
+				<div class="row" style="width:100%;">
 				 
-					<div class="col-sm-6 col-md-offset-1" style="width:40%; height:auto;">
+					<div class="col-md-6 col-md-offset-1" style="width:40%; height:auto;">
 						<div class="booking-form">
 							<form method=post action="reservation_ok.jsp">
 							
@@ -150,8 +150,8 @@
 						</div>	
 					</div>	
 					
-					<div class="col-sm-6" style="width:20%; height:auto;">	
-					<img src="img/reservation.jpg" style="max-width:100%; height:auto;">
+					<div class="col-md-6" style="width:20%; height:auto;">	
+					<img src="../img/reservation.jpg" style="max-width:100%; height:auto;">
 					</div>
 						
 				</div>
