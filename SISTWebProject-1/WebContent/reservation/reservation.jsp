@@ -66,7 +66,7 @@
 			
 				<div class="row" style="width:100%;">
 				 
-					<div class="col-md-6 col-md-offset-1" style="width:40%; height:auto;">
+					<div class="col-md-6 col-md-offset-1" >
 						<div class="booking-form">
 							<form method=post action="reservation_ok.jsp">
 							
@@ -150,7 +150,7 @@
 						</div>	
 					</div>	
 					
-					<div class="col-md-6" style="width:20%; height:auto;">	
+					<div style="width:40%; height:auto; overflow:hidden;">	
 					<img src="../img/reservation.jpg" style="max-width:100%; height:auto;">
 					</div>
 						
