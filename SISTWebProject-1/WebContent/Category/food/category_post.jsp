@@ -47,9 +47,6 @@
 		});
 	</script>
 
-
-
-
 	<div class="single-widget food_left">
 		<div class="food_type">
 			<span id="multiPrint"></span><br />
