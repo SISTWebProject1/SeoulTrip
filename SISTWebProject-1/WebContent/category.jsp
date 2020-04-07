@@ -205,6 +205,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="js/waypoints.min.js"></script>
 <script src="js/mail-script.js"></script>
 <script src="js/main.js"></script>
+<script src="js/category.js"></script>
 
 </body>
 </html>
