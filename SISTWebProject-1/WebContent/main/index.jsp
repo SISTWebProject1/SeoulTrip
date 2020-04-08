@@ -43,7 +43,7 @@
 			} else {
 				$('#header .search-widget').css({"display":"block"});
 
-		})
+		});
 		
 		function login_show() {
 			document.getElementById('login').style.display = "block";
@@ -209,6 +209,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../js/vendor/jquery-2.2.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
  crossorigin="anonymous"></script>
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
+ 
 <script src="../js/vendor/bootstrap.min.js"></script>
 <script src="../js/easing.min.js"></script>
 <script src="../js/hoverIntent.js"></script>

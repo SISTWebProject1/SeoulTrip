@@ -1,20 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!-- 리뷰 뿌려주기 -->
-<div class="col-lg-10 post-list" id="Content-List">
-	<!-- Start Post Area -->
+    pageEncoding="UTF-8"%>
+<div class="col-lg-10 post-list" id="QnA-List">
 	<section class="post-area">
 		<div class="single-post-item">
 			<h3>
-				<a href="blog-details.html">It's Hurricane Season But We Are
-					Visiting Hilton Island</a>
+				<a href="blog-details.html">질문 내용은 다음과 같습니다.</a>
 			</h3>
-			<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed
-				do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-				enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
-				ut aliquip.</p>
-			<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue
-				Reading</a>
+			<p>질문 내용은 다음과 같습니다./질문 내용은 다음과 같습니다./질문 내용은 다음과 같습니다. /질문 내용은 다음과
+				같습니다./질문 내용은 다음과 같습니다./질문 내용은 다음과 같습니다. /질문 내용은 다음과 같습니다./질문 내용은 다음과
+				같습니다./질문 내용은 다음과 같습니다.</p>
+			<a href="blog-details.html" class="primary-btn text-uppercase mt-15">더보기</a>
 			<div class="post-box">
 				<div class="d-flex">
 					<div>
