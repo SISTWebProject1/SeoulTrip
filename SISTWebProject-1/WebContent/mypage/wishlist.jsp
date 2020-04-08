@@ -114,5 +114,3 @@
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
 </body>
-
-</html>

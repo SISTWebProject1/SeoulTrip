@@ -4,55 +4,56 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="img/fav.png">
-	<!-- Author Meta -->
-	<meta name="author" content="codepixer">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title>Ruft Blog</title>
+<!-- Mobile Specific Meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="codepixer">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Ruft Blog</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
-	<!--
-			CSS
-			============================================= -->
-	<link rel="stylesheet" href="../css/linearicons.css">
-	<link rel="stylesheet" href="../css/font-awesome.min.css">
-	<link rel="stylesheet" href="../css/bootstrap.css">
-	<link rel="stylesheet" href="../css/magnific-popup.css">
-	<link rel="stylesheet" href="../css/nice-select.css">
-	<link rel="stylesheet" href="../css/animate.min.css">
-	<link rel="stylesheet" href="../css/owl.carousel.css">
-	<link rel="stylesheet" href="../css/detail.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
+<!--
+		CSS
+		============================================= -->
+<link rel="stylesheet" href="../css/linearicons.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/nice-select.css">
+<link rel="stylesheet" href="../css/animate.min.css">
+<link rel="stylesheet" href="../css/owl.carousel.css">
+<link rel="stylesheet" href="../css/detail.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/main.css">
+
+<script type="text/javascript">
+	document.addEventListener('scroll',()=>{
+		if(window.scrollY < 200){
+			$('#header .search-widget').css({"display":"none"});
+		} else {
+			$('#header .search-widget').css({"display":"block"});
+		}
+	});
 	
-	<script type="text/javascript">
-		document.addEventListener('scroll',()=>{
-			if(window.scrollY < 200){
-				$('#header .search-widget').css({"display":"none"});
-			} else {
-				$('#header .search-widget').css({"display":"block"});
-			}
-		})
-		
-		function login_show() {
-			document.getElementById('login').style.display = "block";
-		}
-		
-		function login_hide() {
-			document.getElementById('login').style.display = "none";
-		}
-	</script>
+	function login_show() {
+		document.getElementById('login').style.display = "block";
+		document.getElementById('login').style.display = "block";
+	}
+	
+	function login_hide() {
+		document.getElementById('login').style.display = "none";
+	}
+</script>
 </head>
 
 <body>
@@ -78,8 +79,8 @@
 						<li><a href="../category/tourplace.do">명소</a></li>
 						<li><a href="../category/food.do">음식점</a></li>
 						<li><a href="../category/festival.do">축제</a></li>
-            <li><a href="../detail/detail.do">DetailTest</a>
-            <li><a href="../reservation/reservation.do">ReservationTest</a>
+            			<li><a href="../detail/detail.do">DetailTest</a>
+            			<li><a href="../reservation/reservation.do">ReservationTest</a>
 						<li class="menu-has-children"><a href="">마이페이지</a>
 							<ul>
 								<li><a href="../mypage/profile.do">프로필</a></li>
@@ -94,7 +95,7 @@
 							</c:when>
 							
 							<c:otherwise>
-								<li><a href="javascript:login_show()">Login</a></li>
+								<li><a href="javascript:login_show()" id="loginShow">Login</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -209,8 +210,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../js/vendor/jquery-2.2.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
  crossorigin="anonymous"></script>
+ <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
+ 
 <script src="../js/vendor/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
 <script src="../js/easing.min.js"></script>
 <script src="../js/hoverIntent.js"></script>
 <script src="../js/superfish.min.js"></script>

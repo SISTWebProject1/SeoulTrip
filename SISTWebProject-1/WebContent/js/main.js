@@ -308,6 +308,51 @@ $(document).ready(function() {
 			  alert('오류');
 		  }
 	  });
+	  
+	  $('#loginShow').click(function(){
+		 let lsOffset = $(this).offset();
+		 $('#login .login_content').offset({
+			top : lsOffset.top+80,
+			left : lsOffset.left-250
+		 });
+		 login_show();
+	  });
+	  
   });
   
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
