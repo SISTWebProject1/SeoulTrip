@@ -78,8 +78,8 @@
 						<li><a href="../category/tourplace.do">명소</a></li>
 						<li><a href="../category/food.do">음식점</a></li>
 						<li><a href="../category/festival.do">축제</a></li>
-            <li><a href="../detail/detail.do">DetailTest</a>
-            <li><a href="../reservation/reservation.do">ReservationTest</a>
+            			<li><a href="../detail/detail.do">DetailTest</a>
+            			<li><a href="../reservation/reservation.do">ReservationTest</a>
 						<li class="menu-has-children"><a href="">마이페이지</a>
 							<ul>
 								<li><a href="../mypage/profile.do">프로필</a></li>
@@ -94,7 +94,7 @@
 							</c:when>
 							
 							<c:otherwise>
-								<li><a href="javascript:login_show()">Login</a></li>
+								<li><a href="javascript:login_show()" id="loginShow">Login</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
