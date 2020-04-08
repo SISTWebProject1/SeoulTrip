@@ -11,9 +11,15 @@ import com.sist.controller.RequestMapping;
 public class MypageModel {
 
 	@RequestMapping("mypage/profile.do")
-	public String main_main(HttpServletRequest request, HttpServletResponse response) {
+	public String main_profile(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../mypage/profile8.jsp");
 //		request.setAttribute("banner_on", true);
+		
+		return "../main/index.jsp";
+	}
+	@RequestMapping("mypage/wishlist.do")
+	public String wishlist(HttpServletRequest request, HttpServletResponse response){
+		request.setAttribute("main_jsp", "../mypage/wishlist.jsp");
 		
 		return "../main/index.jsp";
 	}
