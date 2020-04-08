@@ -99,22 +99,8 @@
 				<h1 class="profile-user-name">janedoe_</h1>
 				<button class="btn profile-edit-btn" data-toggle="modal"
 					data-target="#myModal">Edit Profile</button>
-				<div>
-					<div id="dropdown">
-						<div id="drop-select" class="text-center">
-							<img src="img/user.png" />
-						</div>
-						<div id="dropdown-list">
-							<ul>
-								<li>Filmore District</li>
-								<li>Mission District</li>
-								<li>Northshare Beach</li>
-								<li>Some other branch</li>
-							</ul>
-						</div>
-					</div>
-				</div>
 			</div>
+			
 			<div class="profile-stats">
 				<ul>
 					<li><span class="profile-stat-count">164</span> posts</li>
@@ -122,12 +108,14 @@
 					<li><span class="profile-stat-count">206</span> following</li>
 				</ul>
 			</div>
+			
 			<div class="profile-bio">
 				<p>
 					<span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor
 					sit, amet consectetur adipisicing elit 📷✈️🏕️
 				</p>
 			</div>
+			
 		</div>
 		<!-- End of profile section -->
 		<!-- Modal -->
@@ -139,7 +127,7 @@
 	<nav style="background-color: black; height: 50px;">
 		<ul class="nav-menu">
 			<li><a href="find_review.jsp">활동 피드</a></li>
-			<li><a href="wishlist.jsp">여행</a></li>
+			<li><a href="../mypage/wishlist.do">여행</a></li>
 			<li><a href="#">사진</a></li>
 			<li><a href="#">예약정보</a></li>
 		</ul>
@@ -214,4 +202,3 @@
 	<script src="js/main.js"></script>
 
 </body>
-</html>

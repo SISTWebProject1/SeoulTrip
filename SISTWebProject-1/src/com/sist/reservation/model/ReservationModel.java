@@ -15,5 +15,15 @@ public class ReservationModel {
 		request.setAttribute("main_jsp", "../reservation/reservation.jsp");
 		return "../main/index.jsp";
 	}
-}
+	
+	@RequestMapping("reservation/reservation_ok.do")
+	public String reservation_ok(HttpServletRequest request, HttpServletResponse response)
+	{
+		String no=request.getParameter("no");
+		ReservationVO vo=ReservationDAO.reservationListData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
+		request.setAttribute("main_jsp","???");
+		return "????"; //어디로 갈지 생각해보기.....
+	}
+}	
 	
