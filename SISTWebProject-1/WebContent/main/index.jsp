@@ -4,55 +4,56 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<!-- Mobile Specific Meta -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<!-- Favicon-->
-	<link rel="shortcut icon" href="img/fav.png">
-	<!-- Author Meta -->
-	<meta name="author" content="codepixer">
-	<!-- Meta Description -->
-	<meta name="description" content="">
-	<!-- Meta Keyword -->
-	<meta name="keywords" content="">
-	<!-- meta character set -->
-	<meta charset="UTF-8">
-	<!-- Site Title -->
-	<title>Ruft Blog</title>
+<!-- Mobile Specific Meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Favicon-->
+<link rel="shortcut icon" href="img/fav.png">
+<!-- Author Meta -->
+<meta name="author" content="codepixer">
+<!-- Meta Description -->
+<meta name="description" content="">
+<!-- Meta Keyword -->
+<meta name="keywords" content="">
+<!-- meta character set -->
+<meta charset="UTF-8">
+<!-- Site Title -->
+<title>Ruft Blog</title>
 
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
-	<!--
-			CSS
-			============================================= -->
-	<link rel="stylesheet" href="../css/linearicons.css">
-	<link rel="stylesheet" href="../css/font-awesome.min.css">
-	<link rel="stylesheet" href="../css/bootstrap.css">
-	<link rel="stylesheet" href="../css/magnific-popup.css">
-	<link rel="stylesheet" href="../css/nice-select.css">
-	<link rel="stylesheet" href="../css/animate.min.css">
-	<link rel="stylesheet" href="../css/owl.carousel.css">
-	<link rel="stylesheet" href="../css/detail.css">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="../css/main.css">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
+<!--
+		CSS
+		============================================= -->
+<link rel="stylesheet" href="../css/linearicons.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/nice-select.css">
+<link rel="stylesheet" href="../css/animate.min.css">
+<link rel="stylesheet" href="../css/owl.carousel.css">
+<link rel="stylesheet" href="../css/detail.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/main.css">
+
+<script type="text/javascript">
+	document.addEventListener('scroll',()=>{
+		if(window.scrollY < 200){
+			$('#header .search-widget').css({"display":"none"});
+		} else {
+			$('#header .search-widget').css({"display":"block"});
+		}
+	});
 	
-	<script type="text/javascript">
-		document.addEventListener('scroll',()=>{
-			if(window.scrollY < 200){
-				$('#header .search-widget').css({"display":"none"});
-			} else {
-				$('#header .search-widget').css({"display":"block"});
-
-		});
-		
-		function login_show() {
-			document.getElementById('login').style.display = "block";
-		}
-		
-		function login_hide() {
-			document.getElementById('login').style.display = "none";
-		}
-	</script>
+	function login_show() {
+		document.getElementById('login').style.display = "block";
+		document.getElementById('login').style.display = "block";
+	}
+	
+	function login_hide() {
+		document.getElementById('login').style.display = "none";
+	}
+</script>
 </head>
 
 <body>
