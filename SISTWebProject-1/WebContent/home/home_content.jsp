@@ -38,4 +38,3 @@
 			</c:forEach>			
 		</div>
 	</c:forEach>
-</section>
