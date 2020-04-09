@@ -292,9 +292,11 @@ $(document).ready(function() {
 		  var memberInfo = $('#memberInfo').val();
 		  
 		  if(memberInfo.startsWith('NOID')) {
-			  alert('ID가 존재하지 않습니다.');
+			  $('#login_alert').html('<font color="red">ID가 존재하지 않습니다.</font>');
+			  login_show();
 		  } else if(memberInfo.startsWith('NOPWD')) {
-			  alert('비밀번호가 일치하지 않습니다.');
+			  $('#login_alert').html('<font color="red">비밀번호가 일치하지 않습니다.</font>');
+			  login_show();
 		  } else if(memberInfo.startsWith('SUCCESS')) {
 			  var memberInfo = memberInfo.split('|');
 			  var memberPhoto = memberInfo[1];

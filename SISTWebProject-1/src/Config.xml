@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.sist.main.dao.LoginVO" alias="LoginVO"/>
+		<typeAlias type="com.sist.home.model.FestivalVO" alias="FestivalVO"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -20,5 +21,6 @@
 	
 	<mappers>
 		<mapper resource="com/sist/main/dao/main-mapper.xml"/>
+		<mapper resource="com/sist/home/model/festival-mapper.xml"/>
 	</mappers>
 </configuration>
