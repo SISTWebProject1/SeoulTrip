@@ -6,11 +6,13 @@
     <servlet-class>com.sist.controller.DispatcherServlet</servlet-class>
     <init-param>
       <param-name>contextConfigLocation</param-name>
-      <param-value>C:\Users\sist\git\SISTWebProject-1\SISTWebProject-1\WebContent\WEB-INF\app.xml</param-value>
+
+      <param-value>C:\Users\sist187\git\SISTWebProject-3\SISTWebProject-1\WebContent\WEB-INF\app.xml</param-value>
     </init-param>
     <init-param>
       <param-name>defaultPath</param-name>
-      <param-value>C:\Users\sist\git\SISTWebProject-1\SISTWebProject-1\src</param-value>
+      <param-value>C:\Users\sist187\git\SISTWebProject-3\SISTWebProject-1\src</param-value>
+
     </init-param>
   </servlet>
   <servlet-mapping>
@@ -23,5 +25,7 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-</welcome-file-list>
-</web-app>
+
+  </welcome-file-list>
+  </web-app>
+
