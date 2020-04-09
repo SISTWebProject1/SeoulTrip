@@ -20,7 +20,7 @@
 						<form class="example" action="#"
 							style="margin: auto; max-width: 300px">
 							<a href="board_qna.do"><input type="button" style="font-size: 20px"
-								placeholder="Search Posts" value="질문게시판" /></a>
+								placeholder="Search Posts" value="질문게시판"  /></a>
 						</form>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 				<div class="single-widget search-widget">
 					<form class="example" action="#"
 						style="margin: auto; max-width: 300px">
-						<input type="text" placeholder="Search Posts" name="search2" />
+						<input type="text" placeholder="Search Posts" name="search2"id="keyword" />
 						<button type="submit">
 							<i class="fa fa-search"></i>
 						</button>

@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.detail.dao.*;
+import java.util.*;
 
 @Controller
 public class DetailModel {
@@ -28,5 +30,48 @@ public class DetailModel {
 
 		request.setAttribute("detail_board_jsp", "../detail/detail_qna.jsp");
 		return  "../main/index.jsp";
+	}
+	@RequestMapping("detail/detail_review.do")
+	public String detail_review(HttpServletRequest request, HttpServletResponse response){
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		String page = request.getParameter("page");
+		if(page==null)
+			page="1";
+		int curpage = Integer.parseInt(page);
+		int rowSize = 10;
+		int start = (rowSize)*curpage-(rowSize-1);
+		int end = rowSize*curpage;
+		
+		DetailDAO dao = new DetailDAO();
+		int totalpage = dao.getTotalReview();
+		
+		final int BLOCK = 10;
+		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		// 1~10 , 11~20
+		
+		int allPage = totalpage;
+		if(endPage>allPage)
+			endPage = allPage;
+		
+		Map map = new HashMap();
+		map.put("no", no);
+		map.put("type", type);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<DetailReviewVO> list = dao.getReviewData(map);
+		request.setAttribute("list", list);
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("totalpage", totalpage);
+		request.setAttribute("BLOCK", BLOCK);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("allPage", allPage);				
+		request.setAttribute("main_jsp", "../detail/detail.jsp");
+		request.setAttribute("detail_board_jsp","../detail/detail_review.jsp");
+
+		return "../main/index.jsp";
 	}
 }
