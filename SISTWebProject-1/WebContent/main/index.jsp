@@ -120,6 +120,7 @@
 			    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 			    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
 			  </div>
+			  <p id="login_alert" class="text-right"></p>
 			  <div class="input-group">
 			    <input type="login" class="btn btn-sm btn-primary" value="login">
 				<input type="reset" class="btn btn-sm btn-danger" value="cancel" onclick="login_hide()">
