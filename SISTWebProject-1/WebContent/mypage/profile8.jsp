@@ -70,7 +70,7 @@
 <body>
 	<!-- Start banner Area -->
 		<jsp:include page="my_image.jsp"></jsp:include>
-	</section>
+
 	<!-- End banner Area -->
 
 	<!-- blog Area -->
