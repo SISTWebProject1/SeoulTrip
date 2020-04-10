@@ -63,14 +63,10 @@
 	<!-- Start main body Area -->
 	<div>
 		<h1 style="text-align: center"><b>여행</b></h1>
-		<div style="margin-left: 430px;">
-			<div class="btn btn-sm btn-primary">모든 여행</div>
-			<div class="btn btn-sm btn-primary">관심리스트</div>
-			<div class="btn btn-sm btn-primary">여행</div>
-			<div class="btn btn-sm btn-primary">목록</div>
-		</div>
 	</div>
 	<div class="container">
+			<div class="btn btn-sm btn-primary">관심리스트</div>
+			<div class="btn btn-sm btn-primary">여행</div>	
 		<div class="row" style="margin: 30px;">
 			<c:forEach var="i" begin="1" end="4">
 			<div class="col-md-4">
