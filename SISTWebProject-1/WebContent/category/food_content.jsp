@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <script src="../js/category.js"></script>
+
 <!-- 오른쪽  -->
 <div class="container-fluid bg-3 text-center">
 	<h3 style="">음식으로 서울여행</h3>
@@ -461,6 +464,7 @@
 	<div class="col-lg-12">
 		<div class="body_main_set">
 			<div class="row">
+			  <c:forEach var="vo" items="${list }">
 				<div class="col-lg-4 col-md-4">
 					<a href=""><img class="post-img img-fluid" alt="음식점사진"
 						style="border-radius: 10px 10px 10px 10px;"
@@ -472,7 +476,7 @@
 					</div>
 				</div>
 				<div class="col-lg-8 col-md-8">
-					<div class="body_main_text_title">1.농민백암왕순대</div>
+					<div class="body_main_text_title">${vo.rname }</div>
 					<div class="body_main_text_info">
 						<div
 							style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(../img/category/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
@@ -482,10 +486,11 @@
 						</div>
 						<div class="body_main_text_info_reviewNum">&nbsp;xxx건의 리뷰</div>
 						<div class="body_main_text_info_foodtype">#한식 #저렴 #점심</div>
+						<div class="body_main_text_info_foodtype">${vo.price }</div>
 					</div>
 					<div class="body_main_text_info_bestreview">
 						<div class="body_main_text_info_bestreview_one">
-							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;제육백반 강추입니다 ㅎㅎ
+							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;제육백반입니다 ㅎㅎ
 						</div>
 						<div class="body_main_text_info_bestreview_two">
 							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;돈 받고 먹으라고 해도
@@ -493,6 +498,7 @@
 						</div>
 					</div>
 				</div>
+				</c:forEach>
 			</div>
 		</div>
 		<div class="body_main_set">
@@ -524,8 +530,7 @@
 							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;제육백반 강추입니다 ㅎㅎ
 						</div>
 						<div class="body_main_text_info_bestreview_two">
-							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;돈 받고 먹으라고 해도
-							여긴 좀...
+							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;돈 받고 먹으라
 						</div>
 					</div>
 				</div>
@@ -557,7 +562,7 @@
 					</div>
 					<div class="body_main_text_info_bestreview">
 						<div class="body_main_text_info_bestreview_one">
-							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;제육백반 강추입니다 ㅎㅎ
+							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;강추입니다 ㅎㅎ
 						</div>
 						<div class="body_main_text_info_bestreview_two">
 							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;돈 받고 먹으라고 해도
@@ -575,21 +580,40 @@
 	<div class="col-lg-12">
 		<nav class="blog-pagination justify-content-center d-flex">
 			<ul class="pagination">
-				<li class="page-item"><a href="#" class="page-link"
-					aria-label="Previous"> <span aria-hidden="true"> <span
-							class="lnr lnr-arrow-left"></span>
-					</span>
+			
+				<c:if test="${startPage>1 }">
+				<li class="page-item">
+				<a href="../category/food.do?page=${startPage-1}" class="page-link" aria-label="Previous"> 
+					<span aria-hidden="true"> 
+					<span class="lnr lnr-arrow-left"></span></span>
 				</a></li>
-				<li class="page-item"><a href="#" class="page-link">01</a></li>
-				<li class="page-item active"><a href="#" class="page-link">02</a></li>
-				<li class="page-item"><a href="#" class="page-link">03</a></li>
-				<li class="page-item"><a href="#" class="page-link">04</a></li>
-				<li class="page-item"><a href="#" class="page-link">09</a></li>
-				<li class="page-item"><a href="#" class="page-link"
-					aria-label="Next"> <span aria-hidden="true"> <span
-							class="lnr lnr-arrow-right"></span>
-					</span>
+				</c:if>
+				
+				
+				<c:set var="type" value=""/>
+				<c:forEach var="i" begin="${startPage}" end="${endPage }">
+				
+				<c:if test="${curpage==i }">
+					<c:set var="type" value="class=active"/>
+				</c:if>
+				<c:if test="${curpage!=i }">
+					<c:set var="type" value=""/>
+				</c:if>
+				<li ${type } class="page-item"><a href="../category/food.do?page=${i}" class="page-link">${i}</a></li>
+				
+				</c:forEach>
+				
+				
+				<c:if test="${endPage<allPage }">
+				<li class="page-item"><a href="../category/food.do?page=${endPage+1}" class="page-link"
+					aria-label="Next"> 
+					
+					<span aria-hidden="true"> 
+					<span class="lnr lnr-arrow-right"></span></span>
 				</a></li>
+				</c:if>
+				
+				
 			</ul>
 		</nav>
 	</div>

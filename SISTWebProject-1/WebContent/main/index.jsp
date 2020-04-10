@@ -35,10 +35,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv"
-	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
 
 <script type="text/javascript">
 	document.addEventListener('scroll',()=>{
@@ -232,6 +229,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../js/detail/imageGallery.js"></script>
 <script src="../js/detail/scrolling.js"></script>
 <script src="../js/detail/selectBoard.js"></script>
-<script src="../js/category.js"></script>
 </body>
 </html>

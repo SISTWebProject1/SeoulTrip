@@ -3,6 +3,7 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.sist.main.dao.LoginVO" alias="LoginVO"/>
+		<typeAlias type="com.sist.category.model.FoodVO" alias="FoodVO"/>
 		<typeAlias type="com.sist.home.model.FestivalVO" alias="FestivalVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailReviewVO" alias="DetailReviewVO"/>
 	</typeAliases>
@@ -22,6 +23,7 @@
 	
 	<mappers>
 		<mapper resource="com/sist/main/dao/main-mapper.xml"/>
+		<mapper resource="com/sist/category/model/food-mapper.xml"/>
 		<mapper resource="com/sist/home/model/festival-mapper.xml"/>
 		<mapper resource="com/sist/detail/dao/detail-mapper.xml"/>
 	</mappers>
