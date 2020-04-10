@@ -21,6 +21,8 @@ public class MainModel {
 	
 	@RequestMapping("login_ok.do")
 	public String login_ok(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		
 		String id = request.getParameter("email").trim();
 		String pwd = request.getParameter("password").trim();
 		

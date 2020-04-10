@@ -35,11 +35,6 @@
 	margin: 50px;
 }
 
-.banner-area {
-	background: gray;
-	color: white;
-}
-
 .profile {
 	background-color: white;
 }
@@ -56,6 +51,9 @@
 .nav-menu>li>a {
 	font-size: 15px;
 }
+#my_info >li{
+	margin: 15px;
+}
 </style>
 
 
@@ -71,19 +69,7 @@
 </head>
 <body>
 	<!-- Start banner Area -->
-	<section class="banner-area relative">
-		<div class="overlay overlay-bg"></div>
-		<div class="container box_1170">
-			<div class="row d-flex align-items-center justify-content-center">
-				<div class="about-content col-md-4" style="text-align: center">
-					<div >
-						<h1 class="text-white">사진 추가</h1>
-						<input type="file" />
-					</div>
-
-				</div>
-			</div>
-		</div>
+		<jsp:include page="my_image.jsp"></jsp:include>
 	</section>
 	<!-- End banner Area -->
 
@@ -91,31 +77,26 @@
 	<div class="container" style="margin: 10px;">
 		<div class="profile">
 			<div class="profile-image">
-				<img
-					src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces"
-					alt="">
+				<img src="${ss_member.photo }">
 			</div>
-			<div class="profile-user-settings">
-				<h1 class="profile-user-name">janedoe_</h1>
-				<button class="btn profile-edit-btn" data-toggle="modal"
-					data-target="#myModal">Edit Profile</button>
+			<div class="profile-user-settings" style="text-align: left">
+				<h2 class="profile-user-name">${ss_member.name }</h2>
+				<sub style="color: gray">ID:@${ss_member.memberId }</sub>
 			</div>
-			
-			<div class="profile-stats">
-				<ul>
-					<li><span class="profile-stat-count">164</span> posts</li>
-					<li><span class="profile-stat-count">188</span> followers</li>
-					<li><span class="profile-stat-count">206</span> following</li>
+
+			<div class="profile-bio" style="margin: 5px;">
+				<ul id ="my_info"style="text-align: left;">
+					<li><img src="../mypage/birth.png"
+						style="width: 30px; float: left;">생일 : ${ss_member.birth }</li>
+					<li><img src="../mypage/book.png"
+						style="width: 30px; float: left;">가입일 : ${ss_member.regdate}</li>
+					<li data-toggle="modal"
+					data-target="#myModal" class="btn btn-sm btn-primary">세부사항 작성</li>
+					<li class="btn btn-sm btn-primary">사진 업로드</li>
+					<li class="btn btn-sm btn-primary">리뷰쓰기</li>
 				</ul>
 			</div>
-			
-			<div class="profile-bio">
-				<p>
-					<span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor
-					sit, amet consectetur adipisicing elit 📷✈️🏕️
-				</p>
-			</div>
-			
+
 		</div>
 		<!-- End of profile section -->
 		<!-- Modal -->
@@ -133,23 +114,9 @@
 		</ul>
 	</nav>
 
-
 	<div class="container-fulid">
-		<div class="info" style="height: 500px;">
-			<div class="row" style="text-align: center">
-				<div class="col-sm-3"
-					style="background-color: gray; margin-top: 20px;">
-					<div style="height: 50px; text-align: center; margin: 5px;">
-						<ul style="text-align: left;">
-							<li><h4>소개</h4></li>
-						</ul>
-						<ul style="text-align: left;">
-							<li>~~날짜에 가입</li>
-							<li><a href="#">홈페이지 추가</a></li>
-							<li><a href="#">세부사항 작성</a> </ii>
-						</ul>
-					</div>
-				</div>
+		<div class="info">
+			<div class="row" style="text-align: center; height: 500px;">
 				<div class="col-md-8"
 					style="text-align: center; margin-left: 20px; background-color: gray">
 					<div style="margin: 10px; height: 100px; text-align: center">
@@ -159,22 +126,6 @@
 
 					</div>
 				</div>
-			</div>
-			<div class="row" style="text-align: center">
-				<div class="col-sm-3"
-					style="background-color: gray; margin-top: 20px; text-align: left">
-					<div style="height: 100px; margin: 10px;">
-
-						<h5>여행 조언을 공유하세요!</h5>
-						<h4>
-							<a onclick="upload();">사진 업로드</a>
-						</h4>
-						<h4>
-							<a href="find_review.jsp">리뷰 쓰기</a>
-						</h4>
-					</div>
-				</div>
-
 			</div>
 		</div>
 	</div>
