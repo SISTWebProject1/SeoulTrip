@@ -35,12 +35,12 @@ public class FoodDAO {
 		return list;
 	}
 
-	public static int FoodTotalPage() {
+	public static int foodTotalPage() {
 		SqlSession session = null;
 		int total = 0;
 		try {
 			session = ssf.openSession();
-			total = session.selectOne("FoodTotalPage");
+			total = session.selectOne("foodTotalPage");
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {

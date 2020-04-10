@@ -12,23 +12,32 @@ import java.util.*;
 public class FoodModel {
 	
 	@RequestMapping("category/food.do")
-	public String main_main(HttpServletRequest request, HttpServletResponse response) {
+	public String category_food(HttpServletRequest request, HttpServletResponse response) {
 		
 		 String page=request.getParameter("page");
 		   if(page==null)
 			   page="1";
 		   int curpage=Integer.parseInt(page);
-		   int rowSize=4;
+		   int rowSize=5;
 		   int start=(rowSize*curpage)-(rowSize-1);
+
 		   int end=rowSize*curpage;
+		  
 		   
 		   // Map
 		   Map map=new HashMap();
 		   map.put("start", start);
 		   map.put("end", end);
 		   
-		   List<FoodVO> list=FoodDAO.foodListData(map);
+//		   List<FoodVO> list=FoodDAO.foodListData(map);
+		   List<FoodVO> list= FoodDAO.foodListData(map);
+		   System.out.println(start);
+		   System.out.println(end);
 		   System.out.println(list.size());
+		   System.out.println(list.isEmpty());
+		   System.out.println("1111");
+		   System.out.println(curpage);
+		  
 		   for(FoodVO vo:list)
 		   {
 			   String rname=vo.getRname();
@@ -38,9 +47,9 @@ public class FoodModel {
 				   vo.setRname(rname);
 			   }
 		   }
-		   int totalpage=FoodDAO.FoodTotalPage();
-		   
-		   final int BLOCK=5;
+		   int totalpage=FoodDAO.foodTotalPage();
+		   System.out.println(totalpage);
+		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1; 
 		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
 		   // 1~10  , 11~20  85  => endPage= 81~90

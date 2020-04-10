@@ -486,6 +486,7 @@
 						</div>
 						<div class="body_main_text_info_reviewNum">&nbsp;xxx건의 리뷰</div>
 						<div class="body_main_text_info_foodtype">#한식 #저렴 #점심</div>
+						<div class="body_main_text_info_foodtype">${vo.price }</div>
 					</div>
 					<div class="body_main_text_info_bestreview">
 						<div class="body_main_text_info_bestreview_one">
@@ -590,7 +591,7 @@
 				
 				
 				<c:set var="type" value=""/>
-				<c:forEach var="i" begin="${startPage-1}" end="${endPage }">
+				<c:forEach var="i" begin="${startPage}" end="${endPage }">
 				
 				<c:if test="${curpage==i }">
 					<c:set var="type" value="class=active"/>

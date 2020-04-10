@@ -4,7 +4,6 @@
 <html>
 <head>
 		<link rel="stylesheet" href="../css/category.css">
-
 </head>
 <body>
 	<!-- Start body Area -->

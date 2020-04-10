@@ -11,7 +11,7 @@ import lombok.Setter;
 public class FoodVO implements Serializable{
 	private int no;
 	private String rname;
-	private Date openHour;
+	private String openhour;
 	private String rphoto;
 	private String info;
 	private int tel;
@@ -23,7 +23,7 @@ public class FoodVO implements Serializable{
 	private int rank;
 	private String price;
 	private String menu;
-	private int resCheck;
+	private int rescheck;
 	private int grade;
 	private String post;
 }
