@@ -1,0 +1,170 @@
+@CHARSET "UTF-8";
+
+.cate-img {
+	position: relative;
+	opacity: 0.4;
+}
+
+
+.img-responsive {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	max-width: 100%;
+	height: auto;
+	border: 1px solid gray;
+}
+
+.img-text p {
+	text-align: center;
+	position: absolute;
+	top: 45%;
+	left: 50%;
+	font-size: 1.3em;
+	font-weight: bold;
+	color: black;
+	transform: translate(-50%, -50%);
+}
+
+.row food-catetop {
+	height: 50px;
+}
+
+.single-post-item short {
+	position: relative;
+	padding-bottom: 30px;
+}
+
+.heart {
+	position: absolute;
+	top: 5%;
+	left: 95%;
+	transform: translate(-80%, -20%);
+}
+
+.heart_button{
+	width:25px;
+	height:25px;
+	padding:0px 0px;
+	border-radius: 30%;
+	border:0px solid black;
+}
+
+
+.heart_button > .heart_on{
+	opacity: 0;
+	transition: opacity 1s
+}
+
+.heart_button:HOVER > .far fa-heart fa-fw{
+	opacity: 1;
+}
+
+.far>fa-heart {
+	background-color: red;
+}
+
+.left-side {
+	width: 260px;
+	height: 160px;
+	border: 1px solid #eee;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.map_map {
+	position: relative;
+	color: black;
+	border: 1px solid #d1d1d1;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.map_top {
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: black;
+	transform: translate(-50%, -50%);
+}
+
+.map_button {
+	width: 160px;
+	height: 40px;
+	padding: 5px;
+	background-color: #f4f4f4;
+	border-radius: 5px 5px 5px 5px;
+	border: 0.5px solid #d1d1d1;
+}
+
+.food_type_name{
+	font-weight: bold;
+}
+
+
+.food_type {
+	padding-left:25px;
+	border: :1px solid #eee;
+}
+
+.left-cate{
+	height: 100px;
+}
+
+.body-gap {
+	padding: 60px;
+}
+
+.header_1 {
+	margin-top: 38px;
+	padding: 50px;
+}
+
+.header_2 {
+	font-size: 1.0em;
+	color: black;
+}
+
+.header_3 {
+	position: center;
+	width: 100%;
+}
+
+.body_main_set {
+	width: 95%;
+	border: 0.5px solid #d1d1d1;
+	margin: 10px;
+	background-color: #f9f9f9;
+	border-radius: 10px 10px 10px 10px;
+}
+
+.body_main_img, .body_main_text {
+	margin: 10px;
+}
+
+.body_main_text_title, .body_main_text_info, .body_main_text_bestreview
+	{
+	margin-bottom: 10px;
+	width: 90%;
+}
+
+.body_main_text_bestreview {
+	font-size: 0.9em;
+	color: black;
+}
+
+.body_main_text_title {
+	margin-top: 10px;
+	font-size: 1.2em;
+	font-weight: bold;
+	color: black;
+}
+
+.body_main_text_info {
+	border-bottom-color: #c0c0c0;
+	border-bottom-style: solid;
+}
