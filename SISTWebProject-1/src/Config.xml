@@ -6,6 +6,8 @@
 		<typeAlias type="com.sist.category.model.FoodVO" alias="FoodVO"/>
 		<typeAlias type="com.sist.home.model.FestivalVO" alias="FestivalVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailReviewVO" alias="DetailReviewVO"/>
+		<typeAlias type="com.sist.detail.dao.DetailPhotoVO" alias="DetailPhotoVO"/>
+		<typeAlias type="com.sist.detail.dao.DetailTourplaceVO" alias="DetailTourplaceVO"/>
 	</typeAliases>
 	
 	<environments default="development">
