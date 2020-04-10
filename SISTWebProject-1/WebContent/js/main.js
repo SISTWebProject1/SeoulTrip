@@ -302,6 +302,8 @@ $(document).ready(function() {
 			  var memberPhoto = memberInfo[1];
 			  var memberName = memberInfo[2];
 			  
+			  $('#header_mypage').css("display","inline-block");
+			  
 			  var list = $('#header .nav-menu');
 			  list.children().last().remove();
 			  list.append('<li><a href="../logout_ok.do">Logout</a></li>');
@@ -312,13 +314,21 @@ $(document).ready(function() {
 	  });
 	  
 	  $('#loginShow').click(function(){
+		  $('#login #email').val('');
+		  $('#login #login_alert').html('&nbsp;');
+		  
 		 let lsOffset = $(this).offset();
 		 $('#login .login_content').offset({
 			top : lsOffset.top+80,
 			left : lsOffset.left-250
 		 });
-		 login_show();
 	  });
+	  
+	  $('#login #password').keypress(function(event){
+		     if (event.which==13) {
+		    	 $('#login input[type="login"]').click();
+		     }
+		});
 	  
   });
   

@@ -4,12 +4,30 @@ import java.util.ArrayList;
 
 public class LoginVO {
 
+	private String birth;
+	private String regdate;
 	private String state;
 	private String memberId;
 	private String pwd;
 	private String name;
 	private String photo;
 	private ArrayList<int[]> recentItems;
+	
+	public String getBirth() {
+		return birth;
+	}
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
 
 	public String getState() {
 		return state;
