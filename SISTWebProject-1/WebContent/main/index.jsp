@@ -84,7 +84,9 @@
 						<li><a href="../category/festival.do">축제</a></li>
             			<li><a href="../detail/detail_review.do?type=1&no=198&page=1">DetailTest</a>
             			<li><a href="../reservation/reservation.do">ReservationTest</a>
-						<li class="menu-has-children"><a href="">마이페이지</a>
+						<li class="menu-has-children" id="header_mypage" 
+							<c:if test="${ empty ss_member }">style="display:none;"</c:if>
+						 ><a href="">마이페이지</a>
 							<ul>
 								<li><a href="../mypage/profile.do">프로필</a></li>
 								<li><a href="../mypage/wishlist.do">위시리스트</a></li>

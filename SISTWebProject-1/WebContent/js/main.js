@@ -302,6 +302,8 @@ $(document).ready(function() {
 			  var memberPhoto = memberInfo[1];
 			  var memberName = memberInfo[2];
 			  
+			  $('#header_mypage').css("display","inline-block");
+			  
 			  var list = $('#header .nav-menu');
 			  list.children().last().remove();
 			  list.append('<li><a href="../logout_ok.do">Logout</a></li>');

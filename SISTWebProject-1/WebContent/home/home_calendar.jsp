@@ -29,10 +29,10 @@
 							<div class="panel-group">
 								<c:set var="fvo_count" value="0"/>
 								<c:forEach var="fvo" items="${ flist }" >
-										<c:set var="fvo_month" value="${ fvo.fmtStart }"/>
+										<c:set var="fvo_month" value="${ fvo.fmtEnd }"/>
 										<c:set var="fvo_month" value="${ fvo_month.substring(5,7) }"/>
 										<fmt:parseNumber var="fvo_month" value="${ fvo_month }"/>
-										<c:if test="${ fvo_month==monthvo.month && fvo_count lt 3 && monthvo.month!=12 }">
+										<c:if test="${ fvo_month eq monthvo.month && fvo_count lt 3 && monthvo.month ne 12 }">
 											<div class="panel 
 												<c:choose>
 													<c:when test="${ fvo_count==0 }">panel-success</c:when>
