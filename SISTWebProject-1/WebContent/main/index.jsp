@@ -35,10 +35,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
-	integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv"
-	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
 
 <script type="text/javascript">
 	document.addEventListener('scroll',()=>{
@@ -50,7 +47,6 @@
 	});
 	
 	function login_show() {
-		document.getElementById('login').style.display = "block";
 		document.getElementById('login').style.display = "block";
 	}
 	
@@ -85,7 +81,9 @@
 						<li><a href="../category/festival.do">축제</a></li>
             			<li><a href="../detail/detail_review.do?type=1&no=198&page=1">DetailTest</a>
             			<li><a href="../reservation/reservation.do">ReservationTest</a>
-						<li class="menu-has-children"><a href="">마이페이지</a>
+						<li class="menu-has-children" id="header_mypage" 
+							<c:if test="${ empty ss_member }">style="display:none;"</c:if>
+						 ><a href="">마이페이지</a>
 							<ul>
 								<li><a href="../mypage/profile.do">프로필</a></li>
 								<li><a href="../mypage/wishlist.do">위시리스트</a></li>
@@ -120,7 +118,7 @@
 			    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 			    <input id="password" type="password" class="form-control" name="password" placeholder="Password">
 			  </div>
-			  <p id="login_alert" class="text-right"></p>
+			  <p id="login_alert" class="text-right">&nbsp;</p>
 			  <div class="input-group">
 			    <input type="login" class="btn btn-sm btn-primary" value="login">
 				<input type="reset" class="btn btn-sm btn-danger" value="cancel" onclick="login_hide()">
@@ -231,6 +229,5 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../js/detail/imageGallery.js"></script>
 <script src="../js/detail/scrolling.js"></script>
 <script src="../js/detail/selectBoard.js"></script>
-<script src="../js/category.js"></script>
 </body>
 </html>

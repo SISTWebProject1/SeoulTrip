@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!-- 리뷰 뿌려주기 -->
 <div class="col-lg-10 post-list" id="Content-List">
 	<!-- Start Post Area -->
@@ -28,10 +29,10 @@
 						<div class="meta-details">
 							<ul>
 								<li><a href="#"> <span class="lnr lnr-calendar-full"></span>
-										${vo.regdate }
+										<fmt:formatDate	value="${vo.regdate }" pattern="yyyy-MM-dd" />
 								</a></li>
 								<li><a href="#"> <span class="lnr lnr-picture"></span>
-										${vo.expdate}
+										<fmt:formatDate	value="${vo.expdate }" pattern="yyyy-MM-dd" />
 								</a></li>
 								<li><a href="#"> <span class="lnr lnr-coffee-cup"></span>
 										${vo.likecount }

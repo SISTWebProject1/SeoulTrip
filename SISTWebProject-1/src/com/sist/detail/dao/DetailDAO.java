@@ -11,6 +11,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 
+
+
 public class DetailDAO {
 	private static SqlSessionFactory ssf;
 	static {
@@ -56,6 +58,29 @@ public class DetailDAO {
 			if(session!=null)
 				session.close();
 		}
+		return list;
+	}
+	
+	public String getImageFilepath (int no){
+		SqlSession session = null;
+		String filepath ="";
+		try {
+			session = ssf.openSession();
+			filepath = session.selectOne("getImageFilepath", no);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return filepath;
+	}
+	
+	public static List<DetailReviewVO> getImageFile(){
+		SqlSession session=ssf.openSession();
+		List<DetailReviewVO> list = session.selectList("getImageFile");
+		session.close();
 		return list;
 	}
 }

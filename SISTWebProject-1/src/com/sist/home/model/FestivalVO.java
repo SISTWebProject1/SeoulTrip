@@ -1,5 +1,6 @@
 package com.sist.home.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import lombok.Getter;
@@ -20,5 +21,17 @@ public class FestivalVO {
 	private String addr2;
 	private double grade;
 	private String fphoto;
+	
+	public String getFmtStart() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+		
+		return sdf.format(startdate);
+	}
+	
+	public String getFmtEnd() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
+		
+		return sdf.format(enddate);
+	}
 
 }
