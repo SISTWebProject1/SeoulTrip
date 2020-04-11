@@ -6,8 +6,14 @@
 		<typeAlias type="com.sist.category.model.FoodVO" alias="FoodVO"/>
 		<typeAlias type="com.sist.home.model.FestivalVO" alias="FestivalVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailReviewVO" alias="DetailReviewVO"/>
+
+		<typeAlias type="com.sist.mypage.model.toruPlaceVO_u" alias="toruPlaceVO_u"/>
+		<typeAlias type="com.sist.mypage.model.FestivalVO_u" alias="FestivalVO_u"/>
+		<typeAlias type="com.sist.mypage.model.RestaurantVO_u" alias="RestaurantVO_u"/>
+		<typeAlias type="com.sist.mypage.model.MemberVO_u" alias="MemberVO_u"/>
 		<typeAlias type="com.sist.detail.dao.DetailPhotoVO" alias="DetailPhotoVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailTourplaceVO" alias="DetailTourplaceVO"/>
+
 	</typeAliases>
 	
 	<environments default="development">
@@ -24,6 +30,7 @@
 	</environments>
 	
 	<mappers>
+		<mapper resource="com/sist/mypage/model/mypage_mapper.xml"/>
 		<mapper resource="com/sist/main/dao/main-mapper.xml"/>
 		<mapper resource="com/sist/category/model/food-mapper.xml"/>
 		<mapper resource="com/sist/home/model/festival-mapper.xml"/>
