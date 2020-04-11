@@ -13,7 +13,7 @@ public class MypageModel {
 	@RequestMapping("mypage/profile.do")
 	public String main_profile(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../mypage/profile8.jsp");
-//		request.setAttribute("banner_on", true);
+		
 		
 		return "../main/index.jsp";
 	}
