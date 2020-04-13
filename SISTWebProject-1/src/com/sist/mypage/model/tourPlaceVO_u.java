@@ -3,6 +3,7 @@ package com.sist.mypage.model;
 public class tourPlaceVO_u {
 
 	private int no;
+
 	private String tname;
 	private String tphoto;
 	private String grade;
@@ -30,6 +31,5 @@ public class tourPlaceVO_u {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	
 	
 }

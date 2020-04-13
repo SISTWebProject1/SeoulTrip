@@ -1,5 +1,6 @@
 package com.sist.mypage.model;
 
+
 import java.util.Date;
 
 public class MemberVO_u {
@@ -103,4 +104,5 @@ public class MemberVO_u {
 		this.coverPhoto = coverPhoto;
 	}
 	
+
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <!DOCTYPE html>
@@ -98,24 +98,9 @@
 										<div class="form-group">
 											<span class="form-label">Time</span>
 											<select class="form-control" name=time>
-				
-												<% 
-
-														int i=0;
-														for(i=11; i<=18 ;i++)
-															
-															
-														{
-														
-												%>
-														
-														<option><%=i%>:00</option>
-														
-												<%
-														
-														}
-														
-												%>
+											<c:forEach var="i" begin="11" end="18">
+												<option>${i}:00</option>		
+											</c:forEach>
 											</select>
 											<span class="select-arrow"></span>
 										</div>
@@ -158,8 +143,6 @@
 			</div>
 		</div>
 	</div>
-		
-	
 </section>	
 
 <section class="contact-page-area section-gap">	
@@ -172,7 +155,10 @@
 							<span class="lnr lnr-home"></span>
 						</div>
 						<div class="contact-details">
+								<%--${vo.rname} --%>
 							<h5>W Xyz Bar</h5>
+							
+								<%-- ${vo.addr1} | ${vo.addr2}--%>
 							<p>56, Namdaemun-ro, Jung-gu | 2F, Aloft Seoul Myeongdong, Seoul 04535, South Korea</p>
 						</div>
 					</div>
@@ -181,7 +167,11 @@
 							<span class="lnr lnr-phone-handset"></span>
 						</div>
 						<div class="contact-details">
+						
+							<%--${vo.openhour} --%> 
 							<h5>Open Now:11:00 AM - 12:00 AM</h5>  
+						
+							<!-- delete -->
 							<p>Mon to Fri 9am to 6 pm</p>
 						</div>
 					</div>
@@ -191,7 +181,7 @@
 						</div>
 						<div class="contact-details">
 						
-						
+									<!--${vo.link}  -->
 							<a href="http://www.aloftseoulmyeongdong.com/dining"><h5>http://www.aloftseoulmyeongdong.com/dining</h5></a>
 							<p>Visit our website anytime!</p>
 						</div>
@@ -204,8 +194,8 @@
 								
 								<script>
 									var container = document.getElementById('map');
-									var options = {
-										center: new kakao.maps.LatLng(33.450701, 126.570667),
+									var options = {					/*${vo.mapX},${vo.mapY}  */
+										center: new kakao.maps.LatLng(37.486076, 126.570667),
 										level: 3
 									};
 							
