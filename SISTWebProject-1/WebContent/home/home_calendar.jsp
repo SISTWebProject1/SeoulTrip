@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <section class="post-slider-area calendar">
-	<div class="container box_1170"> 
+	<div class="container box_1170">  
 		<div class="row justify-content-center">
 			<div class="col-lg-10">
 				<div class="owl-carousel active-post-carusel">
