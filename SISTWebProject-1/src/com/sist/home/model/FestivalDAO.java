@@ -1,6 +1,7 @@
 package com.sist.home.model;
 
 import java.io.Reader;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -24,6 +25,14 @@ public class FestivalDAO {
 	public static List<FestivalVO> festivalAllList(){
 		SqlSession ss = ssf.openSession();
 		List<FestivalVO> list = ss.selectList("festivalAllList");
+		
+		ss.close();
+		return list;
+	}
+	
+	public static List<FestivalVO> festivalDateList(Date date) {
+		SqlSession ss = ssf.openSession();
+		List<FestivalVO> list = ss.selectList("festivalDateList", date);
 		
 		ss.close();
 		return list;

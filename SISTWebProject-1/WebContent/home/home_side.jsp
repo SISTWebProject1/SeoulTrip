@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- <div class="single-widget protfolio-widget">
 	<img class="img-fluid" src="../img/blog/user2.png" alt="">
 	<a href="#">
@@ -20,58 +21,8 @@
 	</ul>
 </div> -->
 
-<div class="single-widget popular-posts-widget">
-	<h4 class="title">Popular Posts</h4>
-	<div class="blog-list ">
-		<div class="single-popular-post d-flex flex-row">
-			<div class="popular-thumb">
-				<img class="img-fluid" src="../img/blog/r1.jpg" alt="">
-			</div>
-			<div class="popular-details">
-				<a href="blog-details.html">
-					<h4>Space Final Frontier</h4>
-				</a>
-				<p class="text-uppercase">02 hours ago</p>
-			</div>
-		</div>
-		<div class="single-popular-post d-flex flex-row">
-			<div class="popular-thumb">
-				<img class="img-fluid" src="../img/blog/r2.jpg" alt="">
-			</div>
-			<div class="popular-details">
-				<a href="blog-details.html">
-					<h4>The Amazing Hubble</h4>
-				</a>
-				<p class="text-uppercase">02 hours ago</p>
-			</div>
-		</div>
-		<div class="single-popular-post d-flex flex-row">
-			<div class="popular-thumb">
-				<img class="img-fluid" src="../img/blog/r3.jpg" alt="">
-			</div>
-			<div class="popular-details">
-				<a href="blog-details.html">
-					<h4>Astronomy Astrology</h4>
-				</a>
-				<p class="text-uppercase">02 hours ago</p>
-			</div>
-		</div>
-		<div class="single-popular-post d-flex flex-row">
-			<div class="popular-thumb">
-				<img class="img-fluid" src="../img/blog/r4.jpg" alt="">
-			</div>
-			<div class="popular-details">
-				<a href="blog-details.html">
-					<h4>Asteroids telescope</h4>
-				</a>
-				<p class="text-uppercase">02 hours ago</p>
-			</div>
-		</div>
-	</div>
-</div>
-
 <div class="single-widget category-widget">
-	<h4 class="title">Post Categories</h4>
+	<h4 class="title">Popular Tags</h4>
 	<ul>
 		<li><a href="#" class="justify-content-between align-items-center d-flex">
 				<p>Techlology</p> <span>37</span>
@@ -96,6 +47,26 @@
 			</a></li>
 	</ul>
 </div>
+
+<c:if test="${ hiSize ne 0 }">
+	<div class="single-widget popular-posts-widget">
+		<h4 class="title">Recent Items</h4>
+		<div class="blog-list ">
+			<c:forEach var="hivo" items="${ hiList }">
+				<div class="single-popular-post d-flex flex-row">
+					<div class="popular-thumb">
+						<img class="img-fluid" src="${ hivo.photo }" alt="">
+					</div>
+					<div class="popular-details">
+						<a href="blog-details.html">
+							<h4>${ hivo.name }</h4>
+						</a>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
+</c:if>
 
 <!-- <div class="single-widget newsletter-widget">
 	<h4 class="title">Newsletter</h4>
