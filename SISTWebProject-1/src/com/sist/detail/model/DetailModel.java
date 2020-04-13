@@ -14,6 +14,8 @@ public class DetailModel {
 	public String main_detail(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../detail/detail.jsp");
 		//request.setAttribute("banner_on", true);
+		
+		//cookie에 넣기
 		request.setAttribute("detail_board_jsp","../detail/detail_qna.jsp");
 		return "../main/index.jsp";
 	}
@@ -62,6 +64,25 @@ public class DetailModel {
 		map.put("end", end);
 		
 		List<DetailReviewVO> list = dao.getReviewData(map);
+		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+
+		//X,Y 좌표 가져오기 
+		DetailTourplaceVO vo = dao.getXYcoordinate(Integer.parseInt(no));
+		double mapx = vo.getMapx();
+		double mapy = vo.getMapy();
+		Map mapXY = new HashMap();
+		mapXY.put("mapx", mapx);
+		mapXY.put("mapy", mapy);
+		
+		List<DetailTourplaceVO> nearlist = dao.getNeayByDistance(mapXY);
+		for(DetailTourplaceVO cc: nearlist){
+			System.out.println(cc.getDistance());
+			System.out.println(cc.getTname());
+			System.out.println(cc.getNo());
+		}
+		
+		request.setAttribute("nearlist", nearlist);
+		request.setAttribute("imglist", imglist);
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);

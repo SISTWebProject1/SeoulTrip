@@ -5,10 +5,104 @@
 		SELECT CEIL(COUNT(*)/10.0) FROM review
 	</select>
 	<select id="getReviewData" resultType="DetailReviewVO" parameterType="java.util.Map">
-		SELECT no,title,memberid,content,regdate,expdate,likecount,grade,num
-		FROM (SELECT no,title,memberid,content,regdate,expdate,likecount,grade,rownum as num
-		FROM (SELECT no,title,memberid,content,regdate,expdate,likecount,grade
+		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,num
+		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,rownum as num
+		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade
 		FROM review WHERE no=#{no} AND type=#{type} ORDER BY no ASC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
+	
+	
+	<resultMap type="DetailTourplaceVO" id="tourMap">
+
+	</resultMap>
+	
+	<select id="getImageFilepath" resultType="string" parameterType="int">
+		SELECT distinct(filepath)
+		FROM tourplace, (select photo.filepath as filepath, review.no
+		FROM photo, review
+		WHERE photo.no=review.no)
+		WHERE tourplace.no=#{no} AND rownum=1; 
+	</select>
+
+<!-- 리뷰와 사진 정보를 JOin함 -->
+	<resultMap type="DetailReviewVO" id="reviewMap">
+			<result column="reviewno" property="reviewno"/>
+			<result column="type"	property="type"/>
+			<result column="no"	property="no"/>
+			<result column="memberid" property="memberid"/>
+			<result column="title" property="title"/>
+			<result column="regdate" property="regdate"/>
+			<result column="expdate" property="expdate"/>
+			<result column="likecount" property="likecount"/>
+			<result column="groupid" property="groupid"/>
+			<result column="groupstep" property="groupstep"/>
+			<result column="root" property="root"/>
+			<result column="depth" property="depth"/>
+			<result column="content" property="content"/>
+			<result column="grade" property="grade"/>
+			<result column="filepath" property="dpvo.filepath"/>
+	</resultMap>	
+	
+	<select id="getImageFile" resultMap="reviewMap">
+		SELECT review.reviewno as reviewno, photo.filepath as filepath
+		FROM review,photo
+		WHERE photo.no=review.no
+	</select>
+			
+<!-- Revie_Phto view 작성 이후 -->
+<!-- 	<resultMap type="DetailTourplaceVO" id="ReviewPhotoMap">
+				<id property="no" column="no"/>
+				<result property="tname" column="tname"/>
+				<result property="tphoto" column="tphoto"/>
+				<result property="openhour" column="openhour"/>
+				<result property="tel" column="tel"/>
+				<result property="link" column="link"/>
+				<result property="info" column="info"/>
+				<result property="mapx" column="mapx"/>
+				<result property="mapy" column="mapy"/>
+				<result property="addr1" column="addr1"/>
+				<result property="addr2" column="addr2"/>
+				<result property="grade" column="grade"/>
+				<result property="post" column="post"/>
+				<result property="drpvo.filepath" column="filepath"/>
+	</resultMap>
+	<select id="getImageFilepath" resultMap="ReviewPhotoMap" parameterType="int">
+		SELECT tname, no, distance 
+		FROM (select tname, no, distance_wgs84(37.56612 ,127.01215, mapx,mapy) as distance from tourplace
+		ORDER by distance ASC )
+		WHERE rownum BETWEEN 1 AND 10 AND WHERE no=#{no};
+	</select>
+ -->
+ 
+ 	<select id="getImagesForReview" resultType="Detail_Review_PhotoVO" parameterType="int">
+ 		SELECT filepath ,reviewno,no
+		FROM Review_Photo
+		WHERE no=#{no}
+ 	</select>
+ 	
+ 	<select id="getMainImage" resultType="string" parameterType="int">
+ 		select filepath 
+		FROM review_photo
+		where no=#{no} and rownum=1;
+ 	</select>
+ 	
+ 	
+ 	<!-- mapx,mapy를 가져오는 곳 -->
+ 	<select id="getXYcoordinate" resultType="DetailTourplaceVO" parameterType="int">
+ 		SELECT mapx,mapy
+ 		FROM tourplace
+ 		WHERE no=#{no}
+ 	</select>
+ 	
+ 	<select id="getNeayByDistance" resultType="DetailTourplaceVO" parameterType="java.util.Map">
+ 		SELECT tname, no, distance, num
+		FROM (SELECT tname, no, distance, rownum as num 
+		FROM (SELECT tname, no, distance_wgs84(#{mapx} ,#{mapy}, mapx,mapy) as distance from tourplace
+		ORDER by distance ASC ))
+		WHERE num BETWEEN 2 AND 10
+ 	</select>
 </mapper>
+
+
+

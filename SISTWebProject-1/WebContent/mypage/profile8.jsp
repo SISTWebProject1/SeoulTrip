@@ -23,9 +23,6 @@
 <link rel="stylesheet" href="../css/main.css">
 
 <link rel="stylesheet" href="../css/profile_Instar.css">
-<link rel="stylesheet" href="../css/upload.css">
-<link rel="stylesheet" href="../css/dropdown.css">
-
 <style type="text/css">
 .body {
 	background-color: black;
@@ -51,26 +48,17 @@
 .nav-menu>li>a {
 	font-size: 15px;
 }
-#my_info >li{
+
+#my_info>li {
 	margin: 15px;
 }
 </style>
-
-
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<script type="text/javascript">
-	function upload() {
-		window.open("upload.jsp", "upload",
-				"width=800,height=500 scrollbars=yes");
-	}
-</script>
-</head>
 <body>
 	<!-- Start banner Area -->
-		<jsp:include page="my_image.jsp"></jsp:include>
-	</section>
+	<jsp:include page="my_image.jsp"></jsp:include>
+
 	<!-- End banner Area -->
 
 	<!-- blog Area -->
@@ -85,13 +73,13 @@
 			</div>
 
 			<div class="profile-bio" style="margin: 5px;">
-				<ul id ="my_info"style="text-align: left;">
+				<ul id="my_info" style="text-align: left;">
 					<li><img src="../mypage/birth.png"
 						style="width: 30px; float: left;">생일 : ${ss_member.birth }</li>
 					<li><img src="../mypage/book.png"
 						style="width: 30px; float: left;">가입일 : ${ss_member.regdate}</li>
-					<li data-toggle="modal"
-					data-target="#myModal" class="btn btn-sm btn-primary">세부사항 작성</li>
+					
+					<li class="btn btn-sm btn-primary"><a href="../mypage/profile_Update.do?id=${ss_member.memberId }">프로필 수정</a></li>
 					<li class="btn btn-sm btn-primary">사진 업로드</li>
 					<li class="btn btn-sm btn-primary">리뷰쓰기</li>
 				</ul>
@@ -99,15 +87,12 @@
 
 		</div>
 		<!-- End of profile section -->
-		<!-- Modal -->
-		<jsp:include page="modal.jsp"></jsp:include>
-		<!-- Modal end-->
 	</div>
 	<!-- End of container -->
 
 	<nav style="background-color: black; height: 50px;">
 		<ul class="nav-menu">
-			<li><a href="find_review.jsp">활동 피드</a></li>
+			<li><a href="../mypage/find_review.jsp">활동 피드</a></li>
 			<li><a href="../mypage/wishlist.do">여행</a></li>
 			<li><a href="#">사진</a></li>
 			<li><a href="#">예약정보</a></li>
@@ -138,18 +123,18 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
 		crossorigin="anonymous"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="../js/vendor/bootstrap.min.js"></script>
 	<script type="text/javascript"
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
-	<script src="js/easing.min.js"></script>
-	<script src="js/hoverIntent.js"></script>
-	<script src="js/superfish.min.js"></script>
-	<script src="js/jquery.ajaxchimp.min.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/owl.carousel.min.js"></script>
-	<script src="js/jquery.nice-select.min.js"></script>
-	<script src="js/waypoints.min.js"></script>
-	<script src="js/mail-script.js"></script>
-	<script src="js/main.js"></script>
+	<script src="../js/easing.min.js"></script>
+	<script src="../js/hoverIntent.js"></script>
+	<script src="../js/superfish.min.js"></script>
+	<script src="../js/jquery.ajaxchimp.min.js"></script>
+	<script src="../js/jquery.magnific-popup.min.js"></script>
+	<script src="../js/owl.carousel.min.js"></script>
+	<script src="../js/jquery.nice-select.min.js"></script>
+	<script src="../js/waypoints.min.js"></script>
+	<script src="../js/mail-script.js"></script>
+	<script src="../js/main.js"></script>
 
 </body>
