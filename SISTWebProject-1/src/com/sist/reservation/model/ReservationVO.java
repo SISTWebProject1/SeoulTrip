@@ -1,80 +1,56 @@
 package com.sist.reservation.model;
 /*
-	NO       NOT NULL NUMBER         
-		RNAME    NOT NULL VARCHAR2(4000) 
-		OPENHOUR          VARCHAR2(100)  
-		RPHOTO            VARCHAR2(100)  
-	INFO              CLOB           
-	TEL               VARCHAR2(20)   
-		LINK              VARCHAR2(100)  
-		MAPX              NUMBER         
-		MAPY              NUMBER         
-		ADDR1             VARCHAR2(100)  
-		ADDR2             VARCHAR2(100)  
-	RANK              NUMBER         
-	PRICE             VARCHAR2(100)  
-	MENU              VARCHAR2(100)  
-	RESCHECK          VARCHAR2(1)    
-	GRADE             NUMBER         
-	POST              VARCHAR2(20)
+BOOKINGNUMBER   NOT NULL NUMBER         
+MEMBERID        NOT NULL VARCHAR2(4000) 
+NO              NOT NULL NUMBER         
+RESERVATIONDATE          DATE           
+TIME                     DATE           
+INWON                    NUMBER    
  */
 public class ReservationVO {
-    private String rname;
-    private String openhour;
-    private String rphoto;
-    private String link;
-    private int mapX;
-    private int mapY;
-    private int addr1;
-    private int addr2;
-	public String getRname() {
-		return rname;
+
+	private int bookingnumber;
+	private String memberid;
+	private int no;
+	private String reservationdate;
+	private String time;
+	private int inwon;
+	public int getBookingnumber() {
+		return bookingnumber;
 	}
-	public void setRname(String rname) {
-		this.rname = rname;
+	public void setBookingnumber(int bookingnumber) {
+		this.bookingnumber = bookingnumber;
 	}
-	public String getOpenhour() {
-		return openhour;
+	public String getMemberid() {
+		return memberid;
 	}
-	public void setOpenhour(String openhour) {
-		this.openhour = openhour;
+	public void setMemberid(String memberid) {
+		this.memberid = memberid;
 	}
-	public String getRphoto() {
-		return rphoto;
+	public int getNo() {
+		return no;
 	}
-	public void setRphoto(String rphoto) {
-		this.rphoto = rphoto;
+	public void setNo(int no) {
+		this.no = no;
 	}
-	public String getLink() {
-		return link;
+	public String getReservationdate() {
+		return reservationdate;
 	}
-	public void setLink(String link) {
-		this.link = link;
+	public void setReservationdate(String reservationdate) {
+		this.reservationdate = reservationdate;
 	}
-	public int getMapX() {
-		return mapX;
+	public String getTime() {
+		return time;
 	}
-	public void setMapX(int mapX) {
-		this.mapX = mapX;
+	public void setTime(String time) {
+		this.time = time;
 	}
-	public int getMapY() {
-		return mapY;
+	public int getInwon() {
+		return inwon;
 	}
-	public void setMapY(int mapY) {
-		this.mapY = mapY;
+	public void setInwon(int inwon) {
+		this.inwon = inwon;
 	}
-	public int getAddr1() {
-		return addr1;
-	}
-	public void setAddr1(int addr1) {
-		this.addr1 = addr1;
-	}
-	public int getAddr2() {
-		return addr2;
-	}
-	public void setAddr2(int addr2) {
-		this.addr2 = addr2;
-	}
-    
-    
+	
+	
 }

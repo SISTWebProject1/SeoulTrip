@@ -31,7 +31,14 @@
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 
 <script type="text/javascript">
-
+$(function(){
+	$('#submit-btn').click(function(){
+		
+		document.frm.value();
+		
+	})
+	
+})
 
 
 </script>
@@ -68,19 +75,19 @@
 				 
 					<div class="col-md-6 col-md-offset-1" >
 						<div class="booking-form">
-							<form method=post action="reservation_ok.jsp">
+							<form method=post id=frm action="../reservation/reservation_ok.do">
 							
 								<div class="row">
 								
 									<div class="col-sm-6">
 										<div class="form-group">
-											<input class="form-control" type="text" name=name>
-											<span class="form-label">Name</span>
+											<input class="form-control" type="text" name=name required>
+											<span class="form-label">예약자명</span>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="email" name=email>
+											<input class="form-control" type="email" name=email required>
 											<span class="form-label">Email</span>
 										</div>
 									</div>
@@ -90,13 +97,13 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="tel" name=tel>
-											<span class="form-label">Phone</span>
+											<input class="form-control" type="tel" name=tel required>
+											<span class="form-label">전화번호</span>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<span class="form-label">Time</span>
+											<span class="form-label">예약시간</span>
 											<select class="form-control" name=time>
 											<c:forEach var="i" begin="11" end="18">
 												<option>${i}:00</option>		
@@ -108,12 +115,12 @@
 									
 									<div class="col-md-12">
 										<div class="form-group">
-											<span class="form-label">Person</span>
+											<span class="form-label">예약인원</span>
 											<select class="form-control" name=person>
-												<option>1 Person</option>
-												<option>2 People</option>
-												<option>3 People</option>
-												<option>4 People</option>
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
 											</select>
 											<span class="select-arrow"></span>
 										</div>
@@ -123,13 +130,16 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<input class="form-control" type="date" name="date" required>
+											<input class="form-control" type="date" name=date required>
 											<span class="form-label">Date</span>
 										</div>
 									</div>
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn">Book Now</button>
+									<button class="submit-btn col-md-6" id="submit-btn">예약하기</button>
+									<button class="submit-btn col-md-6" 
+										onclick="javascript:history.back()"
+									>취소하기</button>
 								</div>
 							</form>
 						</div>	
