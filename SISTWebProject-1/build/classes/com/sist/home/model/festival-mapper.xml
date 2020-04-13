@@ -4,6 +4,6 @@
 	<select id="festivalAllList" resultType="FestivalVO">
 		SELECT no, fname, startdate, enddate, addr1
 		FROM festival
-		ORDER BY startdate ASC
+		ORDER BY enddate ASC
 	</select>
 </mapper>
