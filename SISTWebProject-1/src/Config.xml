@@ -6,13 +6,17 @@
 		<typeAlias type="com.sist.category.model.FoodVO" alias="FoodVO"/>
 		<typeAlias type="com.sist.home.model.FestivalVO" alias="FestivalVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailReviewVO" alias="DetailReviewVO"/>
-		<typeAlias type="com.sist.main.dao.HomeItemVO" alias="HomeItemVO"/>
+    	<typeAlias type="com.sist.detail.dao.Detail_Review_PhotoVO" alias="Detail_Review_PhotoVO"/>
+    	<typeAlias type="com.sist.detail.dao.DetailPhotoVO" alias="DetailPhotoVO"/>
+		<typeAlias type="com.sist.detail.dao.DetailTourplaceVO" alias="DetailTourplaceVO"/>
+    	<typeAlias type="com.sist.main.dao.HomeItemVO" alias="HomeItemVO"/>
 		<typeAlias type="com.sist.mypage.model.tourPlaceVO_u" alias="toruPlaceVO_u"/>
 		<typeAlias type="com.sist.mypage.model.FestivalVO_u" alias="FestivalVO_u"/>
 		<typeAlias type="com.sist.mypage.model.RestaurantVO_u" alias="RestaurantVO_u"/>
 		<typeAlias type="com.sist.mypage.model.MemberVO_u" alias="MemberVO_u"/>
-		<typeAlias type="com.sist.detail.dao.DetailPhotoVO" alias="DetailPhotoVO"/>
-		<typeAlias type="com.sist.detail.dao.DetailTourplaceVO" alias="DetailTourplaceVO"/>
+		<typeAlias type="com.sist.mypage.model.ReviewVO_u" alias="ReviewVO_u"/>
+		
+		
 
 	</typeAliases>
 	
