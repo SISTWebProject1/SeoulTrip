@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.detail.dao.detail-mapper">
+	<select id="getTotalReview" resultType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM review
+	</select>
+	<select id="getReviewData" resultType="DetailReviewVO" parameterType="java.util.Map">
+		SELECT no,title,memberid,content,regdate,expdate,likecount,grade,num
+		FROM (SELECT no,title,memberid,content,regdate,expdate,likecount,grade,rownum as num
+		FROM (SELECT no,title,memberid,content,regdate,expdate,likecount,grade
+		FROM review WHERE no=#{no} AND type=#{type} ORDER BY no ASC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	
+	<resultMap type="DetailTourplaceVO" id="tourMap">
+
+	</resultMap>
+	
+	<select id="getImageFilepath" resultType="string" parameterType="int">
+		SELECT distinct(filepath)
+		FROM tourplace, (select photo.filepath as filepath, review.no
+		FROM photo, review
+		WHERE photo.no=review.no)
+		WHERE tourplace.no=#{no} AND rownum=1; 
+	</select>
+	
+	
+	
+	
+	<resultMap type="DetailReviewVO" id="reviewMap">
+			<result column="reviewno" property="reviewno"/>
+			<result column="type"	property="type"/>
+			<result column="no"	property="no"/>
+			<result column="memberid" property="memberid"/>
+			<result column="title" property="title"/>
+			<result column="regdate" property="regdate"/>
+			<result column="expdate" property="expdate"/>
+			<result column="likecount" property="likecount"/>
+			<result column="groupid" property="groupid"/>
+			<result column="groupstep" property="groupstep"/>
+			<result column="root" property="root"/>
+			<result column="depth" property="depth"/>
+			<result column="content" property="content"/>
+			<result column="grade" property="grade"/>
+			<result column="filepath" property="dpvo.filepath"/>
+	</resultMap>	
+	
+	<select id="getImageFile" resultMap="reviewMap">
+		SELECT review.reviewno,type,memberid,title,regdate,expdate,likecount,groupid,groupstep,root,depth,content,grade,photo.filepath
+		FROM review,photo
+		WHERE photo.no=review.no
+	</select>
+			
+
+</mapper>
+
+
+
