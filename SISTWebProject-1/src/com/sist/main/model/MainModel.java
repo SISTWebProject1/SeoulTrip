@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.main.dao.LoginVO;
+import com.sist.main.dao.MainDAO;
 
 @Controller
 public class MainModel {
@@ -16,5 +18,78 @@ public class MainModel {
 		
 		return "index.jsp";
 	}
+	
+	@RequestMapping("login_ok.do")
+	public String login_ok(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		
+		String id = request.getParameter("email").trim();
+		String pwd = request.getParameter("password").trim();
+		
+		LoginVO lvo = MainDAO.getLoginInfo(id, pwd);
+		try {
+			switch (lvo.getState()) {
+				case "NOID" : {
+					request.setAttribute("login_ok_msg", "NOID");
+					break;
+				}
+				case "NOPWD" : {
+					request.setAttribute("login_ok_msg", "NOPWD");
+					break;
+				}
+				case "SUCCESS" : {
+					request.setAttribute("login_ok_msg", "SUCCESS|"+lvo.getPhoto()+"|"+lvo.getName());
+					request.getSession().setAttribute("ss_member", lvo);
+					break;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("MainModel:login_ok():");
+			e.printStackTrace();
+		}
+		
+		return "main/login_ok.jsp";
+	}
+	
+	@RequestMapping("logout_ok.do")
+	public String logout_ok(HttpServletRequest request, HttpServletResponse response) {
+		request.getSession().removeAttribute("ss_member");
+		
+		return "redirect:home/home.do";
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

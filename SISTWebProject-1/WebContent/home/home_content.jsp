@@ -1,297 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<section class="post-area">
-	<div class="single-post-item">
-		<figure>
-			<img class="post-img img-fluid" src="../img/posts/p1.jpg" alt="">
-		</figure>
-		<h3>
-			<a href="blog-details.html">It's Hurricane Season But We Are Visiting Hilton Island</a>
-		</h3>
-		<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-			magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-		<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue Reading</a>
-		<div class="post-box">
-			<div class="d-flex">
-				<div>
-					<a href="#">
-						<img src="../img/author/a1.png" alt="">
-					</a>
-				</div>
-				<div class="post-meta">
-					<div class="meta-head">
-						<a href="#">Marvel Maison</a>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div class="main-body body-gap">
+	<div class="container">
+		<div class="row">
+			<div class="post-list">
+				<section class="post-area">
+					<div class="detail_foodset">
+						<c:forEach begin="1" end="5" step="1">
+							<h3><p>고급 정찬</p></h3>
+							
+							<div class="row food-catetop">
+								<c:forEach begin="1" end="4" step="1">
+									<div class="col-lg-3 col-md-3">
+										<div class="single-post-item short">
+											<figure>
+												<a href="blog-details.html">
+													<img class="post-img img-fluid" src="../img/category/restaurant_01.jpg" alt="">
+												</a>
+											</figure>
+											
+											<div class="heart">
+												<button class="heart_button" type="button">
+													<i class="fas fa-heart"></i>
+												</button>
+											</div>
+											
+											<div class="detail_food3">
+												<h4><a href="blog-details.html">점포명</a></h4>
+												
+												<div style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(../img/category/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
+													<p style="WIDTH: 90%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(../img/category/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;"></p>
+												</div>&nbsp;
+												
+												<a href="">리뷰 xx건</a>
+												
+												<div class="detail_food3_tag">#일식</div>
+											</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</c:forEach>
 					</div>
-					<div class="meta-details">
-						<ul>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-calendar-full"></span>
-									13th Oct, 2018
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-picture"></span>
-									Image Post
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-coffee-cup"></span>
-									Food & Travel
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-bubble"></span>
-									03 Comments
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+				</section>
 			</div>
 		</div>
 	</div>
-
-	<div class="single-post-item">
-		<figure>
-			<img class="post-img img-fluid" src="../img/posts/p2.jpg" alt="">
-		</figure>
-		<h3>
-			<a href="blog-details.html">Global Resorts Network Grn Putting Timeshares To Shame</a>
-		</h3>
-		<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-			magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-		<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue Reading</a>
-		<div class="post-box">
-			<div class="d-flex">
-				<div>
-					<a href="#">
-						<img src="../img/author/a1.png" alt="">
-					</a>
-				</div>
-				<div class="post-meta">
-					<div class="meta-head">
-						<a href="#">Marvel Maison</a>
-					</div>
-					<div class="meta-details">
-						<ul>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-calendar-full"></span>
-									13th Oct, 2018
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-picture"></span>
-									Image Post
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-coffee-cup"></span>
-									Food & Travel
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-bubble"></span>
-									03 Comments
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="single-post-item">
-		<figure>
-			<img class="post-img img-fluid" src="../img/posts/p3.jpg" alt="">
-		</figure>
-		<h3>
-			<a href="blog-details.html">A Guide To Rocky Mountain Vacations</a>
-		</h3>
-		<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-			magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-		<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue Reading</a>
-		<div class="post-box">
-			<div class="d-flex">
-				<div>
-					<a href="#">
-						<img src="../img/author/a1.png" alt="">
-					</a>
-				</div>
-				<div class="post-meta">
-					<div class="meta-head">
-						<a href="#">Marvel Maison</a>
-					</div>
-					<div class="meta-details">
-						<ul>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-calendar-full"></span>
-									13th Oct, 2018
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-picture"></span>
-									Image Post
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-coffee-cup"></span>
-									Food & Travel
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-bubble"></span>
-									03 Comments
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="single-post-item">
-		<figure>
-			<img class="post-img img-fluid" src="../img/posts/p4.jpg" alt="">
-		</figure>
-		<h3>
-			<a href="blog-details.html">Big Savings On Gas While You Travel</a>
-		</h3>
-		<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-			magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-		<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue Reading</a>
-		<div class="post-box">
-			<div class="d-flex">
-				<div>
-					<a href="#">
-						<img src="../img/author/a1.png" alt="">
-					</a>
-				</div>
-				<div class="post-meta">
-					<div class="meta-head">
-						<a href="#">Marvel Maison</a>
-					</div>
-					<div class="meta-details">
-						<ul>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-calendar-full"></span>
-									13th Oct, 2018
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-picture"></span>
-									Image Post
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-coffee-cup"></span>
-									Food & Travel
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-bubble"></span>
-									03 Comments
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="single-post-item">
-		<figure>
-			<img class="post-img img-fluid" src="../img/posts/p5.jpg" alt="">
-		</figure>
-		<h3>
-			<a href="blog-details.html">Tourism Is Back In Full Swing In Cancun Mexico</a>
-		</h3>
-		<p>orem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-			magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
-		<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue Reading</a>
-		<div class="post-box">
-			<div class="d-flex">
-				<div>
-					<a href="#">
-						<img src="../img/author/a1.png" alt="">
-					</a>
-				</div>
-				<div class="post-meta">
-					<div class="meta-head">
-						<a href="#">Marvel Maison</a>
-					</div>
-					<div class="meta-details">
-						<ul>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-calendar-full"></span>
-									13th Oct, 2018
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-picture"></span>
-									Image Post
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-coffee-cup"></span>
-									Food & Travel
-								</a>
-							</li>
-							<li>
-								<a href="#">
-									<span class="lnr lnr-bubble"></span>
-									03 Comments
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<nav class="blog-pagination justify-content-center d-flex">
-		<ul class="pagination">
-			<li class="page-item">
-				<a href="#" class="page-link" aria-label="Previous">
-					<span aria-hidden="true">
-						<span class="lnr lnr-arrow-left"></span>
-					</span>
-				</a>
-			</li>
-			<li class="page-item"><a href="#" class="page-link">01</a></li>
-			<li class="page-item active"><a href="#" class="page-link">02</a></li>
-			<li class="page-item"><a href="#" class="page-link">03</a></li>
-			<li class="page-item"><a href="#" class="page-link">04</a></li>
-			<li class="page-item"><a href="#" class="page-link">09</a></li>
-			<li class="page-item">
-				<a href="#" class="page-link" aria-label="Next">
-					<span aria-hidden="true">
-						<span class="lnr lnr-arrow-right"></span>
-					</span>
-				</a>
-			</li>
-		</ul>
-	</nav>
-</section>
+</div>
