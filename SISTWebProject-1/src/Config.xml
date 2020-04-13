@@ -13,6 +13,7 @@
 		<typeAlias type="com.sist.mypage.model.MemberVO_u" alias="MemberVO_u"/>
 		<typeAlias type="com.sist.detail.dao.DetailPhotoVO" alias="DetailPhotoVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailTourplaceVO" alias="DetailTourplaceVO"/>
+		<typeAlias type="com.sist.detail.dao.Detail_Review_PhotoVO" alias="Detail_Review_PhotoVO"/>
 
 	</typeAliases>
 	

@@ -11,7 +11,13 @@
 			<h3>
 				<a href="blog-details.html">${vo.title }</a>
 			</h3>
-			<p>${vo.content}</p>
+				
+				<c:forEach var="vo2" items="${imglist }">
+					<c:if test="${vo.reviewno eq vo2.reviewno}">
+						<img src="${vo2.filepath }" width="80" height="80" style="display:inline-block"/>
+					</c:if>	
+				</c:forEach>
+			<div style="width:100%">${vo.content}</div>
 			<br><br>
 			<br><br>
 			<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue
