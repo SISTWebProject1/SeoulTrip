@@ -10,7 +10,7 @@
 	</select>
 	
 	<select id="foodTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/5.0) FROM restaurant
+		SELECT CEIL(COUNT(*)/4.0) FROM restaurant
 	</select> 
 
 </mapper>

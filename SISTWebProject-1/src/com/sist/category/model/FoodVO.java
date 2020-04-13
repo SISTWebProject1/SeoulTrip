@@ -1,7 +1,6 @@
 package com.sist.category.model;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;

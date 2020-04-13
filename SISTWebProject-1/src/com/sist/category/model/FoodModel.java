@@ -18,7 +18,7 @@ public class FoodModel {
 		   if(page==null)
 			   page="1";
 		   int curpage=Integer.parseInt(page);
-		   int rowSize=5;
+		   int rowSize=4;
 		   int start=(rowSize*curpage)-(rowSize-1);
 
 		   int end=rowSize*curpage;
@@ -29,14 +29,9 @@ public class FoodModel {
 		   map.put("start", start);
 		   map.put("end", end);
 		   
-//		   List<FoodVO> list=FoodDAO.foodListData(map);
 		   List<FoodVO> list= FoodDAO.foodListData(map);
-		   System.out.println(start);
-		   System.out.println(end);
 		   System.out.println(list.size());
 		   System.out.println(list.isEmpty());
-		   System.out.println("1111");
-		   System.out.println(curpage);
 		  
 		   for(FoodVO vo:list)
 		   {

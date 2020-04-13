@@ -29,8 +29,8 @@
 											<div class="detail_food3">
 												<h4><a href="blog-details.html">점포명</a></h4>
 												
-												<div style="CLEAR: both; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(../img/category/icon_star2.gif) 0px 0px; FLOAT: left; PADDING-BOTTOM: 0px; MARGIN: 0px; WIDTH: 90px; PADDING-TOP: 0px; HEIGHT: 18px;">
-													<p style="WIDTH: 90%; PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: url(../img/category/icon_star.gif) 0px 0px; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; HEIGHT: 18px;"></p>
+												<div class="grade">
+													<p class="grade2" style="WIDTH: 80%;"></p>
 												</div>&nbsp;
 												
 												<a href="">리뷰 xx건</a>

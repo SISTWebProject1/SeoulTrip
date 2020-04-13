@@ -62,6 +62,14 @@ public class DetailModel {
 		map.put("end", end);
 		
 		List<DetailReviewVO> list = dao.getReviewData(map);
+		
+		
+		List<DetailReviewVO> list2 = dao.getImageFile();
+		for(DetailReviewVO vo : list2){
+			System.out.println(vo.getReviewno());
+			System.out.println(vo.getDpvo().getFilepath());
+		}
+		
 		request.setAttribute("list", list);
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
