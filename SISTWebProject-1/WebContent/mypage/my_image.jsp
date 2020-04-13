@@ -13,7 +13,7 @@
 			<div class="about-content col-md-4" style="text-align: center">
 				<div>
 					<h1>사진 추가</h1>
-					<input type="file" />
+					<input type="file" style="display: none"name=file/>
 				</div>
 			</div>
 		</div>

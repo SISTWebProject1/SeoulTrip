@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.mypage.model.mypage_mapper">
-
-
-
-
+	
+	<!-- 리뷰정보 select 활동 피드 -->
+	
+	
+	<!-- 프로필 내용 수정 -->
+	<select id="Update" resultType="MemberVO_u" parameterType="string">
+		SELECT memberId,pwd,name,email,addr1,addr2,birth
+		FROM member
+		WHERE memberId =#{id}
+	</select>
+	
+	<update id="update_profile"  parameterType="MemberVO_u">
+		UPDATE member SET
+		name = #{name},
+		addr1 = #{addr1},
+		birth = #{birth},
+		email = #{email}
+		WHERE memberId = #{memberId}
+	</update>
+	
+	
 </mapper>

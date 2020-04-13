@@ -5,6 +5,7 @@ import java.util.Date;
 
 public class MemberVO_u {
 
+	
 	private String memberId;
 	private String pwd;
 	private String name;
@@ -19,6 +20,7 @@ public class MemberVO_u {
 	private String selfInfo;
 	private int grade;
 	private String coverPhoto;
+	
 	public String getMemberId() {
 		return memberId;
 	}

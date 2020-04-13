@@ -10,6 +10,7 @@
 		<typeAlias type="com.sist.mypage.model.FestivalVO_u" alias="FestivalVO_u"/>
 		<typeAlias type="com.sist.mypage.model.RestaurantVO_u" alias="RestaurantVO_u"/>
 		<typeAlias type="com.sist.mypage.model.MemberVO_u" alias="MemberVO_u"/>
+		<typeAlias type="com.sist.mypage.model.ReviewVO_u" alias="ReviewVO_u"/>
 		<typeAlias type="com.sist.detail.dao.DetailPhotoVO" alias="DetailPhotoVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailTourplaceVO" alias="DetailTourplaceVO"/>
 
