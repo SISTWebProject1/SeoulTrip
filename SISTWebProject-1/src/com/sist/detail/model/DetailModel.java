@@ -75,12 +75,7 @@ public class DetailModel {
 		mapXY.put("mapy", mapy);
 		
 		List<DetailTourplaceVO> nearlist = dao.getNeayByDistance(mapXY);
-		for(DetailTourplaceVO cc: nearlist){
-			System.out.println(cc.getDistance());
-			System.out.println(cc.getTname());
-			System.out.println(cc.getNo());
-		}
-		
+			
 		request.setAttribute("nearlist", nearlist);
 		request.setAttribute("imglist", imglist);
 		request.setAttribute("list", list);
