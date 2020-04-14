@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.detail.dao.detail-mapper">
+	<select id="getTourplaceData" resultType="DetailTourplaceVO" parameterType="int">
+		SELECT * 
+		FROM tourplace
+		WHERE no=#{no}
+	</select>
 
+	<select id="getRestaurantData" resultType="DetailRestaurantVO" parameterType="int">
+		SELECT *
+		FROM restaurant
+		WHERE no=#{no}	
+	</select>
+
+	<select id="getFestivalData" resultType="DetailFestivalVO" parameterType="int">
+		SELECT *
+		FROM festival
+		WHERE no=#{no}
+	</select>
 	
-	<select id="getTotalReview" resultType="int">
-		SELECT CEIL(COUNT(*)/10.0) FROM review
+	<select id="getTotalReview" resultType="int" parameterType="java.util.Map">
+		SELECT CEIL(COUNT(*)/10.0) FROM review 
+		WHERE no=#{no} AND type=#{type}
 	</select>
 	<select id="getReviewData" resultType="DetailReviewVO" parameterType="java.util.Map">
 		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,num
@@ -89,20 +106,27 @@
 		where no=#{no} and rownum=1;
  	</select>
  	
- 	
- 	<!-- mapx,mapy를 가져오는 곳 -->
- 	<select id="getXYcoordinate" resultType="DetailTourplaceVO" parameterType="int">
- 		SELECT mapx,mapy
- 		FROM tourplace
- 		WHERE no=#{no}
- 	</select>
- 	
- 	<select id="getNeayByDistance" resultType="DetailTourplaceVO" parameterType="java.util.Map">
+ 	<select id="getNearTourplace" resultType="DetailTourplaceVO" parameterType="java.util.Map">
  		SELECT tname, no, distance, num
 		FROM (SELECT tname, no, distance, rownum as num 
-		FROM (SELECT tname, no, distance_wgs84(#{mapx} ,#{mapy}, mapx,mapy) as distance from tourplace
+		FROM (SELECT tname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from tourplace
 		ORDER by distance ASC ))
-		WHERE num BETWEEN 2 AND 10
+		WHERE num BETWEEN 2 AND 5
+ 	</select>
+ 	
+  	<select id="getNearRestaurant" resultType="DetailRestaurantVO" parameterType="java.util.Map">
+ 		SELECT rname, no, distance, num
+		FROM (SELECT rname, no, distance, rownum as num 
+		FROM (SELECT rname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from restaurant
+		ORDER by distance ASC ))
+		WHERE num BETWEEN 2 AND 5
+	</select>
+ 	 <select id="getNearFestival" resultType="DetailFestivalVO" parameterType="java.util.Map">
+ 		SELECT fname, no, distance, num
+		FROM (SELECT fname, no, distance, rownum as num 
+		FROM (SELECT fname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from festival
+		ORDER by distance ASC ))
+		WHERE num BETWEEN 2 AND 5
  	</select>
 </mapper>
 

@@ -1892,7 +1892,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 .single-post-item {
   position: relative;
   margin-left: 70px;
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  border: 1px solid #DDDBDB; }
   .single-post-item.short {
     margin-left: 25px; }
     @media (max-width: 991px) {

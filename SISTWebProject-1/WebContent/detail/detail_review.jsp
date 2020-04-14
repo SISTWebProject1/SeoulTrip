@@ -11,18 +11,17 @@
 			<h3>
 				<a href="blog-details.html">${vo.title }</a>
 			</h3>
-				
+				<br>
 				<c:forEach var="vo2" items="${imglist }">
 					<c:if test="${vo.reviewno eq vo2.reviewno}">
 						<img src="${vo2.filepath }" width="80" height="80" style="display:inline-block"/>
 					</c:if>	
 				</c:forEach>
-			<div style="width:100%">${vo.content}</div>
-			<br><br>
-			<br><br>
+
+			<div style="width:100%; height:200px;">${vo.content}</div>
 			<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue
 				Reading</a>
-			<div class="post-box" style="width:100%">
+			<div class="post-box" style="width:100%" id='mouse_over'>
 				<div class="d-flex">
 					<div>
 						<a href="#"> <img src="img/author/a1.png" alt="" />
@@ -56,20 +55,20 @@
 		<div class="text-center">
 		<ul class="pagination">
 			<c:if test="${startPage>1 }">
-				<li><a href="../detail/detail_review.do?type=1&no=198&page=${startPage-1 }">&lt;</a></li>
+				<li><a href="../detail/detail.do?type=${type}&no=${no}&page=${startPage-1 }">&lt;</a></li>
 			</c:if>
-			<c:set var="type" value="" />
+			<c:set var="typo" value="" />
 			<c:forEach var="i" begin="${startPage }" end="${endPage }">
 				<c:if test="${curpage==i }">
-					<c:set var="type" value="class=active" />
+					<c:set var="typo" value="class=active" />
 				</c:if>
 				<c:if test="${curpage!=i }">
-					<c:set var="type" value="" />
+					<c:set var="typo" value="" />
 				</c:if>
-				<li ${type }><a href="../detail/detail_review.do?type=1&no=198&page=${i}">${i}</a></li>
+				<li ${typo }><a href="../detail/detail.do?type=${type}&no=${no}&page=${i}">${i}</a></li>
 			</c:forEach>
 			<c:if test="${endPage<allPage }">
-				<li><a href="../detail/detail_review.do?type=1&no=198&page=${endPage+1 }">&gt;</a></li>
+				<li><a href="../detail/detail.do?type=${type}&no=${no}&page=${endPage+1 }">&gt;</a></li>
 			</c:if>
 		</ul>
 	</div>
