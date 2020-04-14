@@ -232,6 +232,7 @@
 		<input id="memberInfo" type="hidden" value="asdf" />
 
 	</footer>
+
 	<!-- End footer Area -->
 
 	<script src="../js/vendor/jquery-2.2.4.min.js"></script>
@@ -257,5 +258,6 @@
 	<script src="../js/detail/scrolling.js"></script>
 	<script src="../js/detail/selectBoard.js"></script>
 	<script src="../js/category.js"></script>
+  <script src="../js/search2.js"></script>
 </body>
 </html>
