@@ -9,6 +9,8 @@
     	<typeAlias type="com.sist.detail.dao.Detail_Review_PhotoVO" alias="Detail_Review_PhotoVO"/>
     	<typeAlias type="com.sist.detail.dao.DetailPhotoVO" alias="DetailPhotoVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailTourplaceVO" alias="DetailTourplaceVO"/>
+		<typeAlias type="com.sist.detail.dao.DetailRestaurantVO" alias="DetailRestaurantVO"/>
+		<typeAlias type="com.sist.detail.dao.DetailFestivalVO" alias="DetailFestivalVO"/>
     	<typeAlias type="com.sist.main.dao.HomeItemVO" alias="HomeItemVO"/>
 		<typeAlias type="com.sist.mypage.model.tourPlaceVO_u" alias="toruPlaceVO_u"/>
 		<typeAlias type="com.sist.mypage.model.FestivalVO_u" alias="FestivalVO_u"/>

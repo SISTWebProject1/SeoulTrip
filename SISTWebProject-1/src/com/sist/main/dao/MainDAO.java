@@ -70,7 +70,7 @@ public class MainDAO {
 			String lastCookie = slowdownCookies.get(slowdownCookies.size()-1);
 			int lastIdx = Integer.parseInt(lastCookie.substring(8, lastCookie.indexOf("#")));
 			
-			String cookie = "slowdown"+(lastIdx+1)+"#"+type+"_"+no;
+			String cookie = "slowdown"+lastIdx+"#"+type+"_"+no;
 			Cookie addCookie = new Cookie(cookie, "");
 			addCookie.setMaxAge(60*60*24);
 			response.addCookie(addCookie);
