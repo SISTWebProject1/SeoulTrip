@@ -70,7 +70,6 @@ public class HomeModel {
 		request.setAttribute("curdate", curdate);
 		request.setAttribute("calendarvo", new CalendarVO(curyear, curmonth).getInstance());
 		
-		MainDAO.addItemToCookies(request, response, 1, 191);
 		return "../main/index.jsp";
 	}
 

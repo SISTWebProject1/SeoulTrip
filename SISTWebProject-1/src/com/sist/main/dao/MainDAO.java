@@ -58,7 +58,6 @@ public class MainDAO {
 				slowdownCookies.add(cookies[i].getName());
 			}
 		}
-		System.out.println("cookieSize : " + slowdownCookies.size());
 		
 		if(slowdownCookies.size()==0) {
 			String cookie = "slowdown"+"0"+"#"+type+"_"+no;
@@ -82,6 +81,7 @@ public class MainDAO {
 		
 		List<String> slowdownCookies = new ArrayList<String>();
 		Cookie[] cookies = request.getCookies();
+		if(cookies==null) return list;
 		for(int i=0; i<cookies.length; i++){
 			if(cookies[i].getName().startsWith("slowdown")) {
 				slowdownCookies.add(cookies[i].getName());
