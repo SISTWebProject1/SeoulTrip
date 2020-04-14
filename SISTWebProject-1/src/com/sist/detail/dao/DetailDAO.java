@@ -25,13 +25,64 @@ public class DetailDAO {
 			System.out.println(e.getMessage());
 		}
 	}
+	// type 별로 장소 세부 데이터 가져오기 
+	public DetailTourplaceVO getTourplaceData(int no){
+		DetailTourplaceVO vo = new DetailTourplaceVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getTourplaceData",no);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
 	
-	public static int getTotalReview(){
+
+	public DetailRestaurantVO getRestaurantData(int no){
+		DetailRestaurantVO vo = new DetailRestaurantVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getRestaurantData",no);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
+	
+	public DetailFestivalVO getFestivalData(int no){
+		DetailFestivalVO vo = new DetailFestivalVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getFestivalData",no);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
+	
+	
+	
+	public static int getTotalReview(Map map){
 		SqlSession session = null;
 		int total = 0;
 		try {
 			session = ssf.openSession();
-			total = session.selectOne("getTotalReview");
+			total = session.selectOne("getTotalReview",map);
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
@@ -126,12 +177,12 @@ public class DetailDAO {
 		
 	}
 	
-	public static List<DetailTourplaceVO> getNeayByDistance(Map map){
+	public static List<DetailTourplaceVO> getNearTourplace(Map map){
 		List<DetailTourplaceVO> list = new ArrayList<DetailTourplaceVO>();
 		SqlSession session=null;
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getNeayByDistance",map);
+			list = session.selectList("getNearTourplace",map);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -141,9 +192,41 @@ public class DetailDAO {
 				session.close();
 		}
 		return list;
-		
-		
 	}
 	
+	public static List<DetailRestaurantVO> getNearRestaurant(Map map){
+		List<DetailRestaurantVO> list = new ArrayList<DetailRestaurantVO>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getNearRestaurant",map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	
+	
+	public static List<DetailFestivalVO> getNearFestival(Map map){
+		List<DetailFestivalVO> list = new ArrayList<DetailFestivalVO>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getNearFestival",map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
 	
 }

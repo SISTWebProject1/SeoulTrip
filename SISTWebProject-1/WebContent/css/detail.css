@@ -107,3 +107,11 @@
 .post-list #QnA-List {
   display: none;
 }
+
+#mouse_over {
+  opacity: 0;
+}
+
+#mouse_over:hover {
+  opacity: 1;
+}
