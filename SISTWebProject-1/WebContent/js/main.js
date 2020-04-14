@@ -162,7 +162,7 @@ $(document).ready(function() {
 
   // When the window has finished loading create our google map below
 
-  if (document.getElementById("map")) {
+/*  if (document.getElementById("map")) {
     google.maps.event.addDomListener(window, "load", init);
     function init() {
       // Basic options for a simple Google Map
@@ -264,7 +264,7 @@ $(document).ready(function() {
         title: "Snazzy!"
       });
     }
-  }
+  }*/
 
   $(document).ready(function() {
     $("#mc_embed_signup")

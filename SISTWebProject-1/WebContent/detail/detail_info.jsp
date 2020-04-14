@@ -138,12 +138,10 @@
 							var mapy = document.getElementById('mapy').value;
 
 							var options = {
-
 								center : new kakao.maps.LatLng(mapx, mapy),
 								level : 3
 							};
 							var map = new kakao.maps.Map(container, options);
-
 							var markerPosition = options.center;
 
 							// 마커를 생성합니다
@@ -152,8 +150,9 @@
 							});
 
 							// 마커가 지도 위에 표시되도록 설정합니다
-							marker.setMap(map);
-						</script>
+							marker.setMap(map);  
+							
+						</script> 
 					</div>
 				</div>
 			</div>
