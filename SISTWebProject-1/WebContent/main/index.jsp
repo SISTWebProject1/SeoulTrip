@@ -229,5 +229,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="../js/detail/imageGallery.js"></script>
 <script src="../js/detail/scrolling.js"></script>
 <script src="../js/detail/selectBoard.js"></script>
+<script src="../js/search2.js"></script>
 </body>
 </html>

@@ -139,6 +139,51 @@ public class MainDAO {
 		
 		return list;
 	}
+	
+	public static List<HomeItemVO> getSearchData(int type, String keyword) {
+		List<HomeItemVO> list = new ArrayList<HomeItemVO>();
+		
+		String table;
+		String name;
+		String photo;
+		switch (type) {
+			case 1 : {
+				table = "tourplace";
+				name = "tname";
+				photo = "tphoto";
+				break;
+			}
+			case 2 : {
+				table = "restaurant";
+				name = "rname";
+				photo = "rphoto";
+				break;
+			}
+			default : {
+				table = "festival";
+				name = "fname";
+				photo = "fphoto";
+				break;
+			}
+		}
+		
+		Map map = new HashMap();
+		map.put("table", table);
+		map.put("name", name);
+		map.put("photo", photo);
+		map.put("keyword", keyword);
+		
+		try {
+			SqlSession session = ssf.openSession();
+			list = session.selectList("getSearchData", map);
+			session.close();
+		} catch (Exception e) {
+			System.out.println("MainDAO:getSearchData():");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 }
 

@@ -10,6 +10,14 @@
 		FROM ${table}
 		WHERE no = #{no}
 	</select>
+	
+	<select id="getSearchData" resultType="HomeItemVO" parameterType="HashMap">
+		SELECT no, ${name} AS name, ${photo} AS photo
+		FROM ${table}
+		WHERE ${name}||' '||NVL(info,' ')||' '||NVL(addr1,' ')||' '||NVL(addr2,' ')
+		LIKE '%'||#{keyword}||'%'
+		AND rownum &lt; 5
+	</select>
 </mapper>
 
 
