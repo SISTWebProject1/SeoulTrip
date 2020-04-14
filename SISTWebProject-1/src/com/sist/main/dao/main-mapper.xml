@@ -4,6 +4,12 @@
 	<select id="getLoginInfo" resultType="LoginVO" parameterType="String">
 		SELECT memberid, pwd, name, photo, regdate, birth FROM member where memberid = #{memberId}
 	</select>
+	
+	<select id="getHomeItemFromCookie" resultType="HomeItemVO" parameterType="HashMap">
+		SELECT no, ${name}, ${photo}
+		FROM ${table}
+		WHERE no = #{no}
+	</select>
 </mapper>
 
 

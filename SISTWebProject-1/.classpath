@@ -4,5 +4,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/mvcDev/mvcStudy/ruft/WebContent/WEB-INF/lib/mybatis-3.2.8.jar"/>
+	<classpathentry kind="lib" path="C:/mvcDev/mvcStudy/ruft/WebContent/WEB-INF/lib/Controller.jar"/>
+	<classpathentry kind="lib" path="C:/mvcDev/mvcStudy/ruft/WebContent/WEB-INF/lib/lombok-1.18.12.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

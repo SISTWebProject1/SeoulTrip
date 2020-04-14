@@ -106,6 +106,8 @@
 								<li><span>보통</span></li>
 								<li><span>별로</span></li>
 								<li><span>최악</span></li>
+								<li><input type="hidden" name=mapx id=mapx value="${mapx}"/></li>
+								<li><input type="hidden" name=mapy id=mapy value="${mapy}"/></li>
 							</ul>
 						</div>
 					</div>
@@ -131,13 +133,26 @@
 						<script type="text/javascript"
 							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
 						<script>
-                    var container = document.getElementById('map');
-                    var options = {
-                      center: new kakao.maps.LatLng(33.450701, 126.570667),
-                      level: 3
-                    };
-                    var map = new kakao.maps.Map(container, options);
-                  </script>
+							var container = document.getElementById('map');
+							var mapx = document.getElementById('mapx').value;
+							var mapy = document.getElementById('mapy').value;
+
+							var options = {
+								center : new kakao.maps.LatLng(mapx, mapy),
+								level : 3
+							};
+							var map = new kakao.maps.Map(container, options);
+							var markerPosition = options.center;
+
+							// 마커를 생성합니다
+							var marker = new kakao.maps.Marker({
+								position : markerPosition
+							});
+
+							// 마커가 지도 위에 표시되도록 설정합니다
+							marker.setMap(map);  
+							
+						</script> 
 					</div>
 				</div>
 			</div>

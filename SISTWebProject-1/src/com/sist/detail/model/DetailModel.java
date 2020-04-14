@@ -14,9 +14,13 @@ public class DetailModel {
 	public String main_detail(HttpServletRequest request, HttpServletResponse response) {
 		request.setAttribute("main_jsp", "../detail/detail.jsp");
 		//request.setAttribute("banner_on", true);
+		
+		//cookie에 넣기
 		request.setAttribute("detail_board_jsp","../detail/detail_qna.jsp");
 		return "../main/index.jsp";
 	}
+	
+	
 	@RequestMapping("detail/board_review.do")
 	public String detail_switch_review(HttpServletRequest request, HttpServletResponse response){
 		request.setAttribute("main_jsp", "../detail/detail.jsp");
@@ -24,6 +28,9 @@ public class DetailModel {
 		request.setAttribute("detail_board_jsp", "../detail/detail_review.jsp");
 		return  "../main/index.jsp";
 	}
+	
+	
+	
 	@RequestMapping("detail/board_qna.do")
 	public String detail_switch_qna(HttpServletRequest request, HttpServletResponse response){
 		request.setAttribute("main_jsp", "../detail/detail.jsp");
@@ -31,6 +38,8 @@ public class DetailModel {
 		request.setAttribute("detail_board_jsp", "../detail/detail_qna.jsp");
 		return  "../main/index.jsp";
 	}
+	
+	
 	@RequestMapping("detail/detail_review.do")
 	public String detail_review(HttpServletRequest request, HttpServletResponse response){
 		String no = request.getParameter("no");
@@ -62,21 +71,33 @@ public class DetailModel {
 		map.put("end", end);
 		
 		List<DetailReviewVO> list = dao.getReviewData(map);
+		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+
+		//X,Y 좌표 가져오기 
+		DetailTourplaceVO vo = dao.getXYcoordinate(Integer.parseInt(no));
+		double mapx = vo.getMapx();
+		double mapy = vo.getMapy();
+		Map mapXY = new HashMap();
+		mapXY.put("mapx", mapx);
+		mapXY.put("mapy", mapy);
+		
+		List<DetailTourplaceVO> nearlist = dao.getNeayByDistance(mapXY);
+	
 		
 		
-		List<DetailReviewVO> list2 = dao.getImageFile();
-		for(DetailReviewVO vo : list2){
-			System.out.println(vo.getReviewno());
-			System.out.println(vo.getDpvo().getFilepath());
-		}
-		
+		request.setAttribute("mapx", mapx);
+		request.setAttribute("mapy", mapy);
+		request.setAttribute("nearlist", nearlist);
+		request.setAttribute("imglist", imglist);
 		request.setAttribute("list", list);
+		
 		request.setAttribute("curpage", curpage);
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("BLOCK", BLOCK);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("allPage", allPage);				
+		
 		request.setAttribute("main_jsp", "../detail/detail.jsp");
 		request.setAttribute("detail_board_jsp","../detail/detail_review.jsp");
 

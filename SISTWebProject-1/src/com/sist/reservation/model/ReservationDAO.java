@@ -24,10 +24,10 @@ public class ReservationDAO {
 		}
 	}
 
-	//예약할 레스토랑의 정보 한개
-	public static ReservationVO reservationListData(int no)
+	
+	public static RestaurantVO reservationListData(int no)
 	{
-		ReservationVO vo=new ReservationVO();
+		RestaurantVO vo=new RestaurantVO();
 		SqlSession session=null;
 		try{
 			session=ssf.openSession();
@@ -35,7 +35,7 @@ public class ReservationDAO {
 		
 		} catch(Exception e)
 		{
-			System.out.println("reservation:문제상황 "+e.getMessage());
+			System.out.println("reservation: "+e.getMessage());
 		}finally
 		{
 			if(session!=null)
@@ -45,3 +45,4 @@ public class ReservationDAO {
 	}
 
 }
+
