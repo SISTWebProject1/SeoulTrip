@@ -25,13 +25,13 @@ public class MypageDAO {
 	}
 
 	
-	public static MemberVO_u Update(String id){
+	public static MemberVO_u PassWord_check(String id){
 		SqlSession session =null;
 		MemberVO_u vo = new MemberVO_u();
 		try{
 			session = ssf.openSession();
 			System.out.println("11"+id);
-			vo = session.selectOne("Update",id);
+			vo = session.selectOne("passwordCheck",id);
 			
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -46,9 +46,6 @@ public class MypageDAO {
 		SqlSession session = null;
 		try{
 			session = ssf.openSession();
-			SimpleDateFormat dm = new SimpleDateFormat("YY-MM-DD");
-			String birth = vo.getBirth();
-			dm.parse(birth);
 			session.update("update_profile",vo);
 			
 		}catch(Exception ex){

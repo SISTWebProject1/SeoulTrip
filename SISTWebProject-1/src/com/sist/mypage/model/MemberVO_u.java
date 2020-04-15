@@ -11,7 +11,7 @@ public class MemberVO_u {
 	private String name;
 	private String photo;
 	private String email;
-	private String birth;
+	private Date birth;
 	private String gender;
 	private String addr1;
 	private String addr2;
@@ -51,10 +51,10 @@ public class MemberVO_u {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getBirth() {
+	public Date getBirth() {
 		return birth;
 	}
-	public void setBirth(String birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
 	public String getGender() {
@@ -63,9 +63,14 @@ public class MemberVO_u {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	
+	// addr
 	public String getAddr1() {
-		return addr1;
+		return addr1+addr2;
 	}
+	//
+	
+	
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
 	}

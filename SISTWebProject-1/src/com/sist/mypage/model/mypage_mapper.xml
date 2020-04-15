@@ -6,7 +6,7 @@
 	
 	
 	<!-- 프로필 내용 수정 -->
-	<select id="Update" resultType="MemberVO_u" parameterType="string">
+	<select id="passwordCheck" resultType="MemberVO_u" parameterType="string">
 		SELECT memberId,pwd,name,email,addr1,addr2,birth
 		FROM member
 		WHERE memberId =#{id}
@@ -16,7 +16,6 @@
 		UPDATE member SET
 		name = #{name},
 		addr1 = #{addr1},
-		birth = #{birth},
 		email = #{email}
 		WHERE memberId = #{memberId}
 	</update>
