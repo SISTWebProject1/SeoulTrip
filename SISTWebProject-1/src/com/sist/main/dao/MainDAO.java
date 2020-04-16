@@ -184,6 +184,63 @@ public class MainDAO {
 		
 		return list;
 	}
+	
+	public static List<HomeItemVO> getHashTagSearchData(String keyword){
+		List<HomeItemVO> list = new ArrayList<HomeItemVO>();
+		
+		try {
+			SqlSession session = ssf.openSession();
+			List<HomeItemVO> tempList = session.selectList("getTypeNoListBySearch", keyword);
+			if(tempList.isEmpty()) return list;
+			
+			for(HomeItemVO vo : tempList) {
+				int type = vo.getType();
+				int no = vo.getNo();
+				
+				String table;
+				String name;
+				String photo;
+				switch (type) {
+					case 1 : {
+						table = "tourplace";
+						name = "tname";
+						photo = "tphoto";
+						break;
+					}
+					case 2 : {
+						table = "restaurant";
+						name = "rname";
+						photo = "rphoto";
+						break;
+					}
+					default : {
+						table = "festival";
+						name = "fname";
+						photo = "fphoto";
+						break;
+					}
+				}
+				
+				Map map = new HashMap();
+				map.put("table", table);
+				map.put("name", name);
+				map.put("photo", photo);
+				map.put("no", no);
+				
+				vo = session.selectOne("getHIVOData", map);
+				vo.setType(type);
+				list.add(vo);
+
+			}
+			
+			session.close();
+		} catch (Exception e) {
+			System.out.println("MainDAO:getHashTagSearchData():");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
 }
 

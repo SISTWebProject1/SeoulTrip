@@ -21,11 +21,10 @@
 											<c:when test="${ datevo.day eq '토' }">
 												 color:blue; 
 											</c:when>
-											
-											<c:when test="${ curmonth eq monthvo.month && curdate eq datevo.date }">
-												 background-color:rgba(128, 80, 250, 0.4); 
-											</c:when>
 										</c:choose>
+										<c:if test="${ curmonth eq monthvo.month && curdate eq datevo.date }">
+											 background-color:rgba(128, 80, 250, 0.4); 
+										</c:if>
 									" value="${ datevo.date }" 
 									onclick="location.href='festivalList.do?date=${ calendarvo.year }-${ monthvo.month }-${ datevo.date }'"/>
 								</c:forEach>

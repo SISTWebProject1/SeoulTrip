@@ -1,12 +1,4 @@
 package com.sist.reservation.model;
-/*
-BOOKINGNUMBER   NOT NULL NUMBER         
-MEMBERID        NOT NULL VARCHAR2(4000) 
-NO              NOT NULL NUMBER         
-RESERVATIONDATE          DATE           
-TIME                     DATE           
-INWON                    NUMBER    
- */
 public class ReservationVO {
 
 	private int bookingnumber;
