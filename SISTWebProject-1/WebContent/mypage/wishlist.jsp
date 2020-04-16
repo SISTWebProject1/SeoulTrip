@@ -66,9 +66,17 @@
 	</div>
 	<div class="container">
 			<div class="btn btn-sm btn-primary">관심리스트</div>
-			<div class="btn btn-sm btn-primary">여행</div>	
+			<div class="btn btn-sm btn-primary">여행</div>
+		<c:if test="${count== 0 }">
+			<div class="row" style="margin: 30px;">
+				<div class="col-md-12">
+					~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${count !=0 }">	
 		<div class="row" style="margin: 30px;">
-			<c:forEach var="i" begin="1" end="4">
+			<c:forEach var="vo" items="list">
 			<div class="col-md-4">
 				<div class="thumbnail" style="width:300px;height:300px;">
 				<div style="height:70%;background-image: url('../img/reservation.jpg');">
@@ -87,6 +95,7 @@
 			</div>
 			</c:forEach>
 		</div>
+		</c:if>
 	</div>
 
 	<!-- Start main body Area -->

@@ -7,7 +7,7 @@
 	
 	<!-- 프로필 내용 수정 -->
 	<select id="passwordCheck" resultType="MemberVO_u" parameterType="string">
-		SELECT memberId,pwd,name,email,addr1,addr2,birth
+		SELECT *
 		FROM member
 		WHERE memberId =#{id}
 	</select>
@@ -16,9 +16,25 @@
 		UPDATE member SET
 		name = #{name},
 		addr1 = #{addr1},
-		email = #{email}
+		email = #{email},
+		tel = #{tel},
+		selfInfo = #{selfInfo}
 		WHERE memberId = #{memberId}
 	</update>
 	
+	<select id="reivewData" parameterType="string" resultType="ReviewVO_u">
+		SELECT * FROM review
+		WHERE memberId= #{memberId}
+	</select>
 	
+	<select id ="reviewCount" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM review
+		WHERE memberId= #{memberId}
+	</select>
+	
+	<select id="wishtList" parameterType="string" resultType="WishListVO_u">
+		SELECT * FROM
+		wishlist
+		WHERE memberId=#{memberId}
+	</select>
 </mapper>

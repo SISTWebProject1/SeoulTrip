@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,6 +54,12 @@
 #my_info>li {
 	margin: 15px;
 }
+#pro_content{
+	position:absolute;
+	top: 50%;
+	left:50%;
+	transform : translate(-50%,-50%);
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -68,18 +76,30 @@
 				<img src="${ss_member.photo }">
 			</div>
 			<div class="profile-user-settings" style="text-align: left">
-				<h2 class="profile-user-name">${ss_member.name }</h2>
-				<sub style="color: gray">ID:@${ss_member.memberId }</sub>
+				<h2 class="profile-user-name">${vo.name }</h2>
+				<sub style="color: gray">ID:@${vo.memberId }</sub>
 			</div>
 
 			<div class="profile-bio" style="margin: 5px;">
+				<c:if test="${vo.selfInfo !=null }">
+					<div class="caption">
+						${vo.selfInfo }
+					</div>
+				</c:if>
+				<c:if test="${vo.selfInfo == null }">
+					<div class="caption">
+						사진과 정보를 프로필에 추가해주세요!
+					</div>
+				</c:if>
 				<ul id="my_info" style="text-align: left;">
 					<li><img src="../mypage/birth.png"
-						style="width: 30px; float: left;">생일 : ${ss_member.birth }</li>
+						style="width: 30px; float: left;">생일 : ${birth }</li>
 					<li><img src="../mypage/book.png"
-						style="width: 30px; float: left;">가입일 : ${ss_member.regdate}</li>
+						style="width: 30px; float: left;">가입일 : ${regdate}</li>
+					<li><img src="../mypage/book.png"
+						style="width: 30px; float: left;">E-mail : ${vo.email }</li>
 					
-					<li class="btn btn-sm btn-primary"><a href="../mypage/profile_Update.do?id=${ss_member.memberId }">프로필 수정</a></li>
+					<li class="btn btn-sm btn-primary"><a href="../mypage/profile_Update.do?id=${vo.memberId }">프로필 수정</a></li>
 					<li class="btn btn-sm btn-primary">사진 업로드</li>
 					<li class="btn btn-sm btn-primary">리뷰쓰기</li>
 				</ul>
@@ -102,16 +122,26 @@
 	<div class="container-fulid">
 		<div class="info">
 			<div class="row" style="text-align: center; height: 500px;">
-				<div class="col-md-8"
-					style="text-align: center; margin-left: 20px; background-color: gray">
-					<div style="margin: 10px; height: 100px; text-align: center">
-						<h3>프로필 작성</h3>
-
-						<p>사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!</p>
+			
+				<div class="col-md-8" 
+					style="text-align: center; margin-left: 20px; background-color: navy;">
+					<c:if test="${count ==0 }">
+					<div style="margin: 10px; height: 100px; text-align: center;" id="pro_content">
+					
+						<pre><h3>사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!</h3></pre>
 
 					</div>
+					</c:if>
+					<c:if test="${count !=0 }">
+						<c:forEach var="vo" items="list">
+						<div style="margin: 10px; height: 100px; text-align: center;" id="pro_content">
+							<pre><h3>${count }</h3></pre>
+						</div>
+						</c:forEach>
+					</c:if>
 				</div>
 			</div>
+					<div class="btn btn-sm btn-danger">삭제</div>
 		</div>
 	</div>
 	<!-- Blog Area -->

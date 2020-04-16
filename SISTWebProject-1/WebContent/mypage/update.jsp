@@ -46,8 +46,16 @@ $(function(){
   <div class="row">
       <form method=post action="../mypage/update_ok.do" id="reply_frm">
       <table class="table table-hover">
+      	<tr>
+          <th width=20% id=name class="text-right success">아이디</th>
+          <td width=80%>
+           <input type=text name=id size=15 value="${vo.memberId }" disabled>
+          </td>
+        </tr>
+      
+      
         <tr>
-          <th width=20% id=name class="text-right success">이름 ${vo.memberId }</th>
+          <th width=20% id=name class="text-right success">이름</th>
           <td width=80%>
            <input type=text name=name size=15 value="${vo.name }" id=name>
            <input type=hidden name=id id=id value="${vo.memberId}">
@@ -62,8 +70,9 @@ $(function(){
           </td>
         </tr>
         
+        
         <tr>
-          <th width=20% class="text-right success">주소${vo.addr1 }</th>
+          <th width=20% class="text-right success">주소</th>
           <td width=80%>
           	<input type=text name=addr1 id=addr1 size=50 value="${vo.addr1 }">
           </td>
@@ -75,11 +84,17 @@ $(function(){
           	<input type=text name=email id=email size=50 value="${vo.email }">
           </td>
         </tr>
+        <tr>
+          <th width=20% class="text-right success">핸드폰</th>
+          <td width=80%>
+           <input type=text id=tel name=tel size=50 value="${vo.tel }">
+          </td>
+        </tr>
         
         <tr>
           <th width=20% class="text-right success">자기소개</th>
           <td width=80%>
-           <textarea rows="8" cols="55" name=content id=selfinfo>${vo.selfInfo }</textarea>
+           <textarea rows="8" cols="55" name=selfinfo id=selfinfo>${vo.selfInfo }</textarea>
           </td>
         </tr>
         
