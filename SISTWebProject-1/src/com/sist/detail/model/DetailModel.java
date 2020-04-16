@@ -16,12 +16,12 @@ public class DetailModel {
 		String no = request.getParameter("no");
 		String type = request.getParameter("type");
 		String page = request.getParameter("page");
-		
+	
 		DetailDAO dao = new DetailDAO();
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
 		DetailFestivalVO fvo = new DetailFestivalVO();
-		double mapx = 0;
+		double mapx = 0;	
 		double mapy = 0;
 		int totalpage = 0;
 		String title = "";
@@ -71,9 +71,6 @@ public class DetailModel {
 		int rowSize = 5;
 		int start = (rowSize)*curpage-(rowSize-1);
 		int end = rowSize*curpage;
-/*		int totalpage = dao.getTotalReview(Integer.parseInt(no));
-*/		System.out.println(totalpage);
-		//pagination
 		final int BLOCK = 10;
 		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
 		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -102,7 +99,7 @@ public class DetailModel {
 //		
 		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
 		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
-		//List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
+		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
 	
 		
 		request.setAttribute("type", type);
@@ -111,7 +108,7 @@ public class DetailModel {
 		request.setAttribute("no", no);
 		request.setAttribute("nearT", nearT);
 		request.setAttribute("nearR", nearR);
-		//request.setAttribute("nearF", nearF);
+		request.setAttribute("nearF", nearF);
 		request.setAttribute("imglist", imglist);
 		request.setAttribute("list", list);
 		

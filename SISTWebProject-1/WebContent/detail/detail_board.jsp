@@ -8,8 +8,10 @@
 					<div class="Review-search" id="Review_Search">
 						<form class="example" action="#"
 							style="margin: auto; max-width: 300px">
-							<a href="board_review.do"><input type="button" style="font-size: 20px"
-								placeholder="Search Posts" value="리뷰게시판" /></a>
+							<%-- <a href="../detail/detail.do?type=${type}&no=${no }">
+							 --%>
+							 <input type="button" style="font-size:30px; border: none; background: none; text-align:center;"
+								placeholder="Search Posts" value="review" id="Review"/>
 						</form>
 					</div>
 				</div>
@@ -19,8 +21,12 @@
 					<div class="QnA-search" id="QnA_Seach">
 						<form class="example" action="#"
 							style="margin: auto; max-width: 300px">
-							<a href="board_qna.do"><input type="button" style="font-size: 20px"
-								placeholder="Search Posts" value="질문게시판"  /></a>
+							<input type="button" style="font-size:30px; border: none; background: none; text-align:center;"
+								placeholder="Search Posts" value="qna" id="QNA" />
+								
+								<input type="hidden" name=type id=type value="${type}"/>
+								<input type="hidden" name=no id=no value="${no}"/>
+								<input type="hidden" name=page id=page value="${page}"/>
 						</form>
 					</div>
 				</div>
@@ -86,5 +92,4 @@
 			</div>
 		</div>
 	<!-- Modal 처리  -->
-	<jsp:include page="${detail_board_jsp}"></jsp:include>
-	
+	<jsp:include page="${detail_board_jsp}" />
