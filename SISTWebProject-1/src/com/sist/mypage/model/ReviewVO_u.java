@@ -12,6 +12,16 @@ public class ReviewVO_u {
 	private Date expdate;
 	private int likecode;
 	private int grade;
+	
+	private int review_count;
+	
+	
+	public int getReview_count() {
+		return review_count;
+	}
+	public void setReview_count(int review_count) {
+		this.review_count = review_count;
+	}
 	public int getReviewno() {
 		return reviewno;
 	}
