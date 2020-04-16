@@ -55,7 +55,7 @@
 			<c:forEach var="hivo" items="${ hiList }">
 				<div class="single-popular-post d-flex flex-row">
 					<div class="popular-thumb">
-						<img class="img-fluid" src="${ hivo.photo }" alt="">
+						<img class="img-fluid" src="${ hivo.photo }" style="width: 50px; height: 50px; border-bottom: 10px;">
 					</div>
 					<div class="popular-details">
 						<a href="blog-details.html">
