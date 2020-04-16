@@ -18,6 +18,28 @@
 		LIKE '%'||#{keyword}||'%'
 		AND rownum &lt; 5
 	</select>
+	
+	<select id="getHIVOData" resultType="HomeItemVO" parameterType="HashMap">
+		SELECT no, ${name} AS name, ${photo} AS photo
+		FROM ${table}
+		WHERE no = #{no}
+	</select>
+	
+	<select id="getHashTagSearchData" resultType="HashTagVO" parameterType="String">
+		SELECT tagcode, tagname FROM hashtagtable
+		WHERE tagname LIKE '%'||#{keyword}||'%'
+		AND rownum &lt; 5
+	</select>
+	
+	<select id="getTypeNoListBySearch" resultType="HomeItemVO">
+		SELECT type, no FROM
+		(SELECT type, no, tagcode, COUNT(*) AS cnt FROM review NATURAL JOIN reviewtohashtag
+		GROUP BY type, no, tagcode
+		ORDER BY cnt DESC) NATURAL JOIN hashtagtable
+		WHERE tagname LIKE #{keyword}||'%'
+		AND cnt &gt; 3
+		AND rownum &lt; 5
+	</select>
 </mapper>
 
 

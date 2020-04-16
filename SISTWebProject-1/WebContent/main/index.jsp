@@ -131,6 +131,9 @@
 				</div>
 				<p id="login_alert" class="text-right">&nbsp;</p>
 				<div class="input-group">
+					<a href="../member/join.do">
+						<input type="button" class="btn btn-sm btn-info" value="회원가입"/>
+					</a>
 					<input type="login" class="btn btn-sm btn-primary" value="login">
 					<input type="reset" class="btn btn-sm btn-danger" value="cancel"
 						onclick="login_hide()">

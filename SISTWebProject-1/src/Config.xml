@@ -15,7 +15,7 @@
 		<typeAlias type="com.sist.mypage.model.tourPlaceVO_u" alias="toruPlaceVO_u"/>
 		<typeAlias type="com.sist.mypage.model.MemberVO_u" alias="MemberVO_u"/>
 		<typeAlias type="com.sist.mypage.model.ReviewVO_u" alias="ReviewVO_u"/>
-		
+		<typeAlias type="com.sist.main.dao.HashTagVO" alias="HashTagVO"/>
 		
 
 	</typeAliases>
