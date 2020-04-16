@@ -21,16 +21,18 @@
 						<div class="col-lg-4 col-md-4">
 							<div class="single-post-item short">
 								<figure>
+									<a href="../detail/detail.do?type=3&no=${ fvo.no }">
 									<img class="post-img img-fluid" src="${ fvo.fphoto }" style="height: 400px;">
+									</a>
 								</figure>
 								<h3>
-									<a href="../detail/detail?type=3&no=${ fvo.no }">${ fvo.fname }</a>
+									<a href="../detail/detail.do?type=3&no=${ fvo.no }">${ fvo.fname }</a>
 								</h3>
 								<p>
 									${ fvo.addr1 }${ fvo.addr2 }<br/>
 									${ fvo.fmtStart } ~ ${ fvo.fmtEnd }
 								</p>
-								<a href="../detail/detail?type=3&no=${ fvo.no }" class="primary-btn text-uppercase mt-15">축제 상세보기</a>
+								<a href="../detail/detail.do?type=3&no=${ fvo.no }" class="primary-btn text-uppercase mt-15">축제 상세보기</a>
 								<!-- <div class="post-box">
 									<div class="d-flex">
 										<div>

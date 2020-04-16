@@ -2801,6 +2801,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #login .btn {
 	margin: 10px 5px;
+	width: 80px;
 }
 
 #login_alert {
@@ -2826,6 +2827,18 @@ body.mobile-nav-active #mobile-nav-toggle {
 .main-banner .btn-group .btn {
 	background-color: rgba(0,0,0,0);
 	border: 0px solid white;
+}
+
+#search_result {
+	border: 1px solid gray !important;
+}
+
+#search_result tr, #search_result th, #search_result td {
+	display: block;
+}
+
+#search_result a {
+	cursor: pointer !important;
 }
 
 /*# sourceMappingURL=main.css.map */

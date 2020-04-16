@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.main.dao.HashTagVO;
 import com.sist.main.dao.HomeItemVO;
 import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.MainDAO;
@@ -75,6 +76,8 @@ public class MainModel {
 		request.setAttribute("rsList", rsList);
 		List<HomeItemVO> fsList = MainDAO.getSearchData(3, keyword);
 		request.setAttribute("fsList", fsList);
+		List<HomeItemVO> htList = MainDAO.getHashTagSearchData(keyword);
+		request.setAttribute("htList", htList);
 		
 		return "../main/search_result.jsp";
 	}

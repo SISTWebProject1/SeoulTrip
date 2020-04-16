@@ -3,8 +3,8 @@ $(function(){
 	$('input[name="search2"]').addClass('search2');
 	
 	$('body').prepend('<table class="table" id="search_result" '
-						+'style="width:500px;height:800px;position:fixed;z-index:10;'
-						+'background-color:white;border-radius:50px;">'
+						+'style="width:500px;position:fixed;z-index:10;'
+						+'background-color:white;">'
 						+'</table>');
 	$('#search_result').hide();
 	
@@ -18,7 +18,12 @@ $(function(){
 		return false;
 	});
 	
-	$('#header .search2').keyup(function(){
+	$('#header .search2').keyup(function(e){
+		if(e.which==27) {
+			$('#search_result').hide();
+			return false;
+		}
+		
 		$('*').css('cursor','wait');
 		
 		let keyword = $(this).val().trim();
@@ -49,7 +54,12 @@ $(function(){
 		return false;
 	});
 	
-	$('.main-banner .search2').keyup(function(){
+	$('.main-banner .search2').keyup(function(e){
+		if(e.which==27) {
+			$('#search_result').hide();
+			return false;
+		}
+		
 		$('*').css('cursor','wait');
 		
 		let keyword = $(this).val().trim();
@@ -71,12 +81,14 @@ $(function(){
 	});
 	
 	$('.search2').blur(function(){
-		$('#search_result').offset({
-			top : 0,
-			left : 0
-		});
-		$('#search_result').hide();
-		return false;
+		if(!$('#search_result a').click()) {
+			$('#search_result').offset({
+				top : 0,
+				left : 0
+			});
+			$('#search_result').hide();
+			return false;
+		}		
 	});
 	
 });
