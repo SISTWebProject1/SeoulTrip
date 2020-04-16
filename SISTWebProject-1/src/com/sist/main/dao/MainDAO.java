@@ -60,8 +60,9 @@ public class MainDAO {
 		}
 		
 		if(slowdownCookies.size()==0) {
-			String cookie = "slowdown"+"0"+"#"+type+"_"+no;
+			String cookie = "slowdown"+"10"+"#"+type+"_"+no;
 			Cookie addCookie = new Cookie(cookie, "");
+			addCookie.setPath("/");
 			addCookie.setMaxAge(60*60*24);
 			response.addCookie(addCookie);
 		} else {
@@ -69,8 +70,9 @@ public class MainDAO {
 			String lastCookie = slowdownCookies.get(slowdownCookies.size()-1);
 			int lastIdx = Integer.parseInt(lastCookie.substring(8, lastCookie.indexOf("#")));
 			
-			String cookie = "slowdown"+lastIdx+"#"+type+"_"+no;
+			String cookie = "slowdown"+(lastIdx+1)+"#"+type+"_"+no;
 			Cookie addCookie = new Cookie(cookie, "");
+			addCookie.setPath("/");
 			addCookie.setMaxAge(60*60*24);
 			response.addCookie(addCookie);
 		}		
@@ -85,8 +87,10 @@ public class MainDAO {
 		for(int i=0; i<cookies.length; i++){
 			if(cookies[i].getName().startsWith("slowdown")) {
 				slowdownCookies.add(cookies[i].getName());
+				System.out.println(cookies[i].getName());
 			}
 		}
+		System.out.println("========");
 		Collections.sort(slowdownCookies);
 		
 		for(int i=0; i<Math.min(slowdownCookies.size(), 4); i++) {

@@ -125,7 +125,7 @@ public class DetailModel {
 		request.setAttribute("main_jsp", "../detail/detail.jsp");
 		//request.setAttribute("banner_on", true);
 
-//		MainDAO.addItemToCookies(request, response, Integer.parseInt(type), Integer.parseInt(no));
+		MainDAO.addItemToCookies(request, response, Integer.parseInt(type), Integer.parseInt(no));
 		//cookie에 넣기
 		request.setAttribute("detail_board_jsp","../detail/detail_review.jsp");
 		return "../main/index.jsp";
