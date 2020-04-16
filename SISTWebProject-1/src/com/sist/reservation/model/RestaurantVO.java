@@ -1,23 +1,4 @@
 package com.sist.reservation.model;
-/*
-	NO       NOT NULL NUMBER         
-		RNAME    NOT NULL VARCHAR2(4000) 
-		OPENHOUR          VARCHAR2(100)  
-		RPHOTO            VARCHAR2(100)  
-	INFO              CLOB           
-	TEL               VARCHAR2(20)   
-		LINK              VARCHAR2(100)  
-		MAPX              NUMBER         
-		MAPY              NUMBER         
-		ADDR1             VARCHAR2(100)  
-		ADDR2             VARCHAR2(100)  
-	RANK              NUMBER         
-	PRICE             VARCHAR2(100)  
-	MENU              VARCHAR2(100)  
-	RESCHECK          VARCHAR2(1)    
-	GRADE             NUMBER         
-	POST              VARCHAR2(20)
- */
 public class RestaurantVO {
     private String rname;
     private String openhour;
