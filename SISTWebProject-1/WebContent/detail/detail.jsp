@@ -11,6 +11,7 @@ $(function() {
 	$('#QNA').click(function(){
 		const type = $('#type').val();
 		const no = $('#no').val();
+		console.log("QNA");
 		 $.ajax({
 			type:'post',
 			url:'../detail/detail_qna.do',
@@ -25,7 +26,8 @@ $(function() {
 			
 		}); 
 	});
- 	$('#Review').click(function(){
+});
+/*  	$('#Review').click(function(){
 		const type = $('#type').val();
 		const no = $('#no').val();
 		console.log("qns insert");
@@ -46,8 +48,8 @@ $(function() {
 			
 		}); 
 	});
-	$('#Review').click();
-});
+	$('#Review').click(); */
+
 </script> 
 </head>
 <body>

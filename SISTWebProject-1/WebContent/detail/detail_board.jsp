@@ -92,5 +92,4 @@
 			</div>
 		</div>
 	<!-- Modal 처리  -->
-<%-- 	<jsp:include page="${detail_board_jsp}" />
- --%>
+	<jsp:include page="${detail_board_jsp}" />
