@@ -46,7 +46,7 @@
 	</div>
 </div>
 
-<%-- <div class="single-widget popular-posts-widget">
+<div class="single-widget popular-posts-widget">
 	<h4 class="title">주변 축제장소</h4>
 	<div class="blog-list row">
 		<c:forEach var="vo" items="${nearF}">
@@ -65,7 +65,7 @@
 		</div>
 		</c:forEach>
 	</div>
-</div> --%>
+</div>
 <!-- deatil mainbody 종료 -->
 </div>
 </div>

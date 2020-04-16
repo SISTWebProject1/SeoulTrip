@@ -128,6 +128,15 @@
 		ORDER by distance ASC ))
 		WHERE num BETWEEN 2 AND 5
  	</select>
+ 	
+ 	<select id="getRecentReview" resultType="DetailReviewVO" parameterType="java.util.Map">
+ 		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,num
+		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,rownum as num
+		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade
+		FROM review WHERE no=#{no} AND type=#{type} ORDER BY regdate DESC))
+		WHERE num BETWEEN 1 AND 2;
+ 	
+ 	</select>
 </mapper>
 
 
