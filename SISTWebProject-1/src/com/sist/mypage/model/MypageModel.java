@@ -18,6 +18,7 @@ public class MypageModel {
 
 	@RequestMapping("mypage/profile.do")
 	public String main_profile(HttpServletRequest request, HttpServletResponse response) {
+		
 		LoginVO vo = (LoginVO)request.getSession().getAttribute("ss_member");
 		System.out.println(vo.getMemberId());
 		String id = vo.getMemberId().trim();
@@ -36,10 +37,48 @@ public class MypageModel {
 		// review 확인
 		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
 		int count=0;
-		list = MypageDAO.ReivewData(id);
+		list = MypageDAO.ReviewData(id);
+		for(ReviewVO_u v1 : list){
+			System.out.println(v1.getNo());
+			System.out.println(v1.getTitle());
+			System.out.println(v1.getLikecode());
+			System.out.println(v1.getMemberId());
+		}
 		count = MypageDAO.ReviewCount(id);
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
+		
+		// 페이지
+		String page =request.getParameter("page");
+		String type = request.getParameter("type");
+		String no = request.getParameter("no");
+		
+		int totalpage = 0;
+		
+		if(page==null)
+			page="1";
+		int curpage = Integer.parseInt(page);
+		int rowSize = 5;
+		int start = (rowSize)* curpage-(rowSize-1);
+		int end = rowSize*curpage;
+		final int BLOCK = 10;
+		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		// 1~10 , 11~20
+		
+		int allPage = totalpage;
+		if(endPage>allPage)
+			endPage = allPage;
+		
+		Map map = new HashMap();
+		map.put("no", no);
+		map.put("type", type);
+		map.put("start", start);
+		map.put("end", end);
+		
+		// review 정보 확인
+//		list = MypageDAO.getReviewData(map);
+//		List<PhotoVO_u> imglist = dao.getImageForReview(Integer.parseInt(no));
 		
 		request.setAttribute("main_jsp", "../mypage/profile8.jsp");
 		return "../main/index.jsp";
@@ -120,6 +159,7 @@ public class MypageModel {
 		MemberVO_u vo_u = MypageDAO.PassWord_check(id);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
 		vo.setMemberId(vo_u.getMemberId());
 		vo.setName(vo_u.getName());
 		vo.setAddr1(vo_u.getAddr1());
@@ -131,6 +171,11 @@ public class MypageModel {
 		vo.setBirth(birth);
 		vo.setTel(vo_u.getTel());
 	
+		Calendar cal =  Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		
+		
+		request.setAttribute("year", year);
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../mypage/update.jsp");
 		

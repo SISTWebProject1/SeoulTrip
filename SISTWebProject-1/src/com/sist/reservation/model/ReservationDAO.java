@@ -1,7 +1,7 @@
 package com.sist.reservation.model;
 
 import java.io.Reader;
-
+import java.util.*;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -24,7 +24,7 @@ public class ReservationDAO {
 		}
 	}
 
-	
+
 	public static RestaurantVO reservationListData(int no)
 	{
 		RestaurantVO vo=new RestaurantVO();
@@ -81,7 +81,24 @@ public class ReservationDAO {
 		}		
 	
 	}
-
+	////////////////////////////////AJAX////////////////////////////////
+	public static List<ReservationVO> reservationData(String rd)
+	{
+		SqlSession session=null;
+		List<ReservationVO> list=new ArrayList<ReservationVO>();
+		try {
+			session=ssf.openSession();
+			Map map=new HashMap();
+			map.put("rd",rd);
+			list=session.selectList("",map);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			
+		}
+		return list;
+	}
+	
 
 }
 

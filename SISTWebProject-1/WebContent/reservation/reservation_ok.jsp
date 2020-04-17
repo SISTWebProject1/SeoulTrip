@@ -1,41 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<link type="text/css" rel="stylesheet" href="../css/style.css" />
-<style type="text/css">
-.row > .form-group{
- color: #9933ff;
- font-weight: BOLD;
-}
-
-.booking-form {
-	width: 100%;
-	height: 350px;
-}
-
-.row {
-	margin: 0px auto;
-}
-
-</style>
 </head>
-
 <body>
-<!-- name, email, tel, time, person, date -->
-	<div class="booking-form">
-			<div class="row">
-				 	<div class="form-group">ì˜ˆì•½ìëª…   : ${vo.name }</div>
-				 	<div class="form-group">e-mail : ${vo.email }</div>
-				 	<div class="form-group">ì „í™”ë²ˆí˜¸   : ${vo.tel }</div>
-				 	<div class="form-group">ì˜ˆì•½ì‹œê°„  :  ${vo.time }</div>
-				 	<div class="form-group">ì˜ˆì•½ì¸ì›  : ${vo.person }</div>
-				 	<div class="form-group">ì˜ˆì•½ë‚ ì§œ  : ${vo.date }</div>
-			</div>
-	</div>
+	<div class="booking-form"id="result">
+					<div class="form-group " >
+				 		<span class="form-label">¿¹¾àÀÚ¸í</span> 
+				 		<p>  ${vo.name }</p>
+				 	</div>
+				 	<div class="row " >
+				 		<span class="form-label">e-mail</span> 
+				 		<p>  ${vo.email}</p>
+				 	</div>
+				 		<span class="form-label">¿¬¶ôÃ³</span> 
+				 		<p> ${vo.tel }</p>
+				 		<span class="form-label">¿¹¾à½Ã°£</span> 
+				 		<p>   ${vo.time }</p>
+				 		<span class="form-label">¿¹¾àÀÎ¿ø</span> 
+				 		<p>  ${vo.person }</p>
+				 		<span class="form-label">¿¹¾à³¯Â¥</span>
+				 		<p> ${vo.date} </p>
+					
+				</div>
+				
 </body>
 </html>
