@@ -31,12 +31,14 @@
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 
 <script type="text/javascript">
-/*  $(function(){
+ $(function(){
 	$('.submit-btn').click(function(){
-		document.frm.value();
+		//document.frm.value();
+		let no=$(this).attr("value") // 번호 갖고 들어옴
 		$.ajax({
-			type:'POST',
-			url:'../reservation/reservation_ok.do',		
+			type:'post',
+			url:'../reservation/reservation_ok.do',
+			data:{"name":name,"email":email,"tel":tel,"time":time,"person":person,"date":date},
 			success:function(res)
 			{
 				$('#result').html(res);
@@ -45,11 +47,10 @@
 			{
 				alert(e);
 			}
-		})
+		})	
 	}) 
  })
- */
- 
+  
 </script>
 </head>
 
@@ -84,7 +85,7 @@
 				 
 					<div class="col-md-6 col-md-offset-1" >
 						<div class="booking-form">
-						<form method="POST" action="../reservation/reservation_ok.do">
+						<form method="POST" action="../reservation/reservation_ok.do" name=frm>
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">

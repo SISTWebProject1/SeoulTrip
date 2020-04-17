@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="../css/style.css" />
 <style type="text/css">
 .row > .form-group{
- color: #9933ff;
+ color: #cccccc;
  font-weight: BOLD;
 }
 
@@ -29,12 +29,13 @@
 <!-- name, email, tel, time, person, date -->
 	<div class="booking-form">
 			<div class="row">
-				 	<div class="form-group">예약자명   : ${vo.name }</div>
-				 	<div class="form-group">e-mail : ${vo.email }</div>
-				 	<div class="form-group">전화번호   : ${vo.tel }</div>
-				 	<div class="form-group">예약시간  :  ${vo.time }</div>
-				 	<div class="form-group">예약인원  : ${vo.person }</div>
-				 	<div class="form-group">예약날짜  : ${vo.date }</div>
+				
+				 	<div class="form-group">예약자명    ${name }</div>
+				 	<div class="form-group">e-mail : ${email}</div>
+				 	<div class="form-group">전화번호   : ${tel }</div>
+				 	<div class="form-group">예약시간  :  ${time }</div>
+				 	<div class="form-group">예약인원  : ${person }</div>
+				 	<div class="form-group">예약날짜  : ${date }</div>
 			</div>
 	</div>
 </body>

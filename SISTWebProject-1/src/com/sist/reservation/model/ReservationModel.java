@@ -10,7 +10,7 @@ import com.sist.controller.RequestMapping;
 public class ReservationModel {
 
 	@RequestMapping("reservation/reservation.do")
-	public String reservation(HttpServletRequest request,HttpServletResponse response)
+	public String reservation_detail(HttpServletRequest request,HttpServletResponse response)
 	{
 		String no=request.getParameter("no");
 		ReservationDAO dao=new ReservationDAO();
@@ -27,7 +27,7 @@ public class ReservationModel {
 		{	
 			request.setCharacterEncoding("UTF-8");
 		}catch(Exception ex){}
-		String name=request.getParameter("name");
+		String name=request.getParameter("name");	
 		String email=request.getParameter("email");
 		String date=request.getParameter("date");
 		String time=request.getParameter("time");
@@ -40,7 +40,7 @@ public class ReservationModel {
 		rvo.setReservationdate(date);
 		
 		ReservationDAO.bookingInsert(rvo);
-		return "redirect:../reservation/reservtaion.do";
+		return "../reservation/reservation_ok.jsp";
 	}
 	
 	@RequestMapping("../mypage/reservation.do")
