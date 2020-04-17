@@ -123,8 +123,8 @@
 		<div class="info">
 			<div class="row" style="text-align: center; height: 500px;">
 			
-				<div class="col-md-8" 
-					style="text-align: center; margin-left: 20px; background-color: navy;">
+				<div class="col-md-4" 
+					style="text-align: center; margin-left: 20px;">
 					<c:if test="${count ==0 }">
 					<div style="margin: 10px; height: 100px; text-align: center;" id="pro_content">
 					
@@ -134,14 +134,11 @@
 					</c:if>
 					<c:if test="${count !=0 }">
 						<c:forEach var="vo" items="list">
-						<div style="margin: 10px; height: 100px; text-align: center;" id="pro_content">
-							<pre><h3>${count }</h3></pre>
-						</div>
+							<jsp:include page="../mypage/pro_reviews.jsp"></jsp:include>
 						</c:forEach>
 					</c:if>
 				</div>
 			</div>
-					<div class="btn btn-sm btn-danger">삭제</div>
 		</div>
 	</div>
 	<!-- Blog Area -->

@@ -32,24 +32,30 @@
 
 <script type="text/javascript">
  $(function(){
-	$('.submit-btn').click(function(){
-		document.frm.value();
+	$('#submit-btn').click(function(){
+		let name=$('#name').val()
+		let tel=$('#tel').val()
+		let email=$('#email').val()
+		let date=$('#date').val()
+		let time=$('#time').val()
+		let person=$('#person').val()
 		$.ajax({
-			type:'POST',
-			url:'../reservation/reservation_ok.do',		
+			type:'post',
+			url:'../reservation/reservation_ok.do',
+			data:{"name":name, "tel":tel, "email":email, "date":date
+				,"time":time, "person":person},
 			success:function(res)
 			{
 				$('#result').html(res);
 			},
-			error:function(e)
+			error: function(e)
 			{
 				alert(e);
 			}
 		})
-	}) 
+	})
  })
-
- 
+  
 </script>
 </head>
 
@@ -84,11 +90,11 @@
 				 
 					<div class="col-md-6 col-md-offset-1" >
 						<div class="booking-form">
-						<form method="POST" action="../reservation/reservation_ok.do">
+						<form method="POST" action="../reservation/reservation_ok.do" name=frm id=frm>
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<input class="form-control" type="text" name=name required>
+											<input class="form-control" type="text" name=name id=name required>
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
@@ -143,7 +149,7 @@
 									</div>
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn col-md-6" >예약하기</button>
+									<button class="submit-btn col-md-6" id="submit-btn" >예약하기</button>
 									<button class="submit-btn col-md-6" 
 										onclick="javascript:history.back()"
 									>취소하기</button>
@@ -158,7 +164,9 @@
 						
 				</div>
 				
-				<div class="row" id="result"></div>
+				<div class="row" id="result">
+				</div>
+	
 			
 			</div>
 		</div>
@@ -175,11 +183,8 @@
 							<span class="lnr lnr-home"></span>
 						</div>
 						<div class="contact-details">
-								<%--${vo.rname} --%>
-							<h5>W Xyz Bar</h5>
-							
-								<%-- ${vo.addr1} | ${vo.addr2}--%>
-							<p>56, Namdaemun-ro, Jung-gu | 2F, Aloft Seoul Myeongdong, Seoul 04535, South Korea</p>
+							<h5>${vo.rname }</h5>
+							<p>${vo.addr1 } | ${vo.addr2 }</p>
 						</div>
 					</div>
 					<div class="single-contact-address d-flex flex-row">
@@ -188,12 +193,10 @@
 						</div>
 						<div class="contact-details">
 						
-							<%--${vo.openhour} --%> 
-							<h5>Open Now:11:00 AM - 12:00 AM</h5>  
+							
+							<h5>${vo.openhour }</h5>  
 						
-							<!-- delete -->
-							<p>Mon to Fri 9am to 6 pm</p>
-						</div>
+							</div>
 					</div>
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
@@ -201,8 +204,7 @@
 						</div>
 						<div class="contact-details">
 						
-									<!--${vo.link}  -->
-							<a href="http://www.aloftseoulmyeongdong.com/dining"><h5>http://www.aloftseoulmyeongdong.com/dining</h5></a>
+								<a href="${vo.link}"><h5>http://www.aloftseoulmyeongdong.com/dining</h5></a>
 							<p>Visit our website anytime!</p>
 						</div>
 					</div>
@@ -214,8 +216,8 @@
 								
 								<script>
 									var container = document.getElementById('map');
-									var options = {					/*${vo.mapX},${vo.mapY}  */
-										center: new kakao.maps.LatLng(37.486076, 126.570667),
+									var options = {					
+										center: new kakao.maps.LatLng(${vo.mapX},${vo.mapY}),
 										level: 3
 									};
 							
