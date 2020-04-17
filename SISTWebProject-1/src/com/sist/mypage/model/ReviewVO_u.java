@@ -6,16 +6,24 @@ public class ReviewVO_u {
 	private int reviewno;
 	private int type;
 	private int no;
-	private String memeberId;
+	private String memberId;
 	private String title;
 	private Date regdate;
 	private Date expdate;
+	private String content;
 	private int likecode;
 	private int grade;
 	
 	private int review_count;
 	
 	
+	
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
 	public int getReview_count() {
 		return review_count;
 	}
@@ -40,11 +48,11 @@ public class ReviewVO_u {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getMemeberId() {
-		return memeberId;
+	public String getMemberId() {
+		return memberId;
 	}
-	public void setMemeberId(String memeberId) {
-		this.memeberId = memeberId;
+	public void setMemberId(String memeberId) {
+		this.memberId = memeberId;
 	}
 	public String getTitle() {
 		return title;
