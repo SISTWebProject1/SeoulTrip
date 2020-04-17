@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section class="banner-area main-banner">
 	<div class="container box_1170">
 		<div class="row fullscreen d-flex align-items-center justify-content-center">
@@ -12,13 +13,17 @@
 						<button type="submit"><i class="fa fa-search"></i></button>
 					</form>
 					
-					<div class="btn-group">
-					  <button type="button" class="btn btn-primary">#태그1</button>
-					  <button type="button" class="btn btn-primary">#태그2</button>
-					  <button type="button" class="btn btn-primary">#태그3</button>
-					  <button type="button" class="btn btn-primary">#태그4</button>
-					  <button type="button" class="btn btn-primary">#...</button>
-					</div>
+					<c:if test="${ !empty htlist }">
+						<font color="white" style="display: inline-block; position: relative; top: 30px;">최신 태그 : </font>
+						<div class="btn-group" style="display: inline-block;">
+							<c:forEach var="htvo" items="${ htlist }">
+								<button type="button" class="btn btn-primary" 
+								onclick="location.href='${ htvo.tagcode }'">
+									#${ htvo.tagname }
+								</button>
+							</c:forEach>
+						</div>
+					</c:if>
 				</div>
 				
 			</div>
