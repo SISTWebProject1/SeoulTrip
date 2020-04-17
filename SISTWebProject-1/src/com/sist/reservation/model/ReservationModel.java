@@ -13,6 +13,7 @@ public class ReservationModel {
 	public String reservation_detail(HttpServletRequest request,HttpServletResponse response)
 	{
 		String no=request.getParameter("no");
+		
 		ReservationDAO dao=new ReservationDAO();
 		RestaurantVO vo=dao.reservationListData(Integer.parseInt(no));
 		request.setAttribute("vo", vo);
@@ -41,21 +42,6 @@ public class ReservationModel {
 		
 		ReservationDAO.bookingInsert(rvo);
 		return "../reservation/reservation_ok.jsp";
-	}
-	
-	@RequestMapping("../mypage/reservation.do")
-	public String reservation_result(HttpServletRequest request,HttpServletResponse response)
-	{
-
-		  String memberid=request.getParameter("memberid");
-		  
-		  MemberVO mvo=new MemberVO();
-		  mvo.getMemberid();  // related with session login 
-		  mvo.getPwd();	
-		  mvo.getEmail();
-		
-		  request.setAttribute("memberid", memberid);
-		  return "../main/index.jsp";
 	}
 }	
 	

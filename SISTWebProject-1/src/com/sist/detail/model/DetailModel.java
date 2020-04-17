@@ -16,3 +16,4 @@ public class DetailModel {
 		return "../main/index.jsp";
 	}
 }
+	

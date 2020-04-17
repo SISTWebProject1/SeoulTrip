@@ -32,23 +32,28 @@
 
 <script type="text/javascript">
  $(function(){
-	$('.submit-btn').click(function(){
-		//document.frm.value();
-		let no=$(this).attr("value") // 번호 갖고 들어옴
+	$('#submit-btn').click(function(){
+		let name=$('#name').val()
+		let tel=$('#tel').val()
+		let email=$('#email').val()
+		let date=$('#date').val()
+		let time=$('#time').val()
+		let person=$('#person').val()
 		$.ajax({
 			type:'post',
 			url:'../reservation/reservation_ok.do',
-			data:{"name":name,"email":email,"tel":tel,"time":time,"person":person,"date":date},
+			data:{"name":name, "tel":tel, "email":email, "date":date
+				,"time":time, "person":person},
 			success:function(res)
 			{
 				$('#result').html(res);
 			},
-			error:function(e)
+			error: function(e)
 			{
 				alert(e);
 			}
-		})	
-	}) 
+		})
+	})
  })
   
 </script>
@@ -85,11 +90,11 @@
 				 
 					<div class="col-md-6 col-md-offset-1" >
 						<div class="booking-form">
-						<form method="POST" action="../reservation/reservation_ok.do" name=frm>
+						<form method="POST" action="../reservation/reservation_ok.do" name=frm id=frm>
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<input class="form-control" type="text" name=name required>
+											<input class="form-control" type="text" name=name id=name required>
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
@@ -144,7 +149,7 @@
 									</div>
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn col-md-6" >예약하기</button>
+									<button class="submit-btn col-md-6" id="submit-btn" >예약하기</button>
 									<button class="submit-btn col-md-6" 
 										onclick="javascript:history.back()"
 									>취소하기</button>
@@ -159,7 +164,9 @@
 						
 				</div>
 				
-				<div class="row" id="result"></div>
+				<div class="row" id="result">
+				</div>
+	
 			
 			</div>
 		</div>
