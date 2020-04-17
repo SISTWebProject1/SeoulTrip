@@ -10,8 +10,13 @@ import com.sist.controller.RequestMapping;
 public class ReservationModel {
 
 	@RequestMapping("reservation/reservation.do")
-	public String reservation(HttpServletRequest request,HttpServletResponse response)
+	public String reservation_detail(HttpServletRequest request,HttpServletResponse response)
 	{
+		String no=request.getParameter("no");
+		
+		ReservationDAO dao=new ReservationDAO();
+		RestaurantVO vo=dao.reservationListData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../reservation/reservation.jsp");
 		return "../main/index.jsp";
 	}
@@ -23,7 +28,7 @@ public class ReservationModel {
 		{	
 			request.setCharacterEncoding("UTF-8");
 		}catch(Exception ex){}
-		String name=request.getParameter("name");
+		String name=request.getParameter("name");	
 		String email=request.getParameter("email");
 		String date=request.getParameter("date");
 		String time=request.getParameter("time");
@@ -36,22 +41,7 @@ public class ReservationModel {
 		rvo.setReservationdate(date);
 		
 		ReservationDAO.bookingInsert(rvo);
-		return "redirect:../reservation/reservtaion.do";
-	}
-	
-	@RequestMapping("../mypage/reservation.do")
-	public String reservation_result(HttpServletRequest request,HttpServletResponse response)
-	{
-
-		  String memberid=request.getParameter("memberid");
-		  
-		  MemberVO mvo=new MemberVO();
-		  mvo.getMemberid();  // related with session login 
-		  mvo.getPwd();	
-		  mvo.getEmail();
-		
-		  request.setAttribute("memberid", memberid);
-		  return "../main/index.jsp";
+		return "../reservation/reservation_ok.jsp";
 	}
 }	
 	

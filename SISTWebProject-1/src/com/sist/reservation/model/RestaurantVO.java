@@ -1,5 +1,6 @@
 package com.sist.reservation.model;
 public class RestaurantVO {
+	private int no;
     private String rname;
     private String openhour;
     private String rphoto;
@@ -8,6 +9,13 @@ public class RestaurantVO {
     private int mapY;
     private int addr1;
     private int addr2;
+    
+	public int getNo() {
+		return no;
+	}
+	public void setNo(int no) {
+		this.no = no;
+	}
 	public String getRname() {
 		return rname;
 	}

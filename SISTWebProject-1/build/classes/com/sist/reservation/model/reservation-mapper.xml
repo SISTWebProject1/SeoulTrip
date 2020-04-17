@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.reservation.model.reservation-mapper">
 	
-	<select id="reservationListData" resultType="com.sist.reservation.model.ReservationVO" parameterType="int">
-		SELECT rname,openhour,mapX,mapY,addr1,addr2
+	<select id="reservationListData" resultType="com.sist.reservation.model.RestaurantVO" parameterType="int">
+		SELECT *
 		FROM restaurant
-		WHERE no=#{no}	
+		WHERE no=#{no}
 	</select>
 
 	<select id="getPhoto" resultType="string" parameterType="int">
