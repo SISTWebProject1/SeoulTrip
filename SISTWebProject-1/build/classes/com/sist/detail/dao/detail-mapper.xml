@@ -23,7 +23,7 @@
 		SELECT CEIL(COUNT(*)/10.0) FROM review 
 		WHERE no=#{no} AND type=#{type}
 	</select>
-	<select id="getReviewData" resultType="DetailReviewVO" parameterType="java.util.Map">
+	<select id="DetailgetReviewData" resultType="DetailReviewVO" parameterType="java.util.Map">
 		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,num
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,rownum as num
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade

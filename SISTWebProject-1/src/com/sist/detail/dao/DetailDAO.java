@@ -100,7 +100,7 @@ public class DetailDAO {
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getReviewData",map);
+			list = session.selectList("DetailgetReviewData",map);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
