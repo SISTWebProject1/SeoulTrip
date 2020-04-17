@@ -6,8 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
-$(function() {
+ $(function() {
 	$('#QNA').click(function(){
 		const type = $('#type').val();
 		const no = $('#no').val();
@@ -26,37 +27,20 @@ $(function() {
 			
 		}); 
 	});
-});
-/*  	$('#Review').click(function(){
-		const type = $('#type').val();
-		const no = $('#no').val();
-		console.log("qns insert");
-		console.log(type);
-		console.log(no);
 	
-		 $.ajax({
-			type:'post',
-			url:'../detail/detail_review.do',
-			data:{'type': type, 'no':no},
-			success:function(data){
-				$('#result').html(data);
-				console.log(data);	
-			},
-			error : function(e){
-				console.log("error");
-			}
-			
-		}); 
-	});
-	$('#Review').click(); */
+	var location = document.querySelector('#ReviewPosition').offsetTop;
 
+	(function(e){
+ 		window.scrollTo({top:location, behavior:'smooth'});
+	})();
+	
+
+}); 
 </script> 
 </head>
 <body>
  <jsp:include page="../detail/detail_info.jsp"></jsp:include>
  <jsp:include page="../detail/detail_board.jsp"/>
- <div id="result">
- </div>		
  <jsp:include page="../detail/detail_bottom.jsp"></jsp:include>
 
 </body>

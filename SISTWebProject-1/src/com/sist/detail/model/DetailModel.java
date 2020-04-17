@@ -118,40 +118,31 @@ public class DetailModel {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("allPage", allPage);		
-		
+		request.setAttribute("page", page);
 		request.setAttribute("main_jsp", "../detail/detail.jsp");
 		//request.setAttribute("banner_on", true);
 
 		MainDAO.addItemToCookies(request, response, Integer.parseInt(type), Integer.parseInt(no));
 		//cookie에 넣기
-		request.setAttribute("detail_board_jsp","../detail/detail_review.jsp");
+//		request.setAttribute("detail_board_jsp","../detail/detail_review.jsp");
 		return "../main/index.jsp";
-	}
-	
-	
-	@RequestMapping("detail/board_review.do")
-	public String detail_switch_review(HttpServletRequest request, HttpServletResponse response){
-		request.setAttribute("main_jsp", "../detail/detail.jsp");
-
-		request.setAttribute("detail_board_jsp", "../detail/detail_review.jsp");
-		return  "../main/index.jsp";
-	}
-	
-	
-	
-	@RequestMapping("detail/board_qna.do")
-	public String detail_switch_qna(HttpServletRequest request, HttpServletResponse response){
-		request.setAttribute("main_jsp", "../detail/detail.jsp");
-
-		request.setAttribute("detail_board_jsp", "../detail/detail_qna.jsp");
-		return  "../main/index.jsp";
 	}
 	
 	
 	@RequestMapping("detail/detail_review.do")
-	public String detail_review(HttpServletRequest request, HttpServletResponse response){
+	public String detail_switch_review(HttpServletRequest request, HttpServletResponse response){
 
-
-		return "../main/index.jsp";
+		return  "../detail/detail_review_test.jsp";
 	}
+	
+	@RequestMapping("detail/detail_qna.do")
+	public String detail_switch_qna(HttpServletRequest request, HttpServletResponse response){
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		
+		System.out.println("qna 게시판 들어감");
+
+		return  "../detail/detail_qna.jsp";
+	}
+
 }
