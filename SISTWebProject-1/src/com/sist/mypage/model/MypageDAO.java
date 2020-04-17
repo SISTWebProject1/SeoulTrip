@@ -6,11 +6,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import com.sist.detail.dao.DetailReviewVO;
+import com.sist.detail.dao.Detail_Review_PhotoVO;
 
 public class MypageDAO {
 
@@ -58,7 +62,7 @@ public class MypageDAO {
 		}
 		
 	}
-	public static List<ReviewVO_u> ReivewData(String id){
+	public static List<ReviewVO_u> ReviewData(String id){
 		SqlSession session =null;
 		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
 		try{
@@ -102,5 +106,44 @@ public class MypageDAO {
 				session.close();
 		}
 		return list;
+	}
+	
+	
+	
+	public static List<ReviewVO_u> getReviewData(Map map){
+		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getReviewData",map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	//리뷰별 이미지 출력
+	public List<PhotoVO_u> getImageForReview(int no){
+		List<PhotoVO_u> list = new ArrayList<PhotoVO_u>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getImagesForReview",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+		
+		
 	}
 }
