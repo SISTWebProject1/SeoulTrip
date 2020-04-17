@@ -24,7 +24,7 @@ public class ReservationDAO {
 		}
 	}
 
-	
+
 	public static RestaurantVO reservationListData(int no)
 	{
 		RestaurantVO vo=new RestaurantVO();

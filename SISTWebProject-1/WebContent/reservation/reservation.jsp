@@ -31,7 +31,7 @@
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 
 <script type="text/javascript">
- $(function(){
+/*  $(function(){
 	$('.submit-btn').click(function(){
 		document.frm.value();
 		$.ajax({
@@ -48,7 +48,7 @@
 		})
 	}) 
  })
-
+ */
  
 </script>
 </head>
@@ -175,11 +175,8 @@
 							<span class="lnr lnr-home"></span>
 						</div>
 						<div class="contact-details">
-								<%--${vo.rname} --%>
-							<h5>W Xyz Bar</h5>
-							
-								<%-- ${vo.addr1} | ${vo.addr2}--%>
-							<p>56, Namdaemun-ro, Jung-gu | 2F, Aloft Seoul Myeongdong, Seoul 04535, South Korea</p>
+							<h5>${vo.rname }</h5>
+							<p>${vo.addr1 } | ${vo.addr2 }</p>
 						</div>
 					</div>
 					<div class="single-contact-address d-flex flex-row">
@@ -188,12 +185,10 @@
 						</div>
 						<div class="contact-details">
 						
-							<%--${vo.openhour} --%> 
-							<h5>Open Now:11:00 AM - 12:00 AM</h5>  
+							
+							<h5>${vo.openhour }</h5>  
 						
-							<!-- delete -->
-							<p>Mon to Fri 9am to 6 pm</p>
-						</div>
+							</div>
 					</div>
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
@@ -201,8 +196,7 @@
 						</div>
 						<div class="contact-details">
 						
-									<!--${vo.link}  -->
-							<a href="http://www.aloftseoulmyeongdong.com/dining"><h5>http://www.aloftseoulmyeongdong.com/dining</h5></a>
+								<a href="${vo.link}"><h5>http://www.aloftseoulmyeongdong.com/dining</h5></a>
 							<p>Visit our website anytime!</p>
 						</div>
 					</div>
@@ -214,8 +208,8 @@
 								
 								<script>
 									var container = document.getElementById('map');
-									var options = {					/*${vo.mapX},${vo.mapY}  */
-										center: new kakao.maps.LatLng(37.486076, 126.570667),
+									var options = {					
+										center: new kakao.maps.LatLng(${vo.mapX},${vo.mapY}),
 										level: 3
 									};
 							

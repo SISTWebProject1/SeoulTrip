@@ -3,7 +3,7 @@
 <mapper namespace="com.sist.reservation.model.reservation-mapper">
 	
 	<select id="reservationListData" resultType="com.sist.reservation.model.ReservationVO" parameterType="int">
-		SELECT rname,openhour,mapX,mapY,addr1,addr2
+		SELECT rname,openhour,link,mapX,mapY,addr1,addr2
 		FROM restaurant
 		WHERE no=#{no}	
 	</select>

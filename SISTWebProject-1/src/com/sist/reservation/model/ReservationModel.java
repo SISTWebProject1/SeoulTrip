@@ -12,6 +12,10 @@ public class ReservationModel {
 	@RequestMapping("reservation/reservation.do")
 	public String reservation(HttpServletRequest request,HttpServletResponse response)
 	{
+		String no=request.getParameter("no");
+		ReservationDAO dao=new ReservationDAO();
+		RestaurantVO vo=dao.reservationListData(Integer.parseInt(no));
+		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../reservation/reservation.jsp");
 		return "../main/index.jsp";
 	}
