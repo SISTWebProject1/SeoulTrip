@@ -69,8 +69,8 @@
 			<div class="btn btn-sm btn-primary">여행</div>
 		<c:if test="${count== 0 }">
 			<div class="row" style="margin: 30px;">
-				<div class="col-md-12">
-					~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+				<div style="margin: 10px; height: 100px; text-align: center;" id="pro_content">
+						<p><h3>사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!</h3></p>
 				</div>
 			</div>
 		</c:if>
