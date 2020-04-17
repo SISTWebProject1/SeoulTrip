@@ -1892,7 +1892,8 @@ body.mobile-nav-active #mobile-nav-toggle {
 .single-post-item {
   position: relative;
   margin-left: 70px;
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  border: 1px solid #DDDBDB; }
   .single-post-item.short {
     margin-left: 25px; }
     @media (max-width: 991px) {
@@ -2789,7 +2790,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #login .login_content {
 	background-color: white;
 	width: 300px;
-	height: 125px;
+	height: 150px;
 	position: fixed;
 	top: 150px;
 	right: 190px;
@@ -2800,6 +2801,12 @@ body.mobile-nav-active #mobile-nav-toggle {
 
 #login .btn {
 	margin: 10px 5px;
+	width: 80px;
+}
+
+#login_alert {
+	margin: 0px;
+	padding: 0px;
 }
 
 #login .login_back {
@@ -2820,6 +2827,18 @@ body.mobile-nav-active #mobile-nav-toggle {
 .main-banner .btn-group .btn {
 	background-color: rgba(0,0,0,0);
 	border: 0px solid white;
+}
+
+#search_result {
+	border: 1px solid gray !important;
+}
+
+#search_result tr, #search_result th, #search_result td {
+	display: block;
+}
+
+#search_result a {
+	cursor: pointer !important;
 }
 
 /*# sourceMappingURL=main.css.map */

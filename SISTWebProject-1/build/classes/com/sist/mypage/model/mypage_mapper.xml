@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mypage.model.mypage_mapper">
+	
+	<!-- 리뷰정보 select 활동 피드 -->
+	
+	
+	<!-- 프로필 내용 수정 -->
+	<select id="passwordCheck" resultType="MemberVO_u" parameterType="string">
+		SELECT *
+		FROM member
+		WHERE memberId =#{id}
+	</select>
+	
+	<update id="update_profile"  parameterType="MemberVO_u">
+		UPDATE member SET
+		name = #{name},
+		addr1 = #{addr1},
+		email = #{email},
+		tel = #{tel},
+		selfInfo = #{selfInfo}
+		WHERE memberId = #{memberId}
+	</update>
+	
+	<select id="reivewData" parameterType="string" resultType="ReviewVO_u">
+		SELECT * FROM review
+		WHERE memberId= #{id}
+	</select>
+	
+	<select id ="reviewCount" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM review
+		WHERE memberId= #{memberId}
+	</select>
+	
+	<select id="wishtList" parameterType="string" resultType="WishListVO_u">
+		SELECT * FROM
+		wishlist
+		WHERE memberId=#{memberId}
+	</select>
+	<select id="getReviewData" parameterType="java.util.HashMap" resultType="ReviewVO_u">
+		SELECT * FROM review
+	</select>
+</mapper>

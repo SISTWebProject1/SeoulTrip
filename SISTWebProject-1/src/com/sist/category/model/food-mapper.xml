@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.category.model.food-mapper">
+	<select id="foodListData" resultType="FoodVO" parameterType="java.util.Map">
+		SELECT no,rname,openhour,rphoto,price,rescheck,grade,num
+		FROM (SELECT no,rname,openhour,rphoto,price,rescheck,grade,rownum as num
+        FROM (SELECT no,rname,openhour,rphoto,price,rescheck,grade
+		FROM restaurant ORDER BY no ASC))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="foodTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/4.0) FROM restaurant
+	</select> 
+
+</mapper>

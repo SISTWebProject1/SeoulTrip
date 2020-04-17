@@ -1,10 +1,15 @@
 package com.sist.main.model;
 
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.main.dao.HashTagVO;
+import com.sist.main.dao.HomeItemVO;
 import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.MainDAO;
 
@@ -13,7 +18,7 @@ public class MainModel {
 	
 	@RequestMapping("main/main.do")
 	public String main_main(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("main_jsp", "main_content.jsp");
+		//request.setAttribute("main_jsp", "main_content.jsp");
 		//request.setAttribute("banner_on", true);
 		
 		return "index.jsp";
@@ -21,6 +26,8 @@ public class MainModel {
 	
 	@RequestMapping("login_ok.do")
 	public String login_ok(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		
 		String id = request.getParameter("email").trim();
 		String pwd = request.getParameter("password").trim();
 		
@@ -54,6 +61,25 @@ public class MainModel {
 		request.getSession().removeAttribute("ss_member");
 		
 		return "redirect:home/home.do";
+	}
+	
+	@RequestMapping("main/search.do")
+	public String main_search(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {}
+		
+		String keyword = request.getParameter("keyword");
+		List<HomeItemVO> tpList = MainDAO.getSearchData(1, keyword);
+		request.setAttribute("tpList", tpList);
+		List<HomeItemVO> rsList = MainDAO.getSearchData(2, keyword);
+		request.setAttribute("rsList", rsList);
+		List<HomeItemVO> fsList = MainDAO.getSearchData(3, keyword);
+		request.setAttribute("fsList", fsList);
+		List<HomeItemVO> htList = MainDAO.getHashTagSearchData(keyword);
+		request.setAttribute("htList", htList);
+		
+		return "../main/search_result.jsp";
 	}
 
 }

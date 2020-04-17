@@ -162,7 +162,7 @@ $(document).ready(function() {
 
   // When the window has finished loading create our google map below
 
-  if (document.getElementById("map")) {
+/*  if (document.getElementById("map")) {
     google.maps.event.addDomListener(window, "load", init);
     function init() {
       // Basic options for a simple Google Map
@@ -264,7 +264,7 @@ $(document).ready(function() {
         title: "Snazzy!"
       });
     }
-  }
+  }*/
 
   $(document).ready(function() {
     $("#mc_embed_signup")
@@ -292,13 +292,17 @@ $(document).ready(function() {
 		  var memberInfo = $('#memberInfo').val();
 		  
 		  if(memberInfo.startsWith('NOID')) {
-			  alert('ID가 존재하지 않습니다.');
+			  $('#login_alert').html('<font color="red">ID가 존재하지 않습니다.</font>');
+			  login_show();
 		  } else if(memberInfo.startsWith('NOPWD')) {
-			  alert('비밀번호가 일치하지 않습니다.');
+			  $('#login_alert').html('<font color="red">비밀번호가 일치하지 않습니다.</font>');
+			  login_show();
 		  } else if(memberInfo.startsWith('SUCCESS')) {
 			  var memberInfo = memberInfo.split('|');
 			  var memberPhoto = memberInfo[1];
 			  var memberName = memberInfo[2];
+			  
+			  $('#header_mypage').css("display","inline-block");
 			  
 			  var list = $('#header .nav-menu');
 			  list.children().last().remove();
@@ -308,6 +312,59 @@ $(document).ready(function() {
 			  alert('오류');
 		  }
 	  });
+	  
+	  $('#loginShow').click(function(){
+		  $('#login #email').val('');
+		  $('#login #login_alert').html('&nbsp;');
+		  
+		 let lsOffset = $(this).offset();
+		 $('#login .login_content').offset({
+			top : lsOffset.top+80,
+			left : lsOffset.left-250
+		 });
+	  });
+	  
+	  $('#login #password').keypress(function(event){
+		     if (event.which==13) {
+		    	 $('#login input[type="login"]').click();
+		     }
+		});
+	  
   });
   
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

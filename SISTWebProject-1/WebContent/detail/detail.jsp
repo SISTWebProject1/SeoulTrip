@@ -5,19 +5,43 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-    <link rel="stylesheet" href="../css/linearicons.css" />
-    <link rel="stylesheet" href="../css/font-awesome.min.css" />
-    <link rel="stylesheet" href="../css/bootstrap.css" />
-    <link rel="stylesheet" href="../css/magnific-popup.css" />
-    <link rel="stylesheet" href="../css/nice-select.css" />
-    <link rel="stylesheet" href="../css/animate.min.css" />
-    <link rel="stylesheet" href="../css/owl.carousel.css" />
-    <link rel="stylesheet" href="../css/main.css" />
-    <link rel="stylesheet" href="../css/detail.css"/>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+ $(function() {
+	$('#QNA').click(function(){
+		const type = $('#type').val();
+		const no = $('#no').val();
+		console.log("QNA");
+		 $.ajax({
+			type:'post',
+			url:'../detail/detail_qna.do',
+			data:{'type': type, 'no':no},
+			success:function(data){
+				$('#result').html(data);
+				console.log(data);	
+			},
+			error : function(e){
+				console.log("error");
+			}
+			
+		}); 
+	});
+	
+	var location = document.querySelector('#ReviewPosition').offsetTop;
+
+	(function(e){
+ 		window.scrollTo({top:location, behavior:'smooth'});
+	})();
+	
+
+}); 
+</script> 
 </head>
 <body>
  <jsp:include page="../detail/detail_info.jsp"></jsp:include>
- <jsp:include page="../detail/detail_review.jsp"></jsp:include>
+ <jsp:include page="../detail/detail_board.jsp"/>
  <jsp:include page="../detail/detail_bottom.jsp"></jsp:include>
+
 </body>
 </html>

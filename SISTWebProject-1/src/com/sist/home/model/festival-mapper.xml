@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.home.model.festival-mapper">
+	<select id="festivalAllList" resultType="FestivalVO">
+		SELECT no, fname, startdate, enddate, addr1, addr2, fphoto
+		FROM festival
+		ORDER BY enddate ASC
+	</select>
+	
+	<select id="festivalDateList" resultType="FestivalVO" parameterType="java.util.Date">
+		SELECT no, fname, startdate, enddate, addr1, fphoto
+		FROM festival
+		WHERE #{date} BETWEEN startdate AND enddate
+		ORDER BY startdate ASC, enddate ASC
+	</select>
+</mapper>

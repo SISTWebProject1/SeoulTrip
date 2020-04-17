@@ -2,7 +2,43 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.main.dao.main-mapper">
 	<select id="getLoginInfo" resultType="LoginVO" parameterType="String">
-		SELECT memberid, pwd, name, photo FROM member where memberid = #{memberId}
+		SELECT memberid, pwd, name, photo, regdate, birth FROM member where memberid = #{memberId}
+	</select>
+	
+	<select id="getHomeItemFromCookie" resultType="HomeItemVO" parameterType="HashMap">
+		SELECT no, ${name} AS name, ${photo} AS photo
+		FROM ${table}
+		WHERE no = #{no}
+	</select>
+	
+	<select id="getSearchData" resultType="HomeItemVO" parameterType="HashMap">
+		SELECT no, ${name} AS name, ${photo} AS photo
+		FROM ${table}
+		WHERE ${name}||' '||NVL(info,' ')||' '||NVL(addr1,' ')||' '||NVL(addr2,' ')
+		LIKE '%'||#{keyword}||'%'
+		AND rownum &lt; 5
+	</select>
+	
+	<select id="getHIVOData" resultType="HomeItemVO" parameterType="HashMap">
+		SELECT no, ${name} AS name, ${photo} AS photo
+		FROM ${table}
+		WHERE no = #{no}
+	</select>
+	
+	<select id="getHashTagSearchData" resultType="HashTagVO" parameterType="String">
+		SELECT tagcode, tagname FROM hashtagtable
+		WHERE tagname LIKE '%'||#{keyword}||'%'
+		AND rownum &lt; 5
+	</select>
+	
+	<select id="getTypeNoListBySearch" resultType="HomeItemVO">
+		SELECT type, no FROM
+		(SELECT type, no, tagcode, COUNT(*) AS cnt FROM review NATURAL JOIN reviewtohashtag
+		GROUP BY type, no, tagcode
+		ORDER BY cnt DESC) NATURAL JOIN hashtagtable
+		WHERE tagname LIKE #{keyword}||'%'
+		AND cnt &gt; 3
+		AND rownum &lt; 5
 	</select>
 </mapper>
 

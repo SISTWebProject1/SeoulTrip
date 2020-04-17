@@ -64,3 +64,41 @@
 	bottom: 60px;
 	background-color: #dbdbdb!important;
 }
+
+.row.food-catetop {
+	height: 300px;
+}
+
+.single-post-item.short {
+	position: relative;
+	padding-bottom: 30px;
+}
+
+.heart {
+	position: absolute;
+	top: 5%;
+	left: 95%;
+	transform: translate(-80%, -20%);
+}
+
+.heart_button{
+	width:25px;
+	height:25px;
+	padding:0px 0px;
+	border-radius: 30%;
+	border:0px solid black;
+}
+
+
+.heart_button > .heart_on{
+	opacity: 0;
+	transition: opacity 1s
+}
+
+.heart_button:HOVER > .far .fa-heart .fa-fw{
+	opacity: 1;
+}
+
+.far > .fa-heart {
+	background-color: red;
+}
