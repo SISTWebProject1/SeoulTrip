@@ -24,27 +24,11 @@
 <div class="single-widget category-widget">
 	<h4 class="title">Popular Tags</h4>
 	<ul>
-		<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>Techlology</p> <span>37</span>
+		<c:forEach var="phtvo" items="${ phtlist }">
+			<li><a href="#" class="justify-content-between align-items-center d-flex">
+				<p>${ phtvo.tagname }</p> <span>${ phtvo.count }</span>
 			</a></li>
-		<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>Lifestyle</p> <span>24</span>
-			</a></li>
-		<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>Fashion</p> <span>59</span>
-			</a></li>
-		<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>Art</p> <span>29</span>
-			</a></li>
-		<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>Food</p> <span>15</span>
-			</a></li>
-		<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>Architecture</p> <span>09</span>
-			</a></li>
-		<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>Adventure</p> <span>44</span>
-			</a></li>
+		</c:forEach>
 	</ul>
 </div>
 

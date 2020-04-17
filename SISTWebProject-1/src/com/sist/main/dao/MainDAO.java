@@ -87,10 +87,8 @@ public class MainDAO {
 		for(int i=0; i<cookies.length; i++){
 			if(cookies[i].getName().startsWith("slowdown")) {
 				slowdownCookies.add(cookies[i].getName());
-				System.out.println(cookies[i].getName());
 			}
 		}
-		System.out.println("========");
 		Collections.sort(slowdownCookies);
 		
 		for(int i=0; i<Math.min(slowdownCookies.size(), 4); i++) {
@@ -240,6 +238,36 @@ public class MainDAO {
 			session.close();
 		} catch (Exception e) {
 			System.out.println("MainDAO:getHashTagSearchData():");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public static List<HashTagVO> getHTListRegDESC(){
+		List<HashTagVO> list = new ArrayList<HashTagVO>();
+		
+		try {
+			SqlSession ss = ssf.openSession();
+			list = ss.selectList("getHTListRegDESC");
+			ss.close();
+		} catch (Exception e) {
+			System.out.println("MainDAO:getHTListRegDESC():");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public static List<HashTagVO> getPopularHTList(){
+		List<HashTagVO> list = new ArrayList<HashTagVO>();
+		
+		try {
+			SqlSession ss = ssf.openSession();
+			list = ss.selectList("getPopularHTList");
+			ss.close();
+		} catch (Exception e) {
+			System.out.println("MainDAO:getPopularHTList():");
 			e.printStackTrace();
 		}
 		
