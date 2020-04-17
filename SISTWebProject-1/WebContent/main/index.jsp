@@ -89,7 +89,7 @@
 						<li><a href="../category/food.do">음식점</a></li>
 						<li><a href="../category/festival.do">축제</a></li>
 
-            <li><a href="../detail/detail.do">DetailTest</a>
+            <li><a href="../detail/detail.do?type=1&no=198">DetailTest</a>
             <li><a href="../reservation/reservation.do?no=${vo.no}">ReservationTest</a>
 						<li class="menu-has-children"><a href="">마이페이지</a>
 
