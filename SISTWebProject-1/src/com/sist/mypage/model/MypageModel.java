@@ -22,6 +22,7 @@ public class MypageModel {
 		LoginVO vo = (LoginVO)request.getSession().getAttribute("ss_member");
 		System.out.println(vo.getMemberId());
 		String id = vo.getMemberId().trim();
+		
 		MemberVO_u my_vo = MypageDAO.PassWord_check(id);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.applyPattern("yyyy-MM-dd");
@@ -30,7 +31,7 @@ public class MypageModel {
 		
 		request.setAttribute("birth", birth);
 		request.setAttribute("regdate", regdate);
-		request.setAttribute("vo", my_vo);
+		request.setAttribute("my_vo", my_vo);
 		System.out.println(my_vo.getRegdate());
 		
 		
@@ -48,10 +49,15 @@ public class MypageModel {
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
 		
+		// photo 가져오기
+		Map map1 = new HashMap();
+		List<PhotoVO_u> photo_list = new ArrayList<PhotoVO_u>();
+		photo_list = MypageDAO.getImageForReview(map1);
+		
 		// 페이지
 		String page =request.getParameter("page");
 		String type = request.getParameter("type");
-		String no = request.getParameter("no");
+//		String no = request.getParameter("no");
 		
 		int totalpage = 0;
 		
@@ -69,13 +75,11 @@ public class MypageModel {
 		int allPage = totalpage;
 		if(endPage>allPage)
 			endPage = allPage;
-		
 		Map map = new HashMap();
-		map.put("no", no);
+		//map.put("no", no);
 		map.put("type", type);
 		map.put("start", start);
 		map.put("end", end);
-		
 		// review 정보 확인
 //		list = MypageDAO.getReviewData(map);
 //		List<PhotoVO_u> imglist = dao.getImageForReview(Integer.parseInt(no));

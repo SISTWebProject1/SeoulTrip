@@ -24,12 +24,16 @@
 	
 	<select id="reivewData" parameterType="string" resultType="ReviewVO_u">
 		SELECT * FROM review
-		WHERE memberId= #{id}
+		WHERE memberId= #{memberId}
 	</select>
 	
 	<select id ="reviewCount" parameterType="string" resultType="int">
 		SELECT COUNT(*) FROM review
 		WHERE memberId= #{memberId}
+	</select>
+	
+	<select id ="getImagesForReview" resultType="PhotoVO_u" parameterType="java.util.Map">
+		
 	</select>
 	
 	<select id="wishtList" parameterType="string" resultType="WishListVO_u">
