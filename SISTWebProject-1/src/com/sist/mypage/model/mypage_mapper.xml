@@ -32,17 +32,6 @@
 		WHERE memberId= #{memberId}
 	</select>
 	
-	<select id="getImagesForReview" parameterType="array" resultType="PhotoVO_u">
-	
-		SELECT * FROM photo
-		WHERE reviewno
-		<foreach collection="array" item="reviewNo" index="index">
-			 = #{reviewNO}
-		</foreach>
-		
-	</select>
-	
-	
 	<select id="wishtList" parameterType="string" resultType="WishListVO_u">
 		SELECT * FROM
 		wishlist
