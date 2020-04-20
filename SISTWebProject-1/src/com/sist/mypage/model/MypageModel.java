@@ -3,7 +3,6 @@ package com.sist.mypage.model;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +21,7 @@ public class MypageModel {
 		LoginVO vo = (LoginVO)request.getSession().getAttribute("ss_member");
 		System.out.println(vo.getMemberId());
 		String id = vo.getMemberId().trim();
+		
 		MemberVO_u my_vo = MypageDAO.PassWord_check(id);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.applyPattern("yyyy-MM-dd");
@@ -30,28 +30,37 @@ public class MypageModel {
 		
 		request.setAttribute("birth", birth);
 		request.setAttribute("regdate", regdate);
-		request.setAttribute("vo", my_vo);
+		request.setAttribute("my_vo", my_vo);
 		System.out.println(my_vo.getRegdate());
+		
+	
 		
 		
 		// review 확인
 		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
 		int count=0;
 		list = MypageDAO.ReviewData(id);
+		// 사진을 모으기 위해 reviewNO를 배열에 저장
+		int reviewNo[] = new int[list.size()];
+
+		int i =0;
 		for(ReviewVO_u v1 : list){
-			System.out.println(v1.getNo());
-			System.out.println(v1.getTitle());
-			System.out.println(v1.getLikecode());
-			System.out.println(v1.getMemberId());
+			System.out.println(i+" "+v1.getReviewno());
+			reviewNo[i] = v1.getReviewno();
+			i++;
 		}
-		count = MypageDAO.ReviewCount(id);
+		// photo 가져오기
+		list = MypageDAO.getImageForReview(list, reviewNo);
+		
+		// review 숫자ㄴ
+		count = list.size();
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
 		
 		// 페이지
 		String page =request.getParameter("page");
 		String type = request.getParameter("type");
-		String no = request.getParameter("no");
+//		String no = request.getParameter("no");
 		
 		int totalpage = 0;
 		
@@ -69,16 +78,12 @@ public class MypageModel {
 		int allPage = totalpage;
 		if(endPage>allPage)
 			endPage = allPage;
-		
 		Map map = new HashMap();
-		map.put("no", no);
+		//map.put("no", no);
 		map.put("type", type);
 		map.put("start", start);
 		map.put("end", end);
-		
 		// review 정보 확인
-//		list = MypageDAO.getReviewData(map);
-//		List<PhotoVO_u> imglist = dao.getImageForReview(Integer.parseInt(no));
 		
 		request.setAttribute("main_jsp", "../mypage/profile8.jsp");
 		return "../main/index.jsp";
@@ -131,16 +136,16 @@ public class MypageModel {
 		String tel = request.getParameter("tel");
 		String selfinfo = request.getParameter("selfinfo");
 		
-		MemberVO_u vo = new MemberVO_u();
-		vo.setMemberId(id);
-		vo.setName(name);
-		vo.setAddr1(addr1);
-		vo.setEmail(email);
-		vo.setTel(tel);
-		vo.setSelfInfo(selfinfo);
-		System.out.println(vo.getEmail());
+		MemberVO_u my_vo = new MemberVO_u();
+		my_vo.setMemberId(id);
+		my_vo.setName(name);
+		my_vo.setAddr1(addr1);
+		my_vo.setEmail(email);
+		my_vo.setTel(tel);
+		my_vo.setSelfInfo(selfinfo);
+		System.out.println(my_vo.getEmail());
 		
-		MypageDAO.Update_ok(vo);
+		MypageDAO.Update_ok(my_vo);
 		
 		return "redirect:../mypage/profile.do";
 		
@@ -176,7 +181,7 @@ public class MypageModel {
 		
 		
 		request.setAttribute("year", year);
-		request.setAttribute("vo", vo);
+		request.setAttribute("my_vo", vo);
 		request.setAttribute("main_jsp", "../mypage/update.jsp");
 		
 		return "../main/index.jsp";

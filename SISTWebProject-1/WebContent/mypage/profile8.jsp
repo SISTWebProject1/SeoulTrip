@@ -69,24 +69,35 @@
 
 	<!-- End banner Area -->
 
-	<!-- blog Area -->
-	<div class="container" style="margin: 10px;">
-		<div class="profile">
+	
+	<!-- End banner Area -->
+
+	<!-- Start Sample Area -->
+
+	<!-- End Sample Area -->
+
+	<!-- Start Align Area -->
+	<div class="whole-wrap">
+
+		<div class="container">
+
+			<h3 style="margin:10px; border-bottom: 2px groove;">프로필</h3>
+				<div class="profile">
 			<div class="profile-image">
 				<img src="${ss_member.photo }">
 			</div>
 			<div class="profile-user-settings" style="text-align: left">
-				<h2 class="profile-user-name">${vo.name }</h2>
-				<sub style="color: gray">ID:@${vo.memberId }</sub>
+				<h2 class="profile-user-name">${my_vo.name }</h2>
+				<sub style="color: gray">ID:@${my_vo.memberId }</sub>
 			</div>
 
 			<div class="profile-bio" style="margin: 5px;">
-				<c:if test="${vo.selfInfo !=null }">
+				<c:if test="${my_vo.selfInfo !=null }">
 					<div class="caption">
-						${vo.selfInfo }
+						${my_vo.selfInfo }
 					</div>
 				</c:if>
-				<c:if test="${vo.selfInfo == null }">
+				<c:if test="${my_vo.selfInfo == null }">
 					<div class="caption">
 						사진과 정보를 프로필에 추가해주세요!
 					</div>
@@ -97,50 +108,45 @@
 					<li><img src="../mypage/book.png"
 						style="width: 30px; float: left;">가입일 : ${regdate}</li>
 					<li><img src="../mypage/book.png"
-						style="width: 30px; float: left;">E-mail : ${vo.email }</li>
+						style="width: 30px; float: left;">E-mail : ${my_vo.email }</li>
 					
-					<li class="btn btn-sm btn-primary"><a href="../mypage/profile_Update.do?id=${vo.memberId }">프로필 수정</a></li>
+					<li class="btn btn-sm btn-primary"><a href="../mypage/profile_Update.do?id=${my_vo.memberId }">프로필 수정</a></li>
 					<li class="btn btn-sm btn-primary">사진 업로드</li>
 					<li class="btn btn-sm btn-primary">리뷰쓰기</li>
 				</ul>
 			</div>
-
 		</div>
-		<!-- End of profile section -->
-	</div>
-	<!-- End of container -->
-
-	<nav style="background-color: black; height: 50px;">
-		<ul class="nav-menu">
-			<li><a href="../mypage/find_review.jsp">활동 피드</a></li>
-			<li><a href="../mypage/wishlist.do">여행</a></li>
-			<li><a href="#">사진</a></li>
-			<li><a href="#">예약정보</a></li>
-		</ul>
-	</nav>
-
-	<div class="container-fulid">
-		<div class="info">
-			<div class="row" style="text-align: center; height: 500px;">
-			
-				<div class="col-md-4" 
-					style="text-align: center; margin-left: 20px;">
-					<c:if test="${count ==0 }">
-					<div style="margin: 10px; height: 100px; text-align: center;" id="pro_content">
-					
-						<pre><h3>사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!</h3></pre>
-
-					</div>
-					</c:if>
-					<c:if test="${count !=0 }">
-						<c:forEach var="vo" items="list">
-							<jsp:include page="../mypage/pro_reviews.jsp"></jsp:include>
+			<!-- 이미지 지도를 표시할 div 입니다 -->
+			<div class="section-top-border">
+					<h1 style="margin:10px;"><b>활동피드</b></h1>
+					<div class="container">
+						<c:forEach var="vo1" items="${list }">
+						<sub style="color:gray; text-align: right">@${vo1.regdate }</sub>
+						<h3 class="text-heading">${vo1.title }</h3>
+						<c:if test="${vo1.filepath != null }">
+							<img src="${vo1.filepath }" class="img-fulid">
+						</c:if>
+						<c:if test="${vo1.filepath == null }">
+							<img src="../img/logo.png">
+						</c:if>
+						<p class="sample-text">
+							${vo1.content }
+						</p>
+						<p style="border-bottom: 2px groove;">
+							<b> ${vo1.expdate } </b>
+						</p>
 						</c:forEach>
-					</c:if>
+					</div>
+
+				<div class="section-top-border">
+					<h3>WishList</h3>
+					<!-- <jsp:include page="wishlist.jsp"></jsp:include> -->
 				</div>
 			</div>
 		</div>
+		
 	</div>
+		<!-- End Align Area -->
 	<!-- Blog Area -->
 
 	<!-- End footer Area -->

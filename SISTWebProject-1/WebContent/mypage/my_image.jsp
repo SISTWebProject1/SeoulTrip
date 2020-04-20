@@ -9,9 +9,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container box_1170" >
+	<div class="container box_1170" style="background: url(http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=27093&fileTy=MEDIA&fileNo=1&thumbTy=L);">
 		<div class="row d-flex align-items-center justify-content-center">
-			<div class="about-content col-md-4" style="text-align: center">
+			<div class="about-content col-md-4" style="text-align: center;  width:100%">
 				<div>
 					<h1>사진 추가</h1>
 					<input type="file" style="display: none"name=file/>

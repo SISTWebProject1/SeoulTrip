@@ -4,7 +4,6 @@
 	
 	<!-- 리뷰정보 select 활동 피드 -->
 	
-	
 	<!-- 프로필 내용 수정 -->
 	<select id="passwordCheck" resultType="MemberVO_u" parameterType="string">
 		SELECT *
@@ -24,7 +23,7 @@
 	
 	<select id="reivewData" parameterType="string" resultType="ReviewVO_u">
 		SELECT * FROM review
-		WHERE memberId= #{id}
+		WHERE memberId= #{memberId}
 	</select>
 	
 	<select id ="reviewCount" parameterType="string" resultType="int">
@@ -37,7 +36,10 @@
 		wishlist
 		WHERE memberId=#{memberId}
 	</select>
-	<select id="getReviewData" parameterType="java.util.HashMap" resultType="ReviewVO_u">
-		SELECT * FROM review
+	
+	
+	<select id="getReviewData_image_profile" parameterType="int" resultType="string">
+		SELECT filepath FROM review_photo
+		where reviewno = #{reviewNo}
 	</select>
 </mapper>
