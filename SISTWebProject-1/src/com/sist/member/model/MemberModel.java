@@ -48,6 +48,7 @@ public class MemberModel {
 	{
 		String memberid=request.getParameter("memberid");
 		int count=MemberDAO_c.idcheckData(memberid);
+		System.out.println(count);
 		request.setAttribute("count", count);
 		return "../member/idcheck_result.jsp";
 	}
@@ -61,6 +62,7 @@ public class MemberModel {
 		}catch(Exception ex){}
 		
 		String photo=request.getParameter("photo");
+		System.out.println(photo);
 		String memberid=request.getParameter("memberid");
 		String pwd=request.getParameter("pwd");
 		String name=request.getParameter("name");
@@ -73,10 +75,22 @@ public class MemberModel {
 		String tel2=request.getParameter("tel2");
 		String tel3=request.getParameter("tel3");
 		String selfinfo=request.getParameter("selfinfo");
+		System.out.println(memberid);
+		System.out.println(pwd);
+		System.out.println(name);
+		System.out.println(email);
+		System.out.println(birth);
+		System.out.println(gender);
+		System.out.println(addr1);
+		System.out.println(addr2);
+		System.out.println(tel1);
+		System.out.println(tel2);
+		System.out.println(tel3);
+		System.out.println(selfinfo);
 		
 		MemberVO_c vo=new MemberVO_c();
 		vo.setPhoto(photo);
-		vo.setMemberId(memberid);
+		vo.setMemberid(memberid);
 		vo.setPwd(pwd);
 		vo.setName(name);
 		vo.setEmail(email);
@@ -85,7 +99,7 @@ public class MemberModel {
 		vo.setAddr1(addr1);
 		vo.setAddr2(addr2);
 		vo.setTel(tel1+"-"+tel2+"-"+tel3);
-		vo.setSelfInfo(selfinfo);
+		vo.setSelfinfo(selfinfo);
 		
 		//insert
 		MemberDAO_c.memberInsert(vo);

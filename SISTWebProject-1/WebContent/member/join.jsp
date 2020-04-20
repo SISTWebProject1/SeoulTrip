@@ -95,10 +95,10 @@ $(function() {
 			{
 				alert("비밀번호가 틀립니다!!")
 			}
-			else if(p==0)
+/* 			else if(p==0)
 			{
 			    alert("우편번호를 입력하세요");	
-			}
+			} */
 		}
 	})
 })
@@ -116,17 +116,32 @@ $(function() {
     <div class="row">
       <form name="frm" action="../member/join_ok.do" method="post" id="frm">
       <table class="table table-hover">
-        <tr>
-       	   <th width=20% class="danger text-right">프로필사진</th>
-           <td width=80%>
-            	<div class="img_wrap"> <img id="img"> </div>
-            <input type="file" name=photo size=15 class="input-sm" required>
-          </td>
-        </tr>
+      	<tr>
+      		<th width=20% class="danger text-right">프로필 사진</th>
+      		<td width=80% >
+      			<div class="filebox preview-image"> 
+<!--       				<input class="upload-name" value="파일선택" disabled="disabled" > 
+      					<label for="input-file">업로드</label>    id="input-file"--> 
+      				<input type="file" name=photo id="photo" class="upload-hidden"> 
+      			</div>
+<!--       	<form>
+    	<p class="joi">
+       		 <label for="joinimage"></label>
+        	<br/>
+        	<input type="file" name="joinimage" id="joinimage" />
+    	</p>
+    	</form>
+   		<div id="image_preview">
+        	<img src="#" />
+       		 <br />
+        	<a href="#">Remove</a>
+    	</div> -->
+      		</td>
+      	</tr>
         <tr>
           <th width=20% class="danger text-right">ID</th>
           <td width=80%>
-            <input type=text name=id size=15 class="input-sm" readonly id="memberid">
+            <input type=text name=memberid size=15 class="input-sm" readonly id="memberid">
             <input type="button" value="중복체크" class="btn btn-sm btn-danger" id="idcheckBtn">
           </td>
         </tr>
@@ -163,19 +178,20 @@ $(function() {
           </td>
         </tr>
         
-        <tr>
+<!--         <tr>
           <th width=20% class="danger text-right">우편번호</th>
           <td width=80%>
             <input type=text name=post1 size=5 class="input-sm" readonly required> -
             <input type=text name=post2 size=5 class="input-sm" readonly required>
             <input type=button class="btn btn-sm btn-primary" value="우편번호검색" id="postBtn">
           </td>
-        </tr>
+        </tr> -->
         
         <tr>
           <th width=20% class="danger text-right">주소</th>
           <td width=80%>
-            <input type=text name=addr1 size=50 class="input-sm" readonly required>
+          														<!-- readonly -->
+            <input type=text name=addr1 size=50 class="input-sm"  required>
           </td>
         </tr>
         
@@ -202,7 +218,7 @@ $(function() {
         <tr>
           <th width=20% class="danger text-right">소개</th>
           <td width=80%>
-            <textarea rows="8" cols="60" name="selfInfo"></textarea>
+            <textarea rows="8" cols="60" name=selfinfo></textarea>
           </td>
         </tr>
         

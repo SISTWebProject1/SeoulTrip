@@ -12,18 +12,19 @@
   </select>
    <insert id="memberInsert" parameterType="com.sist.member.model.MemberVO_c">
      INSERT INTO member VALUES(
-       #{photo}
        #{memberid},
        #{pwd},
        #{name},
+       #{photo},
        #{email},
-       #{sex},
        #{birth},
+       #{gender},
        #{addr1},
        #{addr2},
        #{tel},
-       #{selfInfo},
        SYSDATE,
+       #{selfinfo},
+       1,
        'n'
      )
    </insert>
