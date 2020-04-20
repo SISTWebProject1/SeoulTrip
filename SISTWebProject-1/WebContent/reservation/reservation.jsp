@@ -39,7 +39,7 @@
 	})
 	
 	$('.submit-btn').click(function(){
-		 $('').text($(this).text());
+		 $('#name').text($(this).text());
 		 $('#tel').text($(this).text());
 		 $('#email').text($(this).text());
 		 $('#person').text($(this).text());
@@ -82,8 +82,8 @@
 			
 <div class="container" >
 		<div class="section">
-				<div class="row">
-						<div class="booking-form col-md-6 col-md-offset-1" style="width:100%">
+				<div class="row" colspan="2">
+						<div class="booking-form col-md-6 col-md-offset-1" style="width:100%; border:1px solid blue; float:left;">
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
@@ -149,7 +149,7 @@
 								</div>
 						</div>	
 			<%-- ==========================================Ajax출력단========================================== --%>						
-						<div class="booking-form col-md-12 col-md-offset-1" id="result">
+						<div class="booking-form col-md-6 col-md-offset-1" id="result" style="border:1px solid red; float:left;">
 						 <p class="form-group">예약자명 | &nbsp;&nbsp; <b>${name}</b> </p>
 						 <p class="form-group">e-mail | &nbsp;&nbsp;<b>${email} </b></p>
 						 <p class="form-group">전화번호 | &nbsp;&nbsp; <b>${tel}</b></p>

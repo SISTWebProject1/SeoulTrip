@@ -4,6 +4,7 @@
 	margin: 0px auto;
 	overflow: hidden;
 	background: none;
+
 }
 
 .row-info{
@@ -43,12 +44,12 @@
 	margin-top: 30px;
 	padding: 20px 30px;
 	float:left;
-	overflow:hidden;
 }
 
 .booking-form .form-group {
 	position: relative;
 	margin-bottom: 20px;
+	float:left;
 }
 
 .booking-form .form-control {
