@@ -193,3 +193,41 @@
 	border-bottom-color: #c0c0c0;
 	border-bottom-style: solid;
 }
+
+
+
+<!-- join css-->
+.filebox .upload-display { /* 이미지가 표시될 지역 */ 
+margin-bottom: 5px; 
+} 
+
+@media(min-width: 768px) { 
+	.filebox .upload-display { 
+	display: inline-block; 
+	margin-right: 5px; 
+	margin-bottom: 0; 
+ } 
+} 
+
+.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */ 
+display: inline-block; 
+width: 140px; 
+padding: 2px; 
+vertical-align: middle; 
+border: 1px solid #ddd; 
+border-radius: 5px; 
+background-color: #fff; 
+} 
+
+.filebox .upload-display img { /* 추가될 이미지 */ 
+display: block; 
+max-width: 100%; 
+width: 100% \9; 
+height: auto; 
+}
+
+
+/*  #image_preview {
+ 	width:140px;
+    display:none;
+} */

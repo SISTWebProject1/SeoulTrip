@@ -54,7 +54,7 @@ $(function(){
 function ok()
 {
 	let memberid=$('#memberid').val();
-	parent.frm.id.value=memberid;
+	parent.frm.memberid.value=memberid;
 	parent.Shadowbox.close();
 }
 </script>
