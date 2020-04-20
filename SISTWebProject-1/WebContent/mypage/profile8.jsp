@@ -123,10 +123,12 @@
 						<c:forEach var="vo1" items="${list }">
 						<sub style="color:gray; text-align: right">@${vo1.regdate }</sub>
 						<h3 class="text-heading">${vo1.title }</h3>
-						
-						<img
-							src="#"
-							alt="#" class="img">
+						<c:if test="${vo1.filepath != null }">
+							<img src="${vo1.filepath }" class="img-fulid">
+						</c:if>
+						<c:if test="${vo1.filepath == null }">
+							<img src="../img/logo.png">
+						</c:if>
 						<p class="sample-text">
 							${vo1.content }
 						</p>
@@ -137,61 +139,8 @@
 					</div>
 
 				<div class="section-top-border">
-					<h3>축제 정보</h3>
-					<div class="row gallery-item">
-
-						<div class="col-md-4">
-							<a
-								href="http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=27127&fileTy=MEDIA&fileNo=3&thumbTy=L"
-								class="img-pop-up"> 204 편리하지만 너무 힘들다 </a>
-						</div>
-						<div class="col-md-4">
-							<a
-								href="http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=27093&fileTy=MEDIA&fileNo=1&thumbTy=L"
-								class="img-pop-up">
-								<div class="single-gallery-image"
-									style="background: url(http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=27093&fileTy=MEDIA&fileNo=1&thumbTy=L);"></div>
-							</a>
-						</div>
-						<div class="col-md-4">
-							<a
-								href="http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26985&fileTy=MEDIA&fileNo=1&thumbTy=L"
-								class="img-pop-up">
-								<div class="single-gallery-image"
-									style="background: url(http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26985&fileTy=MEDIA&fileNo=1&thumbTy=L);"></div>
-							</a>
-						</div>
-						<div class="col-md-6">
-							<a
-								href="http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26981&fileTy=MEDIA&fileNo=1&thumbTy=L"
-								class="img-pop-up">
-								<div class="single-gallery-image"
-									style="background: url(http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26981&fileTy=MEDIA&fileNo=1&thumbTy=L);"></div>
-							</a>
-						</div>
-						<div class="col-md-6">
-							<a
-								href="http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26889&fileTy=MEDIA&fileNo=1&thumbTy=L"
-								class="img-pop-up">
-								<div class="single-gallery-image"
-									style="background: url(http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26889&fileTy=MEDIA&fileNo=1&thumbTy=L);"></div>
-							</a>
-						</div>
-						<div class="col-md-4">
-							<a href="https://www.naver.com/" class="img-pop-up">
-								<div class="single-gallery-image"
-									style="background: url(http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=27103&fileTy=MEDIA&fileNo=1&thumbTy=L);"></div>
-							</a>
-						</div>
-						<div class="col-md-4">
-							<a
-								href="http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26944&fileTy=MEDIA&fileNo=1&thumbTy=L"
-								class="img-pop-up">
-								<div class="single-gallery-image"
-									style="background: url(http://korean.visitseoul.net/comm/getImage?srvcId=MEDIA&parentSn=26944&fileTy=MEDIA&fileNo=1&thumbTy=L);"></div>
-							</a>
-						</div>
-					</div>
+					<h3>WishList</h3>
+					<!-- <jsp:include page="wishlist.jsp"></jsp:include> -->
 				</div>
 			</div>
 		</div>

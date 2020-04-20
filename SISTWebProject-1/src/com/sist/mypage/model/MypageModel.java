@@ -33,10 +33,11 @@ public class MypageModel {
 		request.setAttribute("my_vo", my_vo);
 		System.out.println(my_vo.getRegdate());
 		
+	
+		
 		
 		// review 확인
 		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
-		List<PhotoVO_u> photo_list = new ArrayList<PhotoVO_u>();
 		int count=0;
 		list = MypageDAO.ReviewData(id);
 		// 사진을 모으기 위해 reviewNO를 배열에 저장
@@ -47,19 +48,14 @@ public class MypageModel {
 			System.out.println(i+" "+v1.getReviewno());
 			reviewNo[i] = v1.getReviewno();
 			i++;
-			PhotoVO_u pvo = new PhotoVO_u();
-			pvo.setReviewno(v1.getReviewno());
-			photo_list.add(pvo);
 		}
+		// photo 가져오기
+		list = MypageDAO.getImageForReview(list, reviewNo);
+		
 		// review 숫자ㄴ
 		count = list.size();
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
-		
-		// photo 가져오기
-		Map map1 = new HashMap();
-		//MypageDAO.getImageForReview(reviewNo);
-		
 		
 		// 페이지
 		String page =request.getParameter("page");
@@ -88,8 +84,6 @@ public class MypageModel {
 		map.put("start", start);
 		map.put("end", end);
 		// review 정보 확인
-//		list = MypageDAO.getReviewData(map);
-//		List<PhotoVO_u> imglist = dao.getImageForReview(Integer.parseInt(no));
 		
 		request.setAttribute("main_jsp", "../mypage/profile8.jsp");
 		return "../main/index.jsp";
@@ -142,16 +136,16 @@ public class MypageModel {
 		String tel = request.getParameter("tel");
 		String selfinfo = request.getParameter("selfinfo");
 		
-		MemberVO_u vo = new MemberVO_u();
-		vo.setMemberId(id);
-		vo.setName(name);
-		vo.setAddr1(addr1);
-		vo.setEmail(email);
-		vo.setTel(tel);
-		vo.setSelfInfo(selfinfo);
-		System.out.println(vo.getEmail());
+		MemberVO_u my_vo = new MemberVO_u();
+		my_vo.setMemberId(id);
+		my_vo.setName(name);
+		my_vo.setAddr1(addr1);
+		my_vo.setEmail(email);
+		my_vo.setTel(tel);
+		my_vo.setSelfInfo(selfinfo);
+		System.out.println(my_vo.getEmail());
 		
-		MypageDAO.Update_ok(vo);
+		MypageDAO.Update_ok(my_vo);
 		
 		return "redirect:../mypage/profile.do";
 		
@@ -187,7 +181,7 @@ public class MypageModel {
 		
 		
 		request.setAttribute("year", year);
-		request.setAttribute("vo", vo);
+		request.setAttribute("my_vo", vo);
 		request.setAttribute("main_jsp", "../mypage/update.jsp");
 		
 		return "../main/index.jsp";
