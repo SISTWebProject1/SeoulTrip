@@ -55,7 +55,13 @@ public class MainDAO {
 		Cookie[] cookies = request.getCookies();
 		for(int i=0; i<cookies.length; i++){
 			if(cookies[i].getName().startsWith("slowdown")) {
-				slowdownCookies.add(cookies[i].getName());
+				if(cookies[i].getName().endsWith(type+"_"+no)) {
+					cookies[i].setMaxAge(0);
+					cookies[i].setPath("/");
+					response.addCookie(cookies[i]);
+				} else {
+					slowdownCookies.add(cookies[i].getName());
+				}
 			}
 		}
 		
@@ -91,7 +97,8 @@ public class MainDAO {
 		}
 		Collections.sort(slowdownCookies);
 		
-		for(int i=0; i<Math.min(slowdownCookies.size(), 4); i++) {
+		int size = slowdownCookies.size();
+		for(int i=0; i<Math.min(size, 4); i++) {
 			String cookie = slowdownCookies.remove(slowdownCookies.size()-1);
 			String[] type_no = cookie.substring(cookie.indexOf("#")+1).split("_");
 			String type = type_no[0];
@@ -272,6 +279,102 @@ public class MainDAO {
 		}
 		
 		return list;
+	}
+	
+	public static List<HomeItemVO> getHIListByTagcode_page(int tagcode, int page) {
+		List<HomeItemVO> list = new ArrayList<HomeItemVO>();
+		
+		int rowSize = 12;
+		int end = rowSize*page;
+		int start = end - (rowSize-1);
+		
+		Map map1 = new HashMap();
+		map1.put("tagcode", tagcode);
+		map1.put("start", start);
+		map1.put("end", end);
+		
+		try {
+			SqlSession session = ssf.openSession();
+			List<HomeItemVO> tempList = session.selectList("getTypeNoListByTagcode_page", map1);
+			if(tempList.isEmpty()) return list;
+			
+			for(HomeItemVO vo : tempList) {
+				int type = vo.getType();
+				int no = vo.getNo();
+				
+				String table;
+				String name;
+				String photo;
+				switch (type) {
+					case 1 : {
+						table = "tourplace";
+						name = "tname";
+						photo = "tphoto";
+						break;
+					}
+					case 2 : {
+						table = "restaurant";
+						name = "rname";
+						photo = "rphoto";
+						break;
+					}
+					default : {
+						table = "festival";
+						name = "fname";
+						photo = "fphoto";
+						break;
+					}
+				}
+				
+				Map map = new HashMap();
+				map.put("table", table);
+				map.put("name", name);
+				map.put("photo", photo);
+				map.put("no", no);
+				
+				vo = session.selectOne("getHIVOData", map);
+				vo.setType(type);
+				list.add(vo);
+
+			}
+			
+			session.close();
+		} catch (Exception e) {
+			System.out.println("MainDAO:getHIListByTagcode_page():");
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public static HashTagVO getHashTagData(int tagcode) {
+		HashTagVO vo = new HashTagVO();
+		
+		try {
+			SqlSession ss = ssf.openSession();
+			vo = ss.selectOne("getHashTagData", tagcode);
+			ss.close();
+		} catch (Exception e) {
+			System.out.println("MainDAO:getHashTagData():");
+			e.printStackTrace();
+		}
+		
+		return vo;
+	}
+	
+	public static int getHTItemListTotalPage(int tagcode) {
+		int total = 0;
+		
+		try {
+			SqlSession ss = ssf.openSession();
+			total = ss.selectOne("getHTItemListTotalPage", tagcode);
+			ss.close();
+		} catch (Exception e) {
+			System.out.println("MainDAO:getHTItemListTotalPage():");
+			e.printStackTrace();
+		}
+		
+		return total;
 	}
 
 }

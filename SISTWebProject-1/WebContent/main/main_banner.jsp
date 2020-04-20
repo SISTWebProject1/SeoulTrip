@@ -18,7 +18,7 @@
 						<div class="btn-group" style="display: inline-block;">
 							<c:forEach var="htvo" items="${ htlist }">
 								<button type="button" class="btn btn-primary" 
-								onclick="location.href='${ htvo.tagcode }'">
+								onclick="location.href='../home/htitemlist.do?tagcode=${ htvo.tagcode }'">
 									#${ htvo.tagname }
 								</button>
 							</c:forEach>

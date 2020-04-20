@@ -36,7 +36,7 @@
 		(SELECT type, no, tagcode, COUNT(*) AS cnt FROM review NATURAL JOIN reviewtohashtag
 		GROUP BY type, no, tagcode
 		ORDER BY cnt DESC) NATURAL JOIN hashtagtable
-		WHERE tagname LIKE #{keyword}||'%'
+		WHERE tagname LIKE '%'||#{keyword}||'%'
 		AND cnt &gt; 3
 		AND rownum &lt; 5
 	</select>
@@ -58,6 +58,33 @@
 	<select id="getHTAllList" resultType="HashTagVO" parameterType="int">
 		SELECT tagcode, tagname, count
 		FROM hashtagtable
+	</select>
+	
+	<select id="getTypeNoListByTagcode_page" resultType="HomeItemVO" parameterType="HashMap">
+		SELECT type, no
+	    FROM (SELECT type, no, rownum AS num
+	    FROM (SELECT type, no
+	    FROM (SELECT type, no, tagcode, COUNT(*) AS cnt
+	    FROM review NATURAL JOIN reviewtohashtag
+	    GROUP BY type, no, tagcode
+	    ORDER BY cnt DESC) NATURAL JOIN hashtagtable
+	    WHERE tagcode=#{tagcode}
+	    AND cnt > 3))
+	    WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="getHashTagData" resultType="HashTagVO" parameterType="int">
+		SELECT * FROM hashtagtable WHERE tagcode=#{tagcode}
+	</select>
+	
+	<select id="getHTItemListTotalPage" resultType="int" parameterType="int">
+		SELECT CEIL(COUNT(*)/12)
+		FROM (SELECT type,no,tagcode,COUNT(*) AS cnt
+		FROM review NATURAL JOIN reviewtohashtag
+		GROUP BY type,no,tagcode
+		ORDER BY cnt DESC) NATURAL JOIN hashtagtable
+		WHERE tagcode=#{tagcode}
+		AND cnt > 3
 	</select>
 </mapper>
 
