@@ -20,7 +20,9 @@
 		<typeAlias type="com.sist.member.model.MemberVO_c" alias="MemberVO_c"/>
 		<typeAlias type="com.sist.member.model.ZipcodeVO" alias="ZipcodeVO"/>
 		
-
+		<typeAlias type="com.sist.reservation.model.ReservationVO" alias="ReservationVO"/>
+		<typeAlias type="com.sist.reservation.model.MemberVO_r" alias="MemberVO_r"/>
+		<typeAlias type="com.sist.reservation.model.RestaurantVO_r" alias="RestaurantVO_r"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -43,5 +45,7 @@
 		<mapper resource="com/sist/home/model/festival-mapper.xml"/>
 		<mapper resource="com/sist/detail/dao/detail-mapper.xml"/>
 		<mapper resource="com/sist/member/model/member-mapper.xml"/>
+		<mapper resource="com/sist/reservation/model/reservation-mapper.xml"/>
+
 	</mappers>
 </configuration>
