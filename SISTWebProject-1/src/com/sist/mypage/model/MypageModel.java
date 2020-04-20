@@ -3,7 +3,6 @@ package com.sist.mypage.model;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +21,7 @@ public class MypageModel {
 		LoginVO vo = (LoginVO)request.getSession().getAttribute("ss_member");
 		System.out.println(vo.getMemberId());
 		String id = vo.getMemberId().trim();
+		
 		MemberVO_u my_vo = MypageDAO.PassWord_check(id);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.applyPattern("yyyy-MM-dd");
@@ -30,28 +30,41 @@ public class MypageModel {
 		
 		request.setAttribute("birth", birth);
 		request.setAttribute("regdate", regdate);
-		request.setAttribute("vo", my_vo);
+		request.setAttribute("my_vo", my_vo);
 		System.out.println(my_vo.getRegdate());
 		
 		
 		// review 확인
 		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
+		List<PhotoVO_u> photo_list = new ArrayList<PhotoVO_u>();
 		int count=0;
 		list = MypageDAO.ReviewData(id);
+		// 사진을 모으기 위해 reviewNO를 배열에 저장
+		int reviewNo[] = new int[list.size()];
+
+		int i =0;
 		for(ReviewVO_u v1 : list){
-			System.out.println(v1.getNo());
-			System.out.println(v1.getTitle());
-			System.out.println(v1.getLikecode());
-			System.out.println(v1.getMemberId());
+			System.out.println(i+" "+v1.getReviewno());
+			reviewNo[i] = v1.getReviewno();
+			i++;
+			PhotoVO_u pvo = new PhotoVO_u();
+			pvo.setReviewno(v1.getReviewno());
+			photo_list.add(pvo);
 		}
-		count = MypageDAO.ReviewCount(id);
+		// review 숫자ㄴ
+		count = list.size();
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
+		
+		// photo 가져오기
+		Map map1 = new HashMap();
+		//MypageDAO.getImageForReview(reviewNo);
+		
 		
 		// 페이지
 		String page =request.getParameter("page");
 		String type = request.getParameter("type");
-		String no = request.getParameter("no");
+//		String no = request.getParameter("no");
 		
 		int totalpage = 0;
 		
@@ -69,13 +82,11 @@ public class MypageModel {
 		int allPage = totalpage;
 		if(endPage>allPage)
 			endPage = allPage;
-		
 		Map map = new HashMap();
-		map.put("no", no);
+		//map.put("no", no);
 		map.put("type", type);
 		map.put("start", start);
 		map.put("end", end);
-		
 		// review 정보 확인
 //		list = MypageDAO.getReviewData(map);
 //		List<PhotoVO_u> imglist = dao.getImageForReview(Integer.parseInt(no));

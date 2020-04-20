@@ -128,12 +128,12 @@ public class MypageDAO {
 		return list;
 	}
 	//리뷰별 이미지 출력
-	public List<PhotoVO_u> getImageForReview(int no){
+	public static List<PhotoVO_u> getImageForReview(int[] reviewNo){
 		List<PhotoVO_u> list = new ArrayList<PhotoVO_u>();
 		SqlSession session=null;
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getImagesForReview",no);
+			list = session.selectList("getImagesForReview",reviewNo);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
