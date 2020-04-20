@@ -159,7 +159,7 @@
 						</div>
 					</div>	
 			<%-- ==========================================Ajax출력단========================================== --%>					
-						<div class="row col-md-6 col-md-offset-1" style="overflow:hidden;">
+						<div class="row col-md-6 col-md-offset-1">
 						<div id="map"  style="width:500px;height:400px; border:0px solid white;"></div>
 					
 					</div>			
