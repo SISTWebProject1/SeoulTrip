@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.member.member-mapper">
+  <select id="postfindData" resultType="com.sist.member.model.ZipcodeVO" parameterType="string">
+    SELECT zipcode,sido,gugun,dong,NVL(bunji,' ') as bunji
+    FROM zipcode
+    WHERE dong LIKE '%'||#{dong}||'%'
+  </select>
+  <select id="idcheckData" resultType="int" parameterType="string">
+    SELECT COUNT(*) FROM member
+    WHERE memberid=#{memberid}
+  </select>
+   <insert id="memberInsert" parameterType="com.sist.member.model.MemberVO_c">
+     INSERT INTO member VALUES(
+       #{photo}
+       #{memberid},
+       #{pwd},
+       #{name},
+       #{email},
+       #{sex},
+       #{birth},
+       #{addr1},
+       #{addr2},
+       #{tel},
+       #{selfInfo},
+       SYSDATE,
+       'n'
+     )
+   </insert>
+   <select id="idCount" resultType="int" parameterType="string">
+     SELECT COUNT(*) FROM member
+     WHERE memberid=#{memberid}
+   </select>
+   <select id="getPwd" resultType="com.sist.member.model.MemberVO_c" parameterType="string">
+     SELECT pwd,name FROM member
+     WHERE memberid=#{memberid}
+   </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

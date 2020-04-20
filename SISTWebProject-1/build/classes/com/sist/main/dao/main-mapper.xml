@@ -40,6 +40,25 @@
 		AND cnt &gt; 3
 		AND rownum &lt; 5
 	</select>
+	
+	<select id="getHTListRegDESC" resultType="HashTagVO">
+		SELECT tagcode, tagname
+		FROM (SELECT tagcode, tagname FROM hashtagtable
+				ORDER BY regdate DESC)
+		WHERE rownum &lt; 8
+	</select>
+	
+	<select id="getPopularHTList" resultType="HashTagVO">
+		SELECT tagcode, tagname, count
+		FROM (SELECT tagcode, tagname, count FROM hashtagtable
+				ORDER BY count DESC)
+		WHERE rownum &lt; 8
+	</select>
+	
+	<select id="getHTAllList" resultType="HashTagVO" parameterType="int">
+		SELECT tagcode, tagname, count
+		FROM hashtagtable
+	</select>
 </mapper>
 
 

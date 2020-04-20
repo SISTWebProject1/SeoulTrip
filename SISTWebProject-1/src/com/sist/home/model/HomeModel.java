@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.main.dao.HashTagVO;
 import com.sist.main.dao.HomeItemVO;
 import com.sist.main.dao.MainDAO;
 
@@ -36,6 +37,12 @@ public class HomeModel {
 		
 		List<FestivalVO> flist = FestivalDAO.festivalAllList();
 		request.setAttribute("flist", flist);
+		
+		List<HashTagVO> htlist = MainDAO.getHTListRegDESC();
+		request.setAttribute("htlist", htlist);
+		
+		List<HashTagVO> phtlist = MainDAO.getPopularHTList();
+		request.setAttribute("phtlist", phtlist);
 		
 		return "../main/index.jsp";
 	}
