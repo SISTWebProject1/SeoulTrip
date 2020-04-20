@@ -27,8 +27,8 @@
 							style="margin: auto; max-width: 300px">
 							<input type="button"
 								style="font-size: 30px; border: none; background: none; text-align: center;"
-								placeholder="Search Posts" value="qna" id="QNA" /> <input
-								type="hidden" name=type id=type value="${type}" /> <input
+								placeholder="Search Posts" value="qna" id="QNA" /> 
+								<input type="hidden" name=type id=type value="${type}" /> <input
 								type="hidden" name=no id=no value="${no}" /> <input
 								type="hidden" name=page id=page value="${page}" />
 						</form>
