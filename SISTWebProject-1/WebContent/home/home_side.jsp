@@ -25,8 +25,8 @@
 	<h4 class="title">Popular Tags</h4>
 	<ul>
 		<c:forEach var="phtvo" items="${ phtlist }">
-			<li><a href="#" class="justify-content-between align-items-center d-flex">
-				<p>${ phtvo.tagname }</p> <span>${ phtvo.count }</span>
+			<li><a href="../home/htitemlist.do?tagcode=${ phtvo.tagcode }" class="justify-content-between align-items-center d-flex">
+				<p>#${ phtvo.tagname }</p><span>${ phtvo.count }</span>
 			</a></li>
 		</c:forEach>
 	</ul>
@@ -39,7 +39,7 @@
 			<c:forEach var="hivo" items="${ hiList }">
 				<div class="single-popular-post d-flex flex-row">
 					<div class="popular-thumb">
-						<img class="img-fluid" src="${ hivo.photo }" style="width: 50px; height: 50px; border-bottom: 10px;">
+						<img class="img-fluid" src="${ hivo.photo }" onerror="javascript:src='../img/logo.png'" style="width: 50px; height: 50px; border-bottom: 10px;">
 					</div>
 					<div class="popular-details">
 						<a href="blog-details.html">
