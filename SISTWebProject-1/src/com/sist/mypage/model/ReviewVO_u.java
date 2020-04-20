@@ -13,11 +13,17 @@ public class ReviewVO_u {
 	private String content;
 	private int likecode;
 	private int grade;
+	private String filepath;
 	
 	private int review_count;
 	
 	
-	
+	public String getFilepath() {
+		return filepath;
+	}
+	public void setFilepath(String filepath) {
+		this.filepath = filepath;
+	}
 	public String getContent() {
 		return content;
 	}

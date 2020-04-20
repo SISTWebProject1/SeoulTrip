@@ -128,12 +128,27 @@ public class MypageDAO {
 		return list;
 	}
 	//리뷰별 이미지 출력
-	public static List<PhotoVO_u> getImageForReview(int[] reviewNo){
-		List<PhotoVO_u> list = new ArrayList<PhotoVO_u>();
+	public static List<ReviewVO_u> getImageForReview(List<ReviewVO_u> list, int[] reviewNo){	
 		SqlSession session=null;
+		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("getImagesForReview",reviewNo);
+			String filepath=" ";
+			String temp ="";
+			for(int i=0; i<reviewNo.length; i++){
+				filepath = session.selectOne("getReviewData_image_profile",reviewNo[i]);
+				temp = temp+filepath+"@";
+			}
+			String[] filepath_temp = temp.split("@");
+			System.out.println(filepath_temp.length);
+			for(String te : filepath_temp){
+				System.out.println(te);
+			}
+			int i =0;
+			for(ReviewVO_u vo1 : list){
+				vo1.setFilepath(filepath_temp[i]);
+				i++;
+			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception

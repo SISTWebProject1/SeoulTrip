@@ -1,5 +1,5 @@
 package com.sist.reservation.model;
-public class MemberVO {
+public class MemberVO_r {
 	private String memberid;
 	private String pwd;
 	private String name;
