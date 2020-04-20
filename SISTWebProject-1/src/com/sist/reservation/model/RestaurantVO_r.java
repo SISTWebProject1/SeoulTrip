@@ -1,5 +1,5 @@
 package com.sist.reservation.model;
-public class RestaurantVO {
+public class RestaurantVO_r {
 	private int no;
     private String rname;
     private String openhour;

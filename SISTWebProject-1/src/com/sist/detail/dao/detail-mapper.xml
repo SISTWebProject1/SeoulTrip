@@ -137,6 +137,20 @@
 		WHERE num BETWEEN 1 AND 2;
  	
  	</select>
+ 	
+ 	
+ 	<select id="detailQnaListData" resultType="DetailQnaVO" parameterType="java.util.Map">
+ 		SELECT * 
+ 		FROM qna
+ 		WHERE type=#{type} AND no=#{no}
+ 	</select>
+ 	
+ 	<insert id="DetailQnaInsert" parameterType="DetailQnaVO">
+		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(seq)+1,1) as seq FROM qna
+		</selectKey>
+			INSERT INTO qna VALUES(#{memberid},#{no},#{title},#{pwd},#{content},#{type},#{seq})
+	</insert>
 </mapper>
 
 

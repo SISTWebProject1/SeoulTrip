@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.reservation.model.reservation-mapper">
-	
-	<select id="reservationListData" resultType="com.sist.reservation.model.RestaurantVO" parameterType="int">
+
+	<select id="reservationListData" resultType="RestaurantVO_r">
 		SELECT *
 		FROM restaurant
-		WHERE no=#{no}
-	</select>
-
-	<select id="getPhoto" resultType="string" parameterType="int">
-		SELECT filepath
-		FROM photo
-		WHERE reviewno=#{reviewno}
+	    WHERE no=#{no}
 	</select>
 	
-	<select id="bookingData" resultType="com.sist.reservation.model.MemberVO" parameterType="int">
+	<select id="bookingMemberData" resultType="MemberVO_r" parameterType="int">
 		SELECT email,pwd  
 		FROM member
 		WHERE memberid LIKE '%'||#{memberid}||'%'
 	</select>
 	
-	<insert id="bookingResultData" parameterType="com.sist.reservation.model.ReservationVO"> <!-- ODER MAP -->
+	<insert id="bookingResultData" parameterType="ReservationVO"> <!-- ODER MAP -->
 		INSERT bookingrestaurant
 		INTO VALUES ((SELECT NVL(MAX(bookingnumber)+1,1),#{memberid},#{no},#{reservationdate},#{time},#{inwon})
 	</insert>
 	
+
 </mapper>

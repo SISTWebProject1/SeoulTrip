@@ -28,6 +28,23 @@
 		}); 
 	});
 	
+/* 	$('#qna_insert').click(function(){
+		const type = $('#type').val();
+		const no = $('#no').val();
+		$.ajax({
+			type:'post',
+			url:'../detail/detail_qna_insert.do',
+			datao:{'type':type, 'no':no},
+			success:function(data){
+				$('#result').html(data);
+			
+			},
+			error: function(e){
+				console.log("error");
+			}
+		});	
+	}); */
+	
 	var location = document.querySelector('#ReviewPosition').offsetTop;
 
 	(function(e){
@@ -40,7 +57,8 @@
 </head>
 <body>
  <jsp:include page="../detail/detail_info.jsp"></jsp:include>
- <jsp:include page="../detail/detail_board.jsp"/>
+<%--  <jsp:include page="../detail/detail_board.jsp"/> --%>
+ <jsp:include page="${detail_board_jsp}" />
  <jsp:include page="../detail/detail_bottom.jsp"></jsp:include>
 
 </body>
