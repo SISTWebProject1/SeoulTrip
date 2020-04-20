@@ -29,33 +29,32 @@
 	
 	
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
  $(function(){
-	$('#submit-btn').click(function(){
-		let name=$('#name').val()
-		let tel=$('#tel').val()
-		let email=$('#email').val()
-		let date=$('#date').val()
-		let time=$('#time').val()
-		let person=$('#person').val()
+	$('.submit-btn').hover(function(){
+		 $(this).css('cursor','pointer');
+	},function(){
+		$(this).css('cursor','none');	
+	})
+	
+	$('.submit-btn').click(function(){
+		 $('').text($(this).text());
+		 $('#tel').text($(this).text());
+		 $('#email').text($(this).text());
+		 $('#person').text($(this).text());
+		 $('#time').text($(this).text());
+		 $('#date').text($(this).text());
 		$.ajax({
-			type:'post',
-			url:'../reservation/reservation_ok.do',
-			data:{"name":name, "tel":tel, "email":email, "date":date
-				,"time":time, "person":person},
+			type:'POST',
 			success:function(res)
 			{
 				$('#result').html(res);
-			},
-			error: function(e)
-			{
-				alert(e);
 			}
 		})
 	})
  })
-  
+
 </script>
 </head>
 
@@ -81,16 +80,10 @@
 
 	<!-- Start contact-page Area -->
 			
-	<section class="section">
-		<div id="booking" class="section">
-		<div class="section-center">
-			<div class="container" >
-			
-				<div class="row" style="width:100%;">
-				 
-					<div class="col-md-6 col-md-offset-1" >
-						<div class="booking-form">
-						<form method="POST" action="../reservation/reservation_ok.do" name=frm id=frm>
+<div class="container" >
+		<div class="section">
+				<div class="row">
+						<div class="booking-form col-md-6 col-md-offset-1" style="width:100%">
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
@@ -149,34 +142,38 @@
 									</div>
 								</div>
 								<div class="form-btn">
-									<button class="submit-btn col-md-6" id="submit-btn" >예약하기</button>
+									<button class="submit-btn col-md-6"  >예약하기</button>
 									<button class="submit-btn col-md-6" 
 										onclick="javascript:history.back()"
 									>취소하기</button>
 								</div>
-							</form>
 						</div>	
+			<%-- ==========================================Ajax출력단========================================== --%>						
+						<div class="booking-form col-md-12 col-md-offset-1" id="result">
+						 <p class="form-group">예약자명 | &nbsp;&nbsp; <b>${name}</b> </p>
+						 <p class="form-group">e-mail | &nbsp;&nbsp;<b>${email} </b></p>
+						 <p class="form-group">전화번호 | &nbsp;&nbsp; <b>${tel}</b></p>
+						 <p class="form-group">예약시간 | &nbsp;&nbsp; <b>${time}</b></p>
+						 <p class="form-group">예약인원 | &nbsp;&nbsp; <b>${inwon}</b></p>
+						 <p class="form-group">예약날짜 | &nbsp;&nbsp; <b>${reservationdate}</b></p>
+						</div>
 					</div>	
+			<%-- ==========================================Ajax출력단========================================== --%>					
+						<div class="row col-md-6 col-md-offset-1" style="overflow:hidden;">
+						<div id="map"  style="width:500px;height:400px; border:0px solid white;"></div>
 					
-					<div style="width:40%; height:auto; overflow:hidden;">	
-					<img src="../img/reservation.jpg" style="max-width:100%; height:auto;">
-					</div>
-						
-				</div>
-				
-				<div class="row" id="result">
-				</div>
-	
-			
+					</div>			
+				</div>			
 			</div>
-		</div>
-	</div>
-</section>	
 
+
+
+<div class="container">
 <section class="contact-page-area section-gap">	
-	<div class="container">
-	
-			<div class="row-info">
+		   	<div class="form-group col-md-6 col-md-offset-1" style="width:100%; height:auto; overflow:hidden;">
+						<img src="../img/reservation.jpg" style="max-width:100%; height:auto;">
+			</div>	
+			<div class="row-info col-md-6">
 				<div class="col-lg-4 d-flex flex-column address-wrap">
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
@@ -184,7 +181,9 @@
 						</div>
 						<div class="contact-details">
 							<h5>${vo.rname }</h5>
-							<p>${vo.addr1 } | ${vo.addr2 }</p>
+							<p>${vo.addr1 } 
+							|
+							 ${vo.addr2 }</p>
 						</div>
 					</div>
 					<div class="single-contact-address d-flex flex-row">
@@ -210,23 +209,25 @@
 					</div>
 				</div>	
 			</div>
-			<div id="map" style="width:500px;height:400px; border:0px solid white;"></div>
-							
+</section>
+</div>	
+
+		
+			
 						<!--  Kakao Map -->
 								
 								<script>
 									var container = document.getElementById('map');
 									var options = {					
-										center: new kakao.maps.LatLng(${vo.mapX},${vo.mapY}),
+										center: new kakao.maps.LatLng(37.515343,127.019066),
+										/*${vo.mapX}, ${vo.mapY}  */
 										level: 3
 									};
 							
 									var map = new kakao.maps.Map(container, options);
 								</script>
 		   	
-			
-		</div>
-	</section>
+
 	
 	
 	<script src="js/jquery.min.js"></script>
