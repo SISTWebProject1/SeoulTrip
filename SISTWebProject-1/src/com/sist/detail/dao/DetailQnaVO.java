@@ -7,14 +7,10 @@ import lombok.Setter;
 @Setter
 public class DetailQnaVO {
 	private String memberid;
-	private int tno;
-	private int rno;
-	private int fno;
+	private int seq;
 	private int no;
 	private String title;
-	private String placename;
 	private int pwd;
-	private int id;
 	private String content;
 	private int type;
 }

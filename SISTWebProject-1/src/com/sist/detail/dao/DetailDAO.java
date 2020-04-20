@@ -229,4 +229,37 @@ public class DetailDAO {
 		return list;
 	}
 	
+	
+	// ############################################################################### 질문 게시판 처리 
+	
+	public static List<DetailQnaVO> detailQnaListData (Map map){
+		List<DetailQnaVO> list = new ArrayList<DetailQnaVO>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("detailQnaListData",map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	
+	public static void DetailQnaInsert(DetailQnaVO vo){
+		SqlSession session=null;
+		try {
+			session = ssf.openSession(true);
+			session.update("DetailQnaInsert",vo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+	}
 }

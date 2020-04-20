@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,12 +23,52 @@
 			</div>
 		</div>
 		<div class="col-lg-2">
-			<button id="modalBtn" class="button"
+			<a href="../detail/detail_qna_insert.do?type=${type}&no=${no}"><input type="button" class="button"
 				style="margin-top: 50px; background-color: #555555; color: white;"
-				value="질문하기">질문하기</button>
+				value="질문하기"/>질문하기!!!!</a>
 		</div>
 	</div>
 	<div id="result">
+		<!-- ####################################  -->
+	<div class="wrapper row2">
+		<div id="services" class="clear">
+			<div class="text-center">
+				<img src="../img/detail/qna_Board.jpg" style="width:700px; height:150px"/>
+			</div>
+			<div class="row">
+				<table class="table">
+					<tr class="success">
+						<th width="10%" class="text-center">번호</th>
+						<th width="45%" class="text-center">제목</th>
+						<th width="15%" class="text-center">이름</th>
+	<!-- 					<th width="20%" class="text-center">작성일</th>
+						<th width="10%" class="text-center">조회수</th>
+	 -->				</tr>
+					<c:forEach var="vo" items="${list }">
+						<tr>
+							<td width="10%" class="text-center">${vo.seq }</td>
+							<td width="45%">
+								<a href="../freeboard/detail.do?no=${vo.no}">${vo.title }</a>
+								&nbsp;
+<%-- 								<c:if test="${vo.dbday==today }">
+									<sup><img src="../freeboard/new.gif"/></sup>
+								</c:if> --%>
+							</td>
+							<td width="15%" class="text-center">${vo.memberid }</td>
+<%-- 							<td width="20%" class="text-center">
+								${vo.dbday }
+							<td width="10%" class="text-center">${vo.hit }</td>
+ --%>						</tr>
+					</c:forEach>
+				</table>
+			</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+<!-- 
 		<div class="single-post-item" id="Qna_Board">
 			<h3>
 				<a href="blog-details.html">질문 내용은 다음과 같습니다.</a>
@@ -64,7 +106,4 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-</body>
-</html>
+		</div> -->
