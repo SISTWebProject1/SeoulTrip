@@ -58,7 +58,7 @@ public class MypageModel {
 		
 		// photo 가져오기
 		Map map1 = new HashMap();
-		MypageDAO.getImageForReview(reviewNo);
+		//MypageDAO.getImageForReview(reviewNo);
 		
 		
 		// 페이지

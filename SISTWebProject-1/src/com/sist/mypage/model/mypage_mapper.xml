@@ -4,7 +4,6 @@
 	
 	<!-- 리뷰정보 select 활동 피드 -->
 	
-	
 	<!-- 프로필 내용 수정 -->
 	<select id="passwordCheck" resultType="MemberVO_u" parameterType="string">
 		SELECT *
