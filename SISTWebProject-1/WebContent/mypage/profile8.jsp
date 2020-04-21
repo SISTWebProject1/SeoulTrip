@@ -66,22 +66,14 @@
 <body>
 	<!-- Start banner Area -->
 	<jsp:include page="my_image.jsp"></jsp:include>
-
 	<!-- End banner Area -->
-
-	
-	<!-- End banner Area -->
-
-	<!-- Start Sample Area -->
-
-	<!-- End Sample Area -->
 
 	<!-- Start Align Area -->
 	<div class="whole-wrap">
 
 		<div class="container">
 
-			<h3 style="margin:10px; border-bottom: 2px groove;">프로필</h3>
+			<h3 style="margin:4px; border-bottom: 2px groove;">프로필</h3>
 				<div class="profile">
 			<div class="profile-image">
 				<img src="${ss_member.photo }">
@@ -89,6 +81,9 @@
 			<div class="profile-user-settings" style="text-align: left">
 				<h2 class="profile-user-name">${my_vo.name }</h2>
 				<sub style="color: gray">ID:@${my_vo.memberId }</sub>
+				<div class="btn btn-sm btn-danger" style="margin: 5px;">
+					<a href="../mypage/profile_Update.do?id=${my_vo.memberId }" style="text-decoration: none;color:white">프로필 수정</a>
+				</div>
 			</div>
 
 			<div class="profile-bio" style="margin: 5px;">
@@ -104,43 +99,19 @@
 				</c:if>
 				<ul id="my_info" style="text-align: left;">
 					<li><img src="../mypage/birth.png"
-						style="width: 30px; float: left;">생일 : ${birth }</li>
+						style="width: 20px; float: left;">생일 : ${birth }</li>
 					<li><img src="../mypage/book.png"
-						style="width: 30px; float: left;">가입일 : ${regdate}</li>
+						style="width: 20px; float: left;">가입일 : ${regdate}</li>
 					<li><img src="../mypage/book.png"
-						style="width: 30px; float: left;">E-mail : ${my_vo.email }</li>
-					
-					<li class="btn btn-sm btn-primary"><a href="../mypage/profile_Update.do?id=${my_vo.memberId }">프로필 수정</a></li>
-					<li class="btn btn-sm btn-primary">사진 업로드</li>
-					<li class="btn btn-sm btn-primary">리뷰쓰기</li>
+						style="width: 20px; float: left;">E-mail : ${my_vo.email }</li>
 				</ul>
 			</div>
 		</div>
 			<!-- 이미지 지도를 표시할 div 입니다 -->
 			<div class="section-top-border">
-					<h1 style="margin:10px;"><b>활동피드</b></h1>
-					<div class="container">
-						<c:forEach var="vo1" items="${list }">
-						<sub style="color:gray; text-align: right">@${vo1.regdate }</sub>
-						<h3 class="text-heading">${vo1.title }</h3>
-						<c:if test="${vo1.filepath != null }">
-							<img src="${vo1.filepath }" class="img-fulid">
-						</c:if>
-						<c:if test="${vo1.filepath == null }">
-							<img src="../img/logo.png">
-						</c:if>
-						<p class="sample-text">
-							${vo1.content }
-						</p>
-						<p style="border-bottom: 2px groove;">
-							<b> ${vo1.expdate } </b>
-						</p>
-						</c:forEach>
-					</div>
-
+					<jsp:include page="pro_reviews.jsp"></jsp:include>
 				<div class="section-top-border">
-					<h3>WishList</h3>
-					<!-- <jsp:include page="wishlist.jsp"></jsp:include> -->
+					<jsp:include page="wishlist.jsp"></jsp:include>
 				</div>
 			</div>
 		</div>

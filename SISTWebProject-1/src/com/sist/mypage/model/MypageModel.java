@@ -17,7 +17,7 @@ public class MypageModel {
 
 	@RequestMapping("mypage/profile.do")
 	public String main_profile(HttpServletRequest request, HttpServletResponse response) {
-		
+		// Login 정보 --> id,birth,regdate 값을 받음
 		LoginVO vo = (LoginVO)request.getSession().getAttribute("ss_member");
 		System.out.println(vo.getMemberId());
 		String id = vo.getMemberId().trim();
@@ -28,15 +28,17 @@ public class MypageModel {
 		String birth = sdf.format(my_vo.getBirth());
 		String regdate = sdf.format(my_vo.getRegdate());
 		
+		System.out.println("11111111"+my_vo.getCoverPhoto()+"1111111");
+		
+		
 		request.setAttribute("birth", birth);
 		request.setAttribute("regdate", regdate);
 		request.setAttribute("my_vo", my_vo);
-		System.out.println(my_vo.getRegdate());
 		
+		
+		// _> Login 정보 End
 	
-		
-		
-		// review 확인
+		// review 확인 -> review_image, content,regdate, 등 memberId에 일치하는  review데이터를 수집
 		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
 		int count=0;
 		list = MypageDAO.ReviewData(id);
@@ -49,13 +51,14 @@ public class MypageModel {
 			reviewNo[i] = v1.getReviewno();
 			i++;
 		}
-		// photo 가져오기
+		
 		list = MypageDAO.getImageForReview(list, reviewNo);
 		
-		// review 숫자ㄴ
 		count = list.size();
 		request.setAttribute("list", list);
 		request.setAttribute("count", count);
+		// _> review 정보 End
+		
 		
 		// 페이지
 		String page =request.getParameter("page");
@@ -129,6 +132,7 @@ public class MypageModel {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
+		
 		String id = request.getParameter("id");
 		String name = request.getParameter("name");
 		String addr1 = request.getParameter("addr1");
@@ -136,7 +140,19 @@ public class MypageModel {
 		String tel = request.getParameter("tel");
 		String selfinfo = request.getParameter("selfinfo");
 		
+		String year = request.getParameter("year");
+		System.out.println("확인 : "+year);
+		String month = request.getParameter("month");
+		System.out.println("확인 "+month);
+		String day = request.getParameter("day");
+		System.out.println("확인 : "+ day);
+		String birth =year+"-"+month+"-"+day;
+		
+		
+		System.out.println(birth);
+		
 		MemberVO_u my_vo = new MemberVO_u();
+		my_vo.setBirth(Date.valueOf((birth)));
 		my_vo.setMemberId(id);
 		my_vo.setName(name);
 		my_vo.setAddr1(addr1);
@@ -158,30 +174,33 @@ public class MypageModel {
 		}catch(Exception ex){
 			ex.printStackTrace();	
 		}
-		MemberVO_u vo = new MemberVO_u();
+		
 		String id = request.getParameter("id");
 		request.setAttribute("id", id);
+		System.out.println(id);
+		System.out.println("null??");
 		MemberVO_u vo_u = MypageDAO.PassWord_check(id);
-		
+		System.out.println("null??");
+		System.out.println(vo_u.getBirth());
+		System.out.println("null??");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		
-		vo.setMemberId(vo_u.getMemberId());
-		vo.setName(vo_u.getName());
-		vo.setAddr1(vo_u.getAddr1());
-		String brith = sdf.format(vo_u.getBirth());
-		System.out.println(brith);
-		Date birth = Date.valueOf(brith);
+		String birth_tmp = sdf.format(vo_u.getBirth());
+		System.out.println(birth_tmp);
+		Date birth = Date.valueOf(birth_tmp);
 		System.out.println(birth);
-		vo.setEmail(vo_u.getEmail());
-		vo.setBirth(birth);
-		vo.setTel(vo_u.getTel());
-	
-		Calendar cal =  Calendar.getInstance();
-		int year = cal.get(Calendar.YEAR);
+		vo_u.setBirth(birth);
 		
+		StringTokenizer st = new StringTokenizer(birth_tmp,"-");
+		String year = st.nextToken();
+		String month = st.nextToken();
+		String day = st.nextToken();
 		
 		request.setAttribute("year", year);
-		request.setAttribute("my_vo", vo);
+		request.setAttribute("month", month);
+		request.setAttribute("day", day);
+		
+		
+		request.setAttribute("my_vo", vo_u);
 		request.setAttribute("main_jsp", "../mypage/update.jsp");
 		
 		return "../main/index.jsp";

@@ -54,6 +54,20 @@ select {
 	margin: 2px;
 }
 </style>
+<link
+	href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500"
+	rel="stylesheet">
+<!--
+			CSS
+			============================================= -->
+<link rel="stylesheet" href="../css/linearicons.css">
+<link rel="stylesheet" href="../css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/bootstrap.css">
+<link rel="stylesheet" href="../css/magnific-popup.css">
+<link rel="stylesheet" href="../css/nice-select.css">
+<link rel="stylesheet" href="../css/animate.min.css">
+<link rel="stylesheet" href="../css/owl.carousel.css">
+<link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 	<div class="wrapper row2">
@@ -67,57 +81,76 @@ select {
 						<tr>
 							<th width=20% id=name class="text-right success">아이디</th>
 							<td width=80%><input type=text name=id size=15
-								value="${vo.memberId }" disabled></td>
+								value="${my_vo.memberId }" disabled></td>
 						</tr>
 
 
 						<tr>
 							<th width=20% id=name class="text-right success">이름</th>
 							<td width=80%><input type=text name=name size=15
-								value="${vo.name }" id=name> <input type=hidden name=id
-								id=id value="${vo.memberId}"></td>
+								value="${my_vo.name }" id=name> <input type=hidden name=id
+								id=id value="${my_vo.memberId}"></td>
 						</tr>
 
 						<tr>
 							<th width=20% class="text-right success">생일</th>
 							<td width=80%>
-							<select id="select_year" onchange="javascript:lastday();">
-								<c:forEach var="i"  begin="1" end="${year }">
-									<option value="${year - i }">${(year-i)+1 }</option>
+							<select id="select_year" name="year">
+								<c:forEach var="i"  begin="1800" end="2020">
+									<c:if test="${i==year }">
+										<option value="${i }" selected>${i }년</option>
+									</c:if>
+									<c:if test="${i!=year }">
+										<option value="${i }">${i }년</option>
+									</c:if>
+								
 								</c:forEach>
-							</select> <select id="select_month" onchange="javascript:lastday();">
-									<c:forEach var ="i"  begin="1" end="12" step="1">
-										<option value="i">${i }</option>
-									</c:forEach>
-							</select> <select id="select_day">
-									<option value="1">
-									<option value="2">
-									<option value="3">
-							</select></td>
+							</select> 
+							<select id="select_month" name="month">
+								<c:forEach var ="i"  begin="1" end="12" step="1">
+									<c:if test="${i==month }">
+										<option selected value="${i }">${i }월</option>
+									</c:if>
+									<c:if test="${i!=day }">
+										<option value="${ i}">${i }월</option>
+									</c:if>
+								</c:forEach>
+							</select> 
+							<select id="select_day" name="day">
+								<c:forEach var="i" begin="1" end="31">
+									<c:if test="${i==day }">
+										<option value="${i }"selected>${i }일</option>
+									</c:if>
+									<c:if test="${i != day }">
+										<option value="${i}">${i }일</option>
+									</c:if>
+								</c:forEach>
+							</select>
+							</td>
 						</tr>
 
 
 						<tr>
 							<th width=20% class="text-right success">주소</th>
 							<td width=80%><input type=text name=addr1 id=addr1 size=50
-								value="${vo.addr1 }"></td>
+								value="${my_vo.addr1 }"></td>
 						</tr>
 
 						<tr>
 							<th width=20% class="text-right success">E-mail</th>
 							<td width=80%><input type=text name=email id=email size=50
-								value="${vo.email }"></td>
+								value="${my_vo.email }"></td>
 						</tr>
 						<tr>
 							<th width=20% class="text-right success">핸드폰</th>
 							<td width=80%><input type=text id=tel name=tel size=50
-								value="${vo.tel }"></td>
+								value="${my_vo.tel }"></td>
 						</tr>
 
 						<tr>
 							<th width=20% class="text-right success">자기소개</th>
 							<td width=80%><textarea rows="8" cols="55" name=selfinfo
-									id=selfinfo>${vo.selfInfo }</textarea></td>
+									id=selfinfo>${my_vo.selfInfo }</textarea></td>
 						</tr>
 
 						<tr>

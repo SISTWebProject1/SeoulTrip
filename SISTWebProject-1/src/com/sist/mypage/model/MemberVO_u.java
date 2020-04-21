@@ -19,7 +19,11 @@ public class MemberVO_u {
 	private Date regdate;
 	private String selfInfo;
 	private int grade;
-	private String coverPhoto;
+	private String coverphoto;
+	
+	
+	
+	
 	
 	public String getMemberId() {
 		return memberId;
@@ -64,12 +68,9 @@ public class MemberVO_u {
 		this.gender = gender;
 	}
 	
-	// addr
 	public String getAddr1() {
-		return addr1+addr2;
+		return addr1;
 	}
-	//
-	
 	
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
@@ -105,10 +106,10 @@ public class MemberVO_u {
 		this.grade = grade;
 	}
 	public String getCoverPhoto() {
-		return coverPhoto;
+		return coverphoto;
 	}
 	public void setCoverPhoto(String coverPhoto) {
-		this.coverPhoto = coverPhoto;
+		this.coverphoto = coverPhoto;
 	}
 	
 

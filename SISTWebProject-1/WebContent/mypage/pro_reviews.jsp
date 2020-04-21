@@ -11,42 +11,41 @@
 </head>
 <body>
 
-
-	<c:forEach var="vo1" items="${list }">
-
-		<section class="sample-text-area" >
-				<div class="col-md-6" style="width:80%">
-					<h3 class="text-heading">${vo1.title }</h3>
-					<p class="sample-text">${vo1.content}</p>
-					<p>
-						<b> <fmt:formatDate value="${vo1.regdate }"
-								pattern="yyyy-MM-dd" /></b> <b><fmt:formatDate
-								value="${vo1.expdate }" pattern="yyyy-MM-dd" /></b>
-					<p>
-				</div>
-		</section>
-	</c:forEach>
-
+	<div class="container">
+		<c:forEach var="vo1" items="${list }">
+			<h3 class="text-heading">${vo1.title }</h3>
+			<c:if test="${vo1.filepath != 'null' }">
+				<img src="${vo1.filepath }" class="img-fulid">
+			</c:if>
+			<c:if test="${vo1.filepath =='null' }">
+				<sub style=""><b>사진을 추가 해주세요</b></sub>
+				<img src="../mypage/default_reviews_image.jpg">
+			</c:if>
+			<p class="sample-text">${vo1.content }</p>
+			<p>
+				<b>등록일 :&nbsp;<fmt:formatDate	value="${vo1.expdate }" pattern="yyyy-MM-dd" /></b>
+			</p>
+			<div  style="border-bottom: 2px groove; text-align: right">
+				<input type="button" class="btn-btn-sm btn-danger" value="수정">
+				<input type="button" class="btn-btn-sm btn-danger" value="삭제">
+			</div>
+		</c:forEach>
+	</div>
 	<div class="text-center">
 		<ul class="pagination">
 			<c:if test="${startPage>1 }">
-				<li><a
-					href="../detail/detail.do?type=${type}&no=${no}&page=${startPage-1 }">&lt;</a></li>
+				<li><a href="#">&lt;</a></li>
 			</c:if>
-			<c:set var="typo" value="" />
 			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<c:if test="${curpage==i }">
+				<c:if test="${curpage==1 }">
 					<c:set var="typo" value="class=active" />
 				</c:if>
-				<c:if test="${curpage!=i }">
+				<c:if test="${curpage!=1 }">
 					<c:set var="typo" value="" />
 				</c:if>
-				<li ${typo }><a
-					href="../mypage/detail.do?type=${type}&no=${no}&page=${i}">${i}</a></li>
 			</c:forEach>
 			<c:if test="${endPage<allPage }">
-				<li><a
-					href="../detail/detail.do?type=${type}&no=${no}&page=${endPage+1 }">&gt;</a></li>
+				<li><a href="#">&gt;</a></li>
 			</c:if>
 		</ul>
 	</div>
