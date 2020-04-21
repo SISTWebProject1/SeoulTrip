@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -19,7 +19,6 @@
 <!-- meta character set -->
 <meta charset="UTF-8">
 <!-- Site Title -->
-<title>Category</title>
 
 <link
 	href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500"
@@ -35,14 +34,16 @@
 <link rel="stylesheet" href="../css/animate.min.css">
 <link rel="stylesheet" href="../css/owl.carousel.css">
 <link rel="stylesheet" href="../css/main.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <style type="text/css">
-.banner-area{
+.banner-area {
 	height: 200px;
-	
 }
 </style>
 </head>
@@ -51,52 +52,58 @@
 	<!-- End header Area -->
 
 	<!-- Start banner Area -->
-	<section class="banner-area relative">
-		<div class="overlay overlay-bg"></div>
-		<div class="container box_1170">
-			<div class="row d-flex align-items-center justify-content-center">
-			</div>
-		</div>
-	</section>
-	<!-- End banner Area -->
-
-	<!-- Start main body Area -->
-	<div>
-		<h1 style="text-align: center"><b>여행</b></h1>
+	<div class="container" style="background-color: black">
+		<img src="../mypage/default_wishlist_image.png" class="img-fluid">
 	</div>
+	<!-- End banner Area -->
+	<!-- Start main body Area -->
+	<div></div>
 	<div class="container">
-			<div class="btn btn-sm btn-primary">관심리스트</div>
-			<div class="btn btn-sm btn-primary">여행</div>
 		<c:if test="${count== 0 }">
 			<div class="row" style="margin: 30px;">
-				<div style="margin: 10px; height: 100px; text-align: center;" id="pro_content">
-						<p><h3>사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!</h3></p>
+				<div style="margin: 10px; height: 100px; text-align: center;"
+					id="pro_content">
+					<h3>사람들이 회원님을 쉽게 찾고 더 알아갈 수 있도록 하려면 사진과 정보를 프로필에 추가하세요!</h3>
 				</div>
 			</div>
 		</c:if>
-		<c:if test="${count !=0 }">	
-		<div class="row" style="margin: 30px;">
-			<c:forEach var="vo" items="list">
-			<div class="col-md-4">
-				<div class="thumbnail" style="width:300px;height:300px;">
-				<div style="height:70%;background-image: url('../img/reservation.jpg');">
-			<a href="#">
-			<span style="text-align: right;margin: 15px;"><img src="../mypage/heart2.gif" style="text-align: right;width:30px; height:30px;">
-			</span></a>
-				</div>
-					<div class="caption">
-						<ul>
-						 	<li>장소 이름 :: 가나다란마ㅏ달낭란란ㅇ라날</li>
-						 	<li>리뷰 : 점수</li> 
-						 </ul>
-						<div style="width: 37%" class="btn btn-sm btn-primary text-center">이동</div>
+		<c:if test="${count !=0 }">
+			<div class="row gallery-item">
+					<div class="col-md-4">
+						<a href="#" class="img-pop-up"> <b>장소이름</b> </a>
+						<div class="single-gallery-image"
+							style="background: url(../img/reservation.jpg);"></div>
 					</div>
-				</div>
+					<div class="col-md-4">
+						<a href="#" class="img-pop-up"></a>
+							<div class="single-gallery-image"
+								style="background: url(http://thumb.mt.co.kr/06/2015/09/2015090113044789486_3.jpg?time=061749);"></div>
+						
+					</div>
+					<div class="col-md-4">
+						<a href="#" class="img-pop-up"></a>
+							<div class="single-gallery-image"
+								style="background: url(http://mblogthumb1.phinf.naver.net/MjAxODEyMDJfMjQ5/MDAxNTQzNzUxNTQ3ODY0.AWuIqj0_VBTe5oihCBY2kGGSiM3-qJ4bLvVQIlxsWRwg.udnLbixfCY01EXF6rMiTTNzycT-B2IjWkBXAb1Us7wcg.JPEG.cy9678/IMG_2721.jpg?type=w773);"></div>
+						
+					</div>
+					<div class="col-md-6">
+						<a href="#" class="img-pop-up"></a>
+							<div class="single-gallery-image"
+								style="background: url(https://t1.daumcdn.net/news/201805/04/moneytoday/20180504141224105ruxk.jpg);"></div>
+						
+					</div>
+					<div class="col-md-6">
+						<a href="#" class="img-pop-up"></a>
+							<div class="single-gallery-image"
+								style="background: url(http://t1.daumcdn.net/encyclop/m138/DTzBphhyJljScDLgZ7UYWasOSeuIjsPbrcZxgGlZ);"></div>
+					</div>
 			</div>
-			</c:forEach>
-		</div>
 		</c:if>
 	</div>
+
+
+
+
 
 	<!-- Start main body Area -->
 

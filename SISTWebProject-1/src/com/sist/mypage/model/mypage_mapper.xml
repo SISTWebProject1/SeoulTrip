@@ -6,9 +6,8 @@
 	
 	<!-- 프로필 내용 수정 -->
 	<select id="passwordCheck" resultType="MemberVO_u" parameterType="string">
-		SELECT *
-		FROM member
-		WHERE memberId =#{id}
+		SELECT * FROM member
+		WHERE memberId = #{id}
 	</select>
 	
 	<update id="update_profile"  parameterType="MemberVO_u">
@@ -17,7 +16,8 @@
 		addr1 = #{addr1},
 		email = #{email},
 		tel = #{tel},
-		selfInfo = #{selfInfo}
+		selfInfo = #{selfInfo},
+		birth =#{birth}
 		WHERE memberId = #{memberId}
 	</update>
 	

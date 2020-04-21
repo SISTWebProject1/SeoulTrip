@@ -36,7 +36,6 @@ public class MypageDAO {
 		MemberVO_u vo = new MemberVO_u();
 		try{
 			session = ssf.openSession();
-			System.out.println("11"+id);
 			vo = session.selectOne("passwordCheck",id);
 			
 		}catch(Exception ex){
@@ -133,6 +132,7 @@ public class MypageDAO {
 		
 		try {
 			session = ssf.openSession();
+			
 			String filepath=" ";
 			String temp ="";
 			for(int i=0; i<reviewNo.length; i++){
@@ -149,6 +149,7 @@ public class MypageDAO {
 				vo1.setFilepath(filepath_temp[i]);
 				i++;
 			}
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
