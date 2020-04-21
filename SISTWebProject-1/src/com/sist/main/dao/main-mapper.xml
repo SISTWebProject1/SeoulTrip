@@ -86,6 +86,17 @@
 		WHERE tagcode=#{tagcode}
 		AND cnt > 3
 	</select>
+	
+	<select id="getTagcodeListByTypeNo" resultType="int" parameterType="HashMap">
+		SELECT tagcode
+		FROM (SELECT tagcode, COUNT(*) AS cnt
+		FROM (SELECT tagcode
+		FROM (SELECT reviewno
+		FROM review
+		WHERE type=#{type} AND no=#{no}) NATURAL JOIN reviewtohashtag)
+		GROUP BY tagcode)
+		WHERE cnt > 3
+	</select>
 </mapper>
 
 

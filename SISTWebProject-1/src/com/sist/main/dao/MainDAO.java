@@ -417,15 +417,16 @@ public class MainDAO {
 			Cookie htcookie = null;
 			if(cookies==null) return lists;
 			for(int i=0; i<cookies.length; i++){
-				if(cookies[i].getName().startsWith("slowdownhashtagcodes")) {
+				if(cookies[i].getName().equals("sdhashtagcodes")) {
 					htcookie = cookies[i];
 					break;
 				}
 			}
 			
-			if(htcookie==null) allHTList = ss.selectList("getHTAllList");
-			else {
-				String[] hashtagcodes = htcookie.getValue().split(",");
+			if(htcookie==null) {
+				allHTList = ss.selectList("getHTAllList");
+			} else {
+				String[] hashtagcodes = htcookie.getValue().split("\\.");
 				for(int i=0; i<hashtagcodes.length; i++){
 					allHTList.add(getHashTagData(Integer.parseInt(hashtagcodes[i])));
 				}
@@ -438,7 +439,7 @@ public class MainDAO {
 			for(int i=0; i<5; i++) {
 				int rand = Math.abs(new Random().nextInt())%allSize;
 				for(int j=0; j<i; j++){
-					if(selectedIdx[j]==rand) {
+					if(allHTList.get(selectedIdx[j]).getTagcode()==allHTList.get(rand).getTagcode()) {
 						i--;
 						continue ml;
 					}
@@ -466,6 +467,45 @@ public class MainDAO {
 		}
 		
 		return lists;
+	}
+	
+	public static void addHashTagCodeToCookie(HttpServletRequest request, HttpServletResponse response, int type, int no) {
+		SqlSession ss = null;
+		
+		try {
+			ss = ssf.openSession();
+			
+			Map map = new HashMap();
+			map.put("type", type);
+			map.put("no", no);
+			List<Integer> tagcodes = ss.selectList("getTagcodeListByTypeNo", map);
+			
+			Cookie[] cookies = request.getCookies();
+			Cookie cookie = new Cookie("sdhashtagcodes", "");
+			for(int i=0; i<cookies.length; i++){
+				if(cookies[i].getName().equals(cookie.getName())){
+					cookie.setValue(cookies[i].getValue());
+					break;
+				}
+			}
+			
+			String value = cookie.getValue();
+			for(Integer tagcode : tagcodes) {
+				value += "."+tagcode;
+			}
+			if(value.startsWith(".")) value = value.substring(1);
+			cookie.setValue(value);
+			cookie.setPath("/");
+			cookie.setMaxAge(60*60*24);
+			response.addCookie(cookie);
+			
+		} catch (Exception e) {
+			System.out.println("MainDAO:addHashTagCodeToCookie():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
 	}
 
 }
