@@ -46,7 +46,7 @@ public class HomeModel {
 		List<HashTagVO> phtlist = MainDAO.getPopularHTList();
 		request.setAttribute("phtlist", phtlist);
 		
-		Map<String,List<HomeItemVO>> lists = new HashMap<String, List<HomeItemVO>>();
+		Map<HashTagVO,List<HomeItemVO>> lists = new HashMap<HashTagVO, List<HomeItemVO>>();
 		lists = MainDAO.getHTItemsListsByCookie(request, response);
 		request.setAttribute("lists", lists);
 		

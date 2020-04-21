@@ -404,8 +404,8 @@ public class MainDAO {
 		return total;
 	}
 	
-	public static Map<String, List<HomeItemVO>> getHTItemsListsByCookie(HttpServletRequest request, HttpServletResponse response){
-		Map<String, List<HomeItemVO>> lists = new HashMap<>();
+	public static Map<HashTagVO, List<HomeItemVO>> getHTItemsListsByCookie(HttpServletRequest request, HttpServletResponse response){
+		Map<HashTagVO, List<HomeItemVO>> lists = new HashMap<>();
 		
 		SqlSession ss = null;
 		try {
@@ -453,10 +453,9 @@ public class MainDAO {
 			for(int i=0; i<5; i++){
 				HashTagVO vo = selectedHTList.get(i);
 				int tagcode = vo.getTagcode();
-				String tagname = vo.getTagname();
 				
 				List temp = getHIListByTagcode_page(tagcode, 1);
-				lists.put(tagname, temp.subList(0, Math.min(4, temp.size())));
+				lists.put(vo, temp.subList(0, Math.min(4, temp.size())));
 			}
 			
 		} catch (Exception e) {
