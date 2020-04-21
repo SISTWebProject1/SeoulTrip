@@ -30,8 +30,6 @@ public class FoodModel {
 		   map.put("end", end);
 		   
 		   List<FoodVO> list= FoodDAO.foodListData(map);
-		   System.out.println(list.size());
-		   System.out.println(list.isEmpty());
 		  
 		   for(FoodVO vo:list)
 		   {
@@ -43,7 +41,6 @@ public class FoodModel {
 			   }
 		   }
 		   int totalpage=FoodDAO.foodTotalPage();
-		   System.out.println(totalpage);
 		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1; 
 		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -53,6 +50,18 @@ public class FoodModel {
 		   if(endPage>allPage)
 			   endPage=allPage;
 		   
+		   List<FoodTagVO> taglist=FoodDAO.foodTagListData(map);
+		   System.out.println(taglist.size());
+		   System.out.println(taglist.isEmpty());
+		   
+/*		   String fs=request.getParameter("fs");
+		   StringTokenizer st=new StringTokenizer(fs,",");
+		   List<FoodVO> sidelist= new ArrayList<FoodVO>();*/
+		   
+		   
+		   
+		   
+		   request.setAttribute("taglist", taglist);
 		   request.setAttribute("list", list);
 		   request.setAttribute("curpage", curpage);
 		   request.setAttribute("totalpage", totalpage);

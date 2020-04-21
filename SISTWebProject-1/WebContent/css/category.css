@@ -7,7 +7,6 @@
 	overflow: hidden;
 }
 
-
 .img-responsive {
 	position: absolute;
 	top: 0;
@@ -106,6 +105,9 @@
 	color: black;
 	border: 1px solid #d1d1d1;
 	border-radius: 5px 5px 5px 5px;
+	max-width: 250px;
+	max-height: 150px;
+	margin: auto;
 }
 
 .map_top {
@@ -119,6 +121,14 @@
 	transform: translate(-50%, -50%);
 }
 
+.map_img {
+	max-width: 220px;
+	height: auto;
+	border-radius: 5px 5px 5px 5px;
+	width: 100%;
+	position: relative;
+}
+
 .map_button {
 	width: 160px;
 	height: 40px;
@@ -126,6 +136,8 @@
 	background-color: #f4f4f4;
 	border-radius: 5px 5px 5px 5px;
 	border: 0.5px solid #d1d1d1;
+	width: 100%;
+	position: relative;
 }
 
 .food_type_name {
@@ -135,6 +147,10 @@
 .food_type {
 	padding-left: 25px;
 	border: :1px solid #eee;
+}
+
+.food_type_detail {
+	line-height: 70%;
 }
 
 .left-cate {
@@ -194,38 +210,35 @@
 	border-bottom-style: solid;
 }
 
-
-
-<!-- join css-->
-.filebox .upload-display { /* 이미지가 표시될 지역 */ 
-margin-bottom: 5px; 
-} 
-
-@media(min-width: 768px) { 
-	.filebox .upload-display { 
-	display: inline-block; 
-	margin-right: 5px; 
-	margin-bottom: 0; 
- } 
-} 
-
-.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */ 
-display: inline-block; 
-width: 140px; 
-padding: 2px; 
-vertical-align: middle; 
-border: 1px solid #ddd; 
-border-radius: 5px; 
-background-color: #fff; 
-} 
-
-.filebox .upload-display img { /* 추가될 이미지 */ 
-display: block; 
-max-width: 100%; 
-width: 100% \9; 
-height: auto; 
+<!--
+join css-->.filebox .upload-display { /* 이미지가 표시될 지역 */
+	margin-bottom: 5px;
 }
 
+@media ( min-width : 768px) {
+	.filebox .upload-display {
+		display: inline-block;
+		margin-right: 5px;
+		margin-bottom: 0;
+	}
+}
+
+.filebox .upload-thumb-wrap { /* 추가될 이미지를 감싸는 요소 */
+	display: inline-block;
+	width: 140px;
+	padding: 2px;
+	vertical-align: middle;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
+.filebox .upload-display img { /* 추가될 이미지 */
+	display: block;
+	max-width: 100%;
+	width: 100% \9;
+	height: auto;
+}
 
 /*  #image_preview {
  	width:140px;
