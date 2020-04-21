@@ -93,14 +93,8 @@
             <li><a href="../reservation/reservation.do?no=${vo.no}">ReservationTest</a>
 						<li class="menu-has-children" id="header_mypage" 
 							<c:if test="${ empty ss_member }">style="display:none;"</c:if>><a 
-							href="">마이페이지</a>
-
-
-							<ul>
-								<li><a href="../mypage/profile.do">프로필</a></li>
-								<li><a href="../mypage/wishlist.do">위시리스트</a></li>
-								<li><a href="../mypage/reservation.do">예약내역</a></li>
-							</ul></li>
+							href="../mypage/profile.do">마이페이지</a>
+						</li>
 						<c:choose>
 							<c:when test="${ not empty ss_member }">
 								<li><a href="../logout_ok.do">Logout</a></li>
