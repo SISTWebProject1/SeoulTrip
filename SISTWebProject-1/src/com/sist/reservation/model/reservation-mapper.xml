@@ -2,19 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.reservation.model.reservation-mapper">
 
-	<select id="reservationListData" resultType="RestaurantVO_r">
+	<select id="reservationListData" resultType="RestaurantVO" parameterType="int">
 		SELECT *
 		FROM restaurant
 	    WHERE no=#{no}
 	</select>
 	
-	<select id="bookingMemberData" resultType="MemberVO_r" parameterType="int">
-		SELECT email,pwd  
-		FROM member
-		WHERE memberid LIKE '%'||#{memberid}||'%'
+	<select id="memberIdCount" resultType="int" parameterType="string">
+	  	SELECT COUNT(*) FROM member
+	  	WHERE memberid=#{memberid}
 	</select>
 	
-	<insert id="bookingResultData" parameterType="ReservationVO"> <!-- ODER MAP -->
+	<select id="membergetPwd" resultType="MemberVO_r" parameterType="string">
+		SELECT id,pwd,name
+		FROM member
+		WHERE memberid=#{memberid}	
+	</select>
+	
+	<insert id="bookingInsert" parameterType="ReservationVO"> <!-- ODER MAP -->
 		INSERT bookingrestaurant
 		INTO VALUES ((SELECT NVL(MAX(bookingnumber)+1,1),#{memberid},#{no},#{reservationdate},#{time},#{inwon})
 	</insert>

@@ -14,7 +14,8 @@ public class ReservationModel {
 	
 	{
 		String no=request.getParameter("no");
-		RestaurantVO_r vo=new RestaurantVO_r();
+		System.out.println(no);
+		RestaurantVO vo=new RestaurantVO();
 		vo=ReservationDAO.reservationListData(Integer.parseInt(no));
 		
 		request.setAttribute("vo", vo);
@@ -22,29 +23,21 @@ public class ReservationModel {
 		return "../main/index.jsp";
 	}
 	
+	@RequestMapping("reservation/login.do")
+	public String reservation_login(HttpServletRequest request,HttpServletResponse response)
+	{
+		return"reservation/login.jsp";
+	}
+	
+	@RequestMapping("reservation/login_ok.do")
+	public String movie_login_ok(HttpServletRequest request,HttpServletResponse response)
+	{	
+		String id=request.getParameter("id");
+		String pwd=request.getParameter("pwd");
+		
+		return "reservation/login_ok.jsp";
+	}
 		
 	
-	@RequestMapping("reservation/reservation_ok.do")
-	public static String reservation_ok(HttpServletRequest request, HttpServletResponse response)
-	{
-		try
-		{	
-			request.setCharacterEncoding("UTF-8");
-		}catch(Exception ex){}
-		String name=request.getParameter("name");	
-		String email=request.getParameter("email");
-		String date=request.getParameter("date");
-		String time=request.getParameter("time");
-		String person=request.getParameter("person");
-		String tel=request.getParameter("tel");
-		
-		ReservationVO rvo=new ReservationVO();
-		rvo.setTime(time);
-		rvo.setInwon(Integer.parseInt(person));
-		rvo.setReservationdate(date);
-		
-		ReservationDAO.bookingInsert(rvo);
-		return "../reservation/reservation_ok.jsp";
-	}
 }	
 	

@@ -23,7 +23,7 @@
 		
 		<typeAlias type="com.sist.reservation.model.ReservationVO" alias="ReservationVO"/>
 		<typeAlias type="com.sist.reservation.model.MemberVO_r" alias="MemberVO_r"/>
-		<typeAlias type="com.sist.reservation.model.RestaurantVO_r" alias="RestaurantVO_r"/>
+		<typeAlias type="com.sist.reservation.model.RestaurantVO" alias="RestaurantVO"/>
 	</typeAliases>
 	
 	<environments default="development">
