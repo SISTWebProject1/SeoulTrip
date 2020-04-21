@@ -48,7 +48,7 @@
 						<tr>
 							<td width="10%" class="text-center">${vo.seq }</td>
 							<td width="45%">
-								<a href="../freeboard/detail.do?no=${vo.no}">${vo.title }</a>
+								<a href="../detail/detail_qna_detail.do?type=${type}&no=${no}&seq=${vo.seq}">${vo.title }</a>
 								&nbsp;
 <%-- 								<c:if test="${vo.dbday==today }">
 									<sup><img src="../freeboard/new.gif"/></sup>

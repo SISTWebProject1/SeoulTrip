@@ -46,6 +46,7 @@
 		<mapper resource="com/sist/category/model/food-mapper.xml"/>
 		<mapper resource="com/sist/home/model/festival-mapper.xml"/>
 		<mapper resource="com/sist/detail/dao/detail-mapper.xml"/>
+		<mapper resource="com/sist/detail/dao/detailQna-mapper.xml"/>
 		<mapper resource="com/sist/member/model/member-mapper.xml"/>
 		<mapper resource="com/sist/reservation/model/reservation-mapper.xml"/>
 	</mappers>

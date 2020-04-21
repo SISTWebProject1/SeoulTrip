@@ -68,7 +68,7 @@
 					<br>
 					<c:forEach var="vo2" items="${imglist }">
 						<c:if test="${vo.reviewno eq vo2.reviewno}">
-							<img src="${vo2.filepath }" width="80" height="80"
+							<img src="${vo2.filepath }" width="180" height="180"
 								style="display: inline-block" />
 						</c:if>
 					</c:forEach>
