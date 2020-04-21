@@ -90,7 +90,7 @@
 						<li><a href="../category/festival.do">축제</a></li>
 
             <li><a href="../detail/detail.do?type=1&no=198">DetailTest</a>
-            <li><a href="../reservation/reservation.do?no=${vo.no}">ReservationTest</a>
+            <li><a href="../reservation/reservation.do?no=${vo.no }">ReservationTest</a>
 						<li class="menu-has-children" id="header_mypage" 
 							<c:if test="${ empty ss_member }">style="display:none;"</c:if>><a 
 							href="../mypage/profile.do">마이페이지</a>

@@ -25,9 +25,9 @@ public class ReservationDAO {
 	}
 
 
-	public static RestaurantVO_r reservationListData(int no)
+	public static RestaurantVO reservationListData(int no)
 	{
-		RestaurantVO_r vo=new RestaurantVO_r();
+		RestaurantVO vo=new RestaurantVO();
 		SqlSession session=null;
 		try{
 			session=ssf.openSession();
@@ -43,7 +43,6 @@ public class ReservationDAO {
 		}
 		return vo;
 	}
-	
 	
 	public static void bookingInsert(ReservationVO vo)
 	{

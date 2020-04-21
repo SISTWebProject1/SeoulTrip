@@ -1,23 +1,18 @@
 .section {
+	border: 0px solid green;
 	position: relative;
 	width: 100%;
 	margin: 0px auto;
+	padding-bottom: 20px;
 	overflow: hidden;
 	background: none;
-
+	float:left;
+	
 }
 
 .row-info{
 	overflow: hidden;
 	float: left;
-}
-.section .section-center {
-	position: relative;
-	top: 50%;
-	left: 0;
-	right: 0;
-	-webkit-transform: translateY(-50%);
-	transform: translateY(-50%);
 }
 
 #booking::before {
@@ -31,11 +26,8 @@
 }
 
 
-
-
 .booking-form {
 	position: relative;
-	border: 1px solid red;
 	background: #fff;
 	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.3);
@@ -49,7 +41,6 @@
 .booking-form .form-group {
 	position: relative;
 	margin-bottom: 20px;
-	float:left;
 }
 
 .booking-form .form-control {

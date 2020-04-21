@@ -1,5 +1,6 @@
 package com.sist.reservation.model;
 
-public class ReviewVO {
+public class LoginVO {
 
+	private 
 }
