@@ -37,7 +37,7 @@
 		<h4 class="title">Recent Items</h4>
 		<div class="blog-list ">
 			<c:forEach var="hivo" items="${ hiList }">
-				<div class="single-popular-post d-flex flex-row">
+				<div class="single-popular-post d-flex flex-row" style="margin-top: 10px;">
 					<div class="popular-thumb">
 						<a href="../detail/detail.do?type=${ hivo.type }&no=${ hivo.no }">
 							<img class="img-fluid" src="${ hivo.photo }" onerror="javascript:src='../img/logo.png'" style="width: 50px; height: 50px; border-bottom: 10px;">

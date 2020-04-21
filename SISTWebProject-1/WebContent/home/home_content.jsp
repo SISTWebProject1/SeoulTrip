@@ -8,7 +8,14 @@
 				<section class="post-area">
 					<div class="detail_foodset">
 						<c:forEach var="item" items="${ lists }">
-							<h3 style="margin-left: 25px;"><p>#${ item.key }</p></h3>
+							<h3 style="margin-left: 25px;"><p>
+								<a href="../home/htitemlist.do?tagcode=${ item.key.tagcode }">
+									<font color="black">
+										#${ item.key.tagname }
+									</font>
+									<sub style="position: relative; bottom: 3px;">&nbsp;더보기</sub>
+								</a>	
+							</p></h3>
 							
 							<div class="row food-catetop">
 								<c:forEach var="hcvo" items="${ item.value }">
