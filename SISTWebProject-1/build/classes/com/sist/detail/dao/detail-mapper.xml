@@ -107,9 +107,9 @@
  	</select>
  	
  	<select id="getNearTourplace" resultType="DetailTourplaceVO" parameterType="java.util.Map">
- 		SELECT tname, no, distance, num
-		FROM (SELECT tname, no, distance, rownum as num 
-		FROM (SELECT tname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from tourplace
+ 		SELECT tphoto, tname, no, distance, num
+		FROM (SELECT tphoto, tname, no, distance, rownum as num 
+		FROM (SELECT tphoto, tname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from tourplace
 		ORDER by distance ASC ))
 		WHERE num BETWEEN 2 AND 5
  	</select>
@@ -139,7 +139,7 @@
  	</select>
  	
  	
- 	<select id="detailQnaListData" resultType="DetailQnaVO" parameterType="java.util.Map">
+<!--  	<select id="detailQnaListData" resultType="DetailQnaVO" parameterType="java.util.Map">
  		SELECT * 
  		FROM qna
  		WHERE type=#{type} AND no=#{no}
@@ -151,6 +151,9 @@
 		</selectKey>
 			INSERT INTO qna VALUES(#{memberid},#{no},#{title},#{pwd},#{content},#{type},#{seq})
 	</insert>
+	
+	<select id="detailQnaTotalPage" ></select>	 -->
+	
 </mapper>
 
 

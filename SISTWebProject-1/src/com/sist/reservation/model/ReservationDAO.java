@@ -1,7 +1,6 @@
 package com.sist.reservation.model;
 
 import java.io.Reader;
-import java.util.*;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -25,13 +24,13 @@ public class ReservationDAO {
 	}
 
 
-	public static RestaurantVO reservationListData(int no)
+	public static RestaurantVO restaurantData(int no)
 	{
 		RestaurantVO vo=new RestaurantVO();
 		SqlSession session=null;
 		try{
 			session=ssf.openSession();
-			vo=session.selectOne("reservationListData",no);
+			vo=session.selectOne("restaurantData",no);
 		
 		} catch(Exception e)
 		{
