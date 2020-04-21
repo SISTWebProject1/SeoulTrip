@@ -91,7 +91,9 @@
 
             <li><a href="../detail/detail.do?type=1&no=198">DetailTest</a>
             <li><a href="../reservation/reservation.do?no=${vo.no}">ReservationTest</a>
-						<li class="menu-has-children"><a href="">마이페이지</a>
+						<li class="menu-has-children" id="header_mypage" 
+							<c:if test="${ empty ss_member }">style="display:none;"</c:if>><a 
+							href="">마이페이지</a>
 
 
 							<ul>
