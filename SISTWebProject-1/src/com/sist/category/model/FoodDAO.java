@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+
 public class FoodDAO {
 	private static SqlSessionFactory ssf;
 	static {
@@ -49,4 +50,39 @@ public class FoodDAO {
 		}
 		return total;
 	}
+	
+	public static List<FoodTagVO> foodTagListData(Map map){
+		SqlSession session = null;
+		List<FoodTagVO> taglist = new ArrayList<FoodTagVO>();
+		try{
+			session = ssf.openSession();
+			taglist = session.selectList("foodTagListData",map);
+		}catch(Exception ex){
+			
+		}finally{
+			if (session != null)
+				session.close();
+		}
+		return taglist;
+	}
+	
+/*	public static FoodVO foodSearchData(int fs)
+	   {
+		FoodVO vo=new FoodVO();
+		   SqlSession session=null;
+		   try
+		   {
+			   session=ssf.openSession();
+			   vo=session.selectOne("foodSideData",fs);
+		   }catch(Exception ex)
+		   {
+			   ex.printStackTrace();
+		   }
+		   finally
+		   {
+			   if(session!=null)
+				   session.close();
+		   }
+		   return vo;
+	   }*/
 }

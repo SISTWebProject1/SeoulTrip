@@ -11,6 +11,10 @@
 	
 	<select id="foodTotalPage" resultType="int">
 		SELECT CEIL(COUNT(*)/4.0) FROM restaurant
-	</select> 
+	</select>
+	
+	<select id="foodTagListData" resultType="com.sist.category.model.FoodTagVO" parameterType="java.util.Map">
+		SELECT * FROM restauranttag ORDER BY tagcode
+	</select>
 
 </mapper>
