@@ -3,7 +3,9 @@ package com.sist.home.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,6 +46,10 @@ public class HomeModel {
 		List<HashTagVO> phtlist = MainDAO.getPopularHTList();
 		request.setAttribute("phtlist", phtlist);
 		
+		Map<String,List<HomeItemVO>> lists = new HashMap<String, List<HomeItemVO>>();
+		lists = MainDAO.getHTItemsListsByCookie(request, response);
+		request.setAttribute("lists", lists);
+		
 		return "../main/index.jsp";
 	}
 	
@@ -76,6 +82,40 @@ public class HomeModel {
 		request.setAttribute("curmonth", curmonth);
 		request.setAttribute("curdate", curdate);
 		request.setAttribute("calendarvo", new CalendarVO(curyear, curmonth).getInstance());
+		
+		return "../main/index.jsp";
+	}
+	
+	@RequestMapping("home/htitemlist.do")
+	public String home_htitemlist(HttpServletRequest request, HttpServletResponse response) {
+		String strPage = request.getParameter("page");
+		if(strPage==null) strPage = "1";
+		
+		int curpage = Integer.parseInt(strPage);
+		int tagcode = Integer.parseInt(request.getParameter("tagcode"));
+		
+		HashTagVO htvo = MainDAO.getHashTagData(tagcode);
+		request.setAttribute("htvo", htvo);
+		
+		List<HomeItemVO> htitemlist = MainDAO.getHIListByTagcode_page(tagcode, curpage);
+		request.setAttribute("htitemlist", htitemlist);
+		
+		request.setAttribute("main_jsp", "../home/htitemlist.jsp");
+		request.setAttribute("banner_on", true);
+		
+		List<HomeItemVO> hiList = MainDAO.getHIListFromCookies(request);
+		int hiSize = hiList.size();
+		request.setAttribute("hiList", hiList);
+		request.setAttribute("hiSize", hiSize);
+		
+		List<HashTagVO> phtlist = MainDAO.getPopularHTList();
+		request.setAttribute("phtlist", phtlist);
+		
+		request.setAttribute("curpage", strPage);
+		request.setAttribute("totalpage", MainDAO.getHTItemListTotalPage(tagcode));
+		
+		List<HashTagVO> htlist = MainDAO.getHTListRegDESC();
+		request.setAttribute("htlist", htlist);
 		
 		return "../main/index.jsp";
 	}

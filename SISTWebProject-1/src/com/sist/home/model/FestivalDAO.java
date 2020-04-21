@@ -1,6 +1,7 @@
 package com.sist.home.model;
 
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,18 +24,36 @@ public class FestivalDAO {
 	}
 	
 	public static List<FestivalVO> festivalAllList(){
-		SqlSession ss = ssf.openSession();
-		List<FestivalVO> list = ss.selectList("festivalAllList");
+		SqlSession ss = null;
+		List<FestivalVO> list = new ArrayList<FestivalVO>();
 		
-		ss.close();
+		try {
+			ss = ssf.openSession();
+			list = ss.selectList("festivalAllList");
+		} catch (Exception e) {
+			System.out.println("FestivalDAO:festivalAllList():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
 		return list;
 	}
 	
 	public static List<FestivalVO> festivalDateList(Date date) {
-		SqlSession ss = ssf.openSession();
-		List<FestivalVO> list = ss.selectList("festivalDateList", date);
+		SqlSession ss = null;
+		List<FestivalVO> list = new ArrayList<>();
 		
-		ss.close();
+		try {
+			ss = ssf.openSession();
+			list = ss.selectList("festivalDateList", date);
+		} catch (Exception e) {
+			System.out.println("FestivalDAO:festivalDateList():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
 		return list;
 	}
 
