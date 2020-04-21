@@ -128,37 +128,59 @@
 			
 			
 			<div class="row-info col-md-6" >
-				<div class="col-lg-4 d-flex flex-column address-wrap">
+				<div class="d-flex flex-column address-wrap">
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
-							<span class="lnr lnr-home"></span>
+							<span class="lnr lnr-store"></span>
 						</div>
 						<div class="contact-details">
-							<h5>${vo.rname }</h5>
-							<p>${vo.addr1 } 
-							|
-							 ${vo.addr2 }</p>
+							<h4>${vo.rname }</h4>
 						</div>
 					</div>
+					<br>
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
-							<span class="lnr lnr-phone-handset"></span>
+							<span class="lnr lnr-map"></span>
 						</div>
 						<div class="contact-details">
-						
-							
-							<h5>${vo.openhour }</h5>  
-						
-							</div>
+							<h5>${vo.addr1 }</h5>
+							_____<br>
+							<h5>${vo.addr2 }</h5>
+						</div>
 					</div>
+					
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
 							<span class="lnr lnr-envelope"></span>
 						</div>
 						<div class="contact-details">
-						
-								<a href="${vo.link}"><h5>http://www.aloftseoulmyeongdong.com/dining</h5></a>
-							<p>Visit our website anytime!</p>
+							<h5>${vo.post }</h5>
+						</div>
+					</div>
+					
+					<div class="single-contact-address d-flex flex-row">
+						<div class="icon">
+							<span class="lnr lnr-phone-handset"></span>
+						</div>
+						<div class="contact-details">
+							<h5>${vo.tel }</h5>
+						</div>	
+					</div>
+					
+					<div class="single-contact-address d-flex flex-row">
+						<div class="icon">
+							<span class="lnr lnr-alarm"></span>
+						</div>
+						<div class="contact-details">
+							<h5>${vo.openhour}</h5>  
+						</div>
+					</div>
+					<div class="single-contact-address d-flex flex-row">
+						<div class="icon">
+							<span class="lnr lnr-diamond"></span>
+						</div>
+						<div class="contact-details">
+							<h5>${vo.price}</h5>
 						</div>
 					</div>
 				</div>	
@@ -174,7 +196,7 @@
 		<div class="section section-center">
 
 				
-						<div class="booking-form col-md-6" style="width:100%;margin-left:10px; margin-top:5px; border:1px solid blue;">
+						<div class="booking-form col-md-6" style="width:100%;margin-left:10px; margin-top:5px; border:0px solid blue;">
 								
 					
 										<div class="form-group col-sm-6">
@@ -256,7 +278,7 @@
 		
 			<%-- ==========================================Ajax출력단========================================== --%>						
 					
-					  <div class="booking-form col-md-6 col-md-offset-0" id="result" style="border:1px solid red; margin-left:10px;">
+					  <div class="booking-form col-md-6 col-md-offset-0" id="result" style="border:0px solid red; margin-left:10px;">
 						 <div class="row" >예약자명   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-name"></b> </div>
 						 <div class="row" >전화번호   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-tel"></b></div>
 						 <div class="row" >예약시간  &nbsp;&nbsp;  | &nbsp;&nbsp; <b id="data-time"></b></div>
@@ -281,12 +303,28 @@
 	<script>
 		var container = document.getElementById('map');
 		var options = {					
-			center: new kakao.maps.LatLng(37.515343,127.019066),
+			center: new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"),
 			/*${vo.mapX}, ${vo.mapY}  */
 			level: 3
 		};
 
 		var map = new kakao.maps.Map(container, options);
+		var mapContainer = document.getElementById('map'), 
+	    mapOption = { 
+	        center: new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}"), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };
+		
+		var markerPosition  = new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}"); 
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+
 	</script>
 
 	<script src="js/jquery.min.js"></script>

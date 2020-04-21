@@ -10,13 +10,13 @@ import com.sist.controller.RequestMapping;
 public class ReservationModel {
 
 	@RequestMapping("reservation/reservation.do")
-	public static String reservation_detail(HttpServletRequest request,HttpServletResponse response)
+	public String reservation_detail(HttpServletRequest request,HttpServletResponse response)
 	
 	{
+
 		String no=request.getParameter("no");
 		System.out.println(no);
-		RestaurantVO vo=new RestaurantVO();
-		vo=ReservationDAO.reservationListData(Integer.parseInt(no));
+		RestaurantVO vo=ReservationDAO.restaurantData(Integer.parseInt(no));
 		
 		request.setAttribute("vo", vo);
 		request.setAttribute("main_jsp", "../reservation/reservation.jsp");
@@ -35,6 +35,8 @@ public class ReservationModel {
 		String id=request.getParameter("id");
 		String pwd=request.getParameter("pwd");
 		
+		request.setAttribute("id", id);
+		request.setAttribute("pwd", pwd);
 		return "reservation/login_ok.jsp";
 	}
 		
