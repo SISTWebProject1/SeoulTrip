@@ -36,7 +36,10 @@
 		wishlist
 		WHERE memberId=#{memberId}
 	</select>
-	<select id="getReviewData" parameterType="java.util.HashMap" resultType="ReviewVO_u">
-		SELECT * FROM review
+	
+	
+	<select id="getReviewData_image_profile" parameterType="int" resultType="string">
+		SELECT filepath FROM review_photo
+		where reviewno = #{reviewNo}
 	</select>
 </mapper>

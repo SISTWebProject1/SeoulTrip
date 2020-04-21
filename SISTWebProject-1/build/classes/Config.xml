@@ -16,6 +16,7 @@
 		<typeAlias type="com.sist.mypage.model.MemberVO_u" alias="MemberVO_u"/>
 		<typeAlias type="com.sist.mypage.model.ReviewVO_u" alias="ReviewVO_u"/>
 		<typeAlias type="com.sist.mypage.model.WishListVO_u" alias="WishListVO_u"/>
+		<typeAlias type="com.sist.mypage.model.PhotoVO_u" alias="PhotoVO_u"/>
 		<typeAlias type="com.sist.main.dao.HashTagVO" alias="HashTagVO"/>
 		<typeAlias type="com.sist.member.model.MemberVO_c" alias="MemberVO_c"/>
 		<typeAlias type="com.sist.member.model.ZipcodeVO" alias="ZipcodeVO"/>
@@ -46,6 +47,5 @@
 		<mapper resource="com/sist/detail/dao/detail-mapper.xml"/>
 		<mapper resource="com/sist/member/model/member-mapper.xml"/>
 		<mapper resource="com/sist/reservation/model/reservation-mapper.xml"/>
-
 	</mappers>
 </configuration>

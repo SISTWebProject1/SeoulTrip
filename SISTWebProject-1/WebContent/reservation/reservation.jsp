@@ -39,12 +39,12 @@
 	})
 	
 	$('.submit-btn').click(function(){
-		 $('#name').text($(this).text());
-		 $('#tel').text($(this).text());
-		 $('#email').text($(this).text());
-		 $('#person').text($(this).text());
-		 $('#time').text($(this).text());
-		 $('#date').text($(this).text());
+		 var name=$('#name').val();
+		 var tel=$('#tel').val();
+		 var email=$('#email').val();
+		 var person=$('#person').val();
+		 var time=$('#time').val();
+		 var date=$('#date').val();
 		$.ajax({
 			type:'POST',
 			success:function(res)
@@ -84,13 +84,39 @@
 		<div class="section">
 				<div class="row" colspan="2">
 						<div class="booking-form col-md-6 col-md-offset-1" style="width:100%; border:1px solid blue; float:left;">
-								<div class="row">
-									<div class="col-sm-6">
+								
+									<div class="col-md-12">
+										<div class="form-group">
+											<span class="form-label">예약인원</span>
+											<select class="form-control" name=person>
+												<option>1</option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+											</select>
+											<span class="select-arrow"></span>
+										</div>
+									</div>
+									
+									<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<input class="form-control" type="date" name=date required>
+											<span class="form-label">Date</span>
+										</div>
+									</div>
+									</div>
+									
+									
+								<div class="row">	
+									<div class="col-md-6">
 										<div class="form-group">
 											<input class="form-control" type="text" name=name id=name required>
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
+									
+									
 									<div class="col-md-6">
 										<div class="form-group">
 											<input class="form-control" type="email" name=email required>
@@ -118,29 +144,9 @@
 											<span class="select-arrow"></span>
 										</div>
 									</div>
-									
-									<div class="col-md-12">
-										<div class="form-group">
-											<span class="form-label">예약인원</span>
-											<select class="form-control" name=person>
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-											</select>
-											<span class="select-arrow"></span>
-										</div>
-									</div>
 								</div>
 								
-								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<input class="form-control" type="date" name=date required>
-											<span class="form-label">Date</span>
-										</div>
-									</div>
-								</div>
+								
 								<div class="form-btn">
 									<button class="submit-btn col-md-6"  >예약하기</button>
 									<button class="submit-btn col-md-6" 
