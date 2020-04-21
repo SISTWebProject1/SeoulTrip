@@ -21,7 +21,7 @@
 					<table class="table text-center">
 						<tr>
 							<th width=20% class="text-right success">이름</th>
-							<td width=80%><input type="text" name=name size=15 required />
+							<td width=80%><input type="text" name=memberid size=15 value="${memberid }" disabled />
 							<input type="hidden" name=no value="${no }"/>
 							<input type="hidden" name=type value="${type }"/>
 							</td>
@@ -56,8 +56,6 @@
 		</div>
 		</div>
 	</div>
-	<!-- 	</div>
-</div> -->
 </body>
 </html>
 

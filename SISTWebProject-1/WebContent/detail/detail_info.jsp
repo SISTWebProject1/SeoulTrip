@@ -144,7 +144,7 @@
 
 							var options = {
 								center : new kakao.maps.LatLng(mapx, mapy),
-								level : 6
+								level : 3
 							};
 							var map = new kakao.maps.Map(container, options);
 							var markerPosition = options.center;

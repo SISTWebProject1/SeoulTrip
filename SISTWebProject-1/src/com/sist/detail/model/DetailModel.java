@@ -20,6 +20,8 @@ public class DetailModel {
 		String no = request.getParameter("no");
 		String type = request.getParameter("type");
 		String page = request.getParameter("page");
+		
+		MainDAO.addHashTagCodeToCookie(request, response, Integer.parseInt(type), Integer.parseInt(no));
 	
 		DetailDAO dao = new DetailDAO();
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
@@ -141,29 +143,9 @@ public class DetailModel {
 		return  "../detail/detail_review_test.jsp";
 	}
 	
-	@RequestMapping("detail/detail_qna.do")
-	public String detail_switch_qna(HttpServletRequest request, HttpServletResponse response){
-		String no = request.getParameter("no");
-		String type = request.getParameter("type");
-		
-		System.out.println("qna 게시판 들어감");
-		
-		DetailDAO dao = new DetailDAO();
-		Map map = new HashMap();
-		map.put("no", no);
-		map.put("type", type);
-		
-		List<DetailQnaVO> list = dao.detailQnaListData(map);	
-		
-		request.setAttribute("type", type);
-		request.setAttribute("no",no);
-		request.setAttribute("list", list);
-		return  "../detail/detail_qna.jsp";
-	}
-
 	// ########################################################################### QNA 보드 입출력 관리 ######################
 	
-	@RequestMapping("detail/detail_qna_insert.do")
+/*	@RequestMapping("detail/detail_qna_insert.do")
 	public String detail_qna_insert(HttpServletRequest request,HttpServletResponse response){
 		String no = request.getParameter("no");
 		String type = request.getParameter("type");
@@ -234,6 +216,7 @@ public class DetailModel {
 		request.setAttribute("nearT", nearT);
 		request.setAttribute("nearR", nearR);
 		request.setAttribute("nearF", nearF);
+		//################################################################################## info data 출력
 		
 		
 		request.setAttribute("detail_board_jsp","../detail/detail_qna_insert.jsp");
@@ -275,6 +258,6 @@ public class DetailModel {
 		dao.DetailQnaInsert(vo);
 	
 	return "redirect:../detail/detail.do?type="+type+"&no="+no;
-	}
+	}*/
 }
 	
