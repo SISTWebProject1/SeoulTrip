@@ -21,7 +21,7 @@
 							<div class="single-post-item short">
 								<figure>
 									<a href="../detail/detail.do?type=${ htit.type }&no=${ htit.no }">
-									<img class="post-img img-fluid" src="${ htit.photo }" onerror="javascript:src='../img/logo.png'" style="height: 300px;">
+									<img style="height: 150px; width: 100%;" class="post-img img-fluid" src="${ htit.photo }" onerror="javascript:src='../img/logo.png'" style="height: 300px;">
 									</a>
 								</figure>
 								<h3>
