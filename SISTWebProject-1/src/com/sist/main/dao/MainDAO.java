@@ -354,6 +354,13 @@ public class MainDAO {
 				
 				vo = session.selectOne("getHIVOData", map);
 				vo.setType(type);
+				
+				HomeItemVO tempvo = session.selectOne("getGradeReviewCntByTypeNo", vo);
+				List<HashTagVO> htlist = session.selectList("getHTListByTypeNo", vo);
+				vo.setGrade(tempvo.getGrade());
+				vo.setReviewCnt(tempvo.getReviewCnt());
+				vo.setHashtags(htlist.subList(0, Math.min(5, htlist.size())));
+				
 				list.add(vo);
 
 			}
@@ -460,7 +467,7 @@ public class MainDAO {
 			}
 			
 		} catch (Exception e) {
-			System.out.println("MainDAO:getHTItemListTotalPage():");
+			System.out.println("MainDAO:getHTItemsListsByCookie():");
 			e.printStackTrace();
 		} finally {
 			if(ss!=null) ss.close();
