@@ -97,6 +97,23 @@
 		GROUP BY tagcode)
 		WHERE cnt > 3
 	</select>
+	
+	<select id="getGradeReviewCntByTypeNo" resultType="HomeItemVO" parameterType="HomeItemVO">
+		SELECT TRUNC(AVG(grade)*20) AS grade, COUNT(*) AS reviewCnt
+		FROM review
+		WHERE type=#{type} AND no=#{no}
+	</select>
+	
+	<select id="getHTListByTypeNo" resultType="HashTagVO" parameterType="HomeItemVO">
+		SELECT tagcode, tagname
+		FROM (SELECT tagcode, COUNT(*) AS cnt
+		FROM (SELECT reviewno
+		FROM review
+		WHERE type=#{type} AND no=#{no}) NATURAL JOIN reviewtohashtag
+		GROUP BY tagcode) NATURAL JOIN hashtagtable
+		WHERE cnt > 3
+		ORDER BY cnt DESC
+	</select>
 </mapper>
 
 
