@@ -35,7 +35,7 @@ public class ReservationDAO {
 		} catch(Exception e)
 		{
 			System.out.println(e.getMessage()); 
-		}finally
+		}finally	
 		{
 			if(session!=null)
 				session.close();
@@ -43,14 +43,14 @@ public class ReservationDAO {
 		return vo;
 	}
 	
-	public static void bookingInsert(ReservationVO vo)
+	public static void bookingInfoInsert(ReservationVO vo)
 	{
 
 		SqlSession session=null;
 		try
 		{						
 			session=ssf.openSession(true);
-			session.insert("bookingInsert",vo);
+			session.insert("bookingInfoInsert",vo);
 		}catch (Exception ex)
 		{
 			System.out.println(ex.getMessage());			

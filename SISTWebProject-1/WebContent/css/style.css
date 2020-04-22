@@ -1,5 +1,13 @@
+.rphoto {
+
+   width: 550px;
+   height: 350px;
+	
+}
+
+
 .section {
-	border: 0px solid green;
+	border: 1px solid #cccccc;
 	position: relative;
 	width: 100%;
 	margin: 0px auto;
@@ -9,6 +17,7 @@
 	float:left;
 	
 }
+
 
 .row-info{
 	overflow: hidden;
