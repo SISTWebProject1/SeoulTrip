@@ -23,7 +23,8 @@
 	<div class="container box_1480">
 		<div>
 			<div class="category_sum" style="font-size:20px; font-weight:bold;">
-				<a href=#>메인 </a> <a href=#>/${category}</a> <a href=#>//${title} </a>
+				<a href=#>메인 </a> <a href=#>/${category}</a> <a href=#>/${title} </a>
+
 			</div>
 			<hr>
 			<div class="container-alter container-summary">
@@ -37,6 +38,11 @@
 							</c:forEach>
 						</div>
 					</li>
+					<c:if test="${type==2 }">
+						
+							<a href="../reservation/reservation.do?no=${no}" class="btn btn-sm btn-danger">&nbsp;예약</a>
+										
+					</c:if>
 				</ul>
 			</div>
 			<hr>
@@ -77,6 +83,7 @@
 								<ul>
 						</div>
 					</div>
+				
 				</div>
 
 				<div class="col-lg-6 col-md-6">
