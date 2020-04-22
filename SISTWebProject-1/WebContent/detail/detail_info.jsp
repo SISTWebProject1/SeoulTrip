@@ -108,7 +108,10 @@
 						<div class="rating_statistics">
 							<ul>
 								<c:forEach var="vo" items="${rclist}">
-									<li><span>${vo.grade}는 총 ${vo.count }</span></li>
+									<div class="grade">
+										<p class="grade2" style="WIDTH: ${vo.grade*20 }%;"></p>
+									</div>
+									<li><span>${vo.count }</span></li>	
 								</c:forEach>
 								<li><input type="hidden" name=mapx id=mapx value="${mapx}"/></li>
 								<li><input type="hidden" name=mapy id=mapy value="${mapy}"/></li>
