@@ -24,8 +24,29 @@
 	<title>Reservation</title>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
-	
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<style type="text/css">
+body {
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 15px;
+}
+
+h3,h5 {
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 30px;
+}
+
+h2 {
+
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 40px;
+
+}
+
+b {
+ font-size: 15px; 
+}
+</style>
 	
 	
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
@@ -40,6 +61,7 @@
 			success:function(res)
 			{
 				$('#data-person').text(person+"명");
+				$('#person2').val(person);
 			}
 		})
 	})
@@ -51,6 +73,7 @@
 			success:function(res)
 			{
 				$('#data-time').text(time);
+				$('#time2').val(time);
 			}
 		})
 	})	
@@ -62,6 +85,7 @@
 			success:function(res)
 			{
 				$('#data-date').text(date);
+				$('#date2').val(date);
 			}
 		})
 	})
@@ -73,22 +97,25 @@
 			success:function(res)
 			{
 				$('#data-name').text(name);
-				$('#submit-btn').attr('disabled',false);
+				$('#name2').val(name);
 			}
 		})
 	})
-	$('#submit-btn').click(function(){
 	
+	$('#tel').keyup(function(){
 		var tel=$('#tel').val();
-		var email=$('#email').text();		
+		var email=$('#email').val();
 		$.ajax({
 			type:'post',
 			url:'../reservation/reservation.do',
 			success:function(res)
 			{
 				$('#data-tel').text(tel);
-				$('#data-email').text(email);
+				$('#tel2').val(tel);
+				$('#email2').val(email);
+				$('#submit-btn').attr("disabled",false);
 			}
+			
 		})
 	})
  })
@@ -120,44 +147,31 @@
 <!-- ==================================================================================================음식점정보 -->	
 <div class="container">
 	<div class="section">
+	
+	<h2 style="text-align:center;">&nbsp;&nbsp;${vo.rname }</h2>	
+	
 	<section class="contact-page-area" style="margin-top:20px;">	
 		   	<div class="row-info col-md-6 col-md-offset-0" style="width:100%;">
-						<img src="../img/reservation.jpg" style="max-width:100%; height:auto;float:left;">
-							<!-- ${vo.rphoto}  -->
+						<img src="${vo.rphoto}" class="rphoto">
+							<!--  ../img/reservation.jpg -->
 			</div>	
 			
 			
 			<div class="row-info col-md-6" >
 				<div class="d-flex flex-column address-wrap">
-					<div class="single-contact-address d-flex flex-row">
-						<div class="icon">
-							<span class="lnr lnr-store"></span>
-						</div>
-						<div class="contact-details">
-							<h4>${vo.rname }</h4>
-						</div>
-					</div>
-					<br>
+					<br><br>
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
 							<span class="lnr lnr-map"></span>
 						</div>
 						<div class="contact-details">
 							<h5>${vo.addr1 }</h5>
-							_____<br>
+							<br>
 							<h5>${vo.addr2 }</h5>
 						</div>
 					</div>
 					
-					<div class="single-contact-address d-flex flex-row">
-						<div class="icon">
-							<span class="lnr lnr-envelope"></span>
-						</div>
-						<div class="contact-details">
-							<h5>${vo.post }</h5>
-						</div>
-					</div>
-					
+
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
 							<span class="lnr lnr-phone-handset"></span>
@@ -201,7 +215,8 @@
 					
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약인원</span>
-											<select class="form-control" id=person>
+											<select class="form-control" id="person" >
+									
 												<option>1</option>
 												<option>2</option>
 												<option>3</option>
@@ -218,7 +233,7 @@
 								
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약시간</span>
-											<select class="form-control" id=time >
+											<select class="form-control" id="time" >
 											<c:forEach var="i" begin="11" end="18">
 												<option>${i}:00</option>		
 											</c:forEach>
@@ -230,7 +245,7 @@
 									<div class="row" >
 									<div class="col-sm-12">
 										<div class="form-group col-sm-12">
-											<input class="form-control" type="date" id="date" name=date >
+											<input class="form-control" type="date" id="date" >
 											<span class="form-label">Date</span>
 										</div>
 									</div>
@@ -240,7 +255,7 @@
 								<div class="row">	
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" id="name" name=name required>
+											<input class="form-control" type="text" id="name" required>
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
@@ -248,7 +263,7 @@
 									
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="email" id="email" name=email required >
+											<input class="form-control" type="email" id="email" required>
 											<span class="form-label">Email</span>
 										</div>
 									</div>
@@ -258,41 +273,75 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="tel" id="tel" name=tel required >
+											<input class="form-control" type="tel" id="tel" required>
 											<span class="form-label">전화번호</span>
 										</div>
 									</div>
 							
 								</div>
 								
+							<form method="post" action="reserve_ok.do">
 								
+								<input type="hidden" name="no" id="no" value="${vo.no }"/>
+								<input type="hidden" name="date2" id="date2" value=""/>
+								<input type="hidden" name="time2" id="time2" value=""/>
+								<input type="hidden" name="person2" id="person2" value=""/>
+								<input type="hidden" name="name2" id="name2" value=""/>
+								<input type="hidden" name="email2" id="email2" value=""/>
+								<input type="hidden" name="tel2" id="tel2" value=""/>
+								<input type="hidden" name="id" id="id" value="${ss_member.memberId}"/>
+									  
 								<div class="form-btn">
 									<button class="submit-btn col-md-6"  id="submit-btn" disabled>예약하기</button>
+								</div>
+							</form>
+							
+								<div class="form-btn">
 									<button class="submit-btn col-md-6" 
 										onclick="javascript:history.back()"
 									>취소하기</button>
 								</div>
-							</div>
-						
-						
-		
+								
+							</div>	
+							
+					<div class="row col-md-offset-1">	
+						<table class="table col-md-offset-1" style="margin-top:30px;width:300px; height:300px;">			
+						 <tr class="row">
+						  	<th><b style="font-size:30px;">${ss_member.memberId==null?"방문객 ":ss_member.memberId} 님이 <br>관심있어 할 음식점</b></th>
+						  </tr>
+						 <tr class="row">
+						 	<td>1</td>
+						 	<td>recommendation1</td>
+						 
+						 </tr>
+						 <tr class="row">
+						 	<td>2</td>
+						 	<td>recommendation2</td>
+						 </tr>
+						 <tr class="row">
+						 	<td>3</td>
+						 	<td>recommendation3</td>
+						 </tr>
+						</table>
+					</div>
 			<%-- ==========================================Ajax출력단========================================== --%>						
 					
-					  <div class="booking-form col-md-6 col-md-offset-0" id="result" style="border:0px solid red; margin-left:10px;">
-						 <div class="row" >예약자명   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-name"></b> </div>
+					  <div class="booking-form col-md-6 col-md-offset-0" id="result" style="border:0px solid red; margin-left:15px">
+						 <div class="row">예약자명   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-name"></b> </div>
 						 <div class="row" >전화번호   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-tel"></b></div>
 						 <div class="row" >예약시간  &nbsp;&nbsp;  | &nbsp;&nbsp; <b id="data-time"></b></div>
 						 <div class="row" >예약인원   &nbsp;&nbsp; | &nbsp;&nbsp;<b id="data-person"></b></div>
 						 <div class="row" >예약날짜   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-date"></b></div>
 					</div>
-				
-			
-		</div>					
+
+	
+		</div>	
+						
 		<div class="section">
 				<div class="row col-md-12 col-md-offset-0">
 						<div id="map"  style="width:100%;height:400px;  border:0px solid white; margin-top:10px;"></div>
 				</div>	
-		</div>		
+		</div>
 	</div>					
 <!-- ==================================================================================================예약단 -->	
 
