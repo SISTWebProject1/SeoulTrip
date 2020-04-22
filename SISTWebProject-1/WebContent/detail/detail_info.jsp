@@ -29,11 +29,12 @@
 			<div class="container-alter container-summary">
 				<ul>
 					<li style="font-size:35px; font-weight:bolder;"><a href="#">${title}</a></li>
-					<li><a href="#">순위 /(전체 데이터중)</a></li>
+					<li><a href="#">${rank.ranking }위 /${totalplace }개의 명소중</a></li>
 					<li>
 						<div class="tag_button">
-							<input type="button" value="tag1"> <input type="button"
-								value="tag2">
+							<c:forEach var="tag" items="${taglist}">
+								<input type="button" value="${tag }">
+							</c:forEach>
 						</div>
 					</li>
 				</ul>
@@ -106,11 +107,9 @@
 					<div class="single-post-item short">
 						<div class="rating_statistics">
 							<ul>
-								<li><span>아주좋음</span></li>
-								<li><span>좋음</span></li>
-								<li><span>보통</span></li>
-								<li><span>별로</span></li>
-								<li><span>최악</span></li>
+								<c:forEach var="vo" items="${rclist}">
+									<li><span>${vo.grade}는 총 ${vo.count }</span></li>
+								</c:forEach>
 								<li><input type="hidden" name=mapx id=mapx value="${mapx}"/></li>
 								<li><input type="hidden" name=mapy id=mapy value="${mapy}"/></li>
 							</ul>

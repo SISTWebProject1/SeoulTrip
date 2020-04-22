@@ -30,7 +30,7 @@
 	</div>
 	<div id="result">
 		<!-- ####################################  -->
-	<div class="wrapper row2">
+		<div class="wrapper row2">
 		<div id="services" class="clear">
 			<div class="text-center">
 				<img src="../img/detail/qna_Board.jpg" style="width:700px; height:150px"/>
@@ -41,29 +41,32 @@
 						<th width="10%" class="text-center">번호</th>
 						<th width="45%" class="text-center">제목</th>
 						<th width="15%" class="text-center">이름</th>
-	<!-- 					<th width="20%" class="text-center">작성일</th>
+						<th width="20%" class="text-center">작성일</th>
 						<th width="10%" class="text-center">조회수</th>
-	 -->				</tr>
+					</tr>
 					<c:forEach var="vo" items="${list }">
 						<tr>
 							<td width="10%" class="text-center">${vo.seq }</td>
 							<td width="45%">
-								<a href="../detail/detail_qna_detail.do?type=${type}&no=${no}&seq=${vo.seq}">${vo.title }</a>
-								&nbsp;
-<%-- 								<c:if test="${vo.dbday==today }">
-									<sup><img src="../freeboard/new.gif"/></sup>
-								</c:if> --%>
+							<c:if test="${vo.group_tab>0 }">
+								<c:forEach var="i" begin="1" end="${vo.group_tab }" step="1">
+									&nbsp;&nbsp;
+								</c:forEach>
+								<img src="../img/detail/icon_reply.gif"/>
+							</c:if>
+							<a href="../detail/detail_qna_detail.do?type=${type}&no=${no}&seq=${vo.seq}">${vo.title }</a>
 							</td>
 							<td width="15%" class="text-center">${vo.memberid }</td>
-<%-- 							<td width="20%" class="text-center">
-								${vo.dbday }
+							<td width="20%" class="text-center"><fmt:formatDate
+									value="${vo.regdate }" pattern="yyyy-MM-dd" />
 							<td width="10%" class="text-center">${vo.hit }</td>
- --%>						</tr>
+						</tr>
 					</c:forEach>
 				</table>
 			</div>
 			</div>
 		</div>
+
 	</div>
 </body>
 </html>

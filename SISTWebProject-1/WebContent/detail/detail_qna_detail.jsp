@@ -40,9 +40,9 @@
 				</tr>
 				<tr>
 					<td class="text-right" colspan="4">
-						<a href="../detail/detail_qna_reply.do?type=${type}&no=${no}" class="btn btn-xs btn-primary">답변</a>
+						<a href="../detail/detail_qna_reply.do?type=${type}&no=${no}&seq=${vo.seq}" class="btn btn-xs btn-primary">답변</a>
 						<a href="../detail/detail_qna_update.do?type=${type}&no=${no}&seq=${vo.seq}" class="btn btn-xs btn-success">수정</a>
-						<a href="../detail/detail_qna_delete.do?type=${type}&no=${no}" class="btn btn-xs btn-info">삭제</a>
+						<a href="../detail/detail_qna_delete.do?type=${type}&no=${no}&seq=${vo.seq}" class="btn btn-xs btn-info">삭제</a>
 						<a href="../detail/detail.do?type=${type}&no=${no}" class="btn btn-xs btn-warning">목록</a>
 					</td>
 				</tr>

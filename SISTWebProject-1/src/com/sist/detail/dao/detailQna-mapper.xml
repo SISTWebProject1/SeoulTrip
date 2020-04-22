@@ -126,7 +126,7 @@
 		WHERE seq=#{seq} AND no=#{no} AND type=#{type}
 	</delete>
 	
-	<update id="DetailQnaSubjectUpdate" parameterType="DetailQnaVO">
+	<update id="DetailQnaTitleUpdate" parameterType="DetailQnaVO">
 		UPDATE qna SET
 		title=#{title}, content=#{content}
 		WHERE seq=#{seq}

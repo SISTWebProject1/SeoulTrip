@@ -262,4 +262,157 @@ public class DetailDAO {
 				session.close();
 		}
 	}
+	
+	// ############################################################################ 랭킹 계산
+	public static DetailRankingTourplaceVO detailRankTourData(int no){
+		
+		DetailRankingTourplaceVO vo = new DetailRankingTourplaceVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getRankingTourplace",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
+	public static DetailRankingRestaurantVO detailRankResData(int no){
+		
+		DetailRankingRestaurantVO vo = new DetailRankingRestaurantVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getRankingRestaurant",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
+	public static DetailRankingFestivalVO detailRankFestivalData(int no){
+		
+		DetailRankingFestivalVO vo = new DetailRankingFestivalVO();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("getRankingFestival",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
+	
+	public static int getTotalTourplace(){
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			total = session.selectOne("getTotalTourplace");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return total;
+	}
+	public static int getTotalRestaurant(){
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			total = session.selectOne("getTotalRestaurant");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return total;
+	}
+	public static int getTotalFestival(){
+		int total = 0;
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			total = session.selectOne("getTotalFestival");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return total;
+	}
+	
+	public static List<DetailReviewCountVO> getReviewCount(Map map){
+	
+		List<DetailReviewCountVO> list = new ArrayList<DetailReviewCountVO>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getReviewCountByGrade",map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	
+	public static List<String> getTourTag(int no){
+		List<String> list = new ArrayList<String>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getTourTag",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	public static List<String> getResTag(int no){
+		List<String> list = new ArrayList<String>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getResTag",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
 }

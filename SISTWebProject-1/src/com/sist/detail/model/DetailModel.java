@@ -27,43 +27,74 @@ public class DetailModel {
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
 		DetailFestivalVO fvo = new DetailFestivalVO();
+		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
+		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
+		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
+		
 		double mapx = 0;	
 		double mapy = 0;
 		int totalpage = 0;
+		int totalplace = 0;
+		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
+		List<String> tourtaglist = new ArrayList<String>();
+		List<String> restaglist = new ArrayList<String>();
 		String title = "";
 
 		Map typo = new HashMap();
 		
 		if(Integer.parseInt(type)==1){
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
+			rtvo = dao.detailRankTourData(Integer.parseInt(no));
+			totalplace = dao.getTotalTourplace();
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+			
 			System.out.println("장소 데이터");
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", tourtaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rtvo);
 			request.setAttribute("info", tvo);
 			request.setAttribute("title", tvo.getTname());
 			request.setAttribute("category", "명소");
 		}else if(Integer.parseInt(type)==2){
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
+			rrvo = dao.detailRankResData(Integer.parseInt(no));
+			totalplace = dao.getTotalRestaurant();
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			restaglist = dao.getResTag(Integer.parseInt(no));
+			
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", restaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
 		}else if(Integer.parseInt(type)==3){
 			fvo = dao.getFestivalData(Integer.parseInt(no));
+			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
+			totalplace = dao.getTotalFestival();
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
-
+			rclist = dao.getReviewCount(typo);
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
