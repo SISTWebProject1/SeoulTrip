@@ -23,8 +23,29 @@
 <link rel="stylesheet" href="../css/animate.min.css">
 <link rel="stylesheet" href="../css/owl.carousel.css">
 <link rel="stylesheet" href="../css/main.css">
-
 <link rel="stylesheet" href="../css/profile_Instar.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+  $(function(){
+    $("#dialog").dialog({
+    	autoOpen:false,
+    	show:{
+    		effect:"blind",
+    		duration:1000
+    	},
+    	hide:{
+    		effect:"explode",
+    		duration:1000
+    	}
+    });
+    $("#profile_update").click(function(){
+    	$( "#dialog" ).dialog( "open" );
+    });
+  });
+</script>
 <style type="text/css">
 .body {
 	background-color: black;
@@ -80,7 +101,7 @@
 			</div>
 			<div class="profile-user-settings" style="text-align: left">
 				<h2 class="profile-user-name">${my_vo.name }</h2>
-				<sub style="color: gray">ID:@${my_vo.memberId }</sub>
+				<sub style="color: gray" >ID:@${my_vo.memberId }</sub>
 				<div class="btn btn-sm btn-danger" style="margin: 5px;">
 					<a href="../mypage/profile_Update.do?id=${my_vo.memberId }" style="text-decoration: none;color:white">프로필 수정</a>
 				</div>

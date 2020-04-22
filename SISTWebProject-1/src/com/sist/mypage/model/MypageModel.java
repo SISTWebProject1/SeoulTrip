@@ -19,17 +19,16 @@ public class MypageModel {
 	public String main_profile(HttpServletRequest request, HttpServletResponse response) {
 		// Login 정보 --> id,birth,regdate 값을 받음
 		LoginVO vo = (LoginVO)request.getSession().getAttribute("ss_member");
-		System.out.println(vo.getMemberId());
 		String id = vo.getMemberId().trim();
 		
 		MemberVO_u my_vo = MypageDAO.PassWord_check(id);
+		
+		System.out.println("@@@"+my_vo.getCoverphoto());
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.applyPattern("yyyy-MM-dd");
 		String birth = sdf.format(my_vo.getBirth());
 		String regdate = sdf.format(my_vo.getRegdate());
-		
-		System.out.println("11111111"+my_vo.getCoverPhoto()+"1111111");
-		
 		
 		request.setAttribute("birth", birth);
 		request.setAttribute("regdate", regdate);
@@ -39,32 +38,25 @@ public class MypageModel {
 		// _> Login 정보 End
 	
 		// review 확인 -> review_image, content,regdate, 등 memberId에 일치하는  review데이터를 수집
-		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
-		int count=0;
-		list = MypageDAO.ReviewData(id);
+		List<ReviewVO_u> review_list = new ArrayList<ReviewVO_u>();
+		int review_count=0;
+		review_list = MypageDAO.ReviewData(id);
 		// 사진을 모으기 위해 reviewNO를 배열에 저장
-		int reviewNo[] = new int[list.size()];
-
+		int reviewNo[] = new int[review_list.size()];
 		int i =0;
-		for(ReviewVO_u v1 : list){
+		for(ReviewVO_u v1 : review_list){
 			System.out.println(i+" "+v1.getReviewno());
 			reviewNo[i] = v1.getReviewno();
 			i++;
 		}
-		
-		list = MypageDAO.getImageForReview(list, reviewNo);
-		
-		count = list.size();
-		request.setAttribute("list", list);
-		request.setAttribute("count", count);
+		review_list = MypageDAO.getImageForReview(review_list, reviewNo);
+		review_count = review_list.size();
 		// _> review 정보 End
-		
 		
 		// 페이지
 		String page =request.getParameter("page");
 		String type = request.getParameter("type");
 //		String no = request.getParameter("no");
-		
 		int totalpage = 0;
 		
 		if(page==null)
@@ -87,6 +79,18 @@ public class MypageModel {
 		map.put("start", start);
 		map.put("end", end);
 		// review 정보 확인
+		//wishlist data 값
+		List<WishListVO_u> wish_list = MypageDAO.wishlistData(vo.getMemberId());
+		
+		// wishlist 존재 여부 확인
+		int wish_count =0;
+		wish_count = wish_list.size();
+		
+		request.setAttribute("mypage_review_list", review_list);
+		request.setAttribute("review_count", review_count);
+		request.setAttribute("wish_list", wish_list);
+		request.setAttribute("wish_count", wish_count);
+		
 		
 		request.setAttribute("main_jsp", "../mypage/profile8.jsp");
 		return "../main/index.jsp";
@@ -94,10 +98,11 @@ public class MypageModel {
 	@RequestMapping("mypage/wishlist.do")
 	public String wishlist(HttpServletRequest request, HttpServletResponse response){
 		LoginVO vo = (LoginVO) request.getSession().getAttribute("ss_member");
-		List<WishListVO_u> list = MypageDAO.wishlistData(vo.getMemberId());
+		List<WishListVO_u> wish_list = MypageDAO.wishlistData(vo.getMemberId());
 		int count =0;
-		count = list.size();
-		request.setAttribute("list", list);
+		count = wish_list.size();
+		System.out.println("count : "+count);
+		request.setAttribute("list", wish_list);
 		request.setAttribute("count", count);
 		request.setAttribute("main_jsp", "../mypage/wishlist.jsp");
 		return "../main/index.jsp";
@@ -174,15 +179,12 @@ public class MypageModel {
 		}catch(Exception ex){
 			ex.printStackTrace();	
 		}
-		
+		try{
 		String id = request.getParameter("id");
 		request.setAttribute("id", id);
-		System.out.println(id);
-		System.out.println("null??");
+		System.out.println("id :"+id);
 		MemberVO_u vo_u = MypageDAO.PassWord_check(id);
-		System.out.println("null??");
 		System.out.println(vo_u.getBirth());
-		System.out.println("null??");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String birth_tmp = sdf.format(vo_u.getBirth());
 		System.out.println(birth_tmp);
@@ -201,6 +203,9 @@ public class MypageModel {
 		
 		
 		request.setAttribute("my_vo", vo_u);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 		request.setAttribute("main_jsp", "../mypage/update.jsp");
 		
 		return "../main/index.jsp";

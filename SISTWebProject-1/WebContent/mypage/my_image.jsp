@@ -9,11 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container box_1170" style="background: url(../mypage/default_cover_image.jpg);">
+	<div class="container box_1170" style="background: url(${my_vo.coverphoto});">
 		<div class="row d-flex align-items-center justify-content-center">
 			<div class="about-content col-md-4" style="text-align: center;  width:100%">
 				<div>
-					<img src="${my_vo.coverPhoto }">
+				
 				</div>
 			</div>
 		</div>

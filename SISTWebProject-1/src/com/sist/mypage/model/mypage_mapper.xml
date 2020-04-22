@@ -42,4 +42,9 @@
 		SELECT filepath FROM review_photo
 		where reviewno = #{reviewNo}
 	</select>
+	
+	<select id="mypage_getimage" resultType="string">
+		SELECT tphoto from tourplace
+		WHERE no=#{no }
+	</select>
 </mapper>

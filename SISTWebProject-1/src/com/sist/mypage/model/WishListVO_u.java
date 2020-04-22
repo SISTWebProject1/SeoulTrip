@@ -4,38 +4,45 @@ import java.util.Date;
 
 public class WishListVO_u {
 
-	
-	private int no;
-	private String memberId;
-	private String name;
-	private String palceName;
+	private String wishListNO;
+	private String wishlistname;
+	private String memeberId;
 	private int type;
+	private int no;
 	private Date regdate;
-	private int grade;
-	private String photo;
+	private String wish_photo;
+	
+	
+	
 	public int getNo() {
 		return no;
 	}
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public String getMemberId() {
-		return memberId;
+	public String getWish_photo() {
+		return wish_photo;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setWish_photo(String wish_photo) {
+		this.wish_photo = wish_photo;
 	}
-	public String getName() {
-		return name;
+	public String getWishListNO() {
+		return wishListNO;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setWishListNO(String wishListNO) {
+		this.wishListNO = wishListNO;
 	}
-	public String getPalceName() {
-		return palceName;
+	public String getWishlistname() {
+		return wishlistname;
 	}
-	public void setPalceName(String palceName) {
-		this.palceName = palceName;
+	public void setWishlistname(String wishlistname) {
+		this.wishlistname = wishlistname;
+	}
+	public String getMemeberId() {
+		return memeberId;
+	}
+	public void setMemeberId(String memeberId) {
+		this.memeberId = memeberId;
 	}
 	public int getType() {
 		return type;
@@ -43,23 +50,15 @@ public class WishListVO_u {
 	public void setType(int type) {
 		this.type = type;
 	}
+	
 	public Date getRegdate() {
 		return regdate;
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
 	}
-	public int getGrade() {
-		return grade;
-	}
-	public void setGrade(int grade) {
-		this.grade = grade;
-	}
-	public String getPhoto() {
-		return photo;
-	}
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
+	
+	
+	
 	
 }
