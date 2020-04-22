@@ -36,6 +36,8 @@
 				<property name="url" value="jdbc:oracle:thin:@211.238.142.205:1521:XE"/>
 				<property name="username" value="hr"/>
 				<property name="password" value="happy"/>
+				<property name="poolMaximumActiveConnections" value="15"/>
+				<property name="poolMaximumIdleConnections" value="15"/>
 			</dataSource>
 		</environment>
 	</environments>

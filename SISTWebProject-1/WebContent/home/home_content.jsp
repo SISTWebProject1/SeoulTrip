@@ -23,12 +23,12 @@
 										<div class="single-post-item short">
 											<figure>
 												<a href="../detail/detail.do?type=${ hcvo.type }&no=${ hcvo.no }">
-													<img class="post-img img-fluid" src="${ hcvo.photo }" onerror="javascript:src='../img/logo.png'">
+													<img style="height: 150px; width: 100%;" class="post-img img-fluid" src="${ hcvo.photo }" onerror="javascript:src='../img/logo.png'">
 												</a>
 											</figure>
 											
 											<div class="heart">
-												<button class="heart_button" type="button">
+												<button class="heart_button" type="button" data-type="${ hcvo.type }" data-no="${ hcvo.no }">
 													<i class="fas fa-heart"></i>
 												</button>
 											</div>
@@ -37,10 +37,14 @@
 												<h4><a href="../detail/detail.do?type=${ hcvo.type }&no=${ hcvo.no }">${ hcvo.name }</a></h4>
 												
 												<div class="grade">
-													<p class="grade2" style="WIDTH: 50%;"></p>
+													<p class="grade2" style="WIDTH: ${ hcvo.grade }%;"></p>
 												</div>
-												&nbsp; <a href="../detail/detail.do?type=${ hcvo.type }&no=${ hcvo.no }">리뷰 xx건</a>
-												<div class="detail_food3_tag">#태그 #태그</div>
+												&nbsp; <a href="../detail/detail.do?type=${ hcvo.type }&no=${ hcvo.no }">리뷰 ${ hcvo.reviewCnt }건</a>
+												<div class="detail_food3_tag">
+													<c:forEach var="hashtag" items="${ hcvo.hashtags }">
+														<a href="htitemlist.do?tagcode=${ hashtag.tagcode }">#${ hashtag.tagname }</a>&nbsp;
+													</c:forEach>
+												</div>
 											</div>
 										</div>
 									</div>
