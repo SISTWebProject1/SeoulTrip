@@ -12,7 +12,7 @@
 <body>
 
 	<div class="container">
-		<c:forEach var="vo1" items="${list }">
+		<c:forEach var="vo1" items="${mypage_review_list }">
 			<h3 class="text-heading">${vo1.title }</h3>
 			<c:if test="${vo1.filepath != 'null' }">
 				<img src="${vo1.filepath }" class="img-fulid">

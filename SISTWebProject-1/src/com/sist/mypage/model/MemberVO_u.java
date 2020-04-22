@@ -25,6 +25,12 @@ public class MemberVO_u {
 	
 	
 	
+	public String getCoverphoto() {
+		return coverphoto;
+	}
+	public void setCoverphoto(String coverphoto) {
+		this.coverphoto = coverphoto;
+	}
 	public String getMemberId() {
 		return memberId;
 	}
@@ -104,12 +110,6 @@ public class MemberVO_u {
 	}
 	public void setGrade(int grade) {
 		this.grade = grade;
-	}
-	public String getCoverPhoto() {
-		return coverphoto;
-	}
-	public void setCoverPhoto(String coverPhoto) {
-		this.coverphoto = coverPhoto;
 	}
 	
 

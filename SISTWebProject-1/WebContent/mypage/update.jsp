@@ -70,7 +70,7 @@ select {
 <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-	<div class="wrapper row2">
+	<div class="wrapper row2" id="dialog" style="display: none;">
 		<div id="services" class="clear">
 			<div class="row text-center">
 				<img src="reply.png">

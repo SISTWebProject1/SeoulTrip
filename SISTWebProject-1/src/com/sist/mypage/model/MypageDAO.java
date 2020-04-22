@@ -97,6 +97,17 @@ public class MypageDAO {
 		try{
 			session = ssf.openSession();
 			list = session.selectList("wishtList",id);
+			
+			System.out.println(list.size());
+			int no =0;
+			String photo=" ";
+			for(WishListVO_u vo : list){
+				no = vo.getNo();
+				System.out.println(no);
+				photo=session.selectOne("mypage_getimage",no);
+				vo.setWish_photo(photo);
+			}
+			
 		}catch(Exception ex){
 			ex.getMessage();
 			ex.printStackTrace();
