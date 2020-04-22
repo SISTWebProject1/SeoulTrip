@@ -153,7 +153,74 @@
 	</insert>
 	
 	<select id="detailQnaTotalPage" ></select>	 -->
+	<select id="getRankingTourplace" resultType="DetailRankTourVO" parameterType="int">
+		SELECT no,Tname,average,cnt,RANKING
+		FROM (SELECT no,Tname,average,cnt,RANK() OVER (ORDER BY average DESC,cnt DESC ) AS RANKING
+		FROM (SELECT tourplace.no as no ,TNAME, AVG(review.grade) as average, Count(*) as cnt
+		FROM tourplace,review
+		WHERE tourplace.no = review.no group by TNAME,tourplace.no
+		ORDER BY AVERAGE DESC, cnt DESC))
+		WHERE no=#{no}
+	</select>
 	
+	<select id="getRankingRestaurant" resultType="DetailRankResVO" parameterType="int">
+		SELECT no,Rname,average,cnt,RANKING
+		FROM (SELECT no,Rname,average,cnt,RANK() OVER (ORDER BY average DESC,cnt DESC ) AS RANKING
+		FROM (SELECT restaurant.no as no ,rNAME, AVG(review.grade) as average, Count(*) as cnt
+		FROM restaurant,review
+		WHERE restaurant.no = review.no group by rNAME,restaurant.no
+		ORDER BY AVERAGE DESC, cnt DESC))
+		WHERE no=#{no}
+	</select>
+	<select id="getRankingFestival" resultType="DetailRankFestivalVO" parameterType="int">
+		SELECT no,fname,average,cnt,RANKING
+		FROM (SELECT no,fname,average,cnt,RANK() OVER (ORDER BY average DESC,cnt DESC ) AS RANKING
+		FROM (SELECT festival.no as no ,fNAME, AVG(review.grade) as average, Count(*) as cnt
+		FROM festival,review
+		WHERE festival.no = review.no group by fNAME,festival.no
+		ORDER BY AVERAGE DESC, cnt DESC))
+		WHERE no=#{no}
+	</select>	
+
+	<select id="getTotalTourplace" resultType="int">
+		SELECT count(*) 
+		FROM tourplace
+	</select> 
+	
+	<select id="getTotalRestaurant" resultType="int">
+		SELECT count(*) 
+		FROM restaurant
+	</select> 
+	
+	<select id="getTotalFestival" resultType="int">
+		SELECT count(*) 
+		FROM festival
+	</select> 
+	
+	
+	<select id="getReviewCountByGrade" resultType="DetailReviewCountVO" parameterType="java.util.Map">
+		SELECT COUNT(*) as count ,grade FROM review WHERE no=#{no} AND type=#{type}
+		group BY grade ORDER BY grade DESC
+	</select>
+	
+	<select id="getTourTag" resultType="String" parameterType="int">
+		SELECT tourtag.tagname
+		FROM tourtag,(
+		SELECT tourtagmapper.tagcode as ttm, tourplace.no
+		FROM tourtagmapper,tourplace
+		WHERE tourtagmapper.tno = tourplace.no AND tourplace.no=#{no})
+		WHERE tourtag.tagcode = ttm
+	</select>
+	<select id="getResTag" resultType="String" parameterType="int">
+		SELECT RESTAURANTTAG.tagname
+		FROM RESTAURANTTAG,(
+		SELECT RESTTAGMAPPER.tagcode as rtm, restaurant.no
+		FROM resttagmapper,restaurant
+		WHERE resttagmapper.rno = restaurant.no AND restaurant.no=#{no})
+		WHERE restauranttag.tagcode = rtm
+	</select>
+	
+
 </mapper>
 
 

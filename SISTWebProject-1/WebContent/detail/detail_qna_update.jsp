@@ -14,11 +14,13 @@
 $(function (){
 	$('#pwd2').keyup(function(){
 		var k=$(this).val();
+		var seq=$('#seq').val();
 		var no=$('#no').val();
+		var type=$('#type').val();
 		$.ajax({
 			type:'POST',
-			url:'../reply/password_check.do',
-			data:{"pwd":k, "no":no},
+			url:'../detail/password_check.do',
+			data:{"pwd":k, "seq":seq, 'type':type, 'no':no},
 			success:function(res){
 				var no=res.trim();
 				if(no==1)
@@ -37,32 +39,32 @@ $(function (){
 	})	
 })
 </script>
-<style type="text/css">
-.row {
-	margin: 0px auto;
-	width: 600px;
-}
-
-h2 {
-	text-align: center;
-}
-</style>
 </head>
 <body>
-<div class="wrapper row2">
-	<div class="row">
-		<form method=post action="../detail/detail_qna_insert_ok.do">
+	<div class="wrapper row2">
+		<div id="services" class="clear">
+			<div class="text-center">
+				<img src="../img/detail/qna_Board.jpg"
+					style="width: 700px; height: 150px" />
+			</div>
+		<div class="row justify-content-md-center">
+			<div class="text-center">
+		<form method=post action="../detail/detail_qna_update_ok.do">
 			<table class="table table-hover">
 				<tr>
 					<th width=20% class="text-right success">이름</th>
-					<td width=80%><input type="text" name=name size=15
-						value="${vo.memberid}" required /> <input type="hidden" name="seq" id="no"
-						value="${vo.seq}" /></td>
+					<td width=80%><input type="text" name=memberid size=15
+						value="${vo.memberid}" required /> <input type="hidden" name="seq" id="seq"
+						value="${vo.seq}" />
+						<input type="hidden" name="type" id="type"
+						value="${vo.type}" />
+						<input type="hidden" name="no" id="no"
+						value="${vo.no}" /></td>
 				</tr>
 
 				<tr>
 					<th width=20% class="text-right success">제목</th>
-					<td width=80%><input type="text" name=subject size=50
+					<td width=80%><input type="text" name=title	 size=50
 						value="${vo.title }" required /></td>
 				</tr>
 
@@ -90,5 +92,7 @@ h2 {
 		</form>
 	</div>
 	</div>
+</div>
+</div>
 </body>
 </html>

@@ -145,22 +145,28 @@ public class DetailQnaDAO {
 	}
 		
 	// 답변형 게시판 댓글 추가 , 4개의 SQL문을 실행하여 결과값을 가져온다.
-	public static void DetailQnaReplyInsert(int pno,Map map, DetailQnaVO vo){
+	public static void DetailQnaReplyInsert(int pseq,int no, int type, Map map, DetailQnaVO vo){
 		SqlSession session=null;
+		
 		try {
 			session=ssf.openSession();
+		
 			DetailQnaVO pvo = session.selectOne("DetailQnaParentInfoData",map);
+			pvo.setNo(no);
+			pvo.setType(type);
+			
 			session.update("DetailQnaGroupStepIncrement",pvo);
 						
 			//replyReplyInsert , 들어온 PVO에서 읽어온 값에서 
 			vo.setGroup_id(pvo.getGroup_id());
 			vo.setGroup_step(pvo.getGroup_step()+1);
 			vo.setGroup_tab(pvo.getGroup_tab()+1);
-			vo.setRoot(pno);
+			vo.setRoot(pseq);
 			
 			
 			session.insert("DetailQnaReplyInsert",vo);
 			session.update("DetailQnaDepthIncrement",map);
+			
 			session.commit();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -173,7 +179,7 @@ public class DetailQnaDAO {
 	}
 	
 	// 답글현 게시판 댓글 삭제, 비번 확인 부터 ==> 처리 
-	public static boolean DetailQnaDelete(int seq, Map map, String pwd){
+	public static boolean DetailQnaDelete(int seq,int no, int type,  Map map, String pwd){
 		
 		boolean bCheck=false;
 		SqlSession session = null;
@@ -190,7 +196,9 @@ public class DetailQnaDAO {
 					vo.setTitle("관리자가 삭제한 게시물 입니다");
 					vo.setContent("관리자가 삭제한 게시물 입니다 ");
 					vo.setSeq(seq); //해당 게시물 번호 (mybatix 세팅에서 vo를 받게 되어 있다)
-					session.selectOne("DetailQnaSubjectUpdate",vo);
+					vo.setNo(no);
+					vo.setType(type);
+					session.selectOne("DetailQnaTitleUpdate",vo);
 				}
 				session.update("DetailQnaDepthDecrement",vo.getRoot());
 			}else{
