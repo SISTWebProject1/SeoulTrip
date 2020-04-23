@@ -17,6 +17,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.sist.mypage.model.WishListVO_u;
+
 public class MainDAO {
 	
 	private static SqlSessionFactory ssf;
@@ -414,6 +416,12 @@ public class MainDAO {
 	public static Map<HashTagVO, List<HomeItemVO>> getHTItemsListsByCookie(HttpServletRequest request, HttpServletResponse response){
 		Map<HashTagVO, List<HomeItemVO>> lists = new HashMap<>();
 		
+		LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+		List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+		try {
+			wishlist = getWishListsByMemberId(lvo.getMemberId());
+		} catch (Exception e1) {}
+		
 		SqlSession ss = null;
 		try {
 			ss = ssf.openSession();
@@ -462,8 +470,18 @@ public class MainDAO {
 				HashTagVO vo = selectedHTList.get(i);
 				int tagcode = vo.getTagcode();
 				
-				List temp = getHIListByTagcode_page(tagcode, 1);
-				lists.put(vo, temp.subList(0, Math.min(4, temp.size())));
+				List<HomeItemVO> temp = getHIListByTagcode_page(tagcode, 1);
+				temp = temp.subList(0, Math.min(4, temp.size()));
+				for(HomeItemVO thivo : temp) {
+					for(WishListVO_u wlvo : wishlist) {
+						if(thivo.getNo()==wlvo.getNo() && thivo.getType()==wlvo.getType()) {
+							thivo.setWish(true);
+							break;
+						}
+					}
+				}
+				
+				lists.put(vo, temp);
 			}
 			
 		} catch (Exception e) {
@@ -513,6 +531,62 @@ public class MainDAO {
 			if(ss!=null) ss.close();
 		}
 		
+	}
+	
+	public static void insertIntoWishlist(String id, String type, String no) {
+		SqlSession ss = null;
+		Map map = new HashMap();
+		map.put("pId", id);
+		map.put("pType", Integer.parseInt(type));
+		map.put("pNo", Integer.parseInt(no));
+		
+		try {
+			ss = ssf.openSession();
+			ss.update("insertIntoWishlist", map);
+			
+		} catch (Exception e) {
+			System.out.println("MainDAO:insertIntoWishlist():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+	}
+	
+	public static void deleteFromWishlist(String id, String type, String no) {
+		SqlSession ss = null;
+		Map map = new HashMap();
+		map.put("pId", id);
+		map.put("pType", Integer.parseInt(type));
+		map.put("pNo", Integer.parseInt(no));
+		
+		try {
+			ss = ssf.openSession(true);
+			ss.delete("deleteFromWishlist", map);
+			
+		} catch (Exception e) {
+			System.out.println("MainDAO:deleteFromWishlist():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+	}
+	
+	public static List<WishListVO_u> getWishListsByMemberId(String id) {
+		SqlSession ss = null;
+		List<WishListVO_u> list = new ArrayList<WishListVO_u>();
+		
+		try {
+			ss = ssf.openSession();
+			list = ss.selectList("getWishListsByMemberId", id);
+			
+		} catch (Exception e) {
+			System.out.println("MainDAO:getWishListsByMemberId():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
+		return list;
 	}
 
 }

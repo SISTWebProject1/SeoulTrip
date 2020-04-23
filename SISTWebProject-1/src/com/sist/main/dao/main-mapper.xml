@@ -114,6 +114,25 @@
 		WHERE cnt > 3
 		ORDER BY cnt DESC
 	</select>
+	
+	<parameterMap type="HashMap" id="insertWishlistMap">
+		<parameter property="pId" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="pType" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pNo" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+	</parameterMap>
+	<select id="insertIntoWishlist" parameterMap="insertWishlistMap" statementType="CALLABLE">
+		{CALL insertintowishlist(?,?,?)}
+	</select>
+
+	<delete id="deleteFromWishlist" parameterType="HashMap">
+		DELETE FROM wishlist
+		WHERE memberid=#{pId} AND type=#{pType} AND no=#{pNo}
+	</delete>
+	
+	<select id="getWishListsByMemberId" parameterType="String" resultType="WishListVO_u">
+		SELECT * FROM wishlist
+		WHERE memberid=#{id}
+	</select>
 </mapper>
 
 

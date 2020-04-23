@@ -16,5 +16,6 @@ public class HomeItemVO {
 	private int grade;
 	private int reviewCnt;
 	private List<HashTagVO> hashtags;
+	private boolean wish = false;
 
 }
