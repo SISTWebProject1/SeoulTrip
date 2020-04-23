@@ -59,8 +59,11 @@ public class DetailReviewModel {
 			request.setAttribute("category", "축제");
 		}
 		
+		request.setAttribute("type", type);
+		request.setAttribute("no", no);
 		request.setAttribute("hashtaglist", hashtaglist);
 		request.setAttribute("memberid", memberid);
+	
 		request.setAttribute("main_jsp", "../detail/detail_review_insert.jsp");
 		return "../main/index.jsp";
 	}
@@ -73,22 +76,39 @@ public class DetailReviewModel {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		String memberid = request.getParameter("memberid");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		String hashtag = request.getParameter("hashtag");
+		String regdate = request.getParameter("regdate");
+		String expdate = request.getParameter("expdate");
+		String grade = request.getParameter("grade");
 		
 		
-		String uploadPath=request.getSession().getServletContext().getRealPath("/");
-	
 		int size = 10*1024*1024;
-		String memberid=request.getParameter("memberid");
-		String title=request.getParameter("title");
 		String filename1=request.getParameter("photo1");
 		String filename2=request.getParameter("photo2");
-			
+	
+		System.out.println("리뷰 작성");
+		System.out.println(no);
+		System.out.println(type);
+		System.out.println(memberid);
+		System.out.println(title);
+		System.out.println(content);	
+		System.out.println(hashtag);
+		System.out.println(regdate);
+		System.out.println(expdate);
+		System.out.println(grade);
+		System.out.println(filename1);
+		System.out.println(filename2);
+		
+		String uploadPath=request.getSession().getServletContext().getRealPath("/");
+		System.out.println(uploadPath);
+		
 		try{
 		    MultipartRequest multi=new MultipartRequest(request,uploadPath,size,"UTF-8",new DefaultFileRenamePolicy());
-				
-		    memberid=multi.getParameter("memberid");
-		    title=multi.getParameter("title");
-				
 		    Enumeration files = multi.getFileNames();
 		    String file1 = (String)files.nextElement();
 		    filename1 = multi.getFilesystemName(file1);
@@ -98,8 +118,7 @@ public class DetailReviewModel {
 		}catch(Exception e){
 		    e.printStackTrace();
 		}
-		System.out.println(uploadPath);
-		
+
 		
 		
 		request.setAttribute("filename1",filename1 );
