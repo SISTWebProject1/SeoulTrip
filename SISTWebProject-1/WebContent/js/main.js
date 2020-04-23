@@ -308,6 +308,28 @@ $(document).ready(function() {
 			  list.children().last().remove();
 			  list.append('<li><a href="../logout_ok.do">Logout</a></li>');
 			  list.append('<li><a href="#"><img src="'+memberPhoto+'">&nbsp;&nbsp;'+memberName+'님 환영합니다.</a></li>');
+			  
+			  let wishlist;
+			  $.ajax({
+				 async:false,
+				 type:'post',
+				 url:'../main/getwishlistbyid.do',
+				 success:function(res){
+					 wishlist = res;
+				 }
+			  });
+			  
+			  $.each($('.heart_button'),function(){
+				  let type = $(this).attr('data-type');
+				  let no = $(this).attr('data-no');
+				  
+				  if(wishlist.includes(type+'_'+no)) {
+					  $(this).removeClass('heart_off');
+					  $(this).addClass('heart_on');
+					  $(this).children().css('color','red');
+				  }
+			  });
+			  
 		  } else {
 			  alert('오류');
 		  }
@@ -330,10 +352,13 @@ $(document).ready(function() {
 		     }
 		});
 	  
+	  
+	  
   });
   
+  
+  
 });
-
 
 
 
