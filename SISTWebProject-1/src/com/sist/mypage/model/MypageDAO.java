@@ -15,6 +15,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.sist.detail.dao.DetailReviewVO;
 import com.sist.detail.dao.Detail_Review_PhotoVO;
+import com.sist.reservation.model.ReservationVO;
+import com.sist.reservation.model.RestaurantVO;
 
 public class MypageDAO {
 
@@ -172,5 +174,32 @@ public class MypageDAO {
 		return list;
 		
 		
+	}
+	
+	
+	
+	public static List<BookingRestaurantVO_u> BookingListData(String id){
+		List<BookingRestaurantVO_u> Booking_list = new ArrayList<BookingRestaurantVO_u>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			Booking_list = session.selectList("BookingListData",id);
+			System.out.println("!1");
+			for(BookingRestaurantVO_u bvo : Booking_list){
+				RestaurantVO rvo = new RestaurantVO();
+				rvo = session.selectOne("restaurant_reservation_Data",bvo.getNo());
+				bvo.setRname_reservation(rvo.getRname());
+				bvo.setRphoto_reservation(rvo.getRphoto());
+				System.out.println("11 : "+bvo.getNo()+" : "+rvo.getRname());
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return Booking_list;
 	}
 }
