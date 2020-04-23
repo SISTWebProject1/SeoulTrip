@@ -13,7 +13,7 @@ import com.sist.detail.dao.*;
 import com.sist.detail.dao.DetailQnaDAO;
 import com.sist.detail.dao.DetailQnaVO;
 import com.sist.main.dao.LoginVO;
-
+import java.util.*;
 @Controller
 public class DetailQnaModel {
 	@RequestMapping("detail/detail_qna.do")
@@ -49,54 +49,90 @@ public class DetailQnaModel {
 	
 	@RequestMapping("detail/detail_qna_detail.do")
 	public String detail_detail(HttpServletRequest request, HttpServletResponse response){
-		String no = request.getParameter("no");
-		String type = request.getParameter("type");
+
 		LoginVO vo2 = (LoginVO) request.getSession().getAttribute("ss_member");
 		String memberid = vo2.getMemberId();
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		String page = request.getParameter("page");
 		
 		DetailDAO dao = new DetailDAO();
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
 		DetailFestivalVO fvo = new DetailFestivalVO();
-
+		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
+		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
+		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
+		
 		double mapx = 0;	
 		double mapy = 0;
-
+		int totalpage = 0;
+		int totalplace = 0;
+		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
+		List<String> tourtaglist = new ArrayList<String>();
+		List<String> restaglist = new ArrayList<String>();
 		String title = "";
+
 		Map typo = new HashMap();
 		
 		if(Integer.parseInt(type)==1){
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
+			rtvo = dao.detailRankTourData(Integer.parseInt(no));
+			totalplace = dao.getTotalTourplace();
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+			
 			System.out.println("장소 데이터");
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", tourtaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rtvo);
 			request.setAttribute("info", tvo);
 			request.setAttribute("title", tvo.getTname());
 			request.setAttribute("category", "명소");
 		}else if(Integer.parseInt(type)==2){
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
+			rrvo = dao.detailRankResData(Integer.parseInt(no));
+			totalplace = dao.getTotalRestaurant();
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			restaglist = dao.getResTag(Integer.parseInt(no));
+			
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", restaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
 		}else if(Integer.parseInt(type)==3){
 			fvo = dao.getFestivalData(Integer.parseInt(no));
+			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
+			totalplace = dao.getTotalFestival();
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
 		}
-	
 		System.out.println("질문게시판 작성");
 		
 		Map map = new HashMap();
@@ -140,48 +176,85 @@ public class DetailQnaModel {
 	
 	@RequestMapping("detail/detail_qna_insert.do")
 	public String reply_insert(HttpServletRequest request, HttpServletResponse response){
-		String no = request.getParameter("no");
-		String type = request.getParameter("type");
 		LoginVO vo2 = (LoginVO) request.getSession().getAttribute("ss_member");
 		String memberid = vo2.getMemberId();
+		
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		String page = request.getParameter("page");
 		
 		DetailDAO dao = new DetailDAO();
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
 		DetailFestivalVO fvo = new DetailFestivalVO();
-
+		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
+		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
+		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
+		
 		double mapx = 0;	
 		double mapy = 0;
-
+		int totalpage = 0;
+		int totalplace = 0;
+		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
+		List<String> tourtaglist = new ArrayList<String>();
+		List<String> restaglist = new ArrayList<String>();
 		String title = "";
+
 		Map typo = new HashMap();
 		
 		if(Integer.parseInt(type)==1){
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
+			rtvo = dao.detailRankTourData(Integer.parseInt(no));
+			totalplace = dao.getTotalTourplace();
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+			
 			System.out.println("장소 데이터");
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", tourtaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rtvo);
 			request.setAttribute("info", tvo);
 			request.setAttribute("title", tvo.getTname());
 			request.setAttribute("category", "명소");
 		}else if(Integer.parseInt(type)==2){
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
+			rrvo = dao.detailRankResData(Integer.parseInt(no));
+			totalplace = dao.getTotalRestaurant();
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			restaglist = dao.getResTag(Integer.parseInt(no));
+			
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", restaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
 		}else if(Integer.parseInt(type)==3){
 			fvo = dao.getFestivalData(Integer.parseInt(no));
+			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
+			totalplace = dao.getTotalFestival();
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
@@ -271,39 +344,74 @@ public class DetailQnaModel {
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
 		DetailFestivalVO fvo = new DetailFestivalVO();
-
+		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
+		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
+		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
+		
 		double mapx = 0;	
 		double mapy = 0;
-
+		int totalpage = 0;
+		int totalplace = 0;
+		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
+		List<String> tourtaglist = new ArrayList<String>();
+		List<String> restaglist = new ArrayList<String>();
 		String title = "";
+
 		Map typo = new HashMap();
 		
 		if(Integer.parseInt(type)==1){
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
+			rtvo = dao.detailRankTourData(Integer.parseInt(no));
+			totalplace = dao.getTotalTourplace();
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+			
 			System.out.println("장소 데이터");
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", tourtaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rtvo);
 			request.setAttribute("info", tvo);
 			request.setAttribute("title", tvo.getTname());
 			request.setAttribute("category", "명소");
 		}else if(Integer.parseInt(type)==2){
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
+			rrvo = dao.detailRankResData(Integer.parseInt(no));
+			totalplace = dao.getTotalRestaurant();
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			restaglist = dao.getResTag(Integer.parseInt(no));
+			
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", restaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
 		}else if(Integer.parseInt(type)==3){
 			fvo = dao.getFestivalData(Integer.parseInt(no));
+			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
+			totalplace = dao.getTotalFestival();
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
@@ -395,9 +503,11 @@ public class DetailQnaModel {
 		request.setAttribute("vo", vo);
 		request.setAttribute("type",type);
 		request.setAttribute("no", no);
-		request.setAttribute("detail_board_jsp","../detail/detail_qna_detail.jsp");
-		request.setAttribute("main_jsp", "../detail/detail.jsp");
-		return "../main/index.jsp";
+		
+		//detail/detail_qna_detail.do?type=1&no=198&seq=11
+//		request.setAttribute("detail_board_jsp","../detail/detail_qna_detail.jsp");
+//		request.setAttribute("main_jsp", "../detail/detail.jsp");
+		return "redirect:../detail/detail_qna_detail.do?type="+type+"&no="+no+"&seq="+seq;
 	}
 	
 	@RequestMapping("detail/password_check.do")
@@ -443,45 +553,79 @@ public class DetailQnaModel {
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
 		DetailFestivalVO fvo = new DetailFestivalVO();
-
+		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
+		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
+		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
+		
 		double mapx = 0;	
 		double mapy = 0;
-
+		int totalpage = 0;
+		int totalplace = 0;
+		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
+		List<String> tourtaglist = new ArrayList<String>();
+		List<String> restaglist = new ArrayList<String>();
 		String title = "";
+
 		Map typo = new HashMap();
 		
 		if(Integer.parseInt(type)==1){
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
+			rtvo = dao.detailRankTourData(Integer.parseInt(no));
+			totalplace = dao.getTotalTourplace();
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+			
 			System.out.println("장소 데이터");
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", tourtaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rtvo);
 			request.setAttribute("info", tvo);
 			request.setAttribute("title", tvo.getTname());
 			request.setAttribute("category", "명소");
 		}else if(Integer.parseInt(type)==2){
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
+			rrvo = dao.detailRankResData(Integer.parseInt(no));
+			totalplace = dao.getTotalRestaurant();
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			restaglist = dao.getResTag(Integer.parseInt(no));
+			
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", restaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
 		}else if(Integer.parseInt(type)==3){
 			fvo = dao.getFestivalData(Integer.parseInt(no));
+			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
+			totalplace = dao.getTotalFestival();
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
 		}
-	
 		System.out.println("질문게시판 작성");
 		
 		Map map = new HashMap();
@@ -573,44 +717,79 @@ public class DetailQnaModel {
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
 		DetailFestivalVO fvo = new DetailFestivalVO();
-
+		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
+		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
+		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
+		
 		double mapx = 0;	
 		double mapy = 0;
-
+		int totalpage = 0;
+		int totalplace = 0;
+		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
+		List<String> tourtaglist = new ArrayList<String>();
+		List<String> restaglist = new ArrayList<String>();
 		String title = "";
+
 		Map typo = new HashMap();
 		
 		if(Integer.parseInt(type)==1){
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
+			rtvo = dao.detailRankTourData(Integer.parseInt(no));
+			totalplace = dao.getTotalTourplace();
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+			
 			System.out.println("장소 데이터");
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", tourtaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rtvo);
 			request.setAttribute("info", tvo);
 			request.setAttribute("title", tvo.getTname());
 			request.setAttribute("category", "명소");
 		}else if(Integer.parseInt(type)==2){
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
+			rrvo = dao.detailRankResData(Integer.parseInt(no));
+			totalplace = dao.getTotalRestaurant();
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			restaglist = dao.getResTag(Integer.parseInt(no));
+			
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("taglist", restaglist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
 		}else if(Integer.parseInt(type)==3){
 			fvo = dao.getFestivalData(Integer.parseInt(no));
+			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
+			totalplace = dao.getTotalFestival();
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
 			typo.put("no", no);
+			totalpage = dao.getTotalReview(typo);
+			rclist = dao.getReviewCount(typo);
+			request.setAttribute("rclist", rclist);
+			request.setAttribute("totalplace", totalplace);
+			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
-		}
+		}	
 	
 		System.out.println("질문게시판 작성");
 		

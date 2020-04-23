@@ -27,7 +27,7 @@
 		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,num
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,rownum as num
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade
-		FROM review WHERE no=#{no} AND type=#{type} ORDER BY no ASC))
+		FROM review WHERE no=#{no} AND type=#{type} ORDER BY regdate DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -156,7 +156,7 @@
 	<select id="getRankingTourplace" resultType="DetailRankTourVO" parameterType="int">
 		SELECT no,Tname,average,cnt,RANKING
 		FROM (SELECT no,Tname,average,cnt,RANK() OVER (ORDER BY average DESC,cnt DESC ) AS RANKING
-		FROM (SELECT tourplace.no as no ,TNAME, AVG(review.grade) as average, Count(*) as cnt
+		FROM (SELECT tourplace.no as no ,TNAME, AVG(review.grade)*log(10,count(*)/10+10) as average, Count(*) as cnt
 		FROM tourplace,review
 		WHERE tourplace.no = review.no group by TNAME,tourplace.no
 		ORDER BY AVERAGE DESC, cnt DESC))
@@ -166,7 +166,7 @@
 	<select id="getRankingRestaurant" resultType="DetailRankResVO" parameterType="int">
 		SELECT no,Rname,average,cnt,RANKING
 		FROM (SELECT no,Rname,average,cnt,RANK() OVER (ORDER BY average DESC,cnt DESC ) AS RANKING
-		FROM (SELECT restaurant.no as no ,rNAME, AVG(review.grade) as average, Count(*) as cnt
+		FROM (SELECT restaurant.no as no ,rNAME, AVG(review.grade)*log(10,count(*)/10+10) as average, Count(*) as cnt
 		FROM restaurant,review
 		WHERE restaurant.no = review.no group by rNAME,restaurant.no
 		ORDER BY AVERAGE DESC, cnt DESC))
@@ -175,7 +175,7 @@
 	<select id="getRankingFestival" resultType="DetailRankFestivalVO" parameterType="int">
 		SELECT no,fname,average,cnt,RANKING
 		FROM (SELECT no,fname,average,cnt,RANK() OVER (ORDER BY average DESC,cnt DESC ) AS RANKING
-		FROM (SELECT festival.no as no ,fNAME, AVG(review.grade) as average, Count(*) as cnt
+		FROM (SELECT festival.no as no ,fNAME, AVG(review.grade)*log(10,count(*)/10+10) as average, Count(*) as cnt
 		FROM festival,review
 		WHERE festival.no = review.no group by fNAME,festival.no
 		ORDER BY AVERAGE DESC, cnt DESC))
@@ -220,6 +220,17 @@
 		WHERE restauranttag.tagcode = rtm
 	</select>
 	
+	
+	<select id="DetailhashtagList" resultType="String" parameterType="hashmap">
+		SELECT hashtagtable.tagname
+		FROM hashtagtable,(
+		SELECT hash, no, type
+		FROM (SELECT reviewtohashtag.tagcode as hash, review.reviewno, review.no as no, review.type as type
+		FROM reviewtohashtag,review
+		WHERE reviewtohashtag.reviewno = review.reviewno)
+		WHERE no=#{no} AND type=#{type} group by hash,no,type)
+		WHERE hashtagtable.tagcode = hash
+	</select>
 
 </mapper>
 

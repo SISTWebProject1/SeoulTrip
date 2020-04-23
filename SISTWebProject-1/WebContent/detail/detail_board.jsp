@@ -54,9 +54,12 @@
 				</div>
 			</div>
 			<div class="col-lg-2">
-				<button id="modalBtn" class="button"
-					style="margin-top: 50px; background-color: #555555; color: white;"
-					value="review">리뷰작성</button>
+				<c:if test="${ !empty ss_member }">
+					<a href="../detail/detail_review_insert.do?type=${type}&no=${no}">
+					<input type="button" class="button"	style="margin-top: 50px; background-color: #555555; color: white;"
+							value="리뷰작성" />
+				</a>
+				</c:if>	
 			</div>
 		</div>
 
