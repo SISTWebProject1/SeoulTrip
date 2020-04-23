@@ -89,8 +89,15 @@
 				<div class="col-lg-6 col-md-6">
 					<div class="single-post-item short">
 						<div class="main-image">
-							
-							<img src="${info.tphoto}" alt="image1" id="current" />
+							<c:if test="${type==1}">
+								<img src="${info.tphoto}" alt="image1" id="current" />
+							</c:if>
+							<c:if test="${type==2}">
+								<img src="${info.rphoto}" alt="image1" id="current" />
+							</c:if>
+							<c:if test="${type==3}">
+								<img src="${info.fphoto}" alt="image1" id="current" />
+							</c:if>
 						</div>
 							<br>
 						<div class="imgs">
