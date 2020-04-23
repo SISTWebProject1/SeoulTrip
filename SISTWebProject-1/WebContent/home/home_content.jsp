@@ -28,7 +28,12 @@
 											</figure>
 											
 											<div class="heart">
-												<button class="heart_button" type="button" data-type="${ hcvo.type }" data-no="${ hcvo.no }">
+												<button class="heart_button 
+													<c:choose>
+														<c:when test="${ hcvo.wish eq true }">heart_on</c:when>
+														<c:otherwise>heart_off</c:otherwise>
+													</c:choose>
+												 " type="button" data-type="${ hcvo.type }" data-no="${ hcvo.no }">
 													<i class="fas fa-heart"></i>
 												</button>
 											</div>

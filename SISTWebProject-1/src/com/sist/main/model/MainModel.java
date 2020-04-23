@@ -12,6 +12,7 @@ import com.sist.main.dao.HashTagVO;
 import com.sist.main.dao.HomeItemVO;
 import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.MainDAO;
+import com.sist.mypage.model.WishListVO_u;
 
 @Controller
 public class MainModel {
@@ -80,6 +81,61 @@ public class MainModel {
 		request.setAttribute("htList", htList);
 		
 		return "../main/search_result.jsp";
+	}
+	
+	@RequestMapping("main/insertintowishlist.do")
+	public String main_insertintowishlist(HttpServletRequest request, HttpServletResponse response) {
+		String type = request.getParameter("type");
+		String no = request.getParameter("no");
+		
+		String id;
+		try {
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			id = lvo.getMemberId();
+		} catch (Exception e) {
+			request.setAttribute("msg", "fail");
+			return "task_result.jsp";
+		}
+		
+		MainDAO.insertIntoWishlist(id, type, no);
+		
+		request.setAttribute("msg", "success");
+		return "task_result.jsp";
+	}
+	
+	@RequestMapping("main/deleteFromWishlist.do")
+	public String main_deleteFromWishlist(HttpServletRequest request, HttpServletResponse response) {
+		String type = request.getParameter("type");
+		String no = request.getParameter("no");
+		
+		String id;
+		try {
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			id = lvo.getMemberId();
+		} catch (Exception e) {
+			request.setAttribute("msg", "fail");
+			return "task_result.jsp";
+		}
+		
+		MainDAO.deleteFromWishlist(id, type, no);
+		
+		request.setAttribute("msg", "success");
+		return "task_result.jsp";
+	}
+	
+	@RequestMapping("main/getwishlistbyid.do")
+	public String main_getwishlistbyid(HttpServletRequest request, HttpServletResponse response) {
+		LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+		String id = lvo.getMemberId();
+		
+		List<WishListVO_u> list = MainDAO.getWishListsByMemberId(id);
+		String msg = "";
+		for(WishListVO_u vo : list) {
+			msg += ","+vo.getType()+"_"+vo.getNo();
+		}
+		
+		request.setAttribute("msg", msg.substring(1));
+		return "task_result.jsp";
 	}
 
 }

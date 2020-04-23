@@ -91,6 +91,59 @@ $(function(){
 		}		
 	});
 	
+	$('.heart_on').children().css('color','red');
+	$('.heart_off').children().css('color','gray');
+	
+	$('.heart_button').click(function(){
+		$(this).attr('disabled',true);
+		let task_result = false;
+		
+		let type = $(this).attr('data-type');
+		let no = $(this).attr('data-no');
+		
+		if($(this).hasClass('heart_on')) {
+			$.ajax({
+				async:false,
+				type:'post',
+				url:'../main/deleteFromWishlist.do',
+				data:{type:type,no:no},
+				success:function(res){
+					if(res=='success') {
+						task_result = true;
+					} else {
+						login_show();
+					}
+				}
+			});
+			if(task_result==true) {
+				$(this).removeClass('heart_on');
+				$(this).addClass('heart_off');
+				$(this).children().css('color','gray');
+			}
+		} else {			
+			$.ajax({
+				async:false,
+				type:'post',
+				url:'../main/insertintowishlist.do',
+				data:{type:type,no:no},
+				success:function(res){
+					if(res=='success') {
+						task_result = true;
+					} else {
+						login_show();
+					}
+				}
+			});
+			if(task_result==true) {
+				$(this).removeClass('heart_off');
+				$(this).addClass('heart_on');
+				$(this).children().css('color','red');
+			}
+		}
+		
+		$(this).attr('disabled',false);
+	});
+	
 });
 
 

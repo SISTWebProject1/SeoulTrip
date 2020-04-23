@@ -91,7 +91,6 @@
 
 	<!-- Start Align Area -->
 	<div class="whole-wrap">
-
 		<div class="container">
 
 			<h3 style="margin:4px; border-bottom: 2px groove;">프로필</h3>
@@ -102,9 +101,8 @@
 			<div class="profile-user-settings" style="text-align: left">
 				<h2 class="profile-user-name">${my_vo.name }</h2>
 				<sub style="color: gray" >ID:@${my_vo.memberId }</sub>
-				<div class="btn btn-sm btn-danger" style="margin: 5px;">
-					<a href="../mypage/profile_Update.do?id=${my_vo.memberId }" style="text-decoration: none;color:white">프로필 수정</a>
-				</div>
+				<a href="../mypage/profile_Update.do?id=${my_vo.memberId }" class="btn btn-xs btn-danger" style="background-color: red">프로필 수정</a>
+				<a href="../mypage/bookingList.do?id=${my_vo.memberId }" class="btn btn-xs btn-primary" style="margin:5px;background-color: blue">예약정보</a>
 			</div>
 
 			<div class="profile-bio" style="margin: 5px;">
