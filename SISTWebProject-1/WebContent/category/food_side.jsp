@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 	<div class="single-widget search-widget">
 		<form class="map_map" action="#">
 			<img src="https://static.tacdn.com/img2/maps/img_map.png" alt="" class="map_img">
@@ -9,9 +10,6 @@
 			</div>
 		</form>
 	</div>
-
-	<!-- 스크립트 부분 / 사용한 CDN (jQuery 3.3.1)-->
-
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -48,10 +46,11 @@
 			alert(output());
 		}); */
 	
-	    var delchk = [];
+	    var taglist = [];
 	    $('.check:checked').each(function(){
-	        delchk.push($(this).val());
+	    	taglist.push($(this).val());
 	    });
+
 	</script>
 
 
@@ -64,185 +63,10 @@
 			<c:forEach var="vo" items="${taglist }">
 			<div class="food_type_detail">
 				<div>
-					<input type="checkbox" class="check" value="${vo.tagname}">${vo.tagname}
+					<input type="checkbox" class="check" value="${vo.tagcode}">${vo.tagname}
 				</div>
 				<br>
 			</div>
 			</c:forEach>
 		</div>
 	</div>
-	
-<!-- 		<div class="food_type">
-			<span id="multiPrint"></span><br />
-			<div class="food_type_name">
-				<h5>음식점 타입</h5>
-			</div>
-			<div class="food_type_detail">
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox" class="check" value="간단한음식">간단한음식
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox" class="check" value="디저트">디저트
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox" class="check" value="커피&차">커피&차
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox" class="check" value="베이커리">베이커리
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox" class="check" value="바&펍">바&펍
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
-		<div class="food_type">
-			<div class="food_type_name">
-				<h5>식사 시간</h5>
-			</div>
-			<div class="food_type_detail">
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">아침
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">브런치
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">점심
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">저녁
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">간식
-					</div>
-				</div>
-				<br>
-			</div>
-		</div>
-		<div class="food_type">
-			<div class="food_type_name">
-				<h5>가격대</h5>
-			</div>
-			<div class="food_type_detail">
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">저렴
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">보통
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">고급
-					</div>
-					<br>
-				</div>
-			</div>
-		</div>
-		<div class="food_type">
-			<div class="food_type_name">
-				<h5>세계 요리</h5>
-			</div>
-			<div class="food_type_detail">
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">한식
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">중식
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">양식
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">일식
-					</div>
-					<br>
-				</div>
-			</div>
-		</div>
-		<div class="food_type">
-			<div class="food_type_name">
-				<h5>지역</h5>
-			</div>
-			<div class="food_type_detail">
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">마포구
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">종로구
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">중구
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">송파구
-					</div>
-					<br>
-				</div>
-			</div>
-		</div>
-		<div class="food_type">
-			<div class="food_type_name">
-				<h5>추천 대상</h5>
-			</div>
-			<div class="food_type_detail">
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">커플
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">혼자
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">친구
-					</div>
-				</div>
-				<div class="food_input">
-					<div class="food_input_detail">
-						<input type="checkbox">가족
-					</div>
-					<br>
-				</div>
-			</div>
-		</div> -->

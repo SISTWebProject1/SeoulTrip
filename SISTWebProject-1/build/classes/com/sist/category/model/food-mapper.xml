@@ -16,5 +16,17 @@
 	<select id="foodTagListData" resultType="com.sist.category.model.FoodTagVO" parameterType="java.util.Map">
 		SELECT * FROM restauranttag ORDER BY tagcode
 	</select>
+	
+	<select id="foodtagData" resultType="com.sist.category.model.FoodTagDetailVO" parameterType="java.util.Map">
+		SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade,y.rescheck 
+		FROM resttagmapper x
+		JOIN restaurant y ON x.rno=y.no
+		WHERE x.tagcode=#{foodtagcode} ORDER BY y.no;
+	</select>
+	
+	<select id="foodtagTotalPage" resultType="int" parameterType="java.util.Map">
+		SELECT CEIL(COUNT(*)/4.0) FROM (SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade FROM resttagmapper x
+		JOIN restaurant y ON x.rno=y.no WHERE x.tagcode=#{foodtagcode});
+	</select>
 
 </mapper>

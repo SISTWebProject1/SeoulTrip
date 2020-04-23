@@ -1,16 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
 <!-- 오른쪽  -->
 <div class="container-fluid bg-3 text-center">
 	<h3 style="">음식으로 서울여행</h3>
 	<br>
 	<div class="row">
 		<div class="col-sm-3" style="cursor: pointer;"
-			onclick="location.href='blog-details.html'">
+			onclick="../category/foodtag_content.do">
 			<div class="cate-img">
 				<img src="../img/category/seafood.jpg" class="img-responsive"
 					alt="Image">
@@ -111,8 +113,8 @@
 		<c:forEach var="vo" items="${list }">
 			<div class="col-lg-3 col-md-3">
 				<div class="single-post-item short">
-					<figure> <a href="blog-details.html"><img
-						class="post-img img-fluid" src="../img/category/restaurant_01.jpg"
+					<figure> <a href="foodtag_content.do"><img
+						class="post-img img-fluid" src="${vo.rphoto }"
 						alt=""></a> </figure>
 					<div class="heart">
 						<button class="heart_button" type="button">
@@ -199,7 +201,7 @@
 	</div>
 </div>
 
-
+<!-- https://media-cdn.tripadvisor.com/media/photo-p/12/f9/51/7c/photo1jpg.jpg -->
 
 
 <div class="col-lg-12">
@@ -210,14 +212,14 @@
 		<div class="row">
 			<c:forEach var="vo" items="${list }">
 				<div class="cate_body">
-					<div class="col-lg-4 col-md-4">
-						<a href=""><img class="post-img img-fluid" alt="음식점사진"
+					<div class="col-lg-4 col-md-4" style="height: 200px">
+							<a href=""><img class="post-img img-fluid" alt="음식점사진"
 							style="border-radius: 10px 10px 10px 10px;"
-							src="https://media-cdn.tripadvisor.com/media/photo-p/12/f9/51/7c/photo1jpg.jpg"></a>
-						<div class="heart">
-							<button class="heart_button" type="button">
-								<i class="far fa-heart fa-fw"></i>
-							</button>
+							src="${vo.rphoto }"></a>
+							<div class="heart">
+								<button class="heart_button" type="button">
+									<i class="far fa-heart fa-fw"></i>
+								</button>
 						</div>
 					</div>
 					<div class="col-lg-8 col-md-8">
@@ -286,9 +288,9 @@
 						class="lnr lnr-arrow-right"></span></span>
 			</a></li>
 		</c:if>
-
-
 	</ul>
 	</nav>
 </div>
 </section>
+</body>
+</html>
