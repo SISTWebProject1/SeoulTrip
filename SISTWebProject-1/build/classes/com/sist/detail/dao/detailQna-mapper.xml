@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.detail.dao.detailQna-mapper">
+	<select id="DetailQnaListData" resultType="DetailQnaVO" parameterType="hashmap">
+		SELECT seq,type,title,memberid,regdate,hit,group_tab,num
+		FROM (SELECT seq,type,title,memberid,regdate,hit,group_tab,rownum as num
+		FROM (SELECT seq,type,title,memberid,regdate,hit,group_tab
+		FROM qna WHERE no=#{no} AND type=#{type} ORDER BY group_id DESC, group_step ASC
+		))
+		WHERE num BETWEEN #{start} AND #{end}
+	</select>
+	<select id="DetailQnaFindData" resultType="DetailQnaVO" parameterType="hashmap">
+		SELECT seq,title,name,regdate,hit
+		FROM qna
+		WHERE ${fs} LIKE '%'||#{ss}||'%'
+	</select>	
+	
+	<select id="DetailQnaTotalPage" resultType="int" parameterType="hashmap">
+		SELECT CEIL(COUNT(*)/5.0) 
+		FROM qna
+		WHERE no=#{no} AND type=#{type}
+	</select>
+	<update id="DetailQnaIncrement" parameterType="hashmap">
+		UPDATE qna set
+		hit=hit+1
+		WHERE seq=#{seq} AND no=#{no} AND type=#{type}
+	</update>
+	
+	
+	<select id="DetailQnaDetailPage" resultType="DetailQnaVO" parameterType="hashmap">
+    	SELECT seq,no,type,memberid,title,content,regdate,hit,pwd
+		FROM qna
+		WHERE seq=#{seq} AND no=#{no} AND type=#{type}
+	</select>
+	
+	<insert id="DetailQnaInsert" parameterType="DetailQnaVO">
+		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(seq)+1,1) as seq FROM qna WHERE no=#{no} and type=#{type}
+		</selectKey>	
+		 INSERT INTO qna(no,type,seq,memberid,title,content,pwd,group_id) VALUES(
+      #{no},
+      #{type},
+      #{seq},
+      #{memberid},
+      #{title},
+      #{content},
+      #{pwd},
+      (SELECT NVL(MAX(group_id)+1,1) FROM qna WHERE no=#{no} AND type=#{type})
+    )
+	</insert>
+	
+	<update id="DetailQnaUpdate" parameterType="DetailQnaVO">
+		UPDATE qna SET 
+		memberid=#{memberid},title=#{title},content=#{content},pwd=#{pwd}
+		WHERE no=#{no} AND type=#{type}
+		AND seq=#{seq}
+	</update>
+	
+	<select id="DetailQnaGetPassword" resultType="string" parameterType="hashmap">
+		SELECT pwd FROM qna
+		WHERE seq=#{seq} AND no=#{no} AND type=#{type} 
+	</select>
+	
+	<!-- 답변 관련 SQL ###########################################################################################-->
+	
+	<!-- 
+			이중정렬 
+			ORDER BY group_id DESC,group_step ASC, 
+			
+									gi(DESC 정렬)		gs		gt		
+			AAA						 2				0		0
+				=> BBB				 2				(1->2)	1
+					=> CCC			 2				(2->3)	2
+				=> GGG				 2 				1		1 			* GGG 가 추가되면  GS가 자동 정렬되는 순간 답변의 순서(같은 값에 대해 이전에 입력한 값을 기준으로 출력 ) 
+																			 출력 순서를 조절 하기 위해서 BBB,CCC의 값을 바꿔주어야 한다.  (BBB +1 ,CCC+1 로 출력 답변의 값을 맞춘다) (GS는 최신 순서대로 출력하는게 구성상 맞다 ) 
+			==============================================
+			DDD						 1
+				=> EEE				 1
+			==============================================
+			KKK						 0
+	 -->
+	
+	
+	
+	<!-- pno의 정보를 읽는다. -->
+	<select id="DetailQnaParentInfoData" resultType="DetailQnaVO" parameterType="hashmap">
+		SELECT group_id,group_step,group_tab
+		FROM qna 
+		WHERE seq=${seq} AND no=#{no} AND type=#{type} 
+	</select>
+	
+	<!-- 클릭이 된 그룹에 한해서만 UPDATE 처리 추가된 스텝 보다 큰 값은 모두 +1 -->
+	<update id="DetailQnaGroupStepIncrement" parameterType="DetailQnaVO">
+		UPDATE qna SET 
+		group_step = group_step +1
+		WHERE group_id=#{group_id} AND group_step>#{group_step}	
+		AND no=#{no} AND type=#{type}
+	</update>
+	
+	<!-- group_id,step,tab,root 들은 DB에서 값을 처리 나머지는 입력된 대로 값을 받음 -->
+	<insert id="DetailQnaReplyInsert" parameterType="DetailQnaVO">
+		<selectKey keyProperty="seq" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(seq)+1,1) as seq FROM qna
+		</selectKey>
+		INSERT INTO qna (no,type,seq,memberid,title,content,pwd,group_id,group_step,group_tab,root)
+		VALUES(#{no},#{type},#{seq},#{memberid},#{title},#{content},#{pwd},#{group_id},#{group_step},#{group_tab},#{root})
+	</insert>
+	
+	<!-- Depth 증가  pno 증가-->
+	<update id="DetailQnaDepthIncrement" parameterType="hashmap">
+		UPDATE qna SET
+		depth=depth+1
+		WHERE seq=#{seq} AND no=#{no} AND type=#{type}
+	</update>
+	
+<!-- DELETE 처리 #################################################################### -->
+	<!--  Depth 0이면 삭제 , Depth가 0이 아니라면 삭제하지않고 UPDATE , 이후  Root의 depth를 바꿔야됨............ -->
+	<select id="DetailQnaDeleteInfoData" resultType="DetailQnaVO" parameterType="hashmap">
+		SELECT root,depth
+		FROM qna
+		WHERE seq=#{seq} AND no=#{no} AND type=#{type}
+	</select>
+	
+	<delete id="DetailQnaDelete" parameterType="int">
+		DELETE FROM qna
+		WHERE seq=#{seq} AND no=#{no} AND type=#{type}
+	</delete>
+	
+	<update id="DetailQnaTitleUpdate" parameterType="DetailQnaVO">
+		UPDATE qna SET
+		title=#{title}, content=#{content}
+		WHERE seq=#{seq}
+		AND no=#{no} AND type=#{type}	
+	</update>
+	
+	<!--  ROOT의  Depth 를 감소 시켜야 한다.  -->
+	<update id="DetailQnaDepthDecrement" parameterType="hashmap">
+		UPDATE qna SET
+		depth=depth-1
+		WHERE seq=#{seq} AND no=#{no} AND type=#{type}
+	</update>
+
+</mapper>

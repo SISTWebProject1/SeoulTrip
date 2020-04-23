@@ -25,7 +25,7 @@
 		<div class="col-lg-2">
 			<a href="../detail/detail_qna_insert.do?type=${type}&no=${no}"><input type="button" class="button"
 				style="margin-top: 50px; background-color: #555555; color: white;"
-				value="질문하기"/>질문하기!!!!</a>
+				value="질문하기"/></a>
 		</div>
 	</div>
 	<div id="result">

@@ -29,7 +29,7 @@
 			<hr>
 			<div class="container-alter container-summary">
 				<ul>
-					<li style="font-size:35px; font-weight:bolder;"><a href="#">${title}</a></li>
+					<li style="font-size:25px; font-weight:bolder;"><a href="#">${title}</a></li>
 					<li><a href="#">${rank.ranking }위 /${totalplace }개의 명소중</a></li>
 					<li>
 						<div class="tag_button">
@@ -90,7 +90,7 @@
 					<div class="single-post-item short">
 						<div class="main-image">
 							
-							<img src="${imglist[0].filepath}" alt="image1" id="current" />
+							<img src="${info.tphoto}" alt="image1" id="current" />
 						</div>
 							<br>
 						<div class="imgs">
