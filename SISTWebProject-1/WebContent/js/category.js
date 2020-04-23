@@ -37,7 +37,21 @@ imgTarget.on('change', function(){
 });
 
 
+/*$('.col-lg-4 img').each(function(){
+	$(this).css({
+	"left": "50%",
+	"top": "50%",
+	});
+	});
 
+$('.col-md-4 img').each(function(){
+	$(this).css({
+	"left": "50%",
+	"margin-left": "-"+( $(this).width()/2 )+"px",
+	"top": "50%",
+	"margin-top": "-"+( $(this).height()/2 )+"px"
+	});
+	});*/
 
 
 

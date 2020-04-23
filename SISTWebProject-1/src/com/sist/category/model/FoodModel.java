@@ -50,17 +50,12 @@ public class FoodModel {
 		   if(endPage>allPage)
 			   endPage=allPage;
 		   
+		   
+		   // 체크박스에 테그리스트 넘기기
 		   List<FoodTagVO> taglist=FoodDAO.foodTagListData(map);
 		   System.out.println(taglist.size());
-		   System.out.println(taglist.isEmpty());
 		   
-/*		   String fs=request.getParameter("fs");
-		   StringTokenizer st=new StringTokenizer(fs,",");
-		   List<FoodVO> sidelist= new ArrayList<FoodVO>();*/
-		   
-		   
-		   
-		   
+	   
 		   request.setAttribute("taglist", taglist);
 		   request.setAttribute("list", list);
 		   request.setAttribute("curpage", curpage);
@@ -75,6 +70,36 @@ public class FoodModel {
 		
 		return "../main/index.jsp";
 	}
-	
+	@RequestMapping("category/foodtag_content.do")
+	public String category_foodtag(HttpServletRequest request, HttpServletResponse response){
+		  Map map=new HashMap();
+		   // 체크박스에 테그리스트 넘기기
+		   List<FoodTagVO> taglist=FoodDAO.foodTagListData(map);
+		   System.out.println(taglist.size());
+		
+		 // 태그 페이지
+		 String tpage=request.getParameter("tpage");
+		   if(tpage==null)
+			   tpage="1";
+		   int tcurpage=Integer.parseInt(tpage);
+		   int trowSize=6;
+		   int tstart=(trowSize*tcurpage)-(trowSize-1);
+
+		   int tend=trowSize*tcurpage;
+		   
+		   Map tmap=new HashMap();
+		   tmap.put("tstart", tstart);
+		   tmap.put("tend", tend);
+		   
+		   
+		   
+		 List<FoodTagDetailVO> tlist= FoodDAO.foodTagDetailData(tmap);
+		 request.setAttribute("tlist", tlist);
+		 request.setAttribute("taglist", taglist);
+		   
+		request.setAttribute("main_jsp", "../category/foodtag_content.jsp");
+		request.setAttribute("banner_on", true);
+		return "../main/index.jsp";
+	}
 	
 }
