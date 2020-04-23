@@ -9,7 +9,7 @@
 
 	<!-- Start banner Area -->
 	<div class="container" style="background-color: #6f42c1">
-		<img src="../mypage/default_wishlist_image.png" class="img-fluid">
+		<img src="../mypage/default_wishlist.png" class="img-fluid">
 	</div>
 	<!-- End banner Area -->
 	<!-- Start main body Area -->

@@ -10,6 +10,7 @@ import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.MainDAO;
+import com.sist.reservation.model.RestaurantVO;
 
 
 @Controller
@@ -208,6 +209,18 @@ public class MypageModel {
 		}
 		request.setAttribute("main_jsp", "../mypage/update.jsp");
 		
+		return "../main/index.jsp";
+	}
+	
+	@RequestMapping("mypage/bookingList.do")
+	public String bookingList(HttpServletRequest request, HttpServletResponse response){
+		System.out.println("예약 정보 시작 :");
+		String id = request.getParameter("id");
+		
+		List<BookingRestaurantVO_u> Booking_list = new ArrayList<BookingRestaurantVO_u>();		
+		Booking_list = MypageDAO.BookingListData(id);
+		request.setAttribute("Booking_list", Booking_list);
+		request.setAttribute("main_jsp", "../mypage/booking_table.jsp");
 		return "../main/index.jsp";
 	}
 
