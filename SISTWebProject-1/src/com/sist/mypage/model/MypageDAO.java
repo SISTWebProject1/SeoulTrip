@@ -63,12 +63,12 @@ public class MypageDAO {
 		}
 		
 	}
-	public static List<ReviewVO_u> ReviewData(String id){
+	public static List<ReviewVO_u> ReviewData(Map map){
 		SqlSession session =null;
 		List<ReviewVO_u> list = new ArrayList<ReviewVO_u>();
 		try{
 			session = ssf.openSession();
-			list = session.selectList("reivewData",id);
+			list = session.selectList("reivewData",map);
 		}catch(Exception ex){
 			ex.getMessage();
 			ex.printStackTrace();
@@ -107,6 +107,8 @@ public class MypageDAO {
 				no = vo.getNo();
 				System.out.println(no);
 				photo=session.selectOne("mypage_getimage",no);
+				
+				System.out.println("photo : "+photo);
 				vo.setWish_photo(photo);
 			}
 			
@@ -181,16 +183,17 @@ public class MypageDAO {
 	public static List<BookingRestaurantVO_u> BookingListData(String id){
 		List<BookingRestaurantVO_u> Booking_list = new ArrayList<BookingRestaurantVO_u>();
 		SqlSession session = null;
+		String grade ="";
 		try {
 			session = ssf.openSession();
 			Booking_list = session.selectList("BookingListData",id);
-			System.out.println("!1");
 			for(BookingRestaurantVO_u bvo : Booking_list){
 				RestaurantVO rvo = new RestaurantVO();
 				rvo = session.selectOne("restaurant_reservation_Data",bvo.getNo());
 				bvo.setRname_reservation(rvo.getRname());
 				bvo.setRphoto_reservation(rvo.getRphoto());
-				System.out.println("11 : "+bvo.getNo()+" : "+rvo.getRname());
+				grade = session.selectOne("restaurant_review_score",bvo.getNo());
+				bvo.setGrade(grade);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

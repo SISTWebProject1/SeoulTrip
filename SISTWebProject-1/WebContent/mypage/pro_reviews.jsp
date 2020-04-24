@@ -23,32 +23,36 @@
 			</c:if>
 			<p class="sample-text">${vo1.content }</p>
 			<p>
-				<b>등록일 :&nbsp;<fmt:formatDate	value="${vo1.expdate }" pattern="yyyy-MM-dd" /></b>
+				<b>등록일 :&nbsp;<fmt:formatDate value="${vo1.expdate }"
+						pattern="yyyy-MM-dd" /></b>
 			</p>
-			<div  style="border-bottom: 2px groove; text-align: right">
+			<div style="border-bottom: 2px groove; text-align: right">
 				<input type="button" class="btn-btn-sm btn-danger" value="수정">
 				<input type="button" class="btn-btn-sm btn-danger" value="삭제">
 			</div>
 		</c:forEach>
-	</div>
-	<div class="text-center">
-		<ul class="pagination">
-			<c:if test="${startPage>1 }">
-				<li><a href="#">&lt;</a></li>
-			</c:if>
-			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<c:if test="${curpage==1 }">
-					<c:set var="typo" value="class=active" />
+		<div class="text-center">
+			<ul class="pagination">
+				<c:if test="${startPage>1 }">
+					<li><a href="../mypage/profile.do?page=${startPage-1 }">&lt;</a></li>
 				</c:if>
-				<c:if test="${curpage!=1 }">
-					<c:set var="typo" value="" />
+				<c:set var="type" value="" />
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<c:if test="${curpage==i }">
+						<c:set var="type" value="class=active" />
+					</c:if>
+					<c:if test="${curpage!=i }">
+						<c:set var="type" value="" />
+					</c:if>
+					<li ${type }><a href="../recipe/recipe.do?page=${i}">${i}</a></li>
+				</c:forEach>
+				<c:if test="${endPage<allPage }">
+					<li><a href="../mypage/profile.do?page=${endPage+1 }">&gt;</a></li>
 				</c:if>
-			</c:forEach>
-			<c:if test="${endPage<allPage }">
-				<li><a href="#">&gt;</a></li>
-			</c:if>
-		</ul>
+			</ul>
+		</div>
 	</div>
+
 
 </body>
 </html>
