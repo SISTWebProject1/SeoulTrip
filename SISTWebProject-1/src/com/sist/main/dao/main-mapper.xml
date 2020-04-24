@@ -141,6 +141,62 @@
 	<select id="setReviewnoHashtagname" parameterMap="reviewnoHashtagnameMap" statementType="CALLABLE">
 		{CALL setReviewnoHashtagname(?,?)}
 	</select>
+	
+	<parameterMap type="HashMap" id="reviewReplyDeleteMap">
+		<parameter property="pNo" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+	</parameterMap>
+	<select id="reviewReplyDelete" parameterMap="reviewReplyDeleteMap" statementType="CALLABLE">
+		{CALL replyDelete(?)}
+	</select>
+	
+	<parameterMap type="HashMap" id="reviewReplyInsertMap">
+		<parameter property="pRvno" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pId" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="pMsg" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+	</parameterMap>
+	<select id="reviewReplyInsert" parameterMap="reviewReplyInsertMap" statementType="CALLABLE">
+		{CALL replyInsert(?)}
+	</select>
+	
+	<resultMap type="ReviewReplyVO" id="reviewReplyMap">
+		<result property="no" column="no"/>
+		<result property="reviewNo" column="reviewno"/>
+		<result property="memberId" column="memberid"/>
+		<result property="regdate" column="regdate"/>
+		<result property="group_id" column="group_id"/>
+		<result property="group_step" column="group_step"/>
+		<result property="group_tab" column="group_tab"/>
+		<result property="root" column="root"/>
+		<result property="depth" column="depth"/>
+		<result property="msg" column="msg"/>
+	</resultMap>
+	<parameterMap type="HashMap" id="reviewReplyListDataMap">
+		<parameter property="pStart" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pEnd" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pRvno" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pResult" resultMap="reviewReplyMap" mode="OUT"/>
+	</parameterMap>
+	<select id="reviewReplyListData" parameterMap="reviewReplyListDataMap" statementType="CALLABLE">
+		{CALL replyListData(?,?,?,?)}
+	</select>
+	
+	<parameterMap type="HashMap" id="reviewReplyReplyInsertMap">
+		<parameter property="pRvno" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pPno" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pId" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+		<parameter property="pMsg" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>		
+	</parameterMap>
+	<select id="reviewReplyReplyInsert" parameterMap="reviewReplyReplyInsertMap" statementType="CALLABLE">
+		{CALL replyReplyInsert(?,?,?,?)}
+	</select>
+	
+	<parameterMap type="HashMap" id="reviewReplyTotalPageMap">
+		<parameter property="pRvno" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pTotal" javaType="java.lang.Integer" jdbcType="INTEGER" mode="OUT"/>
+	</parameterMap>
+	<select id="reviewReplyTotalPage" parameterMap="reviewReplyTotalPageMap" statementType="CALLABLE">
+		{CALL replyTotalPage(?,?)}
+	</select>
 </mapper>
 
 
