@@ -15,5 +15,18 @@
 		#{bookingnumber},#{memberid},#{no},#{reservationdate},#{time},#{inwon},#{name},#{email},#{tel})
 	</insert>
 	
-
+	<select id="recommendTag" parameterType="int" resultType="TagVO">
+		SELECT DISTINCT tagname,tagcode,rownum 
+		FROM (SELECT rno,tagname,RESTAURANTTAG.tagcode
+		FROM restauranttag,resttagmapper
+		WHERE restauranttag.tagcode=resttagmapper.tagcode)
+		WHERE rno=#{no} AND rownum=1
+	</select>
+	
+	<select id="getrestInfoTag" parameterType="int" resultType="RestaurantVO">
+		SELECT rno,tagcode,rname,rphoto,restaurant.no,rownum
+		FROM resttagmapper,restaurant
+		WHERE resttagmapper.rno=restaurant.no 
+		AND rownum&lt;=3 AND tagcode=#{tagcode}
+	</select>
 </mapper>

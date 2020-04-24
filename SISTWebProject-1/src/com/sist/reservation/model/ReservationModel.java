@@ -1,5 +1,9 @@
 package com.sist.reservation.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,10 +18,21 @@ public class ReservationModel {
 	public String reservation_detail(HttpServletRequest request,HttpServletResponse response)
 	{
 		String no=request.getParameter("no");
+		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		System.out.println(today);
 		System.out.println(no);
-		RestaurantVO vo=ReservationDAO.restaurantData(Integer.parseInt(no));
 		
-		request.setAttribute("vo", vo);
+		RestaurantVO vo=ReservationDAO.restaurantData(Integer.parseInt(no));
+		TagVO tvo=ReservationDAO.recommendTag(Integer.parseInt(no));
+		int tagcode=tvo.getTagcode();
+		
+		System.out.println(tagcode);
+		List<RestaurantVO> list=ReservationDAO.getrestInfoTag(tagcode);
+
+		request.setAttribute("today",today);
+		request.setAttribute("vo", vo); // 레스토랑 값 읽어오는 용도
+		request.setAttribute("tvo", tvo); // 추천해줄 레스토랑의 tagcode받아오는 용도
+		request.setAttribute("list", list); // 받아온 tagcode로 레스토랑 3개 출력
 		request.setAttribute("main_jsp", "../reservation/reservation.jsp");
 		return "../main/index.jsp";
 	}
@@ -60,7 +75,7 @@ public class ReservationModel {
 		
 		ReservationDAO.bookingInfoInsert(vo);
 		
-		return "redirect: ../detail/detail.do?type=2&no=273";
+		return "redirect: ../detail/detail.do?type=2&no"+no;
 	}
 	
 }	

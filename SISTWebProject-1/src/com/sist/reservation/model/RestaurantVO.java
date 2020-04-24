@@ -32,8 +32,8 @@ public class RestaurantVO {
     private String addr2;
     private String post;
     private String price;
-    
-        
+
+
 	public String getPost() {
 		return post;
 	}
