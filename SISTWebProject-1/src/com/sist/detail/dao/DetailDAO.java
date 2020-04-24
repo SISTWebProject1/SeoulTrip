@@ -112,13 +112,13 @@ public class DetailDAO {
 		return list;
 	}
 	
-	public List<DetailReviewVO> getReviewTop2(Map map){
-		List<DetailReviewVO> list = new ArrayList<DetailReviewVO>();
+	public DetailReviewVO getReviewTop(Map map){
+		DetailReviewVO vo = new DetailReviewVO();
 		SqlSession session = null;
 		
 		try {
 			session = ssf.openSession();
-			list = session.selectList("DetailReviewTop2",map);
+			vo = session.selectOne("DetailTop",map);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -127,9 +127,26 @@ public class DetailDAO {
 			if(session!=null)
 				session.close();
 		}
-		return list;
+		return vo;
 	}
-	
+
+	public DetailReviewVO getReviewWorst(Map map){
+		DetailReviewVO vo = new DetailReviewVO();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			vo = session.selectOne("DetailWorst",map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return vo;
+	}
 	//리뷰별 이미지 출력
 	public List<Detail_Review_PhotoVO> getImageForReview(int no){
 		List<Detail_Review_PhotoVO> list = new ArrayList<Detail_Review_PhotoVO>();
@@ -479,6 +496,37 @@ public class DetailDAO {
 			if(session!=null)
 				session.close();
 		}
-
+	}
+	
+	public static int reviewMin(Map map){
+		int min=0;
+		SqlSession session=null;
+		try {
+			session = ssf.openSession(true);
+			min = session.selectOne("reviewMin",map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return min;
+	}
+	
+	public static int reviewMax(Map map){
+		int max=0;
+		SqlSession session=null;
+		try {
+			session = ssf.openSession(true);
+			max = session.selectOne("reviewMax",map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return max;
 	}
 }

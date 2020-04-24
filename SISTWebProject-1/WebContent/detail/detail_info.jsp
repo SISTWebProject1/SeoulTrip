@@ -52,23 +52,34 @@
 						<div class="content_summary">
 							<ul>
 								<c:if test="${totalpage!=0}">
-								<c:forEach var="top" items="${toplist}">
-								<li>
-									<h5>탑 리뷰</h5>
-								</li>
-								<li>
-									<h3>${top.title}</h3>
-								</li>
-								<li>
-									<p>${top.content}</p> 
-								</li>
-								<li><a href="#">${top.memberid}</a>
-								 	<span>좋아요 숫자 ${top.likecount }</span>
-								 	<span>등록일 ${top.regdate }</span>
-								 </li>
+									<li>
+										<h5>TOP REVIEW</h5>
+									</li>
+									<li>
+										<h3>${top.title}</h3>
+									</li>
+									<li>
+										<p>${top.content}</p>
+									</li>
+									<li><a href="#">${top.memberid}</a>
+									 	<span>좋아요 숫자 ${top.likecount }</span>
+									 	<span>등록일 ${top.regdate }</span>
+									 </li>
 								 <br><br><br>
-								</c:forEach>
-								</c:if>
+								 	<li>
+										<h5>WORST REVIEW</h5>
+									</li>
+									<li>
+										<h3>${worst.title}</h3>
+									</li>
+									<li>
+										<p>${worst.content}</p>
+									</li>
+									<li><a href="#">${worst.memberid}</a>
+									 	<span>좋아요 숫자 ${worst.likecount }</span>
+									 	<span>등록일 ${worst.regdate }</span>
+									 </li>
+								 </c:if>
 								<c:if test="${totalpage==0}">
 								<ul>
 										<li>
