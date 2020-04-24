@@ -23,36 +23,34 @@
 	<!-- Site Title -->
 	<title>Reservation</title>
 	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="../css/style.css" />
 <style type="text/css">
 body {
  font-family: 'Noto Sans KR', sans-serif;
  font-size: 15px;
 }
-
-h3,h5 {
+h3,h5
+{
  font-family: 'Noto Sans KR', sans-serif;
  font-size: 30px;
 }
 
 h2 {
-
  font-family: 'Noto Sans KR', sans-serif;
  font-size: 40px;
 
 }
 
-b {
- font-size: 15px; 
+span {
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size:25px;
 }
 </style>
-	
-	
-	<link type="text/css" rel="stylesheet" href="../css/style.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript">
- $(function(){
+<script type="text/javascript">	
+$(function(){
 	$('#person').click(function(){
 		 var person=$('#person').val();
 		$.ajax({
@@ -60,8 +58,13 @@ b {
 			url:'../reservation/reservation.do',
 			success:function(res)
 			{
-				$('#data-person').text(person+"명");
-				$('#person2').val(person);
+				if(person==null)
+					hidden();
+				else
+				{
+					$('#data-person').text(person+"명");
+					$('#person2').val(person);
+				}
 			}
 		})
 	})
@@ -101,7 +104,6 @@ b {
 			}
 		})
 	})
-	
 	$('#tel').keyup(function(){
 		var tel=$('#tel').val();
 		var email=$('#email').val();
@@ -112,21 +114,28 @@ b {
 			{
 				$('#data-tel').text(tel);
 				$('#tel2').val(tel);
-				$('#email2').val(email);
-				$('#submit-btn').attr("disabled",false);
+				$('#email2').val(email);						
 			}
-			
 		})
 	})
  })
+</script>
+<script>
 
+var id=$('#id').val();
+		if(id==null)
+		{
+			document.on('로그인이 필요한 서비스입니다');
+			history.back();
+		}else
+		{
+			$('#submit-btn').attr("disabled",false);	
+		}
 </script>
 </head>
 
 <body>
-
-
-	<!-- start banner Area -->
+<!-- start banner Area -->
 	<section class="banner-area relative">
 		<div class="overlay overlay-bg"></div>
 		<div class="container">
@@ -152,8 +161,8 @@ b {
 	
 	<section class="contact-page-area" style="margin-top:20px;">	
 		   	<div class="row-info col-md-6 col-md-offset-0" style="width:100%;">
-						<img src="${vo.rphoto}" class="rphoto">
-							<!--  ../img/reservation.jpg -->
+						<img src="../img/reservation.jpg" class="rphoto">
+							<!-- ${vo.rphoto}  -->
 			</div>	
 			
 			
@@ -205,28 +214,21 @@ b {
 <!-- ==================================================================================================음식점정보 -->		
 	
 	
-<!-- ==================================================================================================예약단 -->			
-<div class="container">
-		<div class="section section-center">
+		
+<div class="container">		
 
-				
-						<div class="booking-form col-md-6" style="width:100%;margin-left:10px; margin-top:5px; border:0px solid blue;">
-								
-					
+<!-- ==================================================================================================예약단 -->	
+		<div class="section" >
+						<div class="booking-form col-md-6" style="width:100%;margin-left:10px; margin-top:5px;">
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약인원</span>
 											<select class="form-control" id="person" >
-									
-												<option>1</option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>
-												<option>6</option>
-												<option>7</option>
-												<option>8</option>
-												
+												<option selected disabled>인원을 선택해주세요</option>
+											<c:forEach var="i" begin="1" end="10">
+												<option>${i}</option>
+											</c:forEach>
 											</select>
+											
 											<span class="select-arrow"></span>
 										</div>
 							
@@ -234,6 +236,7 @@ b {
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약시간</span>
 											<select class="form-control" id="time" >
+												<option selected disabled>시간을 선택해주세요</option>
 											<c:forEach var="i" begin="11" end="18">
 												<option>${i}:00</option>		
 											</c:forEach>
@@ -245,8 +248,8 @@ b {
 									<div class="row" >
 									<div class="col-sm-12">
 										<div class="form-group col-sm-12">
-											<input class="form-control" type="date" id="date" >
-											<span class="form-label">Date</span>
+											<input class="form-control" type="date" id="date" name="date" min="${today }">
+											<span class="form-label">예약날짜</span>
 										</div>
 									</div>
 									</div>
@@ -255,7 +258,7 @@ b {
 								<div class="row">	
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" id="name" required>
+											<input class="form-control" type="text" id="name" name="name" >
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
@@ -263,7 +266,7 @@ b {
 									
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="email" id="email" required>
+											<input class="form-control" type="email" id="email" name="name" >
 											<span class="form-label">Email</span>
 										</div>
 									</div>
@@ -273,7 +276,7 @@ b {
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="tel" id="tel" required>
+											<input class="form-control" type="tel" id="tel" >
 											<span class="form-label">전화번호</span>
 										</div>
 									</div>
@@ -289,10 +292,10 @@ b {
 								<input type="hidden" name="name2" id="name2" value=""/>
 								<input type="hidden" name="email2" id="email2" value=""/>
 								<input type="hidden" name="tel2" id="tel2" value=""/>
-								<input type="hidden" name="id" id="id" value="${ss_member.memberId}"/>
-									  
+								<input type="hidden" name="id" id="id" value="${ss_member.memberId}" />			
+								<input type="hidden" name="tagcode" id="tagcode" value="${tvo.tagcode }">  
 								<div class="form-btn">
-									<button class="submit-btn col-md-6"  id="submit-btn" disabled>예약하기</button>
+									<button class="submit-btn col-md-6"  id="submit-btn">예약하기</button>
 								</div>
 							</form>
 							
@@ -302,48 +305,66 @@ b {
 									>취소하기</button>
 								</div>
 								
-							</div>	
-							
-					<div class="row col-md-offset-1">	
-						<table class="table col-md-offset-1" style="margin-top:30px;width:300px; height:300px;">			
-						 <tr class="row">
-						  	<th><b style="font-size:30px;">${ss_member.memberId==null?"방문객 ":ss_member.memberId} 님이 <br>관심있어 할 음식점</b></th>
-						  </tr>
-						 <tr class="row">
-						 	<td>1</td>
-						 	<td>recommendation1</td>
-						 
-						 </tr>
-						 <tr class="row">
-						 	<td>2</td>
-						 	<td>recommendation2</td>
-						 </tr>
-						 <tr class="row">
-						 	<td>3</td>
-						 	<td>recommendation3</td>
-						 </tr>
-						</table>
-					</div>
+					 </div>	
+			</div>	
+
 			<%-- ==========================================Ajax출력단========================================== --%>						
-					
-					  <div class="booking-form col-md-6 col-md-offset-0" id="result" style="border:0px solid red; margin-left:15px">
+			<div class="section">		
+					 <div class="booking-form col-md-6 col-md-offset-0" id="result" style="margin-left:15px" ">
 						 <div class="row">예약자명   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-name"></b> </div>
 						 <div class="row" >전화번호   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-tel"></b></div>
 						 <div class="row" >예약시간  &nbsp;&nbsp;  | &nbsp;&nbsp; <b id="data-time"></b></div>
 						 <div class="row" >예약인원   &nbsp;&nbsp; | &nbsp;&nbsp;<b id="data-person"></b></div>
 						 <div class="row" >예약날짜   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-date"></b></div>
 					</div>
-
+			</div>
+<!-- ==================================================================================================예약단 -->	
+			<div class="section">				
+					<div class="row" style="margin: 0px auto;">
+					 	<div class="row" style="margin: 0px auto;float:left; border:0px solid red;"> 
+					 	 </h5>	
+					 	 
+						 <b style="font-size:25px; text-align:center;">&nbsp;&nbsp;
+						  ${ss_member.memberId==null?"방문객 ":ss_member.memberId} 님에게  
+						&nbsp; # ${tvo.tagname } &nbsp;와 관련된  음식점을 추천해드려요</b>
+						</div>
+					 			
+					 </div>
+						 		
+					<div class="blank-space" style="margin-top:20px;"></div>							
+					
+					
+						
+						 <c:forEach var="rvo" items="${list}">
+			
+							<div class="col-md-4" style="margin: 0px auto; float:left;  width:100%;">
+						   	 <div class="thumbnail">
+						   		<a href="../detail/detail.do?type=2&no=${rvo.no}">
+						        <img src="${rvo.rphoto }" style="width:100%; height:200px;"/>
+						        </a>
+						          <div class="caption text-center">
+						          <p >${rvo.rname}</p>
+						         
+						        </div>
+						      
+						    	</div>
+ 							 </div>
+ 						 
+						 </c:forEach>
+					    
 	
-		</div>	
+		 	 </div>
+		
 						
 		<div class="section">
 				<div class="row col-md-12 col-md-offset-0">
-						<div id="map"  style="width:100%;height:400px;  border:0px solid white; margin-top:10px;"></div>
+						<div id="map"  style="width:100%; height:400px;  border:0px solid white; margin-top:10px;"></div>
 				</div>	
 		</div>
-	</div>					
-<!-- ==================================================================================================예약단 -->	
+		
+		
+</div>					
+
 
 
 
@@ -376,16 +397,15 @@ b {
 
 	</script>
 
-	<script src="js/jquery.min.js"></script>
 	<script>
 		$('.form-control').each(function () {
 			floatedLabel($(this));
 		});
-
+		
 		$('.form-control').on('input', function () {
 			floatedLabel($(this));
 		});
-
+		
 		function floatedLabel(input) {
 			var $field = input.closest('.form-group');
 			if (input.val()) {
@@ -394,8 +414,7 @@ b {
 				$field.removeClass('input-not-empty');
 			}
 		}
-	</script>
-	<!-- End contact-page Area -->
+		</script>
 
 	
 	
