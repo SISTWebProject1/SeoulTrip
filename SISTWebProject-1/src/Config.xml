@@ -33,6 +33,7 @@
 		<typeAlias type="com.sist.reservation.model.RestaurantVO" alias="RestaurantVO"/>
 		<typeAlias type="com.sist.reservation.model.TagVO" alias="TagVO"/>
 		<typeAlias type="com.sist.main.dao.ReviewReplyVO" alias="ReviewReplyVO"/>
+		<typeAlias type="com.sist.category.model.FoodTagDetailVO" alias="FoodTagDetailVO"/>
 	</typeAliases>
 	
 	<environments default="development">
