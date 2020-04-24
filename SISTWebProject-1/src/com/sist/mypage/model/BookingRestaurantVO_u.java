@@ -27,10 +27,15 @@ TEL
 	private String rname_reservation;
 	private String rphoto_reservation;
 	private int price_reservation;
+	private String grade;
 	
 	
-	
-	
+	public String getGrade() {
+		return grade;
+	}
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
 	public int getBookingnumber() {
 		return bookingnumber;
 	}

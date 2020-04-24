@@ -26,10 +26,14 @@
 			<div class="row gallery-item">
 				<c:forEach var ="vo" items="${ wish_list}">
 					<div class="col-md-4">
-					<a href="../detail/detail.do?type=${vo.type }&no=${vo.no}" class="img-pop-up"> 
-						<div class="single-gallery-image"
-							style="background: url(${vo.wish_photo});"></div>
-						<b>${vo.wishlistname }</b> </a>
+						<div class="single-gallery-image">
+					<a href="../detail/detail.do?type=${vo.type }&no=${vo.no}" class="img-pop-up">
+							<img src="${vo.wish_photo}" style="width:300px; height:200px;" >
+						<!--  <div class="single-gallery-image"
+							style="background: url(${vo.wish_photo});"></div>-->
+						<b>${vo.wishlistname }</b> 
+						</a>
+						</div>
 					</div>
 				</c:forEach>
 			</div>

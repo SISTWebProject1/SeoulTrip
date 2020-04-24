@@ -53,6 +53,10 @@ select {
 	width: 80px;
 	margin: 2px;
 }
+.row {
+   margin: 0px auto;
+   width:1000px;
+}
 </style>
 <link
 	href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500"
@@ -70,11 +74,9 @@ select {
 <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
-	<div class="wrapper row2" id="dialog">
-		<div id="services" class="clear">
-			<div class="row text-center">
-				<img src="reply.png">
-			</div>
+
+		<div class="container">
+			<h1 style="margin: 10px;">Profile 수정</h1>
 			<div class="row">
 				<form method=post action="../mypage/update_ok.do" id="reply_frm">
 					<table class="table table-hover">
@@ -83,7 +85,14 @@ select {
 							<td width=80%><input type=text name=id size=15
 								value="${my_vo.memberId }" disabled></td>
 						</tr>
-
+						<tr>
+							<th width="20%" class="text-right success">사진 </th>
+							<td width="80%">
+								<div class="filebox preview-image"> 
+      								<input type="file" name=photo id="photo" class="upload-hidden"> 
+      							</div>
+							</td>
+						</tr>
 
 						<tr>
 							<th width=20% id=name class="text-right success">이름</th>
@@ -171,7 +180,6 @@ select {
 					</table>
 				</form>
 			</div>
-		</div>
 	</div>
 </body>
 </html>
