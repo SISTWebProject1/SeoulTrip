@@ -21,9 +21,13 @@
 		WHERE memberId = #{memberId}
 	</update>
 	
-	<select id="reivewData" parameterType="string" resultType="ReviewVO_u">
-		SELECT * FROM review
-		WHERE memberId= #{memberId}
+	<select id="reivewData" parameterType="hashmap" resultType="ReviewVO_u">
+		SELECT no,reviewno,title,regdate,expdate,likecount,content,num
+		FROM (SELECT no,reviewno,title,regdate,expdate,likecount,content,rownum as num
+		FROM (SELECT no,reviewno,title,regdate,expdate,likecount,content
+		FROM review
+		WHERE memberId= #{id}))
+		where num BETWEEN #{start} and #{end} 
 	</select>
 	
 	<select id ="reviewCount" parameterType="string" resultType="int">
@@ -57,5 +61,10 @@
 	<select id="restaurant_reservation_Data" parameterType="int" resultType="com.sist.reservation.model.RestaurantVO">
 		SELECT rname,rphoto,price FROM restaurant
 		where no = #{no}
+	</select>
+	
+	<select id="restaurant_review_score" parameterType="int" resultType="string">
+		SELECT TRUNC(AVG(grade),2) FROM review
+		WHERE no=#{no} and type=2
 	</select>
 </mapper>

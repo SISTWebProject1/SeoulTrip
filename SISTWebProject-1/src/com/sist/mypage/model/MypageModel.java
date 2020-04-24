@@ -24,8 +24,6 @@ public class MypageModel {
 		
 		MemberVO_u my_vo = MypageDAO.PassWord_check(id);
 		
-		System.out.println("@@@"+my_vo.getCoverphoto());
-		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		sdf.applyPattern("yyyy-MM-dd");
 		String birth = sdf.format(my_vo.getBirth());
@@ -34,32 +32,13 @@ public class MypageModel {
 		request.setAttribute("birth", birth);
 		request.setAttribute("regdate", regdate);
 		request.setAttribute("my_vo", my_vo);
-		
-		
 		// _> Login 정보 End
-	
-		// review 확인 -> review_image, content,regdate, 등 memberId에 일치하는  review데이터를 수집
-		List<ReviewVO_u> review_list = new ArrayList<ReviewVO_u>();
-		int review_count=0;
-		review_list = MypageDAO.ReviewData(id);
-		// 사진을 모으기 위해 reviewNO를 배열에 저장
-		int reviewNo[] = new int[review_list.size()];
-		int i =0;
-		for(ReviewVO_u v1 : review_list){
-			System.out.println(i+" "+v1.getReviewno());
-			reviewNo[i] = v1.getReviewno();
-			i++;
-		}
-		review_list = MypageDAO.getImageForReview(review_list, reviewNo);
-		review_count = review_list.size();
-		// _> review 정보 End
 		
-		// 페이지
+		// review 확인 -> review_image, content,regdate, 등 memberId에 일치하는  review데이터를 수집
+		// 리뷰 페이지
 		String page =request.getParameter("page");
 		String type = request.getParameter("type");
-//		String no = request.getParameter("no");
 		int totalpage = 0;
-		
 		if(page==null)
 			page="1";
 		int curpage = Integer.parseInt(page);
@@ -71,22 +50,44 @@ public class MypageModel {
 		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
 		// 1~10 , 11~20
 		
-		int allPage = totalpage;
-		if(endPage>allPage)
-			endPage = allPage;
 		Map map = new HashMap();
-		//map.put("no", no);
-		map.put("type", type);
+		map.put("id", vo.getMemberId());
 		map.put("start", start);
 		map.put("end", end);
+		
+		
+		List<ReviewVO_u> review_list = new ArrayList<ReviewVO_u>();
+		int review_count=0;
+		review_list = MypageDAO.ReviewData(map);
+		// 사진을 모으기 위해 reviewNO를 배열에 저장
+		int reviewNo[] = new int[review_list.size()];
+		int i =0;
+		for(ReviewVO_u v1 : review_list){
+			reviewNo[i] = v1.getReviewno();
+			i++;
+		}
+		review_list = MypageDAO.getImageForReview(review_list, reviewNo);
+		review_count = review_list.size();
+		
+		int allPage = review_count;
+		if(endPage>allPage)
+			endPage = allPage;
+		// _> review 정보 End
+
+		
 		// review 정보 확인
 		//wishlist data 값
+		
 		List<WishListVO_u> wish_list = MypageDAO.wishlistData(vo.getMemberId());
 		
 		// wishlist 존재 여부 확인
 		int wish_count =0;
 		wish_count = wish_list.size();
 		
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("allPage", allPage);
 		request.setAttribute("mypage_review_list", review_list);
 		request.setAttribute("review_count", review_count);
 		request.setAttribute("wish_list", wish_list);
@@ -207,6 +208,7 @@ public class MypageModel {
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
+		request.setAttribute("banner_on", true);
 		request.setAttribute("main_jsp", "../mypage/update.jsp");
 		
 		return "../main/index.jsp";
@@ -214,11 +216,11 @@ public class MypageModel {
 	
 	@RequestMapping("mypage/bookingList.do")
 	public String bookingList(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("예약 정보 시작 :");
 		String id = request.getParameter("id");
 		
 		List<BookingRestaurantVO_u> Booking_list = new ArrayList<BookingRestaurantVO_u>();		
 		Booking_list = MypageDAO.BookingListData(id);
+		request.setAttribute("banner_on", true);
 		request.setAttribute("Booking_list", Booking_list);
 		request.setAttribute("main_jsp", "../mypage/booking_table.jsp");
 		return "../main/index.jsp";
