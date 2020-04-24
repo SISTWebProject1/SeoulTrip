@@ -197,6 +197,14 @@
 	<select id="reviewReplyTotalPage" parameterMap="reviewReplyTotalPageMap" statementType="CALLABLE">
 		{CALL replyTotalPage(?,?)}
 	</select>
+	
+	<parameterMap type="HashMap" id="reviewReplyUpdateMap">
+		<parameter property="pNo" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pMsg" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+	</parameterMap>
+	<select id="reviewReplyUpdate" parameterMap="reviewReplyUpdateMap" statementType="CALLABLE">
+		{CALL replyUpdate(?,?)}
+	</select>
 </mapper>
 
 

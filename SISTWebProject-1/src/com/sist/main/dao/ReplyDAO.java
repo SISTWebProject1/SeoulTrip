@@ -127,17 +127,18 @@ public class ReplyDAO {
 		return total;
 	}
 	
-	public static void form(int pNo) {
+	public static void replyUpdate(int parentReplyNo, String replyMsg) {
 		SqlSession ss = null;
 		
 		try {
 			ss = ssf.openSession();
 			Map map = new HashMap();
-			
-			ss.update("#", map);
+			map.put("pNo", parentReplyNo);
+			map.put("pMsg", replyMsg);
+			ss.update("reviewReplyUpdate", map);
 			
 		} catch (Exception e) {
-			System.out.println("ReplyDAO:#():");
+			System.out.println("ReplyDAO:replyUpdate():");
 			e.printStackTrace();
 		} finally {
 			if(ss!=null) ss.close();
