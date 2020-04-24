@@ -31,6 +31,15 @@
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
+	<select id="DetailReviewTop2" resultType="DetailReviewVO" parameterType="java.util.Map">
+		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,rownum
+		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade
+		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade 
+		FROM review WHERE no=#{no} AND type=#{type} ORDER BY regdate DESC)
+        ORDER BY likecount DESC, grade DESC)
+        WHERE rownum BETWEEN 1 AND 2
+	</select>
+	
 	
 	<resultMap type="DetailTourplaceVO" id="tourMap">
 
@@ -151,8 +160,10 @@
 		</selectKey>
 			INSERT INTO qna VALUES(#{memberid},#{no},#{title},#{pwd},#{content},#{type},#{seq})
 	</insert>
-	
+
 	<select id="detailQnaTotalPage" ></select>	 -->
+
+
 	<select id="getRankingTourplace" resultType="DetailRankTourVO" parameterType="int">
 		SELECT no,Tname,average,cnt,RANKING
 		FROM (SELECT no,Tname,average,cnt,RANK() OVER (ORDER BY average DESC,cnt DESC ) AS RANKING
@@ -232,6 +243,59 @@
 		WHERE hashtagtable.tagcode = hash
 	</select>
 
+
+	<!-- 
+	private int reviewno;
+	private int type;
+	private int no;
+	private String memberid;
+	private String title;
+	private Date regdate;
+	private Date expdate;
+	private int likecount;
+	private int groupid;
+	private int groupstep;
+	private int root;
+	private int depth;
+	private String content;
+	private int grade;
+
+ -->
+	<insert id="DetailReviewInsert" parameterType="DetailReviewVO">
+		<selectKey keyProperty="reviewno" resultType="int" order="BEFORE">
+			SELECT NVL(max(reviewno)+1,1) as reviewno FROM review
+		</selectKey>	
+			INSERT INTO review(reviewno,type,no,memberid,title,regdate,expdate,content,grade,depth,groupid) VALUES (
+			#{reviewno},
+			#{type},
+			#{no},
+			#{memberid},
+			#{title},
+			#{regdate},
+			#{expdate},
+			#{content},
+			#{grade},
+			#{depth},
+			(SELECT NVL(MAX(groupid)+1,1) FROM review)
+			)
+	</insert>
+	
+	<select id="getReviewNumber" resultType="int">
+		select MAX(reviewno) 
+		FROM review
+	</select>
+	
+	
+	<insert id="DetailPhotoInsert" parameterType="java.util.Map">
+		<selectKey keyProperty="no" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(no)+1,1) as no FROM photo
+		</selectKey>
+			INSERT INTO photo(no,reviewno,filepath) VALUES (
+			#{no},
+			#{reviewno},
+			#{filepath}
+			)
+	</insert>
 </mapper>
 
 

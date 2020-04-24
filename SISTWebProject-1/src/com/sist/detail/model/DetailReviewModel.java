@@ -1,5 +1,7 @@
 package com.sist.detail.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,57 +78,94 @@ public class DetailReviewModel {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		String no = request.getParameter("no");
-		String type = request.getParameter("type");
-		String memberid = request.getParameter("memberid");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		String hashtag = request.getParameter("hashtag");
-		String regdate = request.getParameter("regdate");
-		String expdate = request.getParameter("expdate");
-		String grade = request.getParameter("grade");
 		
-		
+		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
+
 		int size = 10*1024*1024;
-		String filename1=request.getParameter("photo1");
-		String filename2=request.getParameter("photo2");
-	
+
 		System.out.println("리뷰 작성");
-		System.out.println(no);
-		System.out.println(type);
-		System.out.println(memberid);
-		System.out.println(title);
-		System.out.println(content);	
-		System.out.println(hashtag);
-		System.out.println(regdate);
-		System.out.println(expdate);
-		System.out.println(grade);
-		System.out.println(filename1);
-		System.out.println(filename2);
-		
-		String uploadPath=request.getSession().getServletContext().getRealPath("/");
+
+		String uploadPath=request.getSession().getServletContext().getRealPath("/uploadCheck");
 		System.out.println(uploadPath);
-		
+		String path = "../uploadCheck/";
 		try{
 		    MultipartRequest multi=new MultipartRequest(request,uploadPath,size,"UTF-8",new DefaultFileRenamePolicy());
 		    Enumeration files = multi.getFileNames();
+		    String no = multi.getParameter("no");
+		    String type= multi.getParameter("type");
+		    String memberid= multi.getParameter("memberid");
+		    String title = multi.getParameter("title");
+		    String content = multi.getParameter("content");
+		    String hashtag = multi.getParameter("hashtag");
+		    String regdate = multi.getParameter("regdate");
+		    String expdate = multi.getParameter("expdate");
+		    
+		    String grade = multi.getParameter("grade");
+		   
 		    String file1 = (String)files.nextElement();
-		    filename1 = multi.getFilesystemName(file1);
+		    String filename1 = multi.getFilesystemName(file1);
 		    String file2 = (String)files.nextElement();
-		    filename2=multi.getFilesystemName(file2);
+		    String filename2=multi.getFilesystemName(file2);
+		     
+		    String filepath1 = path.concat(filename1);
+		    String filepath2 = path.concat(filename2);
+			
+		    int depth=0;
+			
+		    DetailReviewVO vo = new DetailReviewVO();
+			vo.setNo(Integer.parseInt(no));
+			vo.setType(Integer.parseInt(type));
+			vo.setMemberid(memberid);
+			vo.setTitle(title);
+			vo.setContent(content);
+			Date regdateParse = sdFormat.parse(regdate);
+			vo.setRegdate(regdateParse);
+			Date expdateParse = sdFormat.parse(expdate);
+			vo.setExpdate(expdateParse);
+			vo.setGrade(Integer.parseInt(grade));
+			vo.setDepth(depth);
+			DetailDAO.detailReviewInsert(vo);
+			int reviewNumber = DetailDAO.getReviewNumber();
+			
+			
+			Map map = new HashMap<>();
+			map.put("reviewno", reviewNumber);
+			map.put("filepath", filepath1);
+			DetailDAO.insertPhoto(map);
+			
+			System.out.println(reviewNumber);
+			request.setAttribute("filepath1", filepath1);
+			request.setAttribute("filepath2", filepath2);
+
 
 		}catch(Exception e){
 		    e.printStackTrace();
 		}
 
+		//insert 이후에 작업할 부분
+		//photo table update
+		//hashtagtable update
+//	    System.out.println(filepath1);
+//	    System.out.println(filepath2);
+//	    System.out.println(no);
+//	    System.out.println(type);
+//	    System.out.println(memberid);
+//	    System.out.println(title);
+//	    System.out.println(content);
+//	    System.out.println(hashtag);
+//	    System.out.println(regdate);
+//	    System.out.println(expdate);
+//	    System.out.println(grade);
+//		System.out.println(filename1);
+//		System.out.println(filename2);
 		
-		
-		request.setAttribute("filename1",filename1 );
-		request.setAttribute("filename2", filename2);
+//		request.setAttribute("filename1",filename1 );
+//		request.setAttribute("filename2", filename2);
 		request.setAttribute("uploadPath", uploadPath);
-		request.setAttribute("memberid", memberid);
-		request.setAttribute("title", title);
-		
+//		request.setAttribute("memberid", memberid);
+//		request.setAttribute("title", title);
+//		
+
 		request.setAttribute("main_jsp", "../detail/detail_review_check.jsp");
 		return "../main/index.jsp";
 	}

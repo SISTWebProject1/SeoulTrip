@@ -51,36 +51,58 @@
 					<div class="single-post-item short">
 						<div class="content_summary">
 							<ul>
+								<c:if test="${totalpage!=0}">
+								<c:forEach var="top" items="${toplist}">
 								<li>
-									<h4>리뷰하이라이트1</h4>
+									<h5>탑 리뷰</h5>
 								</li>
 								<li>
-									<h3>리뷰 대표명1</h3>
+									<h3>${top.title}</h3>
 								</li>
 								<li>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit, sed do eiusmod tempor incididunt ut labore et dolore
-										magna aliqua.</p> <a href="#">더보기(scroll)</a>
+									<p>${top.content}</p> 
 								</li>
-								<li><a href="#">리뷰 작성 ID</a> <span>리뷰 평점 (그리기
-										javascript)</span></li>
-							</ul>
-
-							<ul>
-								<li>
-									<h4>리뷰하이라이트2</h4>
-								</li>
-								<li>
-									<h3>리뷰 대표명2</h3>
-								</li>
-								<li>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-										elit, sed do eiusmod tempor incididunt ut labore et dolore
-										magna aliqua.</p> <a href="#">더보기(scroll)</a>
-								</li>
-								<li><a href="#">리뷰 작성 ID</a> <span>리뷰 평점 (그리기
-										javascript)</span></li>
+								<li><a href="#">${top.memberid}</a>
+								 	<span>좋아요 숫자 ${top.likecount }</span>
+								 	<span>등록일 ${top.regdate }</span>
+								 </li>
+								 <br><br><br>
+								</c:forEach>
+								</c:if>
+								<c:if test="${totalpage==0}">
 								<ul>
+										<li>
+											<h4>리뷰하이라이트1</h4>
+										</li>
+										<li>
+											<h3>리뷰 대표명1</h3>
+										</li>
+										<li>
+											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed do eiusmod tempor incididunt ut labore et dolore
+												magna aliqua.</p> <a href="#">더보기(scroll)</a>
+										</li>
+										<li><a href="#">리뷰 작성 ID</a> <span>리뷰 평점 (그리기
+												javascript)</span></li>
+									</ul>
+		
+									<ul>
+										<li>
+											<h4>리뷰하이라이트2</h4>
+										</li>
+										<li>
+											<h3>리뷰 대표명2</h3>
+										</li>
+										<li>
+											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
+												elit, sed do eiusmod tempor incididunt ut labore et dolore
+												magna aliqua.</p> <a href="#">더보기(scroll)</a>
+										</li>
+										<li><a href="#">리뷰 작성 ID</a> <span>리뷰 평점 (그리기
+												javascript)</span></li>
+									<ul>
+							</c:if>
+							</ul>
 						</div>
 					</div>
 				

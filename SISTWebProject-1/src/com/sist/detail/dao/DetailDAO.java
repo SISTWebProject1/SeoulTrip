@@ -111,6 +111,25 @@ public class DetailDAO {
 		}
 		return list;
 	}
+	
+	public List<DetailReviewVO> getReviewTop2(Map map){
+		List<DetailReviewVO> list = new ArrayList<DetailReviewVO>();
+		SqlSession session = null;
+		
+		try {
+			session = ssf.openSession();
+			list = session.selectList("DetailReviewTop2",map);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	
 	//리뷰별 이미지 출력
 	public List<Detail_Review_PhotoVO> getImageForReview(int no){
 		List<Detail_Review_PhotoVO> list = new ArrayList<Detail_Review_PhotoVO>();
@@ -414,5 +433,52 @@ public class DetailDAO {
 				session.close();
 		}
 		return list;
+	}
+	
+	//############################################################### 리뷰 INSERT
+	public static void detailReviewInsert(DetailReviewVO vo){
+		SqlSession session=null;
+		try {
+			session = ssf.openSession(true);
+			session.insert("DetailReviewInsert",vo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+	}
+	
+	public static int getReviewNumber(){
+		int reviewNumber= 0;
+		SqlSession session=null;
+		try {
+			session = ssf.openSession(true);
+			reviewNumber = session.selectOne("getReviewNumber");
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return reviewNumber;
+	}
+	
+	public static void insertPhoto(Map map){
+	
+		SqlSession session=null;
+		try {
+			session = ssf.openSession(true);
+			session.insert("DetailPhotoInsert",map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+
 	}
 }

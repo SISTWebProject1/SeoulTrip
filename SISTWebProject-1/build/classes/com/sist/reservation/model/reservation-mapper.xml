@@ -6,20 +6,13 @@
 		SELECT * FROM restaurant WHERE no=#{no}
 	</select>
 	
-	<select id="memberIdCount" resultType="int" parameterType="string">
-	  	SELECT COUNT(*) FROM member
-	  	WHERE memberid=#{memberid}
-	</select>
-	
-	<select id="membergetPwd" resultType="MemberVO_r" parameterType="string">
-		SELECT id,pwd,name
-		FROM member
-		WHERE memberid=#{memberid}	
-	</select>
-	
-	<insert id="bookingInsert" parameterType="ReservationVO"> ODER MAP
-		INSERT bookingrestaurant
-		INTO VALUES ((SELECT NVL(MAX(bookingnumber)+1,1),#{memberid},#{no},#{reservationdate},#{time},#{inwon})
+
+	<insert id="bookingInfoInsert" parameterType="ReservationVO"> 
+	  <selectKey keyProperty="bookingnumber" resultType="int" order="BEFORE">
+	   SELECT NVL(MAX(bookingnumber)+1,1)as bookingnumber FROM bookingrestaurant
+	  </selectKey>
+		INSERT INTO bookingrestaurant VALUES (
+		#{bookingnumber},#{memberid},#{no},#{reservationdate},#{time},#{inwon},#{name},#{email},#{tel})
 	</insert>
 	
 

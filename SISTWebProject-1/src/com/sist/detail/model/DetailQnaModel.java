@@ -1,17 +1,11 @@
 package com.sist.detail.model;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.detail.dao.*;
-import com.sist.detail.dao.DetailQnaDAO;
-import com.sist.detail.dao.DetailQnaVO;
 import com.sist.main.dao.LoginVO;
 import java.util.*;
 @Controller
@@ -88,6 +82,9 @@ public class DetailQnaModel {
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
 			System.out.println("장소 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -112,6 +109,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
@@ -129,6 +129,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
@@ -215,6 +218,9 @@ public class DetailQnaModel {
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
 			System.out.println("장소 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -239,6 +245,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
@@ -256,6 +265,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
@@ -372,6 +384,9 @@ public class DetailQnaModel {
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
 			System.out.println("장소 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -396,6 +411,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
@@ -413,6 +431,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
@@ -581,6 +602,9 @@ public class DetailQnaModel {
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
 			System.out.println("장소 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -605,6 +629,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
@@ -622,6 +649,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
@@ -745,6 +775,9 @@ public class DetailQnaModel {
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
 			System.out.println("장소 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -769,6 +802,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
@@ -786,6 +822,9 @@ public class DetailQnaModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");

@@ -26,30 +26,35 @@
   <div class="container">
     <h1 class="text-center">리뷰작성</h1>
     <div class="row">
-      <form name="frm" action="../detail/detail_review_insert_ok.do" method="post" id="frm" enctype="multipart/form-data">
+      <form action="../detail/detail_review_insert_ok.do" method="post" enctype="multipart/form-data">
       <table class="table table-hover">
       	<tr>
           <th width=20% class="danger text-right">분류</th>
           <td width=80%>
-            <p name=type size=35 readonly id="memberid">${category}</p>
+            <p> ${category}</p>
           </td>
         </tr>
         <tr>
           <th width=20% class="danger text-right">장소이름</th>
           <td width=80%>
-             <p name=title size=35 readonly id="memberid">${title}</p>
+             <p>${title}</p>
           </td>
         </tr>
-        <tr>
+         <tr>
           <th width=20% class="danger text-right">이름</th>
           <td width=80%>
-            <p name=memberid size=35 readonly id="memberid">${memberid}</p>
+            <p>${memberid}</p>
             <input type="hidden" name=no value="${no }"/>
 			<input type="hidden" name=type value="${type }"/>
 			<input type="hidden" name=memberid value="${memberid }"/>
           </td>
         </tr>
-   
+   		<tr>
+          <th width=20% class="danger text-right">리뷰제목 </th>
+          <td width=80%>
+             <input type=text name=title size=50 class="input-sm" required>
+         </td>
+        </tr>
         <tr>
           <th width=20% class="danger text-right">작성날짜</th>
           <td width=80%>
@@ -73,12 +78,12 @@
         <tr>
           <th width=20% class="danger text-right">점수</th>
           <td width=80%>
-            <select class="input-sm" name="grade">
-              <option>5점</option>
-              <option>4점</option>
-              <option>3점</option>
-              <option>2점</option>
-              <option>1점</option>
+            <select class="input-sm" name="grade" required>
+              <option>5</option>
+              <option>4</option>
+              <option>3</option>
+              <option>2</option>
+              <option>1</option>
             </select>
           </td>
         </tr>
@@ -86,14 +91,14 @@
         <tr>
           <th width=20% class="danger text-right">내용</th>
           <td width=80%>
-            <textarea rows="8" cols="60" name=content></textarea>
+            <textarea rows="8" cols="60" name=content required></textarea>
           </td>
         </tr>
         <tr>
       		<th width=20% class="danger text-right">사진 파일1</th>
       		<td width=80% >
       			<div class="filebox preview-image"> 
-      				<input type="file" name=photo1 id="photo1" class="upload-hidden"> 
+      				<input type="file" name=photo1 id="photo1" class="upload-hidden" required> 
       			</div>
       		</td>
       	</tr>
@@ -101,7 +106,7 @@
       		<th width=20% class="danger text-right">사진 파일2</th>
       		<td width=80% >
       			<div class="filebox preview-image"> 
-      				<input type="file" name=photo2 id="photo2" class="upload-hidden"> 
+      				<input type="file" name=photo2 id="photo2" class="upload-hidden" required> 
       			</div>
       		</td>
       	</tr>

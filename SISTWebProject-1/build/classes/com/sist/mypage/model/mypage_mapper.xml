@@ -47,4 +47,15 @@
 		SELECT tphoto from tourplace
 		WHERE no=#{no }
 	</select>
+	
+	<select id="BookingListData" parameterType="string" resultType="BookingRestaurantVO_u">
+		SELECT * FROM bookingrestaurant
+		where memberId = #{id}
+		ORDER BY bookingnumber
+	</select>
+	
+	<select id="restaurant_reservation_Data" parameterType="int" resultType="com.sist.reservation.model.RestaurantVO">
+		SELECT rname,rphoto,price FROM restaurant
+		where no = #{no}
+	</select>
 </mapper>
