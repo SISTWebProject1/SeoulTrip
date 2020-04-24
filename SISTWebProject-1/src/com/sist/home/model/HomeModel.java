@@ -21,6 +21,7 @@ public class HomeModel {
 	
 	@RequestMapping("home/home.do")
 	public String main_main(HttpServletRequest request, HttpServletResponse response) {
+		
 		request.setAttribute("main_jsp", "../home/home.jsp");
 		request.setAttribute("banner_on", true);
 		
@@ -39,10 +40,10 @@ public class HomeModel {
 		
 		List<FestivalVO> flist = FestivalDAO.festivalAllList();
 		request.setAttribute("flist", flist);
-		
+
 		List<HashTagVO> htlist = MainDAO.getHTListRegDESC();
 		request.setAttribute("htlist", htlist);
-		
+
 		List<HashTagVO> phtlist = MainDAO.getPopularHTList();
 		request.setAttribute("phtlist", phtlist);
 		

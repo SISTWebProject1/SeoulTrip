@@ -590,9 +590,16 @@ public class MainDAO {
 	}
 	
 	public static void setReviewnoHashtagnames(int reviewno, String hashtags) {
-		hashtags = hashtags.trim().replaceAll("[\\s]+", " ");
-		hashtags = hashtags.replaceAll("[^a-zA-Z가-힣]", "");
+		hashtags.trim().replaceAll("[\\s]+", " ");
 		String[] tagnames = hashtags.split(" ");
+		List<String> taglist = new ArrayList<String>();
+		for(int i=0; i<tagnames.length; i++) {
+			String tagname = tagnames[i];
+			if(tagname.startsWith("#")) {
+				tagname = tagname.replaceAll("[^가-힣]", "");
+				if(tagname.length()!=0) taglist.add(tagname);
+			}
+		}
 		
 		SqlSession ss = null;
 		Map map = new HashMap();
@@ -600,9 +607,9 @@ public class MainDAO {
 		try {
 			ss = ssf.openSession();
 			
-			for(int i=0; i<tagnames.length; i++) {
+			for(String tag : taglist) {
 				map.put("pReviewno", reviewno);
-				map.put("pTagname", tagnames[i]);
+				map.put("pTagname", tag);
 				ss.update("setReviewnoHashtagnames", map);
 				map.clear();
 			}
