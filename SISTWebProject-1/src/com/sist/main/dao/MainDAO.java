@@ -610,7 +610,7 @@ public class MainDAO {
 			for(String tag : taglist) {
 				map.put("pReviewno", reviewno);
 				map.put("pTagname", tag);
-				ss.update("setReviewnoHashtagnames", map);
+				ss.update("setReviewnoHashtagname", map);
 				map.clear();
 			}
 			

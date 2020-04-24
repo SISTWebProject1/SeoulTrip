@@ -14,6 +14,7 @@ import com.sist.controller.RequestMapping;
 
 import com.sist.detail.dao.*;
 import com.sist.main.dao.LoginVO;
+import com.sist.main.dao.MainDAO;
 
 import javafx.application.Application;
 
@@ -133,6 +134,7 @@ public class DetailReviewModel {
 			map.put("filepath", filepath1);
 			DetailDAO.insertPhoto(map);
 			
+			MainDAO.setReviewnoHashtagnames(reviewNumber, hashtag);
 			System.out.println(reviewNumber);
 			request.setAttribute("filepath1", filepath1);
 			request.setAttribute("filepath2", filepath2);
