@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<img src="../upload/4.jpg"/>
+	<img src="${filepath1}"/>
+	<img src="${filepath2}"/>
 </body>
 </html>

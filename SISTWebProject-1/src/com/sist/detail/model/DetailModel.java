@@ -31,6 +31,7 @@ public class DetailModel {
 		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
 		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
 		
+		
 		double mapx = 0;	
 		double mapy = 0;
 		int totalpage = 0;
@@ -55,6 +56,10 @@ public class DetailModel {
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
 			System.out.println("장소 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -79,6 +84,9 @@ public class DetailModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
@@ -96,6 +104,9 @@ public class DetailModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
+			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
+			toplist = dao.getReviewTop2(typo);
+			request.setAttribute("toplist", toplist);
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
