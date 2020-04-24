@@ -133,6 +133,14 @@
 		SELECT * FROM wishlist
 		WHERE memberid=#{id}
 	</select>
+	
+	<parameterMap type="HashMap" id="reviewnoHashtagnameMap">
+		<parameter property="pReviewno" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
+		<parameter property="pTagname" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
+	</parameterMap>
+	<select id="setReviewnoHashtagname" parameterMap="reviewnoHashtagnameMap" statementType="CALLABLE">
+		{CALL setReviewnoHashtagname(?,?)}
+	</select>
 </mapper>
 
 
