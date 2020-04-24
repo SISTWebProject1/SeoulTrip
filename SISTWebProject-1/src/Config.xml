@@ -31,6 +31,8 @@
 		<typeAlias type="com.sist.reservation.model.ReservationVO" alias="ReservationVO"/>
 		<typeAlias type="com.sist.reservation.model.MemberVO_r" alias="MemberVO_r"/>
 		<typeAlias type="com.sist.reservation.model.RestaurantVO" alias="RestaurantVO"/>
+		<typeAlias type="com.sist.reservation.model.TagVO" alias="TagVO"/>
+		<typeAlias type="com.sist.main.dao.ReviewReplyVO" alias="ReviewReplyVO"/>
 	</typeAliases>
 	
 	<environments default="development">
