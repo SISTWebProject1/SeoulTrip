@@ -66,23 +66,34 @@ public class FoodDAO {
 		return taglist;
 	}
 	
-/*	public static FoodVO foodSearchData(int fs)
-	   {
-		FoodVO vo=new FoodVO();
-		   SqlSession session=null;
-		   try
-		   {
-			   session=ssf.openSession();
-			   vo=session.selectOne("foodSideData",fs);
-		   }catch(Exception ex)
-		   {
-			   ex.printStackTrace();
-		   }
-		   finally
-		   {
-			   if(session!=null)
-				   session.close();
-		   }
-		   return vo;
-	   }*/
+	public static List<FoodTagDetailVO> foodTagDetailData(Map map){
+		SqlSession session = null;
+		List<FoodTagDetailVO> tlist = new ArrayList<FoodTagDetailVO>();
+		try{
+			session = ssf.openSession();
+			tlist = session.selectList("foodTagListData",map);
+		}catch(Exception ex){
+			
+		}finally{
+			if (session != null)
+				session.close();
+		}
+		return tlist;
+	}
+	
+	public static int foodTagTotalPage(int vo) {
+		SqlSession session = null;
+		int tagtotal = 0;
+		try {
+			session = ssf.openSession();
+			tagtotal = session.selectOne("foodTotalPage");
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+		} finally {
+			if (session != null)
+				session.close();
+		}
+		return tagtotal;                                                                                                                                                                                                                                                                                                                            
+	}
 }
+	

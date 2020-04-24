@@ -588,6 +588,32 @@ public class MainDAO {
 		
 		return list;
 	}
+	
+	public static void setReviewnoHashtagnames(int reviewno, String hashtags) {
+		hashtags = hashtags.trim().replaceAll("[\\s]+", " ");
+		hashtags = hashtags.replaceAll("[^a-zA-Z가-힣]", "");
+		String[] tagnames = hashtags.split(" ");
+		
+		SqlSession ss = null;
+		Map map = new HashMap();
+		
+		try {
+			ss = ssf.openSession();
+			
+			for(int i=0; i<tagnames.length; i++) {
+				map.put("pReviewno", reviewno);
+				map.put("pTagname", tagnames[i]);
+				ss.update("setReviewnoHashtagnames", map);
+				map.clear();
+			}
+			
+		} catch (Exception e) {
+			System.out.println("MainDAO:setReviewnoHashtagnames():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+	}
 
 }
 
