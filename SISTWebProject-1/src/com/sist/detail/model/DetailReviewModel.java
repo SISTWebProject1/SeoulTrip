@@ -79,7 +79,8 @@ public class DetailReviewModel {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+		String no = "";
+		String type="";
 		DateFormat sdFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		int size = 10*1024*1024;
@@ -92,8 +93,8 @@ public class DetailReviewModel {
 		try{
 		    MultipartRequest multi=new MultipartRequest(request,uploadPath,size,"UTF-8",new DefaultFileRenamePolicy());
 		    Enumeration files = multi.getFileNames();
-		    String no = multi.getParameter("no");
-		    String type= multi.getParameter("type");
+		    no = multi.getParameter("no");
+		    type= multi.getParameter("type");
 		    String memberid= multi.getParameter("memberid");
 		    String title = multi.getParameter("title");
 		    String content = multi.getParameter("content");
@@ -138,37 +139,16 @@ public class DetailReviewModel {
 			System.out.println(reviewNumber);
 			request.setAttribute("filepath1", filepath1);
 			request.setAttribute("filepath2", filepath2);
-
+			request.setAttribute("no", no);
+			request.setAttribute("type", type);
 
 		}catch(Exception e){
 		    e.printStackTrace();
 		}
-
-		//insert 이후에 작업할 부분
-		//photo table update
-		//hashtagtable update
-//	    System.out.println(filepath1);
-//	    System.out.println(filepath2);
-//	    System.out.println(no);
-//	    System.out.println(type);
-//	    System.out.println(memberid);
-//	    System.out.println(title);
-//	    System.out.println(content);
-//	    System.out.println(hashtag);
-//	    System.out.println(regdate);
-//	    System.out.println(expdate);
-//	    System.out.println(grade);
-//		System.out.println(filename1);
-//		System.out.println(filename2);
-		
-//		request.setAttribute("filename1",filename1 );
-//		request.setAttribute("filename2", filename2);
 		request.setAttribute("uploadPath", uploadPath);
-//		request.setAttribute("memberid", memberid);
-//		request.setAttribute("title", title);
-//		
-
-		request.setAttribute("main_jsp", "../detail/detail_review_check.jsp");
-		return "../main/index.jsp";
+/*		request.setAttribute("main_jsp", "../detail/detail.jsp");
+		request.setAttribute("detail_board_jsp","../detail/detail_board.jsp");*/
+		
+		return "redirect:../detail/detail.do?type="+type+"&no="+no;
 	}
 }

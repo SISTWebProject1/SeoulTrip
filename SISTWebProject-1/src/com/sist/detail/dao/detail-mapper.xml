@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.detail.dao.detail-mapper">
+	<select id="reviewMin" resultType="int">
+		SELECT MIN(grade)
+        FROM REVIEW
+        WHERE no=#{no} AND type=#{type}
+	</select>
+
+	<select id="reviewMax" resultType="int">
+		SELECT MAX(grade)
+        FROM REVIEW
+        WHERE no=#{no} AND type=#{type}
+	</select>
+
+
 	<select id="getTourplaceData" resultType="DetailTourplaceVO" parameterType="int">
 		SELECT * 
 		FROM tourplace
@@ -27,19 +40,29 @@
 		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,num
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,rownum as num
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade
-		FROM review WHERE no=#{no} AND type=#{type} ORDER BY regdate DESC))
+		FROM review WHERE no=#{no} AND type=#{type} ORDER BY reviewno DESC))
 		WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
-	<select id="DetailReviewTop2" resultType="DetailReviewVO" parameterType="java.util.Map">
-		SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,rownum
-		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade
+	<select id="DetailTop" resultType="DetailReviewVO" parameterType="java.util.Map">
+        SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,numm
+        FROM ( SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade, rownum as numm
+        FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade 
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade 
 		FROM review WHERE no=#{no} AND type=#{type} ORDER BY regdate DESC)
-        ORDER BY likecount DESC, grade DESC)
-        WHERE rownum BETWEEN 1 AND 2
-	</select>
-	
+        WHERE grade=#{grade} ORDER BY likecount DESC) ORDER BY numm)
+        WHERE numm=#{numm}
+ 	</select>
+
+	<select id="DetailWorst" resultType="DetailReviewVO" parameterType="java.util.Map">
+        SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade,numm
+        FROM ( SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade, rownum as numm
+        FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade 
+		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade 
+		FROM review WHERE no=#{no} AND type=#{type} ORDER BY regdate DESC)
+        WHERE grade=#{grade} ORDER BY likecount ASC) ORDER BY numm)
+        WHERE numm=#{numm}
+ 	</select>
 	
 	<resultMap type="DetailTourplaceVO" id="tourMap">
 

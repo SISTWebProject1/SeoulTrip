@@ -30,7 +30,7 @@ public class DetailModel {
 		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
 		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
 		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
-		
+
 		
 		double mapx = 0;	
 		double mapy = 0;
@@ -41,24 +41,37 @@ public class DetailModel {
 		List<String> restaglist = new ArrayList<String>();
 		String title = "";
 
-		Map typo = new HashMap();
 		
+		Map typo = new HashMap();
 		if(Integer.parseInt(type)==1){
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
 			rtvo = dao.detailRankTourData(Integer.parseInt(no));
 			totalplace = dao.getTotalTourplace();
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
+			typo.put("type", Integer.parseInt(type));
+			typo.put("no", Integer.parseInt(no));
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
+			Map test = new HashMap();
+			int rownum=1;
+			int max=dao.reviewMax(typo);
+			int min=dao.reviewMin(typo);
+			test.put("type", type);
+			test.put("no", no);
+			test.put("numm",rownum);
+			test.put("grade", max);
 			System.out.println("장소 데이터");
-			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
-			toplist = dao.getReviewTop2(typo);
-			request.setAttribute("toplist", toplist);
+			DetailReviewVO top = new DetailReviewVO();
+			top = dao.getReviewTop(test);
+			request.setAttribute("top", top);
+			
+			DetailReviewVO worst = new DetailReviewVO();
+			test.put("grade", min);
+			worst = dao.getReviewWorst(test);
+			request.setAttribute("worst", worst);
 			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
@@ -79,14 +92,28 @@ public class DetailModel {
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
 			
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
-			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
-			toplist = dao.getReviewTop2(typo);
-			request.setAttribute("toplist", toplist);
+			Map test = new HashMap();
+			int rownum=1;
+			int max=dao.reviewMax(typo);
+			int min=dao.reviewMin(typo);
+			test.put("type", type);
+			test.put("no", no);
+			test.put("numm",rownum);
+			test.put("grade", max);
+			DetailReviewVO top = new DetailReviewVO();
+			top = dao.getReviewTop(test);
+			request.setAttribute("top", top);
+			
+			DetailReviewVO worst = new DetailReviewVO();
+			test.put("grade", min);
+			worst = dao.getReviewWorst(test);
+			request.setAttribute("worst", worst);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
 			request.setAttribute("category", "음식점");
@@ -104,9 +131,22 @@ public class DetailModel {
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
 			System.out.println("축제데이터");
-			List<DetailReviewVO> toplist = new ArrayList<DetailReviewVO>();
-			toplist = dao.getReviewTop2(typo);
-			request.setAttribute("toplist", toplist);
+			Map test = new HashMap();
+			int rownum=1;
+			int max=dao.reviewMax(typo);
+			int min=dao.reviewMin(typo);
+			test.put("type", type);
+			test.put("no", no);
+			test.put("numm",rownum);
+			test.put("grade", max);
+			DetailReviewVO top = new DetailReviewVO();
+			top = dao.getReviewTop(test);
+			request.setAttribute("top", top);
+			
+			DetailReviewVO worst = new DetailReviewVO();
+			test.put("grade", min);
+			worst = dao.getReviewWorst(test);
+			request.setAttribute("worst", worst);
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
