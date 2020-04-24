@@ -226,7 +226,7 @@
 						<div class="body_main_text_title">${vo.rname }</div>
 						<div class="body_main_text_info">
 							<div class="grade">
-								<p class="grade2" style="WIDTH: 80%;"></p>
+								<p class="grade2" style="WIDTH: 100%;"></p>
 							</div>
 							<div class="body_main_text_info_reviewNum">&nbsp;xxx건의 리뷰</div>
 							<div class="body_main_text_info_foodtype">#한식 #저렴 #점심</div>

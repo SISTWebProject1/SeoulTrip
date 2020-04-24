@@ -17,16 +17,27 @@
 		SELECT * FROM restauranttag ORDER BY tagcode
 	</select>
 	
-	<select id="foodtagData" resultType="com.sist.category.model.FoodTagDetailVO" parameterType="java.util.Map">
-		SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade,y.rescheck 
-		FROM resttagmapper x
+	<select id="foodTagDetailData" resultType="com.sist.category.model.FoodTagDetailVO" parameterType="java.util.Map">
+		CREATE OR REPLACE VIEW FOODTAG_CONTENT AS
+		SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade FROM resttagmapper x
 		JOIN restaurant y ON x.rno=y.no
-		WHERE x.tagcode=#{foodtagcode} ORDER BY y.no;
+		WHERE x.tagcode=7 ORDER BY y.no
+		<!-- #{foodtagcode} -->
 	</select>
 	
-	<select id="foodtagTotalPage" resultType="int" parameterType="java.util.Map">
-		SELECT CEIL(COUNT(*)/4.0) FROM (SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade FROM resttagmapper x
-		JOIN restaurant y ON x.rno=y.no WHERE x.tagcode=#{foodtagcode});
+	<select id="foodData" resultType="com.sist.category.model.FoodTagDetailVO" parameterType="java.util.Map">
+		SELECT tagcode,no,rname,openhour,rphoto,price,rescheck,grade,num
+		FROM (SELECT tagcode,no,rname,openhour,rphoto,price,rescheck,grade,rownum as num
+		FROM (SELECT tagcode,no,rname,openhour,rphoto,price,rescheck,grade
+		FROM FOODTAG_CONTENT ORDER BY no ASC))
+		WHERE num BETWEEN #{start} AND #{end}
+		<!-- WHERE num BETWEEN #{tstart} AND #{tend}; -->
+	</select>
+	
+	<select id="foodTagTotalPage" resultType="int"> <!-- parameterType="int" -->
+		SELECT CEIL(COUNT(*)/6.0) FROM (SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade FROM resttagmapper x
+		JOIN restaurant y ON x.rno=y.no WHERE x.tagcode=7)
+		<!-- JOIN restaurant y ON x.rno=y.no WHERE x.tagcode=#{foodtagcode}); -->
 	</select>
 
 </mapper>

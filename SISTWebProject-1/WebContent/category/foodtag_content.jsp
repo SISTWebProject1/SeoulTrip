@@ -17,6 +17,7 @@
 				</div>
 				<div class="col-lg-9 post-list">
 					<!-- Start food_content Area -->
+					<section class="post-area">
 					<div class="col-lg-12">
 						<h3>
 							<p>서울의 음식점</p>
@@ -72,7 +73,7 @@
 
 								<c:if test="${startPage>1 }">
 									<li class="page-item"><a
-										href="../category/food.do?page=${startPage-1}"
+										href="../category/foodtag_content.do?page=${startPage-1}"
 										class="page-link" aria-label="Previous"> <span
 											aria-hidden="true"> <span class="lnr lnr-arrow-left"></span></span>
 									</a></li>
@@ -87,11 +88,11 @@
 										<c:set var="type" value="" />
 									</c:if>
 									<li ${type } class="page-item"><a
-										href="../category/food.do?page=${i}" class="page-link">${i}</a></li>
+										href="../category/foodtag_content.do?page=${i}" class="page-link">${i}</a></li>
 								</c:forEach>
 								<c:if test="${endPage<allPage }">
 									<li class="page-item"><a
-										href="../category/food.do?page=${endPage+1}" class="page-link"
+										href="../category/foodtag_content.do?page=${endPage+1}" class="page-link"
 										aria-label="Next"> <span aria-hidden="true"> <span
 												class="lnr lnr-arrow-right"></span></span>
 									</a></li>
@@ -99,11 +100,10 @@
 							</ul>
 						</nav>
 					</div>
-					<!-- End food_content Area -->
+					</section>
 				</div>
 			</div>
 		</div>
 	</div>
-	<!-- End body Area -->
 </body>
 </html>
