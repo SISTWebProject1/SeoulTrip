@@ -13,7 +13,9 @@
 									<font color="black">
 										#${ item.key.tagname }
 									</font>
-									<sub style="position: relative; bottom: 3px;">&nbsp;더보기</sub>
+									<c:if test="${ item.value.size() eq 4 }">
+										<sub style="position: relative; bottom: 3px;">&nbsp;더보기</sub>
+									</c:if>
 								</a>	
 							</p></h3>
 							
@@ -47,7 +49,7 @@
 												&nbsp; <a href="../detail/detail.do?type=${ hcvo.type }&no=${ hcvo.no }">리뷰 ${ hcvo.reviewCnt }건</a>
 												<div class="detail_food3_tag">
 													<c:forEach var="hashtag" items="${ hcvo.hashtags }">
-														<a href="htitemlist.do?tagcode=${ hashtag.tagcode }">#${ hashtag.tagname }</a>&nbsp;
+														<a class="btn btn-sm p-0" href="htitemlist.do?tagcode=${ hashtag.tagcode }">#${ hashtag.tagname }</a>
 													</c:forEach>
 												</div>
 											</div>

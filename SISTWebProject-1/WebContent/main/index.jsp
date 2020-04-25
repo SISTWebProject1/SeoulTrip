@@ -73,7 +73,7 @@
 				</div>
 
 				<div class="single-widget search-widget" style="display: none;">
-					<form class="example" action="#"
+					<form class="example" action="javascript:void(0);"
 						style="margin: auto; max-width: 300px">
 						<input type="text" placeholder="검색" name="search2">
 						<button type="submit">

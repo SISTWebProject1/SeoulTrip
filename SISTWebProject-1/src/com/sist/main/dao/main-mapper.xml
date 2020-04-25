@@ -16,7 +16,6 @@
 		FROM ${table}
 		WHERE ${name}||' '||NVL(info,' ')||' '||NVL(addr1,' ')||' '||NVL(addr2,' ')
 		LIKE '%'||#{keyword}||'%'
-		AND rownum &lt; 5
 	</select>
 	
 	<select id="getHIVOData" resultType="HomeItemVO" parameterType="HashMap">
@@ -37,7 +36,6 @@
 		GROUP BY type, no, tagcode
 		ORDER BY cnt DESC) NATURAL JOIN hashtagtable
 		WHERE tagname LIKE '%'||#{keyword}||'%'
-		AND cnt &gt; 3
 		AND rownum &lt; 5
 	</select>
 	
@@ -68,8 +66,7 @@
 	    FROM review NATURAL JOIN reviewtohashtag
 	    GROUP BY type, no, tagcode
 	    ORDER BY cnt DESC) NATURAL JOIN hashtagtable
-	    WHERE tagcode=#{tagcode}
-	    AND cnt > 3))
+	    WHERE tagcode=#{tagcode}))
 	    WHERE num BETWEEN #{start} AND #{end}
 	</select>
 	
@@ -84,7 +81,6 @@
 		GROUP BY type,no,tagcode
 		ORDER BY cnt DESC) NATURAL JOIN hashtagtable
 		WHERE tagcode=#{tagcode}
-		AND cnt > 3
 	</select>
 	
 	<select id="getTagcodeListByTypeNo" resultType="int" parameterType="HashMap">
@@ -95,7 +91,6 @@
 		FROM review
 		WHERE type=#{type} AND no=#{no}) NATURAL JOIN reviewtohashtag)
 		GROUP BY tagcode)
-		WHERE cnt > 3
 	</select>
 	
 	<select id="getGradeReviewCntByTypeNo" resultType="HomeItemVO" parameterType="HomeItemVO">
@@ -111,7 +106,6 @@
 		FROM review
 		WHERE type=#{type} AND no=#{no}) NATURAL JOIN reviewtohashtag
 		GROUP BY tagcode) NATURAL JOIN hashtagtable
-		WHERE cnt > 3
 		ORDER BY cnt DESC
 	</select>
 	

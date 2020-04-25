@@ -2829,7 +2829,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 	border: 0px solid white;
 }
 
-#search_result {
+#search_result table {
 	border: 1px solid gray !important;
 }
 

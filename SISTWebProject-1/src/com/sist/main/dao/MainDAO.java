@@ -302,7 +302,7 @@ public class MainDAO {
 		return list;
 	}
 	
-	public static List<HomeItemVO> getHIListByTagcode_page(int tagcode, int page) {
+	public static List<HomeItemVO> getHIListByTagcode_page(HttpServletRequest request, int tagcode, int page) {
 		List<HomeItemVO> list = new ArrayList<HomeItemVO>();
 		
 		int rowSize = 12;
@@ -353,7 +353,7 @@ public class MainDAO {
 				map.put("name", name);
 				map.put("photo", photo);
 				map.put("no", no);
-				
+
 				vo = session.selectOne("getHIVOData", map);
 				vo.setType(type);
 				
@@ -372,6 +372,21 @@ public class MainDAO {
 			e.printStackTrace();
 		} finally {
 			if(session!=null) session.close();
+		}
+		
+		LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+		List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+		try {
+			wishlist = getWishListsByMemberId(lvo.getMemberId());
+		} catch (Exception e1) {}
+		
+		for(HomeItemVO thivo : list) {
+			for(WishListVO_u wlvo : wishlist) {
+				if(thivo.getNo()==wlvo.getNo() && thivo.getType()==wlvo.getType()) {
+					thivo.setWish(true);
+					break;
+				}
+			}
 		}
 		
 		return list;
@@ -415,12 +430,6 @@ public class MainDAO {
 	
 	public static Map<HashTagVO, List<HomeItemVO>> getHTItemsListsByCookie(HttpServletRequest request, HttpServletResponse response){
 		Map<HashTagVO, List<HomeItemVO>> lists = new HashMap<>();
-		
-		LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
-		List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
-		try {
-			wishlist = getWishListsByMemberId(lvo.getMemberId());
-		} catch (Exception e1) {}
 		
 		SqlSession ss = null;
 		try {
@@ -470,16 +479,8 @@ public class MainDAO {
 				HashTagVO vo = selectedHTList.get(i);
 				int tagcode = vo.getTagcode();
 				
-				List<HomeItemVO> temp = getHIListByTagcode_page(tagcode, 1);
+				List<HomeItemVO> temp = getHIListByTagcode_page(request, tagcode, 1);
 				temp = temp.subList(0, Math.min(4, temp.size()));
-				for(HomeItemVO thivo : temp) {
-					for(WishListVO_u wlvo : wishlist) {
-						if(thivo.getNo()==wlvo.getNo() && thivo.getType()==wlvo.getType()) {
-							thivo.setWish(true);
-							break;
-						}
-					}
-				}
 				
 				lists.put(vo, temp);
 			}
