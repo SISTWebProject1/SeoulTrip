@@ -7,7 +7,7 @@
 			<div class="banner-content text-center col-lg-8">
 			
 				<div class="single-widget search-widget" style="border:0px solid white;">
-					<form class="example" action="#" style="margin:auto;max-width:500px">
+					<form class="example" action="javascript:void(0);" style="margin:auto;max-width:500px">
 						<input type="text" placeholder="검색" name="search2">
 						
 						<button type="submit"><i class="fa fa-search"></i></button>

@@ -9,42 +9,64 @@
 <link rel="stylesheet" href="../css/home.css">
 </head>
 <body>
-
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-xs-9 home_content">
-			<h1 style="margin: 50px 25px;">#${ htvo.tagname }</h1>
-			<section class="post-area">
-				<div class="row">
-					<c:forEach var="htit" items="${ htitemlist }">
-						<div class="col-lg-3 col-md-3">
-							<div class="single-post-item short">
-								<figure>
-									<a href="../detail/detail.do?type=${ htit.type }&no=${ htit.no }">
-									<img style="height: 150px; width: 100%;" class="post-img img-fluid" src="${ htit.photo }" onerror="javascript:src='../img/logo.png'" style="height: 300px;">
-									</a>
-								</figure>
-								<h3>
-									<a href="../detail/detail.do?type=${ htit.type }&no=${ htit.no }">${ htit.name }</a>
-								</h3>
-								<a href="../detail/detail.do?type=${ htit.type }&no=${ htit.no }" class="primary-btn text-uppercase mt-15">상세보기</a>
-							</div>
+			<div class="main-body body-gap">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="post-list">
+							<section class="post-area">
+								<div class="detail_foodset">
+									<h3 style="margin: 50px 25px;">#${ htvo.tagname }</h3>
+									<div id="morehtitemlisttarget" class="row food-catetop" style="height: auto;">
+										<c:forEach var="htit" items="${ htitemlist }">
+											<div class="col-lg-3 col-md-3">
+												<div class="single-post-item short">
+													<figure>
+														<a href="../detail/detail.do?type=${ htit.type }&no=${ htit.no }">
+														<img style="height: 150px; width: 100%;" class="post-img img-fluid" src="${ htit.photo }" onerror="javascript:src='../img/logo.png'" style="height: 300px;">
+														</a>
+													</figure>
+													<div class="heart">
+														<button class="heart_button 
+															<c:choose>
+																<c:when test="${ htit.wish eq true }">heart_on</c:when>
+																<c:otherwise>heart_off</c:otherwise>
+															</c:choose>
+														 " type="button" data-type="${ htit.type }" data-no="${ htit.no }">
+															<i class="fas fa-heart"></i>
+														</button>
+													</div>
+													<div class="detail_food3">
+														<h4><a href="../detail/detail.do?type=${ htit.type }&no=${ htit.no }">${ htit.name }</a></h4>
+														
+														<div class="grade">
+															<p class="grade2" style="WIDTH: ${ htit.grade }%;"></p>
+														</div>
+														&nbsp; <a href="../detail/detail.do?type=${ htit.type }&no=${ htit.no }">리뷰 ${ htit.reviewCnt }건</a>
+														<div class="detail_food3_tag">
+															<c:forEach var="hashtag" items="${ htit.hashtags }">
+																<a class="btn btn-sm p-0" href="htitemlist.do?tagcode=${ hashtag.tagcode }">#${ hashtag.tagname }</a>
+															</c:forEach>
+														</div>
+													</div>
+												</div>
+											</div>
+										</c:forEach>
+									</div>
+								</div>
+							</section>
 						</div>
-					</c:forEach>
+					</div>
+					<div class="text-center">
+						<span class="btn btn-lg m-1" id="morehtitemlist" curpage=${ curpage } totalpage=${ totalpage } tagcode="${ htvo.tagcode }">더 보기 (<span id="morehtitemlistcurpage">${ curpage }</span>/${ totalpage })</span>
+						<span id="morehtitemlisttext">|</span>
+						<span class="btn btn-lg m-1" onclick="window.scroll({top:0,left:0,behavior:'smooth'})">맨 위로 (Top)</span>
+					</div>
 				</div>
-			</section>
-			
-			<div class="text-center">
-				<ul class="pagination">
-					<c:forEach var="i" begin="1" end="${ totalpage }">
-						<li 
-							<c:if test="${ i eq curpage }">class="active"</c:if>
-						 ><a href="htitemlist.do?tagcode=${ htvo.tagcode }&page=${ i }">${ i }</a></li>
-					</c:forEach>
-				</ul>
 			</div>
 		</div>
-		
 		<div class="col-xs-3 home_side">
 			<!-- Start side Area -->
 			<div style="position: sticky; top: 130px;">

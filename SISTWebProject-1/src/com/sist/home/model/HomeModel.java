@@ -2,6 +2,7 @@ package com.sist.home.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -84,6 +85,9 @@ public class HomeModel {
 		request.setAttribute("curdate", curdate);
 		request.setAttribute("calendarvo", new CalendarVO(curyear, curmonth).getInstance());
 		
+		List<HashTagVO> phtlist = MainDAO.getPopularHTList();
+		request.setAttribute("phtlist", phtlist);
+		
 		return "../main/index.jsp";
 	}
 	
@@ -98,7 +102,7 @@ public class HomeModel {
 		HashTagVO htvo = MainDAO.getHashTagData(tagcode);
 		request.setAttribute("htvo", htvo);
 		
-		List<HomeItemVO> htitemlist = MainDAO.getHIListByTagcode_page(tagcode, curpage);
+		List<HomeItemVO> htitemlist = MainDAO.getHIListByTagcode_page(request, tagcode, curpage);
 		request.setAttribute("htitemlist", htitemlist);
 		
 		request.setAttribute("main_jsp", "../home/htitemlist.jsp");
@@ -119,6 +123,17 @@ public class HomeModel {
 		request.setAttribute("htlist", htlist);
 		
 		return "../main/index.jsp";
+	}
+	
+	@RequestMapping("home/morehtitemlist.do")
+	public String home_morehtitemlist(HttpServletRequest request, HttpServletResponse response) {
+		int curpage = Integer.parseInt(request.getParameter("page"));
+		int tagcode = Integer.parseInt(request.getParameter("tagcode"));
+		
+		List<HomeItemVO> htitemlist = MainDAO.getHIListByTagcode_page(request, tagcode, curpage);
+		request.setAttribute("htitemlist", htitemlist);
+		
+		return "morehtitemlist.jsp";
 	}
 
 }
