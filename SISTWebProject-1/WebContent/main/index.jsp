@@ -156,17 +156,69 @@
 	<!-- End content Area =============================================================================== -->
 
 	<!-- start footer Area -->
-	<footer class="footer-area section-gap">
+	<footer class="footer-area" style="padding: 25px 0px;">
 		<div class="container box_1170">
 			<div class="row">
-				<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="col-xs-1">
 					<div class="single-footer-widget">
-						<h6 class="footer_title">About Us</h6>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-							sed do eiusmod tempor incididunt ut labore dolore magna aliqua.</p>
+						<h6 class="footer_title"></h6>
+						<p></p>
+						<p></p>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-sm-6">
+				<div class="col-xs-2">
+					<div class="single-footer-widget">
+						<h6 class="footer_title" style="margin-bottom: 10px;">조장</h6>
+						<p>조우현</p>
+						<p><a href="https://github.com/caskercasker" target="_blank" style="color: #8050fa;">
+							<img src="../main/github.png" width="15" height="15">/caskercasker
+						</a></p>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="single-footer-widget">
+						<h6 class="footer_title" style="margin-bottom: 10px;">조원</h6>
+						<p>김예서</p>
+						<p><a href="https://github.com/Rummikub" target="_blank" style="color: #8050fa;">
+							<img src="../main/github.png" width="15" height="15">/Rummikub
+						</a></p>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="single-footer-widget">
+						<h6 class="footer_title" style="margin-bottom: 10px;">&nbsp;</h6>
+						<p>김용희</p>
+						<p><a href="https://github.com/sigk77" target="_blank" style="color: #8050fa;">
+							<img src="../main/github.png" width="15" height="15">/sigk77
+						</a></p>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="single-footer-widget">
+						<h6 class="footer_title" style="margin-bottom: 10px;">&nbsp;</h6>
+						<p>주홍선</p>
+						<p><a href="https://github.com/juhongseon" target="_blank" style="color: #8050fa;">
+							<img src="../main/github.png" width="15" height="15">/juhongseon
+						</a></p>
+					</div>
+				</div>
+				<div class="col-xs-2">
+					<div class="single-footer-widget">
+						<h6 class="footer_title" style="margin-bottom: 10px;">&nbsp;</h6>
+						<p>최웅</p>
+						<p><a href="https://github.com/ung6039" target="_blank" style="color: #8050fa;">
+							<img src="../main/github.png" width="15" height="15">/ung6039
+						</a></p>
+					</div>
+				</div>
+				<div class="col-xs-1">
+					<div class="single-footer-widget">
+						<h6 class="footer_title">&nbsp;</h6>
+						<p></p>
+						<p></p>
+					</div>
+				</div>
+				<!-- <div class="col-lg-3 col-md-6 col-sm-6">
 					<div class="single-footer-widget">
 						<h6 class="footer_title">Newsletter</h6>
 						<p>Stay updated with our latest trends</p>
@@ -214,16 +266,16 @@
 								class="fa fa-behance"></i></a>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 			<div
-				class="row footer-bottom d-flex justify-content-between align-items-center">
+				class="row footer-bottom d-flex justify-content-between align-items-center" style="padding-top: 25px;">
 				<p class="col-lg-12 footer-text text-center">
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 					Copyright &copy;
 					<script>document.write(new Date().getFullYear());</script>
-					All rights reserved | This template is made with <i
-						class="fa fa-heart-o" aria-hidden="true"></i> by <a
+					All rights reserved | This template is made with <span
+						style="color: #8050fa;">♡</span> by <a
 						href="https://colorlib.com" target="_blank">Colorlib</a>
 					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 				</p>
