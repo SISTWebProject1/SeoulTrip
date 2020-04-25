@@ -16,6 +16,7 @@ public class FestivalVO {
 	private String addr2;
 	private double grade;
 	private String fphoto;
+	private boolean wish;
 
 	public String getFmtStart() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
@@ -115,6 +116,14 @@ public class FestivalVO {
 
 	public void setFphoto(String fphoto) {
 		this.fphoto = fphoto;
+	}
+
+	public boolean getWish() {
+		return wish;
+	}
+
+	public void setWish(boolean wish) {
+		this.wish = wish;
 	}
 
 }

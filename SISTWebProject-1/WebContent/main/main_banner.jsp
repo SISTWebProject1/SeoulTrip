@@ -14,7 +14,7 @@
 					</form>
 					
 					<c:if test="${ !empty htlist }">
-						<font color="white" style="display: inline-block; position: relative; top: 30px;">최신 태그 : </font>
+						<p style="display: inline-block; position: relative; top: 31px; color: white;">최신 태그 : </p>
 						<div class="btn-group" style="display: inline-block;">
 							<c:forEach var="htvo" items="${ htlist }">
 								<button type="button" class="btn btn-primary" 

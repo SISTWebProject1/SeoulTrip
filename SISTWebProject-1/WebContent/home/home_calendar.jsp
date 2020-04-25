@@ -5,7 +5,7 @@
 	<div class="container box_1170">
 		<div class="row justify-content-center">
 			<div class="col-lg-10">
-				<div class="owl-carousel active-post-carusel">
+				<div class="owl-carousel active-post-carusel" draggable="false">
 					<c:forEach var="monthvo" items="${ calendarvo.months }">
 						<div class="month">
 							<div><h2>${ monthvo.month }월</h2></div>

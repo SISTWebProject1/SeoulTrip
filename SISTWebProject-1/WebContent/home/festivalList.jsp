@@ -13,61 +13,51 @@
 <jsp:include page="../home/home_calendar.jsp"/>
 
 <div class="container-fluid">
+	<h2 style="margin-left: 80px;">${ curmonth }월 ${ curdate }일에 열리는 축제</h2>
 	<div class="row">
 		<div class="col-xs-9 home_content">
-			<section class="post-area">
-				<div class="row">
-					<c:forEach var="fvo" items="${ flist }">
-						<div class="col-lg-4 col-md-4">
-							<div class="single-post-item short">
-								<figure>
-									<a href="../detail/detail.do?type=3&no=${ fvo.no }">
-									<img class="post-img img-fluid" src="${ fvo.fphoto }" style="height: 400px;">
-									</a>
-								</figure>
-								<h3>
-									<a href="../detail/detail.do?type=3&no=${ fvo.no }">${ fvo.fname }</a>
-								</h3>
-								<p>
-									${ fvo.addr1 }${ fvo.addr2 }<br/>
-									${ fvo.fmtStart } ~ ${ fvo.fmtEnd }
-								</p>
-								<a href="../detail/detail.do?type=3&no=${ fvo.no }" class="primary-btn text-uppercase mt-15">축제 상세보기</a>
-								<!-- <div class="post-box">
-									<div class="d-flex">
-										<div>
-											<a href="#">
-												<img src="img/author/a1.png" alt="">
-											</a>
-										</div>
-										<div class="post-meta">
-											<div class="meta-head">
-												<a href="#">Marvel Maison</a>
-											</div>
-											<div class="meta-details">
-												<ul>
-													<li>
-														<a href="#">
-															<span class="lnr lnr-calendar-full"></span>
-															13th Oct, 2018
+			<div class="main-body body-gap">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="post-list">
+							<section class="post-area">
+								<div class="detail_foodset">
+									<div class="row food-catetop" style="height: auto;">
+										<c:forEach var="fvo" items="${ flist }">
+											<div class="col-lg-3 col-md-3">
+												<div class="single-post-item short">
+													<figure>
+														<a href="../detail/detail.do?type=3&no=${ fvo.no }">
+														<img class="post-img img-fluid" src="${ fvo.fphoto }" style="height: 200px;">
 														</a>
-													</li>
-													<li>
-														<a href="#">
-															<span class="lnr lnr-bubble"></span>
-															03
-														</a>
-													</li>
-												</ul>
+													</figure>
+													<div class="heart">
+														<button class="heart_button 
+															<c:choose>
+																<c:when test="${ fvo.wish eq true }">heart_on</c:when>
+																<c:otherwise>heart_off</c:otherwise>
+															</c:choose>
+														 " type="button" data-type="3" data-no="${ fvo.no }">
+															<i class="fas fa-heart"></i>
+														</button>
+													</div>
+													<div class="detail_food3">
+														<h4><a href="../detail/detail.do?type=3&no=${ fvo.no }">${ fvo.fname }</a></h4><br/>
+														<div>
+															${ fvo.addr1 }${ fvo.addr2 }<br/>
+															${ fvo.fmtStart } ~ ${ fvo.fmtEnd }
+														</div>
+													</div>
+												</div>
 											</div>
-										</div>
+										</c:forEach>
 									</div>
-								</div> -->
-							</div>
+								</div>
+							</section>
 						</div>
-					</c:forEach>
+					</div>
 				</div>
-			</section>
+			</div>
 		</div>
 		
 		<div class="col-xs-3 home_side">
