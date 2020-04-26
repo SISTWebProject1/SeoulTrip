@@ -16,7 +16,7 @@
 					<c:if test="${vo.reviewno eq vo2.reviewno}">
 						<img src="${vo2.filepath }" width="80" height="80" style="display:inline-block"/>
 					</c:if>	
-				</c:forEach>
+			</c:forEach>
 
 			<div style="width:100%; height:200px;">${vo.content}</div>
 			<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue

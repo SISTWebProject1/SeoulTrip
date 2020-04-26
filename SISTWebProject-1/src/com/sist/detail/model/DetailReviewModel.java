@@ -87,9 +87,9 @@ public class DetailReviewModel {
 
 		System.out.println("리뷰 작성");
 
-		String uploadPath=request.getSession().getServletContext().getRealPath("/uploadCheck");
+		String uploadPath=request.getSession().getServletContext().getRealPath("/upload");
 		System.out.println(uploadPath);
-		String path = "../uploadCheck/";
+		String path = "../upload/";
 		try{
 		    MultipartRequest multi=new MultipartRequest(request,uploadPath,size,"UTF-8",new DefaultFileRenamePolicy());
 		    Enumeration files = multi.getFileNames();
@@ -109,8 +109,8 @@ public class DetailReviewModel {
 		    String file2 = (String)files.nextElement();
 		    String filename2=multi.getFilesystemName(file2);
 		     
-		    String filepath1 = path.concat(filename1);
-		    String filepath2 = path.concat(filename2);
+		    String filepath1 = "";
+		    String filepath2 = "";
 			
 		    int depth=0;
 			
@@ -128,15 +128,24 @@ public class DetailReviewModel {
 			vo.setDepth(depth);
 			DetailDAO.detailReviewInsert(vo);
 			int reviewNumber = DetailDAO.getReviewNumber();
-			
-			
-			Map map = new HashMap<>();
+
+			if(filename1!=null){
+			    filepath1 = path.concat(filename2);
+				Map map = new HashMap<>();
 			map.put("reviewno", reviewNumber);
 			map.put("filepath", filepath1);
 			DetailDAO.insertPhoto(map);
-			
+			}
+			if(filename2!=null){
+			    filepath2 = path.concat(filename2);
+				Map map = new HashMap<>();
+				map.put("reviewno", reviewNumber);
+				map.put("filepath", filepath2);
+				DetailDAO.insertPhoto(map);
+			}
 			MainDAO.setReviewnoHashtagnames(reviewNumber, hashtag);
 			System.out.println(reviewNumber);
+
 			request.setAttribute("filepath1", filepath1);
 			request.setAttribute("filepath2", filepath2);
 			request.setAttribute("no", no);

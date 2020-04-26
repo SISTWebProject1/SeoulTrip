@@ -22,7 +22,8 @@
 				</form>
 			</div>
 		</div>
-		<div class="col-lg-2">
+		<div class="col-lg-2"
+			<c:if test="${ empty ss_member }">style="display:none;"</c:if>>
 			<a href="../detail/detail_qna_insert.do?type=${type}&no=${no}"><input type="button" class="button"
 				style="margin-top: 50px; background-color: #555555; color: white;"
 				value="질문하기"/></a>
@@ -62,7 +63,48 @@
 							<td width="10%" class="text-center">${vo.hit }</td>
 						</tr>
 					</c:forEach>
+		
 				</table>
+		<c:forEach var="vo" items="${list }">
+		<div class="single-post-item">
+			<h3>
+				<a href="blog-details.html">${vo.title }</a>
+			</h3>
+				<br>
+				<div style="width:100%; height:200px;">${vo.content}</div>
+			<a href="blog-details.html" class="primary-btn text-uppercase mt-15">continue
+				Reading</a>
+			<div class="post-box" style="width:100%" id='mouse_over'>
+				<div class="d-flex">
+					<div>
+						<a href="#"> <img src="img/author/a1.png" alt="" />
+						</a>
+					</div>
+					<div class="post-meta">
+						<div class="meta-head">
+							<a href="#">${vo.memberid }</a>
+						</div>
+						<div class="meta-details">
+							<ul>
+								<li><a href="#"> <span class="lnr lnr-calendar-full"></span>
+										<fmt:formatDate	value="${vo.regdate }" pattern="yyyy-MM-dd" />
+								</a></li>
+								<li><a href="#"> <span class="lnr lnr-picture"></span>
+										<fmt:formatDate	value="${vo.expdate }" pattern="yyyy-MM-dd" />
+								</a></li>
+								<li><a href="#"> <span class="lnr lnr-coffee-cup"></span>
+										${vo.likecount }
+								</a></li>
+								<li><a href="#"> <span class="lnr lnr-bubble"></span>
+										${vo.grade }
+								</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</c:forEach>
 			</div>
 			</div>
 		</div>

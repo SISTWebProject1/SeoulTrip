@@ -98,7 +98,7 @@
       		<th width=20% class="danger text-right">사진 파일1</th>
       		<td width=80% >
       			<div class="filebox preview-image"> 
-      				<input type="file" name=photo1 id="photo1" class="upload-hidden" required> 
+      				<input type="file" name=photo1 id="photo1" class="upload-hidden" > 
       			</div>
       		</td>
       	</tr>
@@ -106,7 +106,7 @@
       		<th width=20% class="danger text-right">사진 파일2</th>
       		<td width=80% >
       			<div class="filebox preview-image"> 
-      				<input type="file" name=photo2 id="photo2" class="upload-hidden" required> 
+      				<input type="file" name=photo2 id="photo2" class="upload-hidden" > 
       			</div>
       		</td>
       	</tr>
