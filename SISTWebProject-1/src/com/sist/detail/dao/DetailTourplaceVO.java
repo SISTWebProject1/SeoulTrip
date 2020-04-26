@@ -13,6 +13,17 @@ public class DetailTourplaceVO {
 	private double mapx;
 	private double mapy;
 	private double distance;
+	
+	private int num;
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+
 	public double getDistance() {
 		return distance;
 	}

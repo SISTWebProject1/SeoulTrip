@@ -160,8 +160,13 @@
 									</div>
 									<li><span>${vo.count }</span></li>	
 								</c:forEach>
-								<li><input type="hidden" name=mapx id=mapx value="${mapx}"/></li>
-								<li><input type="hidden" name=mapy id=mapy value="${mapy}"/></li>
+								<li><input type="text" name=mapx id=mapx value="${mapx}"/></li>
+								<li><input type="text" name=mapy id=mapy value="${mapy}"/></li>
+								<c:forEach var="xy" items="${nearT}">
+									<li><input type="text" name="tname${xy.num}" id="tname${xy.num}" value="${xy.tname}"/></li>
+									<li><input type="text" name="mapx${xy.num}" id="mapx${xy.num}" value="${xy.mapx}"/></li>
+									<li><input type="text" name="mapy${xy.num}" id="mapy${xy.num}" value="${xy.mapy}"/></li>
+								</c:forEach>
 							</ul>
 						</div>
 					</div>
@@ -185,27 +190,70 @@
 					<div class="single-post-item short">
 						<div id="map" style="width: 500px; height: 300px;"></div>
 						<script type="text/javascript"
-							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
+							src="//dapi.kakao.com/v2/maps/sdk.js?appkey=68cba5ac8135df1b2685073fb0fd9f93"></script>
 						<script>
-							var container = document.getElementById('map');
-							var mapx = document.getElementById('mapx').value;
-							var mapy = document.getElementById('mapy').value;
+						var mapx = document.getElementById('mapx').value;
+						console.log(mapx);
+						var mapy = document.getElementById('mapy').value;
+						console.log(mapy);
+						var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+					    mapOption = { 
+					        center: new kakao.maps.LatLng(mapx, mapy), // 지도의 중심좌표
+					        level: 6 // 지도의 확대 레벨
+					    };
 
-							var options = {
-								center : new kakao.maps.LatLng(mapx, mapy),
-								level : 3
-							};
-							var map = new kakao.maps.Map(container, options);
-							var markerPosition = options.center;
+					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 					var tname2 = document.getElementById('tname2').value;
+					var mapx2 = document.getElementById('mapx2').value;
+					var mapy2 = document.getElementById('mapy2').value;
+ 					var tname3 = document.getElementById('tname3').value;
+					var mapx3 = document.getElementById('mapx3').value;
+					var mapy3 = document.getElementById('mapy3').value;
+ 					var tname4 = document.getElementById('tname4').value;
+					var mapx4 = document.getElementById('mapx4').value;
+					var mapy4 = document.getElementById('mapy5').value;
+ 					var tname5 = document.getElementById('tname5').value;
+					var mapx5 = document.getElementById('mapx5').value;
+					var mapy5 = document.getElementById('mapy5').value;
+					// 마커를 표시할 위치와 title 객체 배열입니다 
+					var positions = [
+					    {
+					        title: tname2, 
+					        latlng: new kakao.maps.LatLng(mapx2, mapy2)
+					    },
+					    {
+					        title: tname3, 
+					        latlng: new kakao.maps.LatLng(mapx3, mapy3)
+					    },
+					    {
+					        title: tname4, 
+					        latlng: new kakao.maps.LatLng(mapx4, mapy4)
+					    },
+					    {
+					        title: tname5,
+					        latlng: new kakao.maps.LatLng(mapx5, mapy5)
+					    }
+					];
 
-							// 마커를 생성합니다
-							var marker = new kakao.maps.Marker({
-								position : markerPosition
-							});
-
-							// 마커가 지도 위에 표시되도록 설정합니다
-							marker.setMap(map);  
-							
+					// 마커 이미지의 이미지 주소입니다
+					var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+					    
+					for (var i = 0; i < positions.length; i ++) {
+					    
+					    // 마커 이미지의 이미지 크기 입니다
+					    var imageSize = new kakao.maps.Size(24, 35); 
+					    
+					    // 마커 이미지를 생성합니다    
+					    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+					    
+					    // 마커를 생성합니다
+					    var marker = new kakao.maps.Marker({
+					        map: map, // 마커를 표시할 지도
+					        position: positions[i].latlng, // 마커를 표시할 위치
+					        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+					        image : markerImage // 마커 이미지 
+					    });
+					}
 						</script> 
 					</div>
 				</div>

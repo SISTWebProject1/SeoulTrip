@@ -53,14 +53,12 @@
 					</form>
 				</div>
 			</div>
-			<div class="col-lg-2">
-				<c:if test="${ !empty ss_member }">
-					<a href="../detail/detail_review_insert.do?type=${type}&no=${no}">
-					<input type="button" class="button"	style="margin-top: 50px; background-color: #555555; color: white;"
-							value="리뷰작성" />
-				</a>
-				</c:if>	
-			</div>
+			<div class="col-lg-2"
+			<c:if test="${ empty ss_member }">style="display:none;"</c:if>>
+			<a href="../detail/detail_review_insert.do?type=${type}&no=${no}"><input type="button" class="button"
+				style="margin-top: 50px; background-color: #555555; color: white;"
+				value="리뷰작성"/></a>
+		</div>
 		</div>
 
 			<c:forEach var="vo" items="${list }">

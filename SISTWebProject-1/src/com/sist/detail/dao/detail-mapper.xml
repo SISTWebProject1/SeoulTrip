@@ -139,9 +139,9 @@
  	</select>
  	
  	<select id="getNearTourplace" resultType="DetailTourplaceVO" parameterType="java.util.Map">
- 		SELECT tphoto, tname, no, distance, num
-		FROM (SELECT tphoto, tname, no, distance, rownum as num 
-		FROM (SELECT tphoto, tname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from tourplace
+ 		SELECT tphoto, tname, no, mapx,mapy,distance, num
+		FROM (SELECT tphoto, tname, no, mapx,mapy,distance, rownum as num 
+		FROM (SELECT tphoto, tname, no,mapx,mapy, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from tourplace
 		ORDER by distance ASC ))
 		WHERE num BETWEEN 2 AND 5
  	</select>
