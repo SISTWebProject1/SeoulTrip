@@ -19,5 +19,6 @@ public class ReviewReplyVO {
 	private int root;
 	private int depth;
 	private String msg;
+	private String dbday;
 
 }

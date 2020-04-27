@@ -7,6 +7,9 @@ import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.detail.dao.*;
 import com.sist.main.dao.LoginVO;
+import com.sist.main.dao.MainDAO;
+import com.sist.mypage.model.WishListVO_u;
+
 import java.util.*;
 @Controller
 public class DetailQnaModel {
@@ -73,15 +76,28 @@ public class DetailQnaModel {
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
 			rtvo = dao.detailRankTourData(Integer.parseInt(no));
 			totalplace = dao.getTotalTourplace();
+			
+			//LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(tvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					tvo.setWish(true);
+					break;
+				}
+			}
+		
+			
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
+			typo.put("type", Integer.parseInt(type));
+			typo.put("no", Integer.parseInt(no));
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
-			System.out.println("장소 데이터");
 			Map test = new HashMap();
 			int rownum=1;
 			int max=dao.reviewMax(typo);
@@ -90,6 +106,7 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
+			System.out.println("장소 데이터");
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -98,6 +115,7 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -109,6 +127,19 @@ public class DetailQnaModel {
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
 			rrvo = dao.detailRankResData(Integer.parseInt(no));
 			totalplace = dao.getTotalRestaurant();
+			
+			//LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					rvo.setWish(true);
+					break;
+				}
+			}
+			
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
@@ -116,6 +147,7 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
+			
 			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
@@ -145,6 +177,20 @@ public class DetailQnaModel {
 			fvo = dao.getFestivalData(Integer.parseInt(no));
 			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
 			totalplace = dao.getTotalFestival();
+			
+			//LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					fvo.setWish(true);
+					break;
+				}
+			}
+			
+			
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
@@ -175,6 +221,7 @@ public class DetailQnaModel {
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
 		}
+	
 		System.out.println("질문게시판 작성");
 		
 		Map map = new HashMap();
@@ -248,15 +295,28 @@ public class DetailQnaModel {
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
 			rtvo = dao.detailRankTourData(Integer.parseInt(no));
 			totalplace = dao.getTotalTourplace();
+			
+			//LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(tvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					tvo.setWish(true);
+					break;
+				}
+			}
+		
+			
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
+			typo.put("type", Integer.parseInt(type));
+			typo.put("no", Integer.parseInt(no));
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
-			System.out.println("장소 데이터");
 			Map test = new HashMap();
 			int rownum=1;
 			int max=dao.reviewMax(typo);
@@ -265,6 +325,7 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
+			System.out.println("장소 데이터");
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -273,6 +334,7 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -284,6 +346,19 @@ public class DetailQnaModel {
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
 			rrvo = dao.detailRankResData(Integer.parseInt(no));
 			totalplace = dao.getTotalRestaurant();
+			
+			//LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					rvo.setWish(true);
+					break;
+				}
+			}
+			
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
@@ -291,6 +366,7 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
+			
 			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
@@ -312,7 +388,6 @@ public class DetailQnaModel {
 			DetailReviewVO worst = new DetailReviewVO();
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
-			
 			request.setAttribute("worst", worst);
 			request.setAttribute("info", rvo);
 			request.setAttribute("title", rvo.getRname());
@@ -321,6 +396,20 @@ public class DetailQnaModel {
 			fvo = dao.getFestivalData(Integer.parseInt(no));
 			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
 			totalplace = dao.getTotalFestival();
+			
+			//LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					fvo.setWish(true);
+					break;
+				}
+			}
+			
+			
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
@@ -351,6 +440,7 @@ public class DetailQnaModel {
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
 		}
+	
 	
 		System.out.println("질문게시판 작성");
 		
@@ -454,15 +544,28 @@ public class DetailQnaModel {
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
 			rtvo = dao.detailRankTourData(Integer.parseInt(no));
 			totalplace = dao.getTotalTourplace();
+			
+			//LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(tvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					tvo.setWish(true);
+					break;
+				}
+			}
+		
+			
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
+			typo.put("type", Integer.parseInt(type));
+			typo.put("no", Integer.parseInt(no));
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
-			System.out.println("장소 데이터");
 			Map test = new HashMap();
 			int rownum=1;
 			int max=dao.reviewMax(typo);
@@ -471,6 +574,7 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
+			System.out.println("장소 데이터");
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -479,6 +583,7 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -490,6 +595,19 @@ public class DetailQnaModel {
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
 			rrvo = dao.detailRankResData(Integer.parseInt(no));
 			totalplace = dao.getTotalRestaurant();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					rvo.setWish(true);
+					break;
+				}
+			}
+			
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
@@ -497,6 +615,7 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
+			
 			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
@@ -526,6 +645,20 @@ public class DetailQnaModel {
 			fvo = dao.getFestivalData(Integer.parseInt(no));
 			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
 			totalplace = dao.getTotalFestival();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					fvo.setWish(true);
+					break;
+				}
+			}
+			
+			
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
@@ -544,7 +677,6 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
-
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -557,6 +689,7 @@ public class DetailQnaModel {
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
 		}
+	
 	
 		System.out.println("질문게시판 작성");
 		
@@ -712,15 +845,28 @@ public class DetailQnaModel {
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
 			rtvo = dao.detailRankTourData(Integer.parseInt(no));
 			totalplace = dao.getTotalTourplace();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(tvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					tvo.setWish(true);
+					break;
+				}
+			}
+		
+			
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
+			typo.put("type", Integer.parseInt(type));
+			typo.put("no", Integer.parseInt(no));
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
-			System.out.println("장소 데이터");
 			Map test = new HashMap();
 			int rownum=1;
 			int max=dao.reviewMax(typo);
@@ -729,6 +875,7 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
+			System.out.println("장소 데이터");
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -737,6 +884,7 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -748,6 +896,19 @@ public class DetailQnaModel {
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
 			rrvo = dao.detailRankResData(Integer.parseInt(no));
 			totalplace = dao.getTotalRestaurant();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					rvo.setWish(true);
+					break;
+				}
+			}
+			
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
@@ -755,6 +916,7 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
+			
 			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
@@ -769,7 +931,6 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
-
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -785,6 +946,20 @@ public class DetailQnaModel {
 			fvo = dao.getFestivalData(Integer.parseInt(no));
 			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
 			totalplace = dao.getTotalFestival();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					fvo.setWish(true);
+					break;
+				}
+			}
+			
+			
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
@@ -803,7 +978,6 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
-
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -816,6 +990,7 @@ public class DetailQnaModel {
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
 		}
+	
 		System.out.println("질문게시판 작성");
 		
 		Map map = new HashMap();
@@ -926,15 +1101,28 @@ public class DetailQnaModel {
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
 			rtvo = dao.detailRankTourData(Integer.parseInt(no));
 			totalplace = dao.getTotalTourplace();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(tvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					tvo.setWish(true);
+					break;
+				}
+			}
+		
+			
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
+			typo.put("type", Integer.parseInt(type));
+			typo.put("no", Integer.parseInt(no));
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			tourtaglist = dao.getTourTag(Integer.parseInt(no));
 			
-			System.out.println("장소 데이터");
 			Map test = new HashMap();
 			int rownum=1;
 			int max=dao.reviewMax(typo);
@@ -943,7 +1131,7 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
-
+			System.out.println("장소 데이터");
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -952,6 +1140,7 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -963,6 +1152,19 @@ public class DetailQnaModel {
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
 			rrvo = dao.detailRankResData(Integer.parseInt(no));
 			totalplace = dao.getTotalRestaurant();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					rvo.setWish(true);
+					break;
+				}
+			}
+			
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
@@ -970,6 +1172,7 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
+			
 			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
@@ -984,7 +1187,6 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
-
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -1000,6 +1202,20 @@ public class DetailQnaModel {
 			fvo = dao.getFestivalData(Integer.parseInt(no));
 			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
 			totalplace = dao.getTotalFestival();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					fvo.setWish(true);
+					break;
+				}
+			}
+			
+			
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
@@ -1018,7 +1234,6 @@ public class DetailQnaModel {
 			test.put("no", no);
 			test.put("numm",rownum);
 			test.put("grade", max);
-
 			DetailReviewVO top = new DetailReviewVO();
 			top = dao.getReviewTop(test);
 			request.setAttribute("top", top);
@@ -1030,7 +1245,8 @@ public class DetailQnaModel {
 			request.setAttribute("info", fvo);
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
-		}	
+		}
+	
 	
 		System.out.println("질문게시판 작성");
 		

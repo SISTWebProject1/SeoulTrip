@@ -158,18 +158,18 @@
 		<result property="reviewNo" column="reviewno"/>
 		<result property="memberId" column="memberid"/>
 		<result property="regdate" column="regdate"/>
-		<result property="group_id" column="group_id"/>
-		<result property="group_step" column="group_step"/>
+		<result property="group_step" column="num"/>
 		<result property="group_tab" column="group_tab"/>
 		<result property="root" column="root"/>
 		<result property="depth" column="depth"/>
 		<result property="msg" column="msg"/>
+		<result property="dbday" column="dbday"/>
 	</resultMap>
 	<parameterMap type="HashMap" id="reviewReplyListDataMap">
 		<parameter property="pStart" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
 		<parameter property="pEnd" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
 		<parameter property="pRvno" javaType="java.lang.Integer" jdbcType="INTEGER" mode="IN"/>
-		<parameter property="pResult" resultMap="reviewReplyMap" mode="OUT"/>
+		<parameter property="pResult" jdbcType="CURSOR" resultMap="reviewReplyMap" mode="OUT"/>
 	</parameterMap>
 	<select id="reviewReplyListData" parameterMap="reviewReplyListDataMap" statementType="CALLABLE">
 		{CALL replyListData(?,?,?,?)}

@@ -6,12 +6,12 @@ import javax.websocket.Session;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
-
 import com.sist.detail.dao.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 import com.sist.main.dao.*;
+import com.sist.mypage.model.WishListVO_u;
 
 @Controller
 public class DetailModel {
@@ -22,7 +22,7 @@ public class DetailModel {
 		String page = request.getParameter("page");
 		
 		MainDAO.addHashTagCodeToCookie(request, response, Integer.parseInt(type), Integer.parseInt(no));
-	
+		
 		DetailDAO dao = new DetailDAO();
 		DetailTourplaceVO tvo = new DetailTourplaceVO();
 		DetailRestaurantVO rvo = new DetailRestaurantVO();
@@ -47,6 +47,20 @@ public class DetailModel {
 			tvo = dao.getTourplaceData(Integer.parseInt(no));
 			rtvo = dao.detailRankTourData(Integer.parseInt(no));
 			totalplace = dao.getTotalTourplace();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(tvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					tvo.setWish(true);
+					break;
+				}
+			}
+		
+			
 			mapx = tvo.getMapx();
 			mapy = tvo.getMapy();
 			typo.put("type", Integer.parseInt(type));
@@ -84,6 +98,19 @@ public class DetailModel {
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
 			rrvo = dao.detailRankResData(Integer.parseInt(no));
 			totalplace = dao.getTotalRestaurant();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					rvo.setWish(true);
+					break;
+				}
+			}
+			
 			mapx = rvo.getMapx();
 			mapy = rvo.getMapy();
 			typo.put("type", type);
@@ -121,6 +148,20 @@ public class DetailModel {
 			fvo = dao.getFestivalData(Integer.parseInt(no));
 			rfvo = dao.detailRankFestivalData(Integer.parseInt(no));
 			totalplace = dao.getTotalFestival();
+			
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			try {
+				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
+			} catch (Exception e1) {}
+			for(WishListVO_u wlvo : wishlist) {
+				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+					fvo.setWish(true);
+					break;
+				}
+			}
+			
+			
 			mapx = fvo.getMapx();
 			mapy = fvo.getMapy();
 			typo.put("type", type);
@@ -212,7 +253,10 @@ public class DetailModel {
 		request.setAttribute("detail_board_jsp","../detail/detail_board.jsp");
 
 		//request.setAttribute("banner_on", true);
-
+		//###############################################################
+		
+		//###############################################################
+		
 		MainDAO.addItemToCookies(request, response, Integer.parseInt(type), Integer.parseInt(no));
 		//cookie에 넣기
 		return "../main/index.jsp";

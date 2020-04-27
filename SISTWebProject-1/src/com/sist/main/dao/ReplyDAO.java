@@ -74,7 +74,7 @@ public class ReplyDAO {
 			map.put("pEnd", pEnd);
 			map.put("pRvno", reviewNo);
 			ss.update("reviewReplyListData", map);
-			list = (ArrayList<ReviewReplyVO>) map.get("pResult");
+			list = (ArrayList<ReviewReplyVO>)map.get("pResult");
 			
 		} catch (Exception e) {
 			System.out.println("ReplyDAO:#():");

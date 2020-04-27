@@ -75,8 +75,8 @@
 					</c:forEach>
 
 					<div style="width: 100%; height: 200px;">${vo.content}</div>
-					<a href="blog-details.html"
-						class="primary-btn text-uppercase mt-15">continue Reading</a>
+					<div
+						class="primary-btn text-uppercase mt-15 btnclick" id="r${vo.reviewno}" data-no="${vo.reviewno}">continue Reading</div>
 					<div class="post-box" style="width: 100%" id='mouse_over'>
 						<div class="d-flex">
 							<div>
@@ -85,7 +85,7 @@
 							</div>
 							<div class="post-meta">
 								<div class="meta-head">
-									<a href="#">${vo.memberid }</a>
+									<a href="../home/profile_data.do?id=${vo.memberid}">${vo.memberid }</a>
 								</div>
 								<div class="meta-details">
 									<ul>
@@ -107,6 +107,11 @@
 						</div>
 					</div>
 				</div>
+<!-- ####################################################################################################################################### -->
+<!-- ####################################################################################################################################### -->	
+			<div id="replyresult${vo.reviewno}">
+			
+			</div>
 			</c:forEach>
 			<div class="text-center">
 				<ul class="pagination">

@@ -147,16 +147,16 @@
  	</select>
  	
   	<select id="getNearRestaurant" resultType="DetailRestaurantVO" parameterType="java.util.Map">
- 		SELECT rname, no, distance, num
-		FROM (SELECT rname, no, distance, rownum as num 
-		FROM (SELECT rname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from restaurant
+ 		SELECT rphoto,rname, no, mapx,mapy,distance, num
+		FROM (SELECT rphoto,rname, no, mapx,mapy,distance, rownum as num 
+		FROM (SELECT rphoto,rname, no, mapx,mapy,distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from restaurant
 		ORDER by distance ASC ))
 		WHERE num BETWEEN 2 AND 5
 	</select>
  	 <select id="getNearFestival" resultType="DetailFestivalVO" parameterType="java.util.Map">
- 		SELECT fname, no, distance, num
-		FROM (SELECT fname, no, distance, rownum as num 
-		FROM (SELECT fname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from festival
+ 		SELECT fphoto,fname, no, distance, num
+		FROM (SELECT fphoto,fname, no, distance, rownum as num 
+		FROM (SELECT fphoto,fname, no, distance_wgs84(#{mapx},#{mapy},mapx,mapy) as distance from festival
 		ORDER by distance ASC ))
 		WHERE num BETWEEN 2 AND 5
  	</select>

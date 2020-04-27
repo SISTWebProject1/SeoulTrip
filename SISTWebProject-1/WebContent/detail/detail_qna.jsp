@@ -65,7 +65,7 @@
 					</c:forEach>
 		
 				</table>
-		<c:forEach var="vo" items="${list }">
+<%-- 		<c:forEach var="vo" items="${list }">
 		<div class="single-post-item">
 			<h3>
 				<a href="blog-details.html">${vo.title }</a>
@@ -104,7 +104,7 @@
 				</div>
 			</div>
 		</div>
-		</c:forEach>
+		</c:forEach> --%>
 			</div>
 			</div>
 		</div>
