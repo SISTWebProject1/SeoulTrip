@@ -24,13 +24,17 @@
 	<title>Reservation</title>
 	
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=32be74c036d5c62bdc64696f8f5ab2ea"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="../css/style.css" />
 <style type="text/css">
 body {
  font-family: 'Noto Sans KR', sans-serif;
  font-size: 15px;
+}
+h3,h5
+{
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 30px;
 }
 
 h2 {
@@ -43,13 +47,8 @@ span {
  font-family: 'Noto Sans KR', sans-serif;
  font-size:25px;
 }
-#noInfo {
-  color: #8c8c8c;
-}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="jquery.validate.min.js"></script>
-<script type="text/javascript" src="jquery.validate.js"></script>
 <script type="text/javascript">	
 $(function(){
 	$('#person').click(function(){
@@ -109,59 +108,31 @@ $(function(){
 	
 	$('#tel').keyup(function(){
 		var tel=$('#tel').val();
-		$.ajax({
-			type:'post',
-			url:'../reservation/reservation.do',
-			success:function(res)
-			{
-				$('#data-tel').text(tel);
-				$('#tel2').val(tel);			
-			}
-		})
-	})
-
-	$('#email').keyup(function(){
 		var email=$('#email').val();
 		$.ajax({
 			type:'post',
 			url:'../reservation/reservation.do',
 			success:function(res)
 			{
-				$('#email2').val(email);
+				$('#data-tel').text(tel);
+				$('#tel2').val(tel);
+				$('#email2').val(email);		
+				$('.submit-btn').attr("disabled",false);
 			}
-			
 		})
-	}),
-	$('#form').validate({
-			rules : {
-				name : {required:true, minlength:3},
-				tel : {required:true, minlength:10},
-				email : {required:true,email:true, remote:"Validate"}
-			},
-			messages :{
-				name : {
-					required: "예약하실 분의 성함을 입력하세요",
-					minlength: jQuery.format("0글자 이상 입력하세요!")
-				},
-				tel : {
-					required: "전화번호를 입력하세요 (예)010-XXXX-XXXX",
-					minlength: jQuery.format("휴대폰번호 11자리를 정확히 입력하세요")
-				},
-				email: {
-					required: "이메일 형식을 지켜서 입력해주세요",
-					email: "이메일 형식을 지켜주세요 (예)sist@sist.co.kr"
-				}
-			},
-			submitHandler:function(frm){
-				frm.submit();
-			},
-			success:function(e)
-			{
-				
-			}
-		});
-	});	
-
+	})
+ })
+ 
+/* 
+var id=$('#id').val();
+		if(id==null)
+		{
+			document.on('로그인이 필요한 서비스입니다');
+			history.back();
+		}else
+		{
+			$('#submit-btn').attr("disabled",false);	
+		} */
 </script>
 
 
@@ -189,20 +160,17 @@ $(function(){
 <!-- ==================================================================================================음식점정보 -->	
 <div class="container">
 	<div class="section">
-	  
+	
 	<h2 style="text-align:center;">&nbsp;&nbsp;${vo.rname }</h2>	
 	
 	<section class="contact-page-area" style="margin-top:20px;">	
 		   	<div class="row-info col-md-6 col-md-offset-0" style="width:100%;">
-						<img src="${vo.rphoto }" class="rphoto">
-				<c:if test="${empty vo.rphoto}" >
-						<img src="img/img_def.png" class="rphoto" id="noInfo" >
-				</c:if>
+						<img src="../img/reservation.jpg" class="rphoto">
+							<!-- ${vo.rphoto}  -->
 			</div>	
 			
 			
 			<div class="row-info col-md-6" >
-			
 				<div class="d-flex flex-column address-wrap">
 					<br><br>
 					<div class="single-contact-address d-flex flex-row">
@@ -210,14 +178,9 @@ $(function(){
 							<span class="lnr lnr-map"></span>
 						</div>
 						<div class="contact-details">
-						
 							<h5>${vo.addr1 }</h5>
 							<br>
 							<h5>${vo.addr2 }</h5>
-
-						<c:if test="${empty vo.addr1}" >
-							<h5 id="noInfo">주소 정보가 없습니다</h5>
-						</c:if>
 						</div>
 					</div>
 					
@@ -228,9 +191,6 @@ $(function(){
 						</div>
 						<div class="contact-details">
 							<h5>${vo.tel }</h5>
-						<c:if test="${empty vo.tel}" >
-							<h5 id="noInfo" >전화번호 정보가 없습니다</h5>
-						</c:if>
 						</div>	
 					</div>
 					
@@ -238,14 +198,9 @@ $(function(){
 						<div class="icon">
 							<span class="lnr lnr-alarm"></span>
 						</div>
-						
 						<div class="contact-details">
-						  <h5>${vo.openhour}</h5> 
-						<c:if test="${empty vo.openhour}" >
-						  <h5 id="noInfo">운영시간 정보가 없습니다</h5>
-						 </c:if>
-   						</div>
-   				
+							<h5>${vo.openhour}</h5>  
+						</div>
 					</div>
 					<div class="single-contact-address d-flex flex-row">
 						<div class="icon">
@@ -253,13 +208,9 @@ $(function(){
 						</div>
 						<div class="contact-details">
 							<h5>${vo.price}</h5>
-						<c:if test="${empty vo.price}" >
-							<h5 id="noInfo">가격대 정보가 없습니다</h5>
-						</c:if>
 						</div>
 					</div>
 				</div>	
-			
 			</div>
 	</section>
 </div>
@@ -272,12 +223,11 @@ $(function(){
 
 <!-- ==================================================================================================예약단 -->	
 		<div class="section" >
-				<form method="post" action="reserve_ok.do" id="form">
 						<div class="booking-form col-md-6" style="width:100%;margin-left:10px; margin-top:5px;">
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약인원</span>
 											<select class="form-control" id="person" >
-												<option selected disabled >인원을 선택해주세요</option>
+												<option selected disabled>인원을 선택해주세요</option>
 											<c:forEach var="i" begin="1" end="10">
 												<option>${i}</option>
 											</c:forEach>
@@ -302,7 +252,7 @@ $(function(){
 									<div class="row" >
 									<div class="col-sm-12">
 										<div class="form-group col-sm-12">
-											<input class="form-control" type="date" id="date"  min="${today }" required>
+											<input class="form-control" type="date" id="date" name="date" min="${today }">
 											<span class="form-label">예약날짜</span>
 										</div>
 									</div>
@@ -312,32 +262,33 @@ $(function(){
 								<div class="row">	
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" id="name"  required>
+											<input class="form-control" type="text" id="name" name="name" >
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
 									
+									
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="tel" id="tel" required>
-											<span class="form-label">전화번호</span>
+											<input class="form-control" type="email" id="email" name="name" >
+											<span class="form-label">Email</span>
 										</div>
 									</div>
 									
 								</div>
 								
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-6">
 										<div class="form-group">
-											<input  class="form-control" id="email" type="email" required>
-											<span class="form-label">Email</span>
+											<input class="form-control" type="tel" id="tel" >
+											<span class="form-label">전화번호</span>
 										</div>
-									</div>							
+									</div>
+							
 								</div>
 								
-							
-						
-							
+							<form method="post" action="reserve_ok.do">
+								
 								<input type="hidden" name="no" id="no" value="${vo.no }"/>
 								<input type="hidden" name="date2" id="date2" value=""/>
 								<input type="hidden" name="time2" id="time2" value=""/>
@@ -348,20 +299,19 @@ $(function(){
 								<input type="hidden" name="id" id="id" value="${ss_member.memberId}" />			
 								<input type="hidden" name="tagcode" id="tagcode" value="${tvo.tagcode }">  
 								<div class="form-btn">
-									<button class="submit-btn col-md-6">예약하기</button>
-								<!--disabled  -->
-					
-								</div>			
+									<button class="submit-btn col-md-6" disabled>예약하기</button>
+								</div>
+							</form>
+							
 								<div class="form-btn">
 									<button class="submit-btn col-md-6" 
 										onclick="javascript:history.back()"
 									>취소하기</button>
 								</div>
 								
-							</div>
-						</form>		
 					 </div>	
-	
+			</div>	
+
 			<%-- ==========================================Ajax출력단========================================== --%>						
 			<div class="section">		
 					 <div class="booking-form col-md-6 col-md-offset-0" id="result" style="margin-left:15px" ">
@@ -376,6 +326,7 @@ $(function(){
 			<div class="section">				
 					<div class="row" style="margin: 0px auto;">
 					 	<div class="row" style="margin: 0px auto;float:left; border:0px solid red;"> 
+					 	 </h5>	
 					 	 
 						 <b style="font-size:25px; text-align:center;">&nbsp;&nbsp;
 						  ${ss_member.memberId==null?"방문객 ":ss_member.memberId} 님에게  
@@ -393,7 +344,7 @@ $(function(){
 							<div class="col-md-4" style="margin: 0px auto; float:left;  width:100%;">
 						   	 <div class="thumbnail">
 						   		<a href="../detail/detail.do?type=2&no=${rvo.no}">
-						        	<img src="${rvo.rphoto }" style="width:100%; height:200px;"/>
+						        <img src="${rvo.rphoto }" style="width:100%; height:200px;"/>
 						        </a>
 						          <div class="caption text-center">
 						          <p >${rvo.rname}</p>
@@ -427,6 +378,7 @@ $(function(){
 		var container = document.getElementById('map');
 		var options = {					
 			center: new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"),
+			/*${vo.mapX}, ${vo.mapY}  */
 			level: 3
 		};
 
@@ -437,7 +389,7 @@ $(function(){
 	        level: 3 // 지도의 확대 레벨
 	    };
 		
-		var markerPosition  = new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}");
+		var markerPosition  = new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}"); 
 
 		// 마커를 생성합니다
 		var marker = new kakao.maps.Marker({
@@ -449,7 +401,6 @@ $(function(){
 
 	</script>
 
-	<script src="jquery.min.js"></script>
 	<script>
 		$('.form-control').each(function () {
 			floatedLabel($(this));

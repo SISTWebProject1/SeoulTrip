@@ -15,7 +15,12 @@ import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
 import com.sist.main.dao.HashTagVO;
 import com.sist.main.dao.HomeItemVO;
+import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.MainDAO;
+import com.sist.mypage.model.MemberVO_u;
+import com.sist.mypage.model.MypageDAO;
+import com.sist.mypage.model.ReviewVO_u;
+import com.sist.mypage.model.WishListVO_u;
 
 @Controller
 public class HomeModel {
@@ -134,6 +139,85 @@ public class HomeModel {
 		request.setAttribute("htitemlist", htitemlist);
 		
 		return "morehtitemlist.jsp";
+	}
+	
+	@RequestMapping("home/profile_data.do")
+	public String main_profile(HttpServletRequest request, HttpServletResponse response) {
+		String id = request.getParameter("id");
+		
+		MemberVO_u my_vo = MypageDAO.PassWord_check(id);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		sdf.applyPattern("yyyy-MM-dd");
+		String birth = sdf.format(my_vo.getBirth());
+		String regdate = sdf.format(my_vo.getRegdate());
+		
+		request.setAttribute("birth", birth);
+		request.setAttribute("regdate", regdate);
+		request.setAttribute("my_vo", my_vo);
+		// _> Login 정보 End
+		
+		// review 확인 -> review_image, content,regdate, 등 memberId에 일치하는  review데이터를 수집
+		// 리뷰 페이지
+		String page =request.getParameter("page");
+		String type = request.getParameter("type");
+		int totalpage = 0;
+		if(page==null)
+			page="1";
+		int curpage = Integer.parseInt(page);
+		int rowSize = 5;
+		int start = (rowSize)* curpage-(rowSize-1);
+		int end = rowSize*curpage;
+		final int BLOCK = 10;
+		int startPage = ((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage = ((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		// 1~10 , 11~20
+		
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("end", end);
+		
+		
+		List<ReviewVO_u> review_list = new ArrayList<ReviewVO_u>();
+		int review_count=0;
+		review_list = MypageDAO.ReviewData(map);
+		// 사진을 모으기 위해 reviewNO를 배열에 저장
+		int reviewNo[] = new int[review_list.size()];
+		int i =0;
+		for(ReviewVO_u v1 : review_list){
+			reviewNo[i] = v1.getReviewno();
+			i++;
+		}
+		review_list = MypageDAO.getImageForReview(review_list, reviewNo);
+		review_count = review_list.size();
+		
+		int allPage = review_count;
+		if(endPage>allPage)
+			endPage = allPage;
+		// _> review 정보 End
+
+		
+		// review 정보 확인
+		//wishlist data 값
+		
+		List<WishListVO_u> wish_list = MypageDAO.wishlistData(id);
+		
+		// wishlist 존재 여부 확인
+		int wish_count =0;
+		wish_count = wish_list.size();
+		
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("curpage", curpage);
+		request.setAttribute("allPage", allPage);
+		request.setAttribute("mypage_review_list", review_list);
+		request.setAttribute("review_count", review_count);
+		request.setAttribute("wish_list", wish_list);
+		request.setAttribute("wish_count", wish_count);
+		
+		request.setAttribute("main_jsp", "../home/profile_data.jsp");
+		return "../main/index.jsp";
 	}
 
 }
