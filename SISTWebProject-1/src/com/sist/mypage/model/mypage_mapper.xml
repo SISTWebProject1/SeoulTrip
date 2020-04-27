@@ -64,7 +64,18 @@
 	</select>
 	
 	<select id="restaurant_review_score" parameterType="int" resultType="string">
-		SELECT TRUNC(AVG(grade),2) FROM review
+		SELECT TRUNC(AVG(grade),1) FROM review
 		WHERE no=#{no} and type=2
 	</select>
+	
+	<delete id="reservation_del" parameterType="BookingRestaurantVO_u">
+	 	DELETE FROM bookingrestaurant
+	 	where memberid = #{memberId} and bookingnumber = #{bookingnumber}
+	</delete>
+	<select id="reviewTotalCount_mypage" parameterType="string" resultType="int">
+		SELECT Trunc(COUNT(*)/5) FROM review
+		WHERE memberId =#{id}
+	</select>
+	
+	
 </mapper>
