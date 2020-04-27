@@ -40,8 +40,8 @@
 						pattern="yyyy-MM-dd" /></b>
 			</p>
 			<div style="border-bottom: 2px groove; text-align: right">
-				<input type="button" class="btn-btn-sm btn-danger" value="수정">
-				<input type="button" class="btn-btn-sm btn-danger" value="삭제">
+				<a href="../mypage/review_update_mypage.do?id=${ss_member.memberId}" class="btn-btn-sm btn-danger">수정</a>
+				<a href="#" class="btn-btn-sm btn-danger">삭제</a>
 			</div>
 		</c:forEach>
 		<div class="text-center">
