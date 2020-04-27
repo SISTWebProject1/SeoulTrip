@@ -90,6 +90,14 @@ public class MypageModel {
 		request.setAttribute("main_jsp", "../mypage/profile8.jsp");
 		return "../main/index.jsp";
 	}
+	@RequestMapping("mypage/review_update_mypage.do")
+	public String mypage_review_update(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");
+		
+		request.setAttribute("banner_on", true);
+		request.setAttribute("main_jsp", "../mypage/review_update.jsp");
+		return "../main/index.jsp";
+	}
 	@RequestMapping("mypage/wishlist.do")
 	public String wishlist(HttpServletRequest request, HttpServletResponse response){
 		LoginVO vo = (LoginVO) request.getSession().getAttribute("ss_member");
