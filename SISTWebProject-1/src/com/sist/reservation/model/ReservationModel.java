@@ -19,9 +19,7 @@ public class ReservationModel {
 	{
 		String no=request.getParameter("no");
 		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		System.out.println(today);
-		System.out.println(no);
-		
+
 		RestaurantVO vo=ReservationDAO.restaurantData(Integer.parseInt(no));
 		TagVO tvo=ReservationDAO.recommendTag(Integer.parseInt(no));
 		int tagcode=tvo.getTagcode();
@@ -56,7 +54,7 @@ public class ReservationModel {
 		String tel=request.getParameter("tel2").trim();
 		
 		System.out.println(id);
-		System.out.println(no);
+		System.out.println(no);	
 		System.out.println(reservationdate);
 		System.out.println(time);
 		System.out.println(inwon);
@@ -67,7 +65,7 @@ public class ReservationModel {
 		vo.setNo(Integer.parseInt(no));
 		vo.setMemberid(id);
 		vo.setName(name);
-		vo.setEmail("qwerty@sist.co.kr");
+		vo.setEmail(email);
 		vo.setInwon(Integer.parseInt(inwon));
 		vo.setReservationdate(reservationdate);
 		vo.setTel(tel);
@@ -75,7 +73,7 @@ public class ReservationModel {
 		
 		ReservationDAO.bookingInfoInsert(vo);
 		
-		return "redirect: ../detail/detail.do?type=2&no"+no;
+		return "redirect: ../mypage/bookingList.do?id="+id;
 	}
 	
 }	

@@ -8,6 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link href="https://fonts.googleapis.com/css?family=Jua|Single+Day|Stylish&display=swap&subset=korean"
+ rel="stylesheet">
+<style type="text/css">
+.sample-text{
+	font-family: Jua;
+	font-size: 18px;
+}
+.text-heading{
+	font-family: Lato;
+	font-size:30px;
+}
+</style>
 </head>
 <body>
 
@@ -21,36 +33,22 @@
 				<sub style=""><b>사진을 추가 해주세요</b></sub>
 				<img src="../mypage/default_reviews_image.jpg">
 			</c:if>
-			<p class="sample-text">${vo1.content }</p>
-			<p>
+			<br>
+			<pre class="sample-text" style="white-space: pre-wrap;border: none;">${vo1.content }</pre>
+			<p >
 				<b>등록일 :&nbsp;<fmt:formatDate value="${vo1.expdate }"
 						pattern="yyyy-MM-dd" /></b>
 			</p>
 			<div style="border-bottom: 2px groove; text-align: right">
-				<input type="button" class="btn-btn-sm btn-danger" value="수정">
-				<input type="button" class="btn-btn-sm btn-danger" value="삭제">
+				<a href="../mypage/review_update_mypage.do?id=${ss_member.memberId}" class="btn-btn-sm btn-danger">수정</a>
+				<a href="#" class="btn-btn-sm btn-danger">삭제</a>
 			</div>
 		</c:forEach>
 		<div class="text-center">
-			<ul class="pagination">
-				<c:if test="${startPage>1 }">
-					<li><a href="../mypage/profile.do?page=${startPage-1 }">&lt;</a></li>
-				</c:if>
-				<c:set var="type" value="" />
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<c:if test="${curpage==i }">
-						<c:set var="type" value="class=active" />
-					</c:if>
-					<c:if test="${curpage!=i }">
-						<c:set var="type" value="" />
-					</c:if>
-					<li ${type }><a href="../recipe/recipe.do?page=${i}">${i}</a></li>
-				</c:forEach>
-				<c:if test="${endPage<allPage }">
-					<li><a href="../mypage/profile.do?page=${endPage+1 }">&gt;</a></li>
-				</c:if>
-			</ul>
-		</div>
+      	<a href="../mypage/profile.do?page=${curpage>1?curpage-1:curpage }" class="btn btn-md btn-primary" style="background-color: blue;color:white;" >이전</a>
+       		 ${curpage } page / ${totalpage } pages
+      	<a href="../mypage/profile.do?page=${curpage<totalpage?curpage+1:curpage }" class="btn btn-sm btn-primary" style="background-color: blue;color:white;">다음</a>
+   		 </div>
 	</div>
 
 

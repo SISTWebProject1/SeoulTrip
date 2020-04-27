@@ -12,6 +12,7 @@
 	rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Lato:400,500,900'
 	rel='stylesheet' type='text/css'>
+
 <!--
 			CSS
 			============================================= -->
@@ -29,24 +30,6 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$(function() {
-		$("#dialog").dialog({
-			autoOpen : false,
-			show : {
-				effect : "blind",
-				duration : 1000
-			},
-			hide : {
-				effect : "explode",
-				duration : 1000
-			}
-		});
-		$("#profile_update").click(function() {
-			$("#dialog").dialog("open");
-		});
-	});
-</script>
 <style type="text/css">
 #keyBtn {
 	background-color: maroon;
@@ -81,12 +64,15 @@
 
 #my_info>li {
 	margin: 15px;
+	font-family: Lato;
+	font-size:15px;
 }
 
-#pro_content {
+.pro_content {
 	position: absolute;
 	top: 50%;
 	left: 50%;
+	font-family :Lato;
 	transform: translate(-50%, -50%);
 }
 </style>
@@ -101,7 +87,7 @@
 	<div class="whole-wrap">
 		<div class="container">
 
-			<h3 style="margin: 4px; border-bottom: 2px groove;">프로필</h3>
+			<h3 style="margin: 4px; border-bottom: 2px groove; font-family: Lato;">프로필</h3>
 			<div class="profile">
 				<div class="profile-image">
 					<img src="${ss_member.photo }">
@@ -110,22 +96,22 @@
 					<h2 class="profile-user-name">${my_vo.name }</h2>
 					<sub style="color: gray">ID:@${my_vo.memberId }</sub> <span
 						class="btn btn-xs btn-danger"
-						style="background-color: red; border: 1px solid transparent;">
+						style="background-color: #337ab7; border: 1px solid transparent;">
 						<a href="../mypage/profile_Update.do?id=${my_vo.memberId }"
-						style="text-decoration: none; color: white;">프로필 수정</a>
+						style="text-decoration: none; color: white; font-family: Lato;">프로필 수정</a>
 					</span> <span class="btn btn-xs btn-primary"
-						style="background-color: red; border: 1px solid transparent;">
+						style="background-color: #d9534f; border: 1px solid transparent;">
 						<a href="../mypage/bookingList.do?id=${my_vo.memberId }"
-						style="color: white;">예약정보</a>
+						style="color: white;font-family: Lato;">예약정보</a>
 					</span>
 				</div>
 
 				<div class="profile-bio" style="margin: 5px;">
 					<c:if test="${my_vo.selfInfo !=null }">
-						<div class="caption">${my_vo.selfInfo }</div>
+						<div class="caption" style="font-family: Lato;">${my_vo.selfInfo }</div>
 					</c:if>
 					<c:if test="${my_vo.selfInfo == null }">
-						<div class="caption">사진과 정보를 프로필에 추가해주세요!</div>
+						<div class="caption" style="font-family: Lato;">사진과 정보를 프로필에 추가해주세요!</div>
 					</c:if>
 					<ul id="my_info" style="text-align: left;">
 						<li><img src="../mypage/birth.png"
@@ -140,14 +126,6 @@
 			<!-- 이미지 지도를 표시할 div 입니다 -->
 			<div class="section-top-border">
 				<jsp:include page="pro_reviews.jsp"></jsp:include>
-				<!--  <div class="row text-center">
-					<a href="../mypage/profile.do?page=${curpage>1?curpage-1:curpage }"
-						class="btn btn-sm btn-primary">이전</a> ${curpage } page /
-					${allPage } pages <a
-						href="../mypage/profile.do?page=${curpage<allPage?curpage+1:curpage }"
-						class="btn btn-sm btn-primary">다음</a>
-				</div>
-				-->
 				<div class="section-top-border">
 					<jsp:include page="wishlist.jsp"></jsp:include>
 				</div>

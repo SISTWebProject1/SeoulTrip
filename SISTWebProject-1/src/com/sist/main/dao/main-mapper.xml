@@ -90,7 +90,8 @@
 		FROM (SELECT reviewno
 		FROM review
 		WHERE type=#{type} AND no=#{no}) NATURAL JOIN reviewtohashtag)
-		GROUP BY tagcode)
+		GROUP BY tagcode
+		ORDER BY cnt)
 	</select>
 	
 	<select id="getGradeReviewCntByTypeNo" resultType="HomeItemVO" parameterType="HomeItemVO">
@@ -198,6 +199,19 @@
 	</parameterMap>
 	<select id="reviewReplyUpdate" parameterMap="reviewReplyUpdateMap" statementType="CALLABLE">
 		{CALL replyUpdate(?,?)}
+	</select>
+	
+	<select id="getAllNoNameFromTourplace" resultType="HomeItemVO">
+		SELECT no, tname AS name FROM tourplace
+	</select>
+	<select id="getAllNoNameFromRestaurant" resultType="HomeItemVO">
+		SELECT no, rname AS name FROM restaurant
+	</select>
+	<select id="getAllNoNameFromFestival" resultType="HomeItemVO">
+		SELECT no, fname AS name FROM festival
+	</select>
+	<select id="getAllMemberId" resultType="LoginVO">
+		SELECT memberid FROM (SELECT memberid FROM member ORDER BY memberid) WHERE rownum &lt; 1000
 	</select>
 </mapper>
 
