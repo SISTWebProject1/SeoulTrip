@@ -622,6 +622,71 @@ public class MainDAO {
 			if(ss!=null) ss.close();
 		}
 	}
+	
+	/*public static void setWishlistRandomly(){
+		
+		SqlSession ss = null;
+		
+		try {
+			ss = ssf.openSession();
+			
+			List<HomeItemVO> allTypeNoList = new ArrayList<HomeItemVO>();
+					
+			List<HomeItemVO> temp = ss.selectList("getAllNoNameFromTourplace");
+			for(HomeItemVO vo : temp) {
+				vo.setType(1);
+				allTypeNoList.add(vo);
+			}
+			temp = ss.selectList("getAllNoNameFromRestaurant");
+			for(HomeItemVO vo : temp) {
+				vo.setType(2);
+				allTypeNoList.add(vo);
+			}
+			temp = ss.selectList("getAllNoNameFromFestival");
+			for(HomeItemVO vo : temp) {
+				vo.setType(3);
+				allTypeNoList.add(vo);
+			}
+			
+			List<LoginVO> allIdList = ss.selectList("getAllMemberId");
+			for(LoginVO vo : allIdList) {
+				System.out.println(vo.getMemberId()+" \t====================================");
+				
+				List<HomeItemVO> wishlist = new ArrayList<HomeItemVO>();
+				int cycle = Math.abs(new Random().nextInt())%15;
+				System.out.println("cycle : "+cycle);
+				target:
+				for(int i=0; i<cycle; i++) {
+					HomeItemVO thivo = allTypeNoList.get(Math.abs(new Random().nextInt())%allTypeNoList.size());
+					System.out.println(i+"|"+thivo.getType()+"|"+thivo.getNo()+"|"+thivo.getName());
+					if(wishlist.size()==0) {
+						wishlist.add(thivo);
+						continue target;
+					}
+					for(int j=0; j<wishlist.size(); j++) {
+						HomeItemVO wlvo = wishlist.get(j);
+						if(wlvo.getNo()==thivo.getNo() && wlvo.getType()==thivo.getType()) {
+							i--;
+							break;
+						} else {
+							wishlist.add(thivo);
+						}
+					}
+				}
+				for(HomeItemVO wlvo : wishlist) {
+					System.out.println(wlvo.getType()+"|"+wlvo.getNo()+"|"+wlvo.getName());
+				}
+				System.out.println("====================================================");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("MainDAO:setWishlistRandomly():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
+	}*/
 
 }
 

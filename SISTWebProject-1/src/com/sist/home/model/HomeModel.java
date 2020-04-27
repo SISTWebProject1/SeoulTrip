@@ -57,6 +57,8 @@ public class HomeModel {
 		lists = MainDAO.getHTItemsListsByCookie(request, response);
 		request.setAttribute("lists", lists);
 		
+		//MainDAO.setWishlistRandomly();
+		
 		return "../main/index.jsp";
 	}
 	
@@ -65,11 +67,18 @@ public class HomeModel {
 		String strDate = request.getParameter("date");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d");
 		Date date = new Date();
-		try {
-			date = sdf.parse(strDate);
-		} catch (ParseException e) {
-			System.out.println("HomeModel:home_festivalList():");
-			e.printStackTrace();
+		if(strDate==null) {
+			Date today = new Date();
+			date.setYear(today.getYear());
+			date.setMonth(today.getMonth());
+			date.setDate(today.getDate());
+		} else {
+			try {
+				date = sdf.parse(strDate);
+			} catch (ParseException e) {
+				System.out.println("HomeModel:home_festivalList():");
+				e.printStackTrace();
+			}
 		}
 		
 		List<FestivalVO> flist = FestivalDAO.festivalDateList(date);
