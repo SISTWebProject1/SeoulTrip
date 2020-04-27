@@ -100,15 +100,11 @@ public class MypageDAO {
 			session = ssf.openSession();
 			list = session.selectList("wishtList",id);
 			
-			System.out.println(list.size());
 			int no =0;
 			String photo=" ";
 			for(WishListVO_u vo : list){
 				no = vo.getNo();
-				System.out.println(no);
 				photo=session.selectOne("mypage_getimage",no);
-				
-				System.out.println("photo : "+photo);
 				vo.setWish_photo(photo);
 			}
 			
@@ -141,6 +137,21 @@ public class MypageDAO {
 		}
 		return list;
 	}
+	public static int getreviewTotalCount_mypage(String id){
+		int count =0;
+		SqlSession session= null;
+		try{
+			session = ssf.openSession();
+			count = session.selectOne("reviewTotalCount_mypage", id);
+			
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			session.close();
+		}
+		
+		return count;
+	}
 	//리뷰별 이미지 출력
 	public static List<ReviewVO_u> getImageForReview(List<ReviewVO_u> list, int[] reviewNo){	
 		SqlSession session=null;
@@ -155,9 +166,7 @@ public class MypageDAO {
 				temp = temp+filepath+"@";
 			}
 			String[] filepath_temp = temp.split("@");
-			System.out.println(filepath_temp.length);
 			for(String te : filepath_temp){
-				System.out.println(te);
 			}
 			int i =0;
 			for(ReviewVO_u vo1 : list){
@@ -167,7 +176,6 @@ public class MypageDAO {
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}finally{
 			if(session!=null)
@@ -204,5 +212,20 @@ public class MypageDAO {
 				session.close();
 		}
 		return Booking_list;
+	}
+	
+	public static void reservation_del(BookingRestaurantVO_u vo){
+		SqlSession session = null;
+		try{
+			session = ssf.openSession(true);
+			session.delete("reservation_del", vo);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}finally{
+			if(session != null){
+				session.close();
+			}
+		}
+		
 	}
 }

@@ -1,26 +1,24 @@
-.rphoto {
-
-   width: 550px;
-   height: 350px;
-	
-}
-
-
 .section {
 	position: relative;
 	width: 100%;
+	height: 100vh;
 	margin: 0px auto;
-	padding-bottom: 20px;
 	overflow: hidden;
 	background: none;
-	float:left;
-	
 }
 
-
 .row-info{
+	border: 0px solid red;
 	overflow: hidden;
 	float: left;
+}
+.section .section-center {
+	position: relative;
+	top: 50%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
 }
 
 #booking::before {
@@ -34,8 +32,11 @@
 }
 
 
+
+
 .booking-form {
 	position: relative;
+	border: 0px solid red;
 	background: #fff;
 	-webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.3);
@@ -153,5 +154,3 @@
 	width: 100%;
 	text-transform: capitalize;
 }
-
-

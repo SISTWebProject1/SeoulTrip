@@ -7,59 +7,54 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="https://fonts.googleapis.com/css?family=Jua|Poor+Story|Single+Day|Stylish&display=swap&subset=korean" rel="stylesheet">
+<style type="text/css">
+.body_main_text_info_reviewNum{
+	font-size: 20px;
+	font-family: 'PoorStory';
+}
+</style>
 <body>
-	<section class="sample-text-area">
-		<div class="text-heading" style="background-color: #6f42c1;background-image:url(../mypage/8.jpg);" >
-		<h1 style="margin: 10px; text-align: center">${ss_member.memberId}님의예약정보</h1>
-		</div>
-		<div class="container-fluid" style="background-image:url()">
-			<div class="row">
+	<div class="container">
+		<h1 style="margin: 30px; text-align: left;">${ss_member.memberId}님의예약정보</h1>
+		<div class="row" style="background-color: infotext;">
 			<c:forEach var="b_vo" items="${Booking_list }">
-			<div class="col-md-4" style="text-align: center;">
-						<div class="content-details" style="text-align: left; margin: 5px; height:300px;width: 500px;">
-						<h3 class="text-heading">${b_vo.rname_reservation }</h3>
-							<a href="../detail/detail.do?no=${b_vo.no }&type=2">
-						<c:if test="${b_vo.rphoto_reservation == null}">
-							<img src="../mypage/default_reviews_image.jpg" class="img-fluid" >
-						</c:if>
-						<c:if test="${b_vo.rphoto_reservation != 'null'}">
-							<img src="${b_vo.rphoto_reservation}" class="img-fulid">
-						</c:if>
+				<div class="cate_body">
+					<div class="col-lg-4 col-md-4" style="height: 200px">
+							<a href="">
+							<img class="post-img img-fluid" alt="음식점사진"
+							style="border-radius: 10px 10px 10px 10px;"
+							src="${b_vo.rphoto_reservation }">
 							</a>
+					</div>
+					<div class="col-lg-8 col-md-8">
+						<div class="body_main_text_title">${b_vo.rname_reservation }</div>
+						<div class="body_main_text_info">
+							<div class="grade">
+								<p class="grade2" style="WIDTH: ${b_vo.grade*20 }%;"></p>
+							</div>
+							<br>
+							<div class="body_main_text_info_bestreview">
+								<a href="../mypage/reservation_del.do?id=${b_vo.memberId }&bookingnumber=${b_vo.bookingnumber}" class ="btn btn-sm btn-danger">삭제</a>									
+								<a href="../mypage/profile.do" class="btn btn-sm btn-primary">뒤로</a>
+							</div>
 						</div>
-				<table class="table">
-					<tr>
-						<th width="30%">예약</th>
-						<td width="70%">${b_vo.bookingnumber}번
-						</td>
-					</tr>
-					<tr>
-						<th width="30%">예약 날짜 </th>
-						<td width="70%"> ${b_vo.reservationDate}</td>
-					<tr>
-					<tr>
-						<th width="30%">예약 시간</th>
-						<td width="70%">${b_vo.time} </td>
-					</tr>
-					<tr>
-						<th width="30%">가게 번호</th>
-						<td width="70%">${b_vo.tel }</td>
-					</tr>
-					<tr>
-						<th width="30%">인원</th>
-						<td width="70%"> ${b_vo.inwon }</td>
-					</tr>
-					<tr>
-						<th width="30%">평점</th>
-						<td width="70%">${b_vo.grade }</td>
-					</tr>
-				</table>
-					
-			</div>
+						<div class="body_main_text_info_bestreview">
+							<div class="body_main_text_info_reviewNum">
+							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;
+							예약 날짜 :&nbsp;${b_vo.reservationDate }</div>
+							<div class="body_main_text_info_reviewNum">
+							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;
+							예약 시간 :&nbsp;${b_vo.time} </div>
+							<div class="body_main_text_info_reviewNum">
+							<i class="fas fa-quote-right"></i>&nbsp;&nbsp;
+							인원 : &nbsp;${b_vo.inwon }</div>
+						</div>
+					</div>
+				</div>
+				<br>
 			</c:forEach>
-			<button style="height:100px; width:100%; text-align: center" onclick="javascript:history.back()">뒤로</button>
-			</div>
 		</div>
-	</section>
+	</div>
 </body>
 </html>
