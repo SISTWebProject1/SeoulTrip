@@ -90,7 +90,8 @@
 		FROM (SELECT reviewno
 		FROM review
 		WHERE type=#{type} AND no=#{no}) NATURAL JOIN reviewtohashtag)
-		GROUP BY tagcode)
+		GROUP BY tagcode
+		ORDER BY cnt)
 	</select>
 	
 	<select id="getGradeReviewCntByTypeNo" resultType="HomeItemVO" parameterType="HomeItemVO">
