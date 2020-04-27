@@ -29,4 +29,6 @@
 		WHERE resttagmapper.rno=restaurant.no 
 		AND rownum&lt;=3 AND tagcode=#{tagcode}
 	</select>
+	
+	
 </mapper>
