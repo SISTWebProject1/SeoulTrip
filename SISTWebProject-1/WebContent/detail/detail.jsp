@@ -27,30 +27,33 @@
 			
 		}); 
 	});
-	
-/* 	$('#qna_insert').click(function(){
-		const type = $('#type').val();
-		const no = $('#no').val();
-		$.ajax({
-			type:'post',
-			url:'../detail/detail_qna_insert.do',
-			datao:{'type':type, 'no':no},
-			success:function(data){
-				$('#result').html(data);
-			
-			},
-			error: function(e){
-				console.log("error");
-			}
-		});	
-	}); */
-	
 	var location = document.querySelector('#ReviewPosition').offsetTop;
-
 	(function(e){
  		window.scrollTo({top:location, behavior:'smooth'});
 	})();
-	
+	var check = 0;
+	$('.btnclick').click(function(){
+		const type=$('#type').val();
+		const no = $('#no').val();
+		const reviewno = $(this).attr('data-no');
+		console.log(reviewno);
+		console.log(type);
+		console.log(no);
+		$.ajax({
+			type:'post',
+			url:'../detail/detail_review_list.do',
+			data:{'type':type, 'no':no, 'reviewno':reviewno},
+			success:function(res){
+					console.log(res);
+					$('#replyresult'+reviewno).html(res);
+			},
+			error : function(e){
+				alert("error");
+			}
+		});
+		
+		
+	})
 
 }); 
 </script> 

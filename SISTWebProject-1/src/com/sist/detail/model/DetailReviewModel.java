@@ -130,7 +130,7 @@ public class DetailReviewModel {
 			int reviewNumber = DetailDAO.getReviewNumber();
 
 			if(filename1!=null){
-			    filepath1 = path.concat(filename2);
+			    filepath1 = path.concat(filename1);
 				Map map = new HashMap<>();
 			map.put("reviewno", reviewNumber);
 			map.put("filepath", filepath1);

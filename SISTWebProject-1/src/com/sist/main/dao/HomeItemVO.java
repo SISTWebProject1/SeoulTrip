@@ -51,6 +51,7 @@ public class HomeItemVO {
 	public void setHashtags(List<HashTagVO> hashtags) {
 		this.hashtags = hashtags;
 	}
+
 	public boolean isWish() {
 		return wish;
 	}

@@ -15,6 +15,15 @@ public class DetailFestivalVO {
 	private int grade;
 	private String fphoto;
 	
+	private boolean wish = false;
+
+	public boolean isWish() {
+		return wish;
+	}
+	public void setWish(boolean wish) {
+		this.wish = wish;
+	}
+	
 	private double distance;
 	public double getDistance() {
 		return distance;

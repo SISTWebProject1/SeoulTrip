@@ -32,7 +32,8 @@
 		<c:forEach var="vo" items="${nearR}">
 		<div class="single-popular-post d-flex flex-row col-lg-3 col-md-3">
 			<div class="popular-thumb">
-				<img class="img-fluid" src="img/blog/r1.jpg" alt="" />
+				<img class="img-fluid" src="${vo.rphoto }" width="180" height="180"
+								style="display:block"/>
 			</div>
 			<div class="popular-details">
 				<a href="../detail/detail.do?type=2&no=${vo.no }">
@@ -53,7 +54,8 @@
 		<c:forEach var="vo" items="${nearF}">
 		<div class="single-popular-post d-flex flex-row col-lg-3 col-md-3">
 			<div class="popular-thumb">
-				<img class="img-fluid" src="img/blog/r1.jpg" alt="" />
+				<img class="img-fluid" src="${vo.fphoto}" width="180" height="180"
+								style="display:block"/>
 			</div>
 			<div class="popular-details">
 				<a href="../detail/detail.do?type=3&no=${vo.no }">

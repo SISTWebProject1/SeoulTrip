@@ -18,6 +18,24 @@ public class DetailRestaurantVO {
 	private String rescheck;
 	private int grade;
 	private String post;
+	
+	private boolean wish = false;
+
+	public boolean isWish() {
+		return wish;
+	}
+	public void setWish(boolean wish) {
+		this.wish = wish;
+	}
+	private int num;
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
 	private double distance;
 	public double getDistance() {
 		return distance;

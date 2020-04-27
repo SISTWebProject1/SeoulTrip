@@ -14,6 +14,16 @@ public class DetailTourplaceVO {
 	private double mapy;
 	private double distance;
 	
+	private boolean wish = false;
+
+	public boolean isWish() {
+		return wish;
+	}
+	public void setWish(boolean wish) {
+		this.wish = wish;
+	}
+	
+	
 	private int num;
 	public int getNum() {
 		return num;

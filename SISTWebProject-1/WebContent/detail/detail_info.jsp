@@ -23,10 +23,19 @@
 	<div class="container box_1480">
 		<div>
 			<div class="category_sum" style="font-size:20px; font-weight:bold;">
-				<a href=#>메인 </a> <a href=#>/${category}</a> <a href=#>/${title} </a>
+				<a href=#>메인 </a> 
+				<c:if test="${category=='축제'}">
+					<a href="../home/festivalList.do">/${category}</a> 
+				</c:if>
+				<c:if test="${category ne'축제'}">
+					<a href=#>/${category}</a> 
+				</c:if>
+				
+				<a href=#>/${title} </a>
 
 			</div>
-			<hr>
+	
+				<hr>
 			<div class="container-alter container-summary">
 				<ul>
 					<li style="font-size:25px; font-weight:bolder;"><a href="#">${title}</a></li>
@@ -34,14 +43,14 @@
 					<li>
 						<div class="tag_button">
 							<c:forEach var="tag" items="${taglist}">
-								<input type="button" value="${tag }">
+								<input type="button" value="${tag }" style="display:inline;">
 							</c:forEach>
 						</div>
 					</li>
 					<c:if test="${type==2 }">
-						
+						<c:if test="${ss_member.memberId != null }">
 							<a href="../reservation/reservation.do?no=${no}" class="btn btn-sm btn-danger">&nbsp;예약</a>
-										
+						</c:if>				
 					</c:if>
 				</ul>
 			</div>
@@ -49,7 +58,17 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 					<div class="single-post-item short">
-						<div class="content_summary">
+					 <div class="heart">
+							<button class="heart_button 
+								<c:choose>
+									<c:when test="${ info.wish eq true }">heart_on</c:when>
+									<c:otherwise>heart_off</c:otherwise>
+								</c:choose>
+							 " type="button" data-type="${type}" data-no="${no }">
+								<i class="fas fa-heart"></i>
+							</button>
+						</div>					
+							<div class="content_summary">
 							<ul>
 								<c:if test="${totalpage!=0}">
 									<li>
@@ -120,7 +139,7 @@
 				</div>
 
 				<div class="col-lg-6 col-md-6">
-					<div class="single-post-item short">
+						<div class="single-post-item short">
 						<div class="main-image">
 							<c:if test="${type==1}">
 								<img src="${info.tphoto}" alt="image1" id="current" />
@@ -160,12 +179,17 @@
 									</div>
 									<li><span>${vo.count }</span></li>	
 								</c:forEach>
-								<li><input type="text" name=mapx id=mapx value="${mapx}"/></li>
-								<li><input type="text" name=mapy id=mapy value="${mapy}"/></li>
+								<li><input type="hidden" name=mapx id=mapx value="${mapx}"/></li>
+								<li><input type="hidden" name=mapy id=mapy value="${mapy}"/></li>
 								<c:forEach var="xy" items="${nearT}">
-									<li><input type="text" name="tname${xy.num}" id="tname${xy.num}" value="${xy.tname}"/></li>
-									<li><input type="text" name="mapx${xy.num}" id="mapx${xy.num}" value="${xy.mapx}"/></li>
-									<li><input type="text" name="mapy${xy.num}" id="mapy${xy.num}" value="${xy.mapy}"/></li>
+									<li><input type="hidden" name="tname${xy.num}" id="tname${xy.num}" value="${xy.tname}"/></li>
+									<li><input type="hidden" name="mapx${xy.num}" id="mapx${xy.num}" value="${xy.mapx}"/></li>
+									<li><input type="hidden" name="mapy${xy.num}" id="mapy${xy.num}" value="${xy.mapy}"/></li>
+								</c:forEach>
+								<c:forEach var="xy2" items="${nearR}">
+									<li><input type="hidden" name="rname${xy2.num}" id="rname${xy2.num}" value="${xy2.rname}"/></li>
+									<li><input type="hidden" name="rmapx${xy2.num}" id="rmapx${xy2.num}" value="${xy2.mapx}"/></li>
+									<li><input type="hidden" name="rmapy${xy2.num}" id="rmapy${xy2.num}" value="${xy2.mapy}"/></li>
 								</c:forEach>
 							</ul>
 						</div>
@@ -202,58 +226,98 @@
 					        level: 6 // 지도의 확대 레벨
 					    };
 
-					var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
- 					var tname2 = document.getElementById('tname2').value;
-					var mapx2 = document.getElementById('mapx2').value;
-					var mapy2 = document.getElementById('mapy2').value;
- 					var tname3 = document.getElementById('tname3').value;
-					var mapx3 = document.getElementById('mapx3').value;
-					var mapy3 = document.getElementById('mapy3').value;
- 					var tname4 = document.getElementById('tname4').value;
-					var mapx4 = document.getElementById('mapx4').value;
-					var mapy4 = document.getElementById('mapy5').value;
- 					var tname5 = document.getElementById('tname5').value;
-					var mapx5 = document.getElementById('mapx5').value;
-					var mapy5 = document.getElementById('mapy5').value;
-					// 마커를 표시할 위치와 title 객체 배열입니다 
-					var positions = [
-					    {
-					        title: tname2, 
-					        latlng: new kakao.maps.LatLng(mapx2, mapy2)
-					    },
-					    {
-					        title: tname3, 
-					        latlng: new kakao.maps.LatLng(mapx3, mapy3)
-					    },
-					    {
-					        title: tname4, 
-					        latlng: new kakao.maps.LatLng(mapx4, mapy4)
-					    },
-					    {
-					        title: tname5,
-					        latlng: new kakao.maps.LatLng(mapx5, mapy5)
-					    }
-					];
-
-					// 마커 이미지의 이미지 주소입니다
-					var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
-					    
-					for (var i = 0; i < positions.length; i ++) {
-					    
-					    // 마커 이미지의 이미지 크기 입니다
-					    var imageSize = new kakao.maps.Size(24, 35); 
-					    
-					    // 마커 이미지를 생성합니다    
-					    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
-					    
-					    // 마커를 생성합니다
-					    var marker = new kakao.maps.Marker({
-					        map: map, // 마커를 표시할 지도
-					        position: positions[i].latlng, // 마커를 표시할 위치
-					        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-					        image : markerImage // 마커 이미지 
-					    });
-					}
+						var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+ 	 					var tname2 = document.getElementById('tname2').value;
+						var mapx2 = document.getElementById('mapx2').value;
+						var mapy2 = document.getElementById('mapy2').value;
+	 					var tname3 = document.getElementById('tname3').value;
+						var mapx3 = document.getElementById('mapx3').value;
+						var mapy3 = document.getElementById('mapy3').value;
+	 					var tname4 = document.getElementById('tname4').value;
+						var mapx4 = document.getElementById('mapx4').value;
+						var mapy4 = document.getElementById('mapy5').value;
+	 					var tname5 = document.getElementById('tname5').value;
+						var mapx5 = document.getElementById('mapx5').value;
+						var mapy5 = document.getElementById('mapy5').value;
+						var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	
+						// 마커를 표시할 위치와 title 객체 배열입니다 
+						var positions = [
+						    {
+						        title: tname2, 
+						        latlng: new kakao.maps.LatLng(mapx2, mapy2)
+						    },
+						    {
+						        title: tname3, 
+						        latlng: new kakao.maps.LatLng(mapx3, mapy3)
+						    },
+						    {
+						        title: tname4, 
+						        latlng: new kakao.maps.LatLng(mapx4, mapy4)
+						    },
+						    {
+						        title: tname5,
+						        latlng: new kakao.maps.LatLng(mapx5, mapy5)
+						    }
+						];
+						
+ 
+		 				var rname2 = document.getElementById('rname2').value;
+						var rmapx2 = document.getElementById('rmapx2').value;
+						var rmapy2 = document.getElementById('rmapy2').value;
+	 					var rname3 = document.getElementById('rname3').value;
+						var rmapx3 = document.getElementById('rmapx3').value;
+						var rmapy3 = document.getElementById('rmapy3').value;
+	 					var rname4 = document.getElementById('rname4').value;
+						var rmapx4 = document.getElementById('rmapx4').value;
+						var rmapy4 = document.getElementById('rmapy4').value;
+	 					var rname5 = document.getElementById('rname5').value;
+						var rmapx5 = document.getElementById('rmapx5').value;
+						var rmapy5 = document.getElementById('rmapy5').value;
+						var positions2 = [
+						    {
+						        title: rname2, 
+						        latlng: new kakao.maps.LatLng(rmapx2, rmapy2)
+						    },
+						    {
+						        title: rname3, 
+						        latlng: new kakao.maps.LatLng(rmapx3, rmapy3)
+						    },
+						    {
+						        title: rname4, 
+						        latlng: new kakao.maps.LatLng(rmapx4, rmapy4)
+						    },
+						    {
+						        title: rname5,
+						        latlng: new kakao.maps.LatLng(rmapx5, rmapy5)
+						    }
+						];
+	
+						// 마커 이미지의 이미지 주소입니다
+		 
+						var imageSrc2 = "https://i1.daumcdn.net/dmaps/apis/n_local_blit_04.png";
+						for (var i = 0; i < positions.length; i ++) {
+						    
+						    // 마커 이미지의 이미지 크기 입니다
+						    var imageSize = new kakao.maps.Size(24, 35); 
+						    
+						    // 마커 이미지를 생성합니다    
+						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+						    var markerImage2 = new kakao.maps.MarkerImage(imageSrc2, imageSize); 
+						    // 마커를 생성합니다
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: positions[i].latlng, // 마커를 표시할 위치
+						        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+						    var marker2 = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: positions2[i].latlng, // 마커를 표시할 위치
+						        title : positions2[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage2 // 마커 이미지 
+						    });
+						}
 						</script> 
 					</div>
 				</div>
