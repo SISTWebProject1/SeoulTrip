@@ -200,6 +200,19 @@
 	<select id="reviewReplyUpdate" parameterMap="reviewReplyUpdateMap" statementType="CALLABLE">
 		{CALL replyUpdate(?,?)}
 	</select>
+	
+	<select id="getAllNoNameFromTourplace" resultType="HomeItemVO">
+		SELECT no, tname AS name FROM tourplace
+	</select>
+	<select id="getAllNoNameFromRestaurant" resultType="HomeItemVO">
+		SELECT no, rname AS name FROM restaurant
+	</select>
+	<select id="getAllNoNameFromFestival" resultType="HomeItemVO">
+		SELECT no, fname AS name FROM festival
+	</select>
+	<select id="getAllMemberId" resultType="LoginVO">
+		SELECT memberid FROM (SELECT memberid FROM member ORDER BY memberid) WHERE rownum &lt; 1000
+	</select>
 </mapper>
 
 
