@@ -111,5 +111,23 @@ public class TourplaceDAO {
 		}
 		return foodtagtotal;                                                                                                                                                                                                                                                                                                                            
 	}
+	
+	public static TourplaceTagVO getTourtagVO(int tagcode) {
+		SqlSession ss = null;
+		TourplaceTagVO vo = new TourplaceTagVO();
+		
+		try {
+			ss = ssf.openSession();
+			vo = ss.selectOne("getTourtagVO", tagcode);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
+		return vo;
+	}
+	
 }
 	

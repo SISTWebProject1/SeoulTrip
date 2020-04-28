@@ -76,7 +76,7 @@ $(function (){
 				<tr>
 					<th width=20% class="text-right success">비밀번호</th>
 					<td width=80%><input type="password" name=pwd size=10 id=pwd2
-						value="${vo.pwd }" required />
+						value="" required />
 						<div id="result"></div>
 					</td>
 				</tr>

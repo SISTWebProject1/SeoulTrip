@@ -27,7 +27,7 @@
 		SELECT rno,tagcode,rname,rphoto,restaurant.no,rownum
 		FROM resttagmapper,restaurant
 		WHERE resttagmapper.rno=restaurant.no 
-		AND rownum&lt;=3 AND tagcode=#{tagcode}
+		AND rownum&lt;=3 AND tagcode=#{tagcode} order by rno
 	</select>
 	
 	

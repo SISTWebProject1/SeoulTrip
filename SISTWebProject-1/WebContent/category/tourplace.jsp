@@ -7,12 +7,16 @@
 </head>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-$(function () {	
+$(function () {
 	$('.check').click(function(){
 		let tourplacetagcode = "data";
 		let tagnames = "data";
+		let targetpage;
 		
-		$('.check:checked').each(function(){
+		if($(this).is(':checked') == false) targetpage = 1;
+		else targetpage = $('#targetpage').attr('page');
+		
+		$('.check:checked:not(:last)').each(function(){
 	    	tourplacetagcode += ","+$(this).val();
 	    	tagnames += " | "+$(this).parent().text().trim();
 	     });
@@ -20,7 +24,7 @@ $(function () {
 		$.ajax({
 			type:"POST",
 			url:"tourplacetag_content.do",
-			data:{"tourplacetagcode":tourplacetagcode,"tagnames":tagnames},
+			data:{"tourplacetagcode":tourplacetagcode,"tagnames":tagnames,"page":targetpage},
 			success:function(res)
 			{
 				$('#tourplacetag').html(res);

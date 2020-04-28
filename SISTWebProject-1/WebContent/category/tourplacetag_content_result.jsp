@@ -4,6 +4,18 @@
 <!DOCTYPE>
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.to_page').click(function(){
+		let targetpage = $(this).text();
+		$('#targetpage').attr('page',targetpage);
+		$('#targetpage').prop('checked',false);
+		$('#targetpage').click();
+		return false;
+	});
+});
+</script>
 </head>
 <body>
 	<!-- Start body Area -->
@@ -33,7 +45,7 @@
 											</div>
 										</div>
 										<div class="col-lg-8 col-md-8">
-											<div class="body_main_text_title">${vo.tname }</div>
+											<div class="body_main_text_title">${ vo.tel }. ${vo.tname }</div>
 											<div class="body_main_text_info">
 												<div class="grade">
 													<p class="grade2" style="WIDTH: ${ vo.grade }%;"></p>
@@ -82,7 +94,7 @@
 									<c:if test="${curpage!=i }">
 										<c:set var="type" value="" />
 									</c:if>
-									<li ${type } class="page-item"><a
+									<li ${type } class="page-item to_page"><a
 										href="../category/tourplacetag_content.do?page=${i}" class="page-link">${i}</a></li>
 								</c:forEach>
 								<c:if test="${endPage<allPage }">

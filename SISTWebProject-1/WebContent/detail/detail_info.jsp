@@ -41,16 +41,37 @@
 					<li style="font-size:25px; font-weight:bolder;"><a href="#">${title}</a></li>
 					<li><a href="#">${rank.ranking }위 /${totalplace }개의 명소중</a></li>
 					<li>
-						<div class="tag_button">
-							<c:forEach var="tag" items="${taglist}">
-								<input type="button" value="${tag }" style="display:inline;">
+						<div class="tag_button" style="display:inline;">
+<%-- 							<c:forEach var="tag" items="${taglist}">
+								<span style="border:outset 1px; font-size:20px; ">${tag}</span>
+								<input type="button" value="${tag }">
+							</c:forEach> --%>
+							<c:if test="${type==1}">
+							<c:forEach var="tag" items="${alltaglist }">
+								<a href="../category/tourplace.do?tagcode=${tag.tagcode}">
+								<span style="border:outset 1px; font-size:18px; ">${tag.tagname}</span>
+								</a>
 							</c:forEach>
+							</c:if>
+							<c:if test="${type==2}">
+								<c:forEach var="tag" items="${alltaglist }">
+								<a href="../category/food.do?tagcode=${tag.tagcode}">
+								<span style="border:outset 1px; font-size:18px; ">${tag.tagname}</span>
+								</a>
+							</c:forEach>
+							</c:if>
 						</div>
 					</li>
-					<c:if test="${type==2 }">
-						<c:if test="${ss_member.memberId != null }">
+<%-- 						<c:if test="${ss_member.memberId != null }">
 							<a href="../reservation/reservation.do?no=${no}" class="btn btn-sm btn-danger">&nbsp;예약</a>
-						</c:if>				
+						</c:if>	 --%>	
+					<c:if test="${type==2 }">
+						<div id="reservebtn" 
+							<c:if test="${ empty ss_member }">style="display:inline; visibility:hidden;" </c:if>>
+							<a href="../reservation/reservation.do?no=${no}"><input type="button" class="btn btn-sm btn-danger"
+								style="display:inline;"
+								value="예약"/></a>	
+							</div>
 					</c:if>
 				</ul>
 			</div>
@@ -153,11 +174,22 @@
 						</div>
 							<br>
 						<div class="imgs">
-						<c:forEach var="i" begin="0" end="7">
+<%-- 						<c:forEach var="i" begin="0" end="7">
 							<c:if test="${imglist[i].filepath ne NULL }">
 								<img src="${imglist[i].filepath}"/>
 							</c:if>
-						</c:forEach>
+							<c:if test="${imglist[i].filepath eq NULL }">
+								<img src="../mypage/default_reviews_image.jpg">
+							</c:if>
+						</c:forEach> --%>
+		 				<c:forEach var="i" begin="0" end="7">
+							<c:if test="${allimglist[i] ne NULL }">
+								<img src="${allimglist[i]}"/>
+							</c:if>
+							<c:if test="${allimglist[i] eq NULL }">
+								<img src="../mypage/default_reviews_image.jpg">
+							</c:if>
+						</c:forEach> 
 						</div>
 					</div>
 				</div>

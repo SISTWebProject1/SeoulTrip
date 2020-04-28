@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -94,7 +95,7 @@
 						<li class="menu-active"><a href="../home/home.do">Home</a></li>
 						<li><a href="../category/tourplace.do">명소</a></li>
 						<li><a href="../category/food.do">음식점</a></li>
-						<li><a href="../category/festival.do">축제</a></li>
+						<li><a href="../home/festivalList.do">축제</a></li>
 
             <li><a href="../detail/detail.do?type=1&no=198">DetailTest</a>
             <li><a href="../reservation/reservation.do?no=57">ReservationTest</a>

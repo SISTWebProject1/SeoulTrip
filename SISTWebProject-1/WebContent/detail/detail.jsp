@@ -8,8 +8,24 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
- $(function() {
+$(function() {
+	$('#memberInfo').click(function(){
+		alert("로그인 성공");
+		$('#reviewbtn').show();
+		$('#qnabtn').show();
+		$('#reservebtn').css("visibility","visible");
+	});
+	
+	
+	var scroll = $('#reviewscroll').val();
+	if(scroll==1400){
+		window.scrollTo({top:scroll, behavior:'smooth'});
+	}
+/*  	var scroll = ('#reviewscroll').val();
+	alert("scroll");
+	 */
 	$('#QNA').click(function(){
+		
 		const type = $('#type').val();
 		const no = $('#no').val();
 		console.log("QNA");
@@ -27,11 +43,16 @@
 			
 		}); 
 	});
-	var location = document.querySelector('#ReviewPosition').offsetTop;
+/* 	$('#Review').click(function(){
+		var location = document.querySelector('#reviewlist').offsetTop;
+		alert(location);
+	}) */
+/* 	var location = document.querySelector('#reviewlist').offsetTop;
 	(function(e){
  		window.scrollTo({top:location, behavior:'smooth'});
-	})();
+	})(); */
 	var check = 0;
+	
 	$('.btnclick').click(function(){
 		const type=$('#type').val();
 		const no = $('#no').val();
@@ -51,9 +72,7 @@
 				alert("error");
 			}
 		});
-		
-		
-	})
+	});
 
 }); 
 </script> 

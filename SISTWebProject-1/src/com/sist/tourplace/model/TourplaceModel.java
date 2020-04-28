@@ -42,8 +42,8 @@ public class TourplaceModel {
 				   list = TourplaceDAO.tourplaceData(map);
 				   totalpage = TourplaceDAO.tourplaceTagTotalPage();
 				   
-				   
-				   
+				   TourplaceTagVO tagvo = TourplaceDAO.getTourtagVO(Integer.parseInt(tagcode));
+				   request.setAttribute("tagvo", tagvo);
 			   }
 			  
 			   for(TourplaceVO vo:list)
@@ -164,48 +164,6 @@ public class TourplaceModel {
 
 		request.setAttribute("tlist", tlist);
 
-		   
-		   if(tourplacetagcode.equals("data")) {
-			   request.setAttribute("title", "서울의 명소");
-		   } else {
-			   tmap.put("tagcode", tourplacetagcode.substring(5));
-			   request.setAttribute("title", tagnames.substring(7));
-			   
-			   TourplaceDAO.tourplaceTagDetailData(tmap);
-			   tlist= TourplaceDAO.tourplaceData(tmap);
-			   tagtotalpage = TourplaceDAO.tourplaceTagTotalPage();
-		   }		   
-		   
-		   for(TourplaceVO vo:tlist)
-		   {
-			   String tname=vo.getTname();
-			   if(tname.length()>12)
-			   {
-				   tname=tname.substring(0,12).concat("...");
-				   vo.setTname(tname);
-			   }
-			   
-			   HomeItemVO temp = new HomeItemVO();
-			   temp.setType(1);
-			   temp.setNo(vo.getNo());
-			   
-			   temp = MainDAO.getGradeReviewCntByTypeNo(temp);
-			   vo.setGrade(temp.getGrade());
-			   vo.setRank(temp.getReviewCnt());
-		   }
-		   System.out.println(tlist);
-		   
-		
-		   
-		   request.setAttribute("curpage", curpage);
-		   request.setAttribute("tagtotalpage", tagtotalpage);
-		   request.setAttribute("BLOCK", BLOCK);
-		   request.setAttribute("startPage", startPage);
-		   request.setAttribute("endPage", endPage);
-		   request.setAttribute("allPage", allPage);		   
-		   
-		 request.setAttribute("tlist", tlist);
-		 
 		return "../category/tourplacetag_content_result.jsp";
 	}
 

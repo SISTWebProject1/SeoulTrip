@@ -38,9 +38,12 @@
 			<p >
 				<b>등록일 :&nbsp;<fmt:formatDate value="${vo1.expdate }"
 						pattern="yyyy-MM-dd" /></b>
+				<br>
+				<b>수정일 :&nbsp;<fmt:formatDate value="${vo1.regdate }"
+						pattern="yyyy-MM-dd" /></b>
 			</p>
 			<div style="border-bottom: 2px groove; text-align: right">
-				<a href="../mypage/review_update_mypage.do?id=${ss_member.memberId}" class="btn-btn-sm btn-danger">수정</a>
+				<a href="../mypage/review_update_mypage.do?id=${ss_member.memberId}&reviewno=${vo1.reviewno}&no=${vo1.no}" class="btn-btn-sm btn-danger">수정</a>
 				<a href="#" class="btn-btn-sm btn-danger">삭제</a>
 			</div>
 		</c:forEach>

@@ -13,12 +13,24 @@
 	font-size: 20px;
 	font-family: 'PoorStory';
 }
+#booking{
+transform: translate(-50%, -50%);
+top: 50%;
+left: 50%;
+}
 </style>
 <body>
 	<div class="container">
 		<h1 style="margin: 30px; text-align: left;">${ss_member.memberId}님의예약정보</h1>
+		<c:if test="${Booking_countkey == true }">
+				<div style="height: 200px; text-align: center; border-top: 2px solid">
+					<h2><b>예약 정보가 없습니다</b></h2>
+				</div>
+		</c:if>
+		<c:if test="${Booking_countkey != true }">
 		<div class="row" style="background-color: infotext;">
 			<c:forEach var="b_vo" items="${Booking_list }">
+			
 				<div class="cate_body">
 					<div class="col-lg-4 col-md-4" style="height: 200px">
 							<a href="">
@@ -55,6 +67,12 @@
 				<br>
 			</c:forEach>
 		</div>
+		<div class="text-center" style="margin: 15px;">
+      	<a href="../mypage/bookingList.do?page=${curpage>1?curpage-1:curpage }&id=${booking_id}" class="btn btn-md btn-primary" style="background-color: blue;color:white;" >이전</a>
+       		 ${curpage } page / ${totalpage } pages
+      	<a href="../mypage/bookingList.do?page=${curpage<totalpage?curpage+1:curpage }&id=${booking_id}" class="btn btn-sm btn-primary" style="background-color: blue;color:white;">다음</a>
+   		 </div>
+		</c:if>
 	</div>
 </body>
 </html>

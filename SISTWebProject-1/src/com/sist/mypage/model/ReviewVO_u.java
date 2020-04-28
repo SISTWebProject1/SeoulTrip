@@ -17,7 +17,17 @@ public class ReviewVO_u {
 	
 	private int review_count;
 	
+	private String tname;
 	
+
+	
+	
+	public String getTname() {
+		return tname;
+	}
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
 	public String getFilepath() {
 		return filepath;
 	}
