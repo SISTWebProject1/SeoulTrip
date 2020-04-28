@@ -2,41 +2,57 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.tourplace.model.tourplace-mapper">
 	<select id="tourplaceListData" resultType="TourplaceVO" parameterType="java.util.Map">
-		SELECT no,tname,openhour,tphoto,grade,num
-		FROM (SELECT no,tname,openhour,tphoto,grade,rownum as num
-        FROM (SELECT no,tname,openhour,tphoto,grade
-		FROM tourplace ORDER BY no ASC))
-		WHERE num BETWEEN #{start} AND #{end}
+		SELECT no, tname, tphoto, tel
+		FROM (SELECT no, tname, tphoto, rownum as tel
+		FROM (SELECT tourplace.no, tname, tphoto FROM tourplace, 
+		(SELECT tourplace.no AS no, COUNT(*) AS cnt,
+		AVG(review.grade)*Log(10,COUNT(*)/10+10) AS average    
+		FROM tourplace, review
+		WHERE tourplace.no = review.no GROUP BY tname, tourplace.no
+		ORDER BY average DESC, cnt DESC) temp
+		WHERE tourplace.no = temp.no))
+		WHERE tel BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="tourplaceTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/4.0) FROM tourplace
+		SELECT CEIL(COUNT(*)/10.0) FROM tourplace
 	</select>
 	
-	<select id="tourplaceTagListData" resultType="TourplaceTagVO" parameterType="java.util.Map">
-		SELECT * FROM tourplacetag ORDER BY tagcode
+	<select id="tourplaceTagListData" resultType="TourplaceTagVO">
+		SELECT * FROM tourtag ORDER BY tagname
 	</select>
 	
-	<select id="tourplaceTagDetailData" resultType="TourplaceTagDetailVO" parameterType="java.util.Map">
+	<select id="getTourtagVO" resultType="TourplaceTagVO" parameterType="int">
+		SELECT * FROM tourtag WHERE tagcode=#{tagcode}
+	</select>
+	
+	<select id="tourplaceTagDetailData" resultType="TourplaceVO" parameterType="java.util.Map">
 		CREATE OR REPLACE VIEW TOURPLACETAG_CONTENT AS
-		SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.grade FROM tourplacetagmapper x
-		JOIN tourplace y ON x.rno=y.no
-		WHERE x.tagcode=7 ORDER BY y.no
-		<!-- #{foodtagcode} -->
+		SELECT tp1.no, tname, tphoto
+		FROM (SELECT DISTINCT y1.no,y1.tname,y1.tphoto FROM tourtagmapper x1
+		JOIN tourplace y1 ON x1.tno=y1.no
+		WHERE x1.tagcode IN (${tagcode})) tp1,
+		(SELECT tp2.no AS no, COUNT(*) AS cnt, AVG(NVL(review.grade,0))*Log(10,COUNT(*)/10+10) AS average    
+		FROM (SELECT DISTINCT y2.no,y2.tname,y2.tphoto FROM tourtagmapper x2
+		JOIN tourplace y2 ON x2.tno=y2.no
+		WHERE x2.tagcode IN (${tagcode})) tp2 LEFT OUTER JOIN review
+		ON type = 1 AND tp2.no = review.no
+		GROUP BY tname, tp2.no) temp
+		WHERE tp1.no = temp.no
+		ORDER BY average DESC, cnt DESC
 	</select>
 	
-	<select id="tourplaceData" resultType="TourplaceTagDetailVO" parameterType="java.util.Map">
-		SELECT tagcode,no,tname,openhour,tphoto,grade,num
-		FROM (SELECT tagcode,no,tname,openhour,tphoto,grade,rownum as num
-		FROM (SELECT tagcode,no,tname,openhour,tphoto,grade
-		FROM TOURPLACETAG_CONTENT ORDER BY no ASC))
-		WHERE num BETWEEN #{start} AND #{end}
+	<select id="tourplaceData" resultType="TourplaceVO" parameterType="java.util.Map">
+		SELECT no,tname,tphoto,tel
+		FROM (SELECT no,tname,tphoto,rownum as tel
+		FROM (SELECT no,tname,tphoto
+		FROM TOURPLACETAG_CONTENT))
+		WHERE tel BETWEEN #{start} AND #{end}
 		<!-- WHERE num BETWEEN #{tstart} AND #{tend}; -->
 	</select>
 	
 	<select id="tourplaceTagTotalPage" resultType="int"> <!-- parameterType="int" -->
-		SELECT CEIL(COUNT(*)/6.0) FROM (SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.grade FROM tourplacetagmapper x
-		JOIN tourplace y ON x.rno=y.no WHERE x.tagcode=7)
+		SELECT CEIL(COUNT(*)/10.0) FROM TOURPLACETAG_CONTENT
 		<!-- JOIN restaurant y ON x.rno=y.no WHERE x.tagcode=#{foodtagcode}); -->
 	</select>
 

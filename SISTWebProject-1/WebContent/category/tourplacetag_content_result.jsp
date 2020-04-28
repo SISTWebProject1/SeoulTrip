@@ -4,16 +4,35 @@
 <!DOCTYPE>
 <html>
 <head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.to_page').click(function(){
+		let targetpage = $(this).text();
+		$('#targetpage').attr('page',targetpage);
+		$('#targetpage').prop('checked',false);
+		$('#targetpage').click();
+		return false;
+	});
+});
+</script>
 </head>
 <body>
-	<section class="post-area">
+	<!-- Start body Area -->
+	<div class="main-body">
+		<div class="container box_1170">
+			<div class="row">
+				
+				<div class="col-lg-9 post-list">
+					<!-- Start food_content Area -->
+					<section class="post-area">
 					<div class="col-lg-12">
 						<h3>
-							<p>${ (tagvo.tagname eq null) ? "서울의 명소" : tagvo.tagname }</p>
+							<p>${ title }</p>
 						</h3>
 						<div class="body_main_set">
 							<div class="row">
-								<c:forEach var="vo" items="${list }">
+								<c:forEach var="vo" items="${tlist }">
 									<div class="cate_body">
 										<div class="col-lg-4 col-md-4" style="height: 200px">
 											<a href=""><img class="post-img img-fluid" alt="음식점사진"
@@ -26,7 +45,7 @@
 											</div>
 										</div>
 										<div class="col-lg-8 col-md-8">
-											<div class="body_main_text_title">${ vo.tel }. ${ vo.tname }</div>
+											<div class="body_main_text_title">${ vo.tel }. ${vo.tname }</div>
 											<div class="body_main_text_info">
 												<div class="grade">
 													<p class="grade2" style="WIDTH: ${ vo.grade }%;"></p>
@@ -61,7 +80,7 @@
 
 								<c:if test="${startPage>1 }">
 									<li class="page-item"><a
-										href="../category/tourplace.do?page=${startPage-1}"
+										href="../category/tourplacetag_content.do?page=${startPage-1}"
 										class="page-link" aria-label="Previous"> <span
 											aria-hidden="true"> <span class="lnr lnr-arrow-left"></span></span>
 									</a></li>
@@ -75,12 +94,12 @@
 									<c:if test="${curpage!=i }">
 										<c:set var="type" value="" />
 									</c:if>
-									<li ${type } class="page-item"><a
-										href="../category/tourplace.do?page=${i}" class="page-link">${i}</a></li>
+									<li ${type } class="page-item to_page"><a
+										href="../category/tourplacetag_content.do?page=${i}" class="page-link">${i}</a></li>
 								</c:forEach>
 								<c:if test="${endPage<allPage }">
 									<li class="page-item"><a
-										href="../category/tourplace.do?page=${endPage+1}" class="page-link"
+										href="../category/tourplacetag_content.do?page=${endPage+1}" class="page-link"
 										aria-label="Next"> <span aria-hidden="true"> <span
 												class="lnr lnr-arrow-right"></span></span>
 									</a></li>
@@ -88,6 +107,10 @@
 							</ul>
 						</nav>
 					</div>
-				</section>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

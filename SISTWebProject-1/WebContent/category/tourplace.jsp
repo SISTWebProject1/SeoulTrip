@@ -8,14 +8,23 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function () {
-	var tourplacetagcode = [];
-	$('.check:checked').each(function(){
-    	tourplacetagcode.push($(this).val());
-    	
+	$('.check').click(function(){
+		let tourplacetagcode = "data";
+		let tagnames = "data";
+		let targetpage;
+		
+		if($(this).is(':checked') == false) targetpage = 1;
+		else targetpage = $('#targetpage').attr('page');
+		
+		$('.check:checked:not(:last)').each(function(){
+	    	tourplacetagcode += ","+$(this).val();
+	    	tagnames += " | "+$(this).parent().text().trim();
+	     });
+		
 		$.ajax({
 			type:"POST",
 			url:"tourplacetag_content.do",
-			data:{"tourplacetagcode":tourplacetagcode},
+			data:{"tourplacetagcode":tourplacetagcode,"tagnames":tagnames,"page":targetpage},
 			success:function(res)
 			{
 				$('#tourplacetag').html(res);
@@ -23,8 +32,8 @@ $(function () {
 			error: function () {
 				alert("오류");
 			}
-		})
-     });
+		});
+	});
 });
 </script>
 <body>
@@ -39,7 +48,7 @@ $(function () {
 				</div>
 				<div class="col-lg-9 post-list" id="tourplacetag">
 					<!-- Start food_content Area -->
-					<jsp:include page="tourplace_content.jsp"/>
+					<jsp:include page="tourplacetag_content.jsp"/>
 					<!-- End food_content Area -->
 				</div>
 			</div>

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
@@ -69,19 +70,27 @@ public class HomeModel {
 		Date date = new Date();
 		if(strDate==null) {
 			Date today = new Date();
-			date.setYear(today.getYear());
-			date.setMonth(today.getMonth());
-			date.setDate(today.getDate());
-		} else {
-			try {
-				date = sdf.parse(strDate);
-			} catch (ParseException e) {
-				System.out.println("HomeModel:home_festivalList():");
-				e.printStackTrace();
-			}
+			strDate = (today.getYear()+1900)+"-"+(today.getMonth()+1)+"-"+today.getDate();
+		}
+		try {
+			date = sdf.parse(strDate);
+		} catch (ParseException e) {
+			System.out.println("HomeModel:home_festivalList():");
+			e.printStackTrace();
 		}
 		
 		List<FestivalVO> flist = FestivalDAO.festivalDateList(date);
+		try {
+			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+			String id = lvo.getMemberId();
+			
+			List<WishListVO_u> wishlist = MainDAO.getWishListsByMemberId(id);
+			for(FestivalVO tfvo : flist) {
+				for(WishListVO_u wlvo : wishlist) {
+					if(wlvo.getType()==3 && wlvo.getNo()==tfvo.getNo()) tfvo.setWish(true);
+				}
+			}
+		} catch (Exception e) {}
 		request.setAttribute("flist", flist);
 		
 		request.setAttribute("main_jsp", "../home/festivalList.jsp");

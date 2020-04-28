@@ -623,6 +623,23 @@ public class MainDAO {
 		}
 	}
 	
+	public static HomeItemVO getGradeReviewCntByTypeNo(HomeItemVO vo) {
+		SqlSession ss = null;
+		
+		try {
+			ss = ssf.openSession();
+			vo = ss.selectOne("getGradeReviewCntByTypeNo", vo);
+			
+		} catch (Exception e) {
+			System.out.println("MainDAO:getGradeReviewCntByTypeNo():");
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
+		return vo;
+	}
+	
 	/*public static void setWishlistRandomly(){
 		
 		SqlSession ss = null;

@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -33,12 +30,21 @@ body {
  font-size: 15px;
 }
 
-h2 {
+h1,h2,h3 {
  font-family: 'Noto Sans KR', sans-serif;
- font-size: 40px;
 
 }
 
+a {
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 12px;
+}
+
+
+p {
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 20px;
+}
 span {
  font-family: 'Noto Sans KR', sans-serif;
  font-size:25px;
@@ -48,8 +54,8 @@ span {
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="jquery.validate.min.js"></script>
-<script type="text/javascript" src="jquery.validate.js"></script>
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> -->
 <script type="text/javascript">	
 $(function(){
 	$('#person').click(function(){
@@ -120,46 +126,48 @@ $(function(){
 		})
 	})
 
-	$('#email').keyup(function(){
-		var email=$('#email').val();
+	$('#emails').keyup(function(){
+		var email=$('#emails').val();
 		$.ajax({
 			type:'post',
 			url:'../reservation/reservation.do',
 			success:function(res)
 			{
+				$('#data-email').text(email);
 				$('#email2').val(email);
 			}
 			
 		})
-	}),
-	$('#form').validate({
-			rules : {
-				name : {required:true, minlength:3},
-				tel : {required:true, minlength:10},
-				email : {required:true,email:true, remote:"Validate"}
+	}) 
+	$("#form").validate({
+		rules : {
+			name : {required:true, minlength:3},
+			tel : {required:true, minlength:11},
+			email : {required:true,email:true},
+		},
+		messages :{
+			name : {
+				required: "예약하실 분의 성함을 입력하세요",
+				minlength: "0글자 이상 입력하세요!"
 			},
-			messages :{
-				name : {
-					required: "예약하실 분의 성함을 입력하세요",
-					minlength: jQuery.format("0글자 이상 입력하세요!")
-				},
-				tel : {
-					required: "전화번호를 입력하세요 (예)010-XXXX-XXXX",
-					minlength: jQuery.format("휴대폰번호 11자리를 정확히 입력하세요")
-				},
-				email: {
-					required: "이메일 형식을 지켜서 입력해주세요",
-					email: "이메일 형식을 지켜주세요 (예)sist@sist.co.kr"
-				}
+			tel : {
+				required: "연락을 받으실 휴대폰 번호를 입력해주세요 (예)010-XXXX-XXXX",
+				minlength: "휴대폰번호 11자리를 정확히 입력하세요"
 			},
-			submitHandler:function(frm){
-				frm.submit();
-			},
-			success:function(e)
-			{
-				
+			email: {
+				required: "이메일 형식을 지켜서 입력해주세요  (예)sist@sist.co.kr",
+				email: "연락받으실 이메일 주소를 정확히 입력해주세요"
 			}
-		});
+		},
+		submitHandler:function(frm){
+			frm.submit();
+		},
+		success:function(e)
+		{
+			
+		}
+	});    
+	
 	});	
 
 </script>
@@ -169,8 +177,8 @@ $(function(){
 
 <body>
 <!-- start banner Area -->
-	<section class="banner-area relative">
-		<div class="overlay overlay-bg"></div>
+		<section class="banner-area relative">
+			<div class="overlay overlay-bg"></div>
 		<div class="container">
 			<div class="row d-flex align-items-center justify-content-center">
 				<div class="about-content col-lg-12">
@@ -190,7 +198,7 @@ $(function(){
 <div class="container">
 	<div class="section">
 	  
-	<h2 style="text-align:center;">&nbsp;&nbsp;${vo.rname }</h2>	
+	<h1 style="text-align:center;">&nbsp;&nbsp;${vo.rname }</h1>	
 	
 	<section class="contact-page-area" style="margin-top:20px;">	
 		   	<div class="row-info col-md-6 col-md-offset-0" style="width:100%;">
@@ -276,7 +284,7 @@ $(function(){
 						<div class="booking-form col-md-6" style="width:100%;margin-left:10px; margin-top:5px;">
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약인원</span>
-											<select class="form-control" id="person" >
+											<select class="form-control" id="person" name="person">
 												<option selected disabled >인원을 선택해주세요</option>
 											<c:forEach var="i" begin="1" end="10">
 												<option>${i}</option>
@@ -289,7 +297,7 @@ $(function(){
 								
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약시간</span>
-											<select class="form-control" id="time" >
+											<select class="form-control" id="time" name="time" >
 												<option selected disabled>시간을 선택해주세요</option>
 											<c:forEach var="i" begin="11" end="18">
 												<option>${i}:00</option>		
@@ -302,7 +310,7 @@ $(function(){
 									<div class="row" >
 									<div class="col-sm-12">
 										<div class="form-group col-sm-12">
-											<input class="form-control" type="date" id="date"  min="${today }" required>
+											<input class="form-control" type="date" id="date" name="date" min="${today }" >
 											<span class="form-label">예약날짜</span>
 										</div>
 									</div>
@@ -312,14 +320,14 @@ $(function(){
 								<div class="row">	
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" id="name"  required>
+											<input class="form-control" type="text" id="name" name="name" >
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
 									
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="tel" id="tel" required>
+											<input class="form-control" type="tel" id="tel" name="tel" >
 											<span class="form-label">전화번호</span>
 										</div>
 									</div>
@@ -329,7 +337,7 @@ $(function(){
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<input  class="form-control" id="email" type="email" required>
+											<input  class="form-control" id="emails" type="email" name="email" 	>
 											<span class="form-label">Email</span>
 										</div>
 									</div>							
@@ -365,22 +373,29 @@ $(function(){
 			<%-- ==========================================Ajax출력단========================================== --%>						
 			<div class="section">		
 					 <div class="booking-form col-md-6 col-md-offset-0" id="result" style="margin-left:15px" ">
-						 <div class="row">예약자명   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-name"></b> </div>
-						 <div class="row" >전화번호   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-tel"></b></div>
-						 <div class="row" >예약시간  &nbsp;&nbsp;  | &nbsp;&nbsp; <b id="data-time"></b></div>
-						 <div class="row" >예약인원   &nbsp;&nbsp; | &nbsp;&nbsp;<b id="data-person"></b></div>
-						 <div class="row" >예약날짜   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-date"></b></div>
+						 <div class="row" >예약인원   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="data-person"></b></div>
+						 <div class="row" >예약시간  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-time"></b></div>
+						 <div class="row" >예약날짜   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-date"></b></div>
+						 <div class="row">예약자명   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-name"></b> </div>
+						 <div class="row" >전화번호   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-tel"></b></div>
+						 <div class="row">E-MAIL  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-email"></b></div>
 					</div>
 			</div>
 <!-- ==================================================================================================예약단 -->	
 			<div class="section">				
 					<div class="row" style="margin: 0px auto;">
+					 	
+					 	
+					<c:if test="${list!=null }"> 	
 					 	<div class="row" style="margin: 0px auto;float:left; border:0px solid red;"> 
 					 	 
-						 <b style="font-size:25px; text-align:center;">&nbsp;&nbsp;
+						 <b style="font-size:25px; text-align:right;">&nbsp;&nbsp;
 						  ${ss_member.memberId==null?"방문객 ":ss_member.memberId} 님에게  
-						&nbsp; # ${tvo.tagname } &nbsp;와 관련된  음식점을 추천해드려요</b>
+						&nbsp; # ${tvo.tagname } &nbsp; 관련  음식점을 추천해드려요</b>
 						</div>
+					</c:if>
+					
+					
 					 			
 					 </div>
 						 		
@@ -389,20 +404,33 @@ $(function(){
 					
 						
 						 <c:forEach var="rvo" items="${list}">
-			
+						 
 							<div class="col-md-4" style="margin: 0px auto; float:left;  width:100%;">
 						   	 <div class="thumbnail">
+						   	 	
+						   	 <c:if test="${rvo.no!=vo.no }">
 						   		<a href="../detail/detail.do?type=2&no=${rvo.no}">
-						        	<img src="${rvo.rphoto }" style="width:100%; height:200px;"/>
+						   	 
+						        	<img src="${rvo.rphoto }" style="width:100%; height:220px;"/>
 						        </a>
-						          <div class="caption text-center">
-						          <p >${rvo.rname}</p>
-						         
-						        </div>
+						     </c:if>
+						     
+						     <c:if test="${rvo.no==vo.no }">
+						   		
+						        	<img src="../img/img_def.png" style="width:100%; height:220px;"/>
+						 
+						     </c:if>
+						     
 						      
+						          <div class="caption text-center">
+
+						          <p>${rvo.rname==vo.rname?"준비중입니다":rvo.rname}</p>
+
+						        </div>
 						    	</div>
  							 </div>
- 						 
+ 			
+ 						  
 						 </c:forEach>
 					    
 	
@@ -411,6 +439,7 @@ $(function(){
 						
 		<div class="section">
 				<div class="row col-md-12 col-md-offset-0">
+					<h3 style="text-align:center;"> ${vo.rname } &nbsp;위치와 가는 길을 검색해보세요</h3>
 						<div id="map"  style="width:100%; height:400px;  border:0px solid white; margin-top:10px;"></div>
 				</div>	
 		</div>
@@ -424,7 +453,46 @@ $(function(){
 		
 			
 	<script>
-		var container = document.getElementById('map');
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"), // 지도의 중심좌표
+        level: 4 // 지도의 확대 레벨
+    };
+
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"); 
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+	
+	var X=${vo.mapX};
+	var Y=${vo.mapY};
+	
+	var iwContent = '<div style="padding:20px; color:#8050fa;font-size:15px;">'+"${vo.rname}"
+		+'<a href="https://map.kakao.com/link/map/'
+		+"${vo.rname}"+','+"${vo.mapX}"+','+"${vo.mapY}"
+		+'style="color:blue" target="_blank"><br>길찾기</a>'
+		+'</div>'
+		,
+	    iwPosition = new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"); //인포윈도우 표시 위치입니다
+	
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+	    position : iwPosition, 
+	    content : iwContent 
+	});
+	  
+	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	infowindow.open(map, marker); 
+		/* var container = document.getElementById('map');
 		var options = {					
 			center: new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"),
 			level: 3
@@ -434,7 +502,7 @@ $(function(){
 		var mapContainer = document.getElementById('map'), 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}"), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
+	        level: 4 // 지도의 확대 레벨
 	    };
 		
 		var markerPosition  = new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}");
@@ -446,10 +514,10 @@ $(function(){
 
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setMap(map);
-
+ */
 	</script>
 
-	<script src="jquery.min.js"></script>
+
 	<script>
 		$('.form-control').each(function () {
 			floatedLabel($(this));

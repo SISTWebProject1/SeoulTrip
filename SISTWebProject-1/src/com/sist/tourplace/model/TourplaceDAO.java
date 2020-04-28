@@ -16,7 +16,7 @@ public class TourplaceDAO {
 			Reader reader = Resources.getResourceAsReader("Config.xml");
 			ssf = new SqlSessionFactoryBuilder().build(reader);
 		} catch (Exception e) {
-			System.out.println("FoodDAO:static block:");
+			System.out.println("TourplaceDAO:static block:");
 			e.printStackTrace();
 		}
 	}
@@ -66,9 +66,9 @@ public class TourplaceDAO {
 		return taglist;
 	}
 	
-	public static List<TourplaceTagDetailVO> tourplaceTagDetailData(Map map){
+	public static List<TourplaceVO> tourplaceTagDetailData(Map map){
 		SqlSession session = null;
-		List<TourplaceTagDetailVO> tlist = new ArrayList<TourplaceTagDetailVO>();
+		List<TourplaceVO> tlist = new ArrayList<TourplaceVO>();
 		try{
 			session = ssf.openSession();
 			tlist = session.selectList("tourplaceTagDetailData",map);
@@ -81,9 +81,9 @@ public class TourplaceDAO {
 		return tlist;
 	}
 	
-	public static List<TourplaceTagDetailVO> tourplaceData(Map map){
+	public static List<TourplaceVO> tourplaceData(Map map){
 		SqlSession session = null;
-		List<TourplaceTagDetailVO> tlist = new ArrayList<TourplaceTagDetailVO>();
+		List<TourplaceVO> tlist = new ArrayList<TourplaceVO>();
 		try{
 			session = ssf.openSession();
 			tlist = session.selectList("tourplaceData",map);
@@ -111,5 +111,23 @@ public class TourplaceDAO {
 		}
 		return foodtagtotal;                                                                                                                                                                                                                                                                                                                            
 	}
+	
+	public static TourplaceTagVO getTourtagVO(int tagcode) {
+		SqlSession ss = null;
+		TourplaceTagVO vo = new TourplaceTagVO();
+		
+		try {
+			ss = ssf.openSession();
+			vo = ss.selectOne("getTourtagVO", tagcode);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
+		return vo;
+	}
+	
 }
 	
