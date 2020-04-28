@@ -42,8 +42,8 @@ public class TourplaceModel {
 				   list = TourplaceDAO.tourplaceData(map);
 				   totalpage = TourplaceDAO.tourplaceTagTotalPage();
 				   
-				   TourplaceTagVO tagvo = TourplaceDAO.getTourtagVO(Integer.parseInt(tagcode));
-				   request.setAttribute("tagvo", tagvo);
+				   
+				   
 			   }
 			  
 			   for(TourplaceVO vo:list)
@@ -164,17 +164,7 @@ public class TourplaceModel {
 
 		request.setAttribute("tlist", tlist);
 
-		   int end=rowSize*curpage;
 		   
-		   Map tmap=new HashMap();
-		   tmap.put("start", start);
-		   tmap.put("end", end);
-		   
-		   List<TourplaceVO> tlist = TourplaceDAO.tourplaceListData(tmap);
-		   int tagtotalpage = TourplaceDAO.tourplaceTotalPage();
-		   
-		   String tagnames = request.getParameter("tagnames");
-		   String tourplacetagcode = request.getParameter("tourplacetagcode");
 		   if(tourplacetagcode.equals("data")) {
 			   request.setAttribute("title", "서울의 명소");
 		   } else {
@@ -205,14 +195,7 @@ public class TourplaceModel {
 		   }
 		   System.out.println(tlist);
 		   
-		   final int BLOCK=10;
-		   int startPage=((curpage-1)/BLOCK*BLOCK)+1; 
-		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
-		   // 1~10  , 11~20  85  => endPage= 81~90
-		   
-		   int allPage=tagtotalpage;
-		   if(endPage>allPage)
-			   endPage=allPage;
+		
 		   
 		   request.setAttribute("curpage", curpage);
 		   request.setAttribute("tagtotalpage", tagtotalpage);
