@@ -5,8 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.detail.dao.DetailDAO;
+import com.sist.detail.dao.DetailReviewVO;
 import com.sist.main.dao.HomeItemVO;
+import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.MainDAO;
+import com.sist.mypage.model.WishListVO_u;
 
 import java.util.*;
 
@@ -16,6 +20,11 @@ public class TourplaceModel {
 	@RequestMapping("category/tourplace.do")
 	public String category_food(HttpServletRequest request, HttpServletResponse response) {
 		 try {			 
+			 List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			 try {
+				 wishlist = MainDAO.getWishListsByMemberId(((LoginVO)(request.getSession().getAttribute("ss_member"))).getMemberId());
+			 } catch (Exception e) {}
+			 
 			 String page=request.getParameter("page");
 			   if(page==null)
 				   page="1";
@@ -62,6 +71,29 @@ public class TourplaceModel {
 				   temp = MainDAO.getGradeReviewCntByTypeNo(temp);
 				   vo.setGrade(temp.getGrade());
 				   vo.setRank(temp.getReviewCnt());
+				   
+				   for(WishListVO_u wlvo : wishlist) {
+					   if(vo.getNo()==wlvo.getNo() && wlvo.getType()==1) vo.setWish(true);
+				   }
+				   
+				   DetailDAO dtdao = new DetailDAO();
+				   
+				   Map tmap = new HashMap();
+				   tmap.put("type", 1);
+				   tmap.put("no", vo.getNo());
+				   
+				   int min = dtdao.reviewMin(tmap);
+				   int max = dtdao.reviewMax(tmap);
+				   
+				   tmap.put("numm", 1);
+				   tmap.put("grade", min);
+				   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
+				   tmap.put("grade", max);
+				   DetailReviewVO worstRv = dtdao.getReviewWorst(tmap);
+				   
+				   vo.setTopRv(topRv);
+				   vo.setWorstRv(worstRv);
+				   
 			   }
 			   
 			   final int BLOCK=10;
@@ -100,6 +132,11 @@ public class TourplaceModel {
 
 	@RequestMapping("category/tourplacetag_content.do")
 	public String category_foodtag(HttpServletRequest request, HttpServletResponse response) {
+		List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+		 try {
+			 wishlist = MainDAO.getWishListsByMemberId(((LoginVO)(request.getSession().getAttribute("ss_member"))).getMemberId());
+		 } catch (Exception e) {}
+		 
 		// 태그 페이지
 		String page = request.getParameter("page");
 		if (page == null || page.length() == 0)
@@ -144,6 +181,28 @@ public class TourplaceModel {
 			temp = MainDAO.getGradeReviewCntByTypeNo(temp);
 			vo.setGrade(temp.getGrade());
 			vo.setRank(temp.getReviewCnt());
+			
+			for(WishListVO_u wlvo : wishlist) {
+				   if(vo.getNo()==wlvo.getNo() && wlvo.getType()==1) vo.setWish(true);
+			   }
+			
+				DetailDAO dtdao = new DetailDAO();
+			   
+			   tmap.clear();
+			   tmap.put("type", 1);
+			   tmap.put("no", vo.getNo());
+			   
+			   int min = dtdao.reviewMin(tmap);
+			   int max = dtdao.reviewMax(tmap);
+			   
+			   tmap.put("numm", 1);
+			   tmap.put("grade", min);
+			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
+			   tmap.put("grade", max);
+			   DetailReviewVO worstRv = dtdao.getReviewWorst(tmap);
+			   
+			   vo.setTopRv(topRv);
+			   vo.setWorstRv(worstRv);
 		}
 
 		final int BLOCK = 10;

@@ -8,6 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.sist.main.dao.HashTagVO;
+import com.sist.main.dao.HomeItemVO;
+
 
 public class TourplaceDAO {
 	private static SqlSessionFactory ssf;
@@ -27,6 +30,15 @@ public class TourplaceDAO {
 		try {
 			session = ssf.openSession();
 			list = session.selectList("tourplaceListData", map);
+			
+			for(TourplaceVO tpvo : list) {
+				HomeItemVO vo = new HomeItemVO();
+				vo.setType(1);
+				vo.setNo(tpvo.getNo());
+				List<HashTagVO> htlist = session.selectList("getHTListByTypeNo", vo);
+				tpvo.setHashtags(htlist.subList(0, 5));
+			}
+			
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
@@ -72,6 +84,14 @@ public class TourplaceDAO {
 		try{
 			session = ssf.openSession();
 			tlist = session.selectList("tourplaceTagDetailData",map);
+			
+			for(TourplaceVO tpvo : tlist) {
+				HomeItemVO vo = new HomeItemVO();
+				vo.setType(1);
+				vo.setNo(tpvo.getNo());
+				List<HashTagVO> htlist = session.selectList("getHTListByTypeNo", vo);
+				tpvo.setHashtags(htlist.subList(0, 5));
+			}
 		}catch(Exception ex){
 			
 		}finally{
@@ -87,6 +107,14 @@ public class TourplaceDAO {
 		try{
 			session = ssf.openSession();
 			tlist = session.selectList("tourplaceData",map);
+			
+			for(TourplaceVO tpvo : tlist) {
+				HomeItemVO vo = new HomeItemVO();
+				vo.setType(1);
+				vo.setNo(tpvo.getNo());
+				List<HashTagVO> htlist = session.selectList("getHTListByTypeNo", vo);
+				tpvo.setHashtags(htlist.subList(0, 5));
+			}
 		}catch(Exception ex){
 			
 		}finally{

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -16,12 +17,15 @@
 								<c:forEach var="vo" items="${list }">
 									<div class="cate_body">
 										<div class="col-lg-4 col-md-4" style="height: 200px">
-											<a href=""><img class="post-img img-fluid" alt="음식점사진"
+											<a href="../detail/detail.do?type=1&no=${ vo.no }"><img class="post-img img-fluid" alt="음식점사진"
 												style="border-radius: 10px 10px 10px 10px;"
 												src="${vo.tphoto }"></a>
 											<div class="heart">
-												<button class="heart_button" type="button">
-													<i class="far fa-heart fa-fw"></i>
+												<button class="heart_button 
+													<c:if test="${ vo.wish eq true }">heart_on</c:if>
+													<c:if test="${ vo.wish eq false }">heart_off</c:if>
+												" type="button" data-type="1" data-no="${ vo.no }">
+													<i class="fas fa-heart"></i>
 												</button>
 											</div>
 										</div>
@@ -33,16 +37,20 @@
 												</div>
 												<div class="body_main_text_info_reviewNum">&nbsp;${ vo.rank }건의
 													리뷰</div>
-												<div class="body_main_text_info_foodtype">#한식 #저렴 #점심</div>
+												<div class="body_main_text_info_foodtype">
+													<c:forEach var="hashtag" items="${ vo.hashtags }">
+														<a class="btn btn-sm p-0" href="../home/htitemlist.do?tagcode=${ hashtag.tagcode }">#${ hashtag.tagname }</a>
+													</c:forEach>
+												</div>
 											</div>
 											<div class="body_main_text_info_bestreview">
 												<div class="body_main_text_info_bestreview_one">
-													<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;제육백반입니다
-													ㅎㅎ
+													<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;
+													<font color="green">${ fn:substring(vo.topRv.content,0,35) }...</font>
 												</div>
 												<div class="body_main_text_info_bestreview_two">
-													<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;돈 받고
-													먹으라고 해도 여긴 좀...
+													<i class="fas fa-quote-right"></i>&nbsp;&nbsp;&nbsp;
+													<font color="red">${ fn:substring(vo.worstRv.content,0,35) }...</font>
 												</div>
 											</div>
 										</div>
