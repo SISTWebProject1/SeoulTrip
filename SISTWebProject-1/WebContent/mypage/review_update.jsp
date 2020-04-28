@@ -20,6 +20,7 @@
 </div>
 </section>
   <div class="container">
+  	<h1 style="margin: 10px;"> 리뷰 수정 </h1>
     <div class="row">
       <form action="../mypage/mypage_review_update_ok.do" method="post">
       <table class="table table-hover">
@@ -66,7 +67,7 @@
         </tr>
         <tr>
           <td colspan="2" class="text-center">
-            <input type=submit value="리뷰작성" class="btn btn-sm btn-info"
+            <input type=submit value="리뷰 수정" class="btn btn-sm btn-info"
             id="sendBtn">
             <input type=button value="취소" class="btn btn-sm btn-success"
               onclick="javascript:history.back()"

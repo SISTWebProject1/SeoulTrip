@@ -106,8 +106,6 @@ public class MypageModel {
 		mrvo = MypageDAO.mypage_reviewDetailData(map);
 		
 		String type=" ";
-		System.out.println("type 번호 : "+mrvo.getType());
-		
 		switch(mrvo.getType()){
 		case 1:
 			type="장소";
@@ -179,8 +177,6 @@ public class MypageModel {
 		String month = request.getParameter("month");
 		String day = request.getParameter("day");
 		String birth =year+"-"+month+"-"+day;
-		
-		
 		
 		MemberVO_u my_vo = new MemberVO_u();
 		my_vo.setBirth(Date.valueOf((birth)));
@@ -294,15 +290,15 @@ public class MypageModel {
 		}
 		SimpleDateFormat spf = new SimpleDateFormat("yyyy-mm-dd");
 		String regdate = request.getParameter("regdate");
-//		System.out.println(regdate);
+		spf.applyPattern("yyyy-MM-dd");
 		try {
 			date = spf.parse(regdate);
 		} catch (ParseException e) {
 			System.out.println("날짜 변환 : ");
 			e.printStackTrace();
 		}
-//		System.out.println(date.toString());
 
+		
 		String content = request.getParameter("content");
 		String title = request.getParameter("title"); 
 		String reviewno = request.getParameter("reviewno");
