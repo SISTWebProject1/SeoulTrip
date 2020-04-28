@@ -70,7 +70,8 @@
 	<div class="single-widget food_left">
 		<div class="food_type">
 			<div class="food_type_name">
-				<h5>음식점 태그</h5>
+				<h5 style="display: inline-block;">명소 태그</h5>
+				<a href="tourplace.do" style="float: right; position: relative; top: 8px;"><font color="gray">초기화</font></a>
 			</div>
 		<span id="multiPrint"></span><br />
 			<c:forEach var="vo" items="${taglist }">

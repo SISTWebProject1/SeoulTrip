@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.main.dao.HomeItemVO;
+import com.sist.main.dao.MainDAO;
 
 import java.util.*;
 
@@ -18,7 +20,7 @@ public class TourplaceModel {
 			   if(page==null)
 				   page="1";
 			   int curpage=Integer.parseInt(page);
-			   int rowSize=4;
+			   int rowSize=10;
 			   int start=(rowSize*curpage)-(rowSize-1);
 
 			   int end=rowSize*curpage;
@@ -39,7 +41,16 @@ public class TourplaceModel {
 					   tname=tname.substring(0,12).concat("...");
 					   vo.setTname(tname);
 				   }
+				   
+				   HomeItemVO temp = new HomeItemVO();
+				   temp.setType(1);
+				   temp.setNo(vo.getNo());
+				   
+				   temp = MainDAO.getGradeReviewCntByTypeNo(temp);
+				   vo.setGrade(temp.getGrade());
+				   vo.setRank(temp.getReviewCnt());
 			   }
+			  
 			   int totalpage=TourplaceDAO.tourplaceTotalPage();
 			   final int BLOCK=10;
 			   int startPage=((curpage-1)/BLOCK*BLOCK)+1; 
@@ -76,34 +87,37 @@ public class TourplaceModel {
 	}
 	@RequestMapping("category/tourplacetag_content.do")
 	public String category_foodtag(HttpServletRequest request, HttpServletResponse response){
-		  Map map=new HashMap();
-		   // 체크박스에 테그리스트 넘기기
-		   List<TourplaceTagVO> taglist=TourplaceDAO.tourplaceTagListData(map);
-		
 		 // 태그 페이지
 		 String page=request.getParameter("page");
 		   if(page==null)
 			   page="1";
 		   int curpage=Integer.parseInt(page);
-		   int rowSize=6;
+		   int rowSize=10;
 		   int start=(rowSize*curpage)-(rowSize-1);
 
 		   int end=rowSize*curpage;
 		   
-		   /*int foodtagcode = Integer.parseInt(request.getParameter("foodtagcode"));*/
-		   
-		   
 		   Map tmap=new HashMap();
 		   tmap.put("start", start);
 		   tmap.put("end", end);
-		   /*tmap.put("foodtagcode", foodtagcode);*/
 		   
-		   TourplaceDAO.tourplaceTagDetailData(tmap);
-		   List<TourplaceTagDetailVO> tlist= TourplaceDAO.tourplaceData(tmap);
-		   System.out.println(tlist);
+		   List<TourplaceVO> tlist = TourplaceDAO.tourplaceListData(tmap);
+		   int tagtotalpage = TourplaceDAO.tourplaceTotalPage();
 		   
+		   String tagnames = request.getParameter("tagnames");
+		   String tourplacetagcode = request.getParameter("tourplacetagcode");
+		   if(tourplacetagcode.equals("data")) {
+			   request.setAttribute("title", "서울의 명소");
+		   } else {
+			   tmap.put("tagcode", tourplacetagcode.substring(5));
+			   request.setAttribute("title", tagnames.substring(7));
+			   
+			   TourplaceDAO.tourplaceTagDetailData(tmap);
+			   tlist= TourplaceDAO.tourplaceData(tmap);
+			   tagtotalpage = TourplaceDAO.tourplaceTagTotalPage();
+		   }		   
 		   
-		   for(TourplaceTagDetailVO vo:tlist)
+		   for(TourplaceVO vo:tlist)
 		   {
 			   String tname=vo.getTname();
 			   if(tname.length()>12)
@@ -111,11 +125,15 @@ public class TourplaceModel {
 				   tname=tname.substring(0,12).concat("...");
 				   vo.setTname(tname);
 			   }
+			   
+			   HomeItemVO temp = new HomeItemVO();
+			   temp.setType(1);
+			   temp.setNo(vo.getNo());
+			   
+			   temp = MainDAO.getGradeReviewCntByTypeNo(temp);
+			   vo.setGrade(temp.getGrade());
+			   vo.setRank(temp.getReviewCnt());
 		   }
-		   
-		   /*int tagtotal=FoodDAO.foodTagTotalPage(foodtagcode);*/
-		   
-		   int tagtotalpage=TourplaceDAO.tourplaceTagTotalPage();
 		   
 		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1; 
@@ -131,20 +149,11 @@ public class TourplaceModel {
 		   request.setAttribute("BLOCK", BLOCK);
 		   request.setAttribute("startPage", startPage);
 		   request.setAttribute("endPage", endPage);
-		   request.setAttribute("allPage", allPage);
-		   
-		   
-		   
-		   System.out.println(tagtotalpage);
-
-		   
+		   request.setAttribute("allPage", allPage);		   
 		   
 		 request.setAttribute("tlist", tlist);
-		 request.setAttribute("taglist", taglist);
-		   
-		request.setAttribute("main_jsp", "../category/tourplacetag_content.jsp");
-		request.setAttribute("banner_on", true);
-		return "../main/index.jsp";
+		 
+		return "../category/tourplacetag_content_result.jsp";
 	}
 	
 }

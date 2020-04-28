@@ -6,14 +6,21 @@
 <head>
 </head>
 <body>
-	<section class="post-area">
+	<!-- Start body Area -->
+	<div class="main-body">
+		<div class="container box_1170">
+			<div class="row">
+				
+				<div class="col-lg-9 post-list">
+					<!-- Start food_content Area -->
+					<section class="post-area">
 					<div class="col-lg-12">
 						<h3>
-							<p>${ (title eq null) ? "서울의 명소" : title }</p>
+							<p>${ title }</p>
 						</h3>
 						<div class="body_main_set">
 							<div class="row">
-								<c:forEach var="vo" items="${list }">
+								<c:forEach var="vo" items="${tlist }">
 									<div class="cate_body">
 										<div class="col-lg-4 col-md-4" style="height: 200px">
 											<a href=""><img class="post-img img-fluid" alt="음식점사진"
@@ -26,7 +33,7 @@
 											</div>
 										</div>
 										<div class="col-lg-8 col-md-8">
-											<div class="body_main_text_title">${ vo.tname }</div>
+											<div class="body_main_text_title">${vo.tname }</div>
 											<div class="body_main_text_info">
 												<div class="grade">
 													<p class="grade2" style="WIDTH: ${ vo.grade }%;"></p>
@@ -88,6 +95,10 @@
 							</ul>
 						</nav>
 					</div>
-				</section>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
