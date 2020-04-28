@@ -30,12 +30,21 @@ body {
  font-size: 15px;
 }
 
-h2 {
+h1,h2,h3 {
  font-family: 'Noto Sans KR', sans-serif;
- font-size: 40px;
 
 }
 
+a {
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 12px;
+}
+
+
+p {
+ font-family: 'Noto Sans KR', sans-serif;
+ font-size: 20px;
+}
 span {
  font-family: 'Noto Sans KR', sans-serif;
  font-size:25px;
@@ -189,7 +198,7 @@ $(function(){
 <div class="container">
 	<div class="section">
 	  
-	<h2 style="text-align:center;">&nbsp;&nbsp;${vo.rname }</h2>	
+	<h1 style="text-align:center;">&nbsp;&nbsp;${vo.rname }</h1>	
 	
 	<section class="contact-page-area" style="margin-top:20px;">	
 		   	<div class="row-info col-md-6 col-md-offset-0" style="width:100%;">
@@ -364,23 +373,29 @@ $(function(){
 			<%-- ==========================================Ajax출력단========================================== --%>						
 			<div class="section">		
 					 <div class="booking-form col-md-6 col-md-offset-0" id="result" style="margin-left:15px" ">
-						 <div class="row" >예약인원   &nbsp;<b id="data-person"></b></div>
-						 <div class="row" >예약시간  &nbsp;&nbsp;   &nbsp;&nbsp; <b id="data-time"></b></div>
-						 <div class="row" >예약날짜   &nbsp;&nbsp;  &nbsp;&nbsp; <b id="data-date"></b></div>
-						 <div class="row">예약자명   &nbsp;&nbsp;  &nbsp;&nbsp; <b id="data-name"></b> </div>
-						 <div class="row" >전화번호   &nbsp;&nbsp;  &nbsp;&nbsp; <b id="data-tel"></b></div>
-						 <div class="row">E-MAIL  &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; <b id="data-email"></b></div>
+						 <div class="row" >예약인원   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b id="data-person"></b></div>
+						 <div class="row" >예약시간  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-time"></b></div>
+						 <div class="row" >예약날짜   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-date"></b></div>
+						 <div class="row">예약자명   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-name"></b> </div>
+						 <div class="row" >전화번호   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-tel"></b></div>
+						 <div class="row">E-MAIL  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b id="data-email"></b></div>
 					</div>
 			</div>
 <!-- ==================================================================================================예약단 -->	
 			<div class="section">				
 					<div class="row" style="margin: 0px auto;">
+					 	
+					 	
+					<c:if test="${list!=null }"> 	
 					 	<div class="row" style="margin: 0px auto;float:left; border:0px solid red;"> 
 					 	 
-						 <b style="font-size:25px; text-align:center;">&nbsp;&nbsp;
+						 <b style="font-size:25px; text-align:right;">&nbsp;&nbsp;
 						  ${ss_member.memberId==null?"방문객 ":ss_member.memberId} 님에게  
-						&nbsp; # ${tvo.tagname } &nbsp;와 관련된  음식점을 추천해드려요</b>
+						&nbsp; # ${tvo.tagname } &nbsp; 관련  음식점을 추천해드려요</b>
 						</div>
+					</c:if>
+					
+					
 					 			
 					 </div>
 						 		
@@ -389,20 +404,33 @@ $(function(){
 					
 						
 						 <c:forEach var="rvo" items="${list}">
-			
+						 
 							<div class="col-md-4" style="margin: 0px auto; float:left;  width:100%;">
 						   	 <div class="thumbnail">
+						   	 	
+						   	 <c:if test="${rvo.no!=vo.no }">
 						   		<a href="../detail/detail.do?type=2&no=${rvo.no}">
-						        	<img src="${rvo.rphoto }" style="width:100%; height:200px;"/>
+						   	 
+						        	<img src="${rvo.rphoto }" style="width:100%; height:220px;"/>
 						        </a>
-						          <div class="caption text-center">
-						          <p >${rvo.rname}</p>
-						         
-						        </div>
+						     </c:if>
+						     
+						     <c:if test="${rvo.no==vo.no }">
+						   		
+						        	<img src="../img/img_def.png" style="width:100%; height:220px;"/>
+						 
+						     </c:if>
+						     
 						      
+						          <div class="caption text-center">
+
+						          <p>${rvo.rname==vo.rname?"준비중입니다":rvo.rname}</p>
+
+						        </div>
 						    	</div>
  							 </div>
- 						 
+ 			
+ 						  
 						 </c:forEach>
 					    
 	
@@ -411,6 +439,7 @@ $(function(){
 						
 		<div class="section">
 				<div class="row col-md-12 col-md-offset-0">
+					<h3 style="text-align:center;"> ${vo.rname } &nbsp;위치와 가는 길을 검색해보세요</h3>
 						<div id="map"  style="width:100%; height:400px;  border:0px solid white; margin-top:10px;"></div>
 				</div>	
 		</div>
@@ -424,7 +453,46 @@ $(function(){
 		
 			
 	<script>
-		var container = document.getElementById('map');
+	
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"), // 지도의 중심좌표
+        level: 4 // 지도의 확대 레벨
+    };
+
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+	
+	// 마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"); 
+	
+	// 마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	    position: markerPosition
+	});
+	
+	// 마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
+	
+	var X=${vo.mapX};
+	var Y=${vo.mapY};
+	
+	var iwContent = '<div style="padding:20px; color:#8050fa;font-size:15px;">'+"${vo.rname}"
+		+'<a href="https://map.kakao.com/link/map/'
+		+"${vo.rname}"+','+"${vo.mapX}"+','+"${vo.mapY}"
+		+'style="color:blue" target="_blank"><br>길찾기</a>'
+		+'</div>'
+		,
+	    iwPosition = new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"); //인포윈도우 표시 위치입니다
+	
+	// 인포윈도우를 생성합니다
+	var infowindow = new kakao.maps.InfoWindow({
+	    position : iwPosition, 
+	    content : iwContent 
+	});
+	  
+	// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+	infowindow.open(map, marker); 
+		/* var container = document.getElementById('map');
 		var options = {					
 			center: new kakao.maps.LatLng("${vo.mapX}","${vo.mapY}"),
 			level: 3
@@ -434,7 +502,7 @@ $(function(){
 		var mapContainer = document.getElementById('map'), 
 	    mapOption = { 
 	        center: new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}"), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
+	        level: 4 // 지도의 확대 레벨
 	    };
 		
 		var markerPosition  = new kakao.maps.LatLng("${vo.mapX}", "${vo.mapY}");
@@ -446,7 +514,7 @@ $(function(){
 
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setMap(map);
-
+ */
 	</script>
 
 
