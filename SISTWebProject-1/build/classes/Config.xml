@@ -16,8 +16,6 @@
 		<typeAlias type="com.sist.detail.dao.DetailRankingRestaurantVO" alias="DetailRankResVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailRankingFestivalVO" alias="DetailRankFestivalVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailReviewCountVO" alias="DetailReviewCountVO"/>
-		<typeAlias type="com.sist.detail.dao.Detail_Review_HashtagVO" alias="DetailReviewHashVO"/>
-		<typeAlias type="com.sist.detail.dao.DetailTagMappingVO" alias="DetailTagMappingVO"/>
 		
     	<typeAlias type="com.sist.main.dao.HomeItemVO" alias="HomeItemVO"/>
     	

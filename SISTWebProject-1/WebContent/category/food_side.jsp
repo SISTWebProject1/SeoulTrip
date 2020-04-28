@@ -2,14 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-	<div class="single-widget search-widget">
+<!-- 	<div class="single-widget search-widget">
 		<form class="map_map" action="#">
 			<img src="https://static.tacdn.com/img2/maps/img_map.png" alt="" class="map_img">
 			<div class="map_top">
 				<button class="map_button" type="button" onclick="">지도 보기</button>
 			</div>
 		</form>
-	</div>
+	</div> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 		
@@ -70,7 +70,8 @@
 	<div class="single-widget food_left">
 		<div class="food_type">
 			<div class="food_type_name">
-				<h5>음식점 태그</h5>
+				<h5 style="display: inline-block;">음식점 태그</h5>
+				<a href="food.do" style="float: right; position: relative; top: 8px;"><font color="gray">초기화</font></a>
 			</div>
 		<span id="multiPrint"></span><br />
 			<c:forEach var="vo" items="${taglist }">
