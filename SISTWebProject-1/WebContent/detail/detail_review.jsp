@@ -19,6 +19,7 @@
 			</c:forEach>
 
 			<div style="width:100%; height:70px;">${vo.content}</div>
+
 			<a href="blog-details.html" class="primary-btn text-uppercase mt-15" id="continue">continue
 				Reading</a>
 			<div class="post-box" style="width:100%" id='mouse_over'>

@@ -150,7 +150,7 @@
 		<parameter property="pMsg" javaType="java.lang.String" jdbcType="VARCHAR" mode="IN"/>
 	</parameterMap>
 	<select id="reviewReplyInsert" parameterMap="reviewReplyInsertMap" statementType="CALLABLE">
-		{CALL replyInsert(?)}
+		{CALL replyInsert(?,?,?)}
 	</select>
 	
 	<resultMap type="ReviewReplyVO" id="reviewReplyMap">

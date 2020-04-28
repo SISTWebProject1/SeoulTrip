@@ -435,12 +435,44 @@ public class DetailDAO {
 		}
 		return list;
 	}
+	public static List<String> getTourTagCode(int no){
+		List<String> list = new ArrayList<String>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getTourTagCode",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
 	public static List<String> getResTag(int no){
 		List<String> list = new ArrayList<String>();
 		SqlSession session = null;
 		try {
 			session = ssf.openSession();
 			list = session.selectList("getResTag",no);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	public static List<String> getResTagCode(int no){
+		List<String> list = new ArrayList<String>();
+		SqlSession session = null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("getResTagCode",no);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -528,5 +560,69 @@ public class DetailDAO {
 				session.close();
 		}
 		return max;
+	}
+	public static List<Detail_Review_HashtagVO> DetailReviewHash (Map map){
+		List<Detail_Review_HashtagVO> list= new ArrayList<Detail_Review_HashtagVO>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("DetailReviewHashtag",map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	
+	
+	//DetailALLimageFilepath
+	public static List<String> DetailAllImages (Map map){
+		List<String> list= new ArrayList<String>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("DetailInfoImages",map);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	
+	public static List<DetailTagMappingVO> DetailTourtagmapper(int no){
+		List<DetailTagMappingVO> list= new ArrayList<DetailTagMappingVO>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("DetailTourplaceTag",no);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
+	}
+	public static List<DetailTagMappingVO> DetailRestagmapper(int no){
+		List<DetailTagMappingVO> list= new ArrayList<DetailTagMappingVO>();
+		SqlSession session=null;
+		try {
+			session = ssf.openSession();
+			list = session.selectList("DetailRestaurantTag",no);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}finally{
+			if(session!=null)
+				session.close();
+		}
+		return list;
 	}
 }

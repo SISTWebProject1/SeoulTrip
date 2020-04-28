@@ -60,7 +60,8 @@ public class DetailQnaModel {
 		DetailRankingTourplaceVO rtvo = new DetailRankingTourplaceVO();
 		DetailRankingRestaurantVO rrvo = new DetailRankingRestaurantVO();
 		DetailRankingFestivalVO rfvo = new DetailRankingFestivalVO();
-		
+		List<DetailTagMappingVO> tourplacetaglist = new ArrayList<DetailTagMappingVO>();
+		List<DetailTagMappingVO> restauranttaglist = new ArrayList<DetailTagMappingVO>();	
 		double mapx = 0;	
 		double mapy = 0;
 		int totalpage = 0;
@@ -115,7 +116,14 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
+			tourplacetaglist = dao.DetailTourtagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", tourplacetaglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -147,8 +155,14 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
-			
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
+			restauranttaglist = dao.DetailRestagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", restauranttaglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -197,6 +211,13 @@ public class DetailQnaModel {
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
+			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
@@ -235,9 +256,7 @@ public class DetailQnaModel {
 		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
 		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
 		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
-		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
 
-		request.setAttribute("imglist", imglist);
 		request.setAttribute("type", type);
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);
@@ -287,6 +306,10 @@ public class DetailQnaModel {
 		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
 		List<String> tourtaglist = new ArrayList<String>();
 		List<String> restaglist = new ArrayList<String>();
+		
+		List<DetailTagMappingVO> tourplacetaglist = new ArrayList<DetailTagMappingVO>();
+		List<DetailTagMappingVO> restauranttaglist = new ArrayList<DetailTagMappingVO>();
+
 		String title = "";
 
 		Map typo = new HashMap();
@@ -334,7 +357,16 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			
+			tourplacetaglist = dao.DetailTourtagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", tourplacetaglist);
+
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -366,7 +398,14 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
+			restauranttaglist = dao.DetailRestagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", restauranttaglist);
 			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
@@ -416,6 +455,13 @@ public class DetailQnaModel {
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
+			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
@@ -455,9 +501,7 @@ public class DetailQnaModel {
 		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
 		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
 		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
-		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
 
-		request.setAttribute("imglist", imglist);
 		request.setAttribute("type", type);
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);
@@ -536,6 +580,9 @@ public class DetailQnaModel {
 		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
 		List<String> tourtaglist = new ArrayList<String>();
 		List<String> restaglist = new ArrayList<String>();
+		
+		List<DetailTagMappingVO> tourplacetaglist = new ArrayList<DetailTagMappingVO>();
+		List<DetailTagMappingVO> restauranttaglist = new ArrayList<DetailTagMappingVO>();
 		String title = "";
 
 		Map typo = new HashMap();
@@ -583,7 +630,16 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			
+			tourplacetaglist = dao.DetailTourtagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", tourplacetaglist);
+
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -616,7 +672,14 @@ public class DetailQnaModel {
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
 			
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
+			restauranttaglist = dao.DetailRestagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", restauranttaglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -665,6 +728,13 @@ public class DetailQnaModel {
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
+			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
@@ -704,9 +774,7 @@ public class DetailQnaModel {
 		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
 		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
 		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
-		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
 
-		request.setAttribute("imglist", imglist);
 		request.setAttribute("type", type);
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);
@@ -837,6 +905,8 @@ public class DetailQnaModel {
 		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
 		List<String> tourtaglist = new ArrayList<String>();
 		List<String> restaglist = new ArrayList<String>();
+		List<DetailTagMappingVO> tourplacetaglist = new ArrayList<DetailTagMappingVO>();
+		List<DetailTagMappingVO> restauranttaglist = new ArrayList<DetailTagMappingVO>();
 		String title = "";
 
 		Map typo = new HashMap();
@@ -884,7 +954,15 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			tourplacetaglist = dao.DetailTourtagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", tourplacetaglist);
+
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -916,8 +994,12 @@ public class DetailQnaModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
-			
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			restauranttaglist = dao.DetailRestagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", restauranttaglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -966,6 +1048,12 @@ public class DetailQnaModel {
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
@@ -1004,9 +1092,7 @@ public class DetailQnaModel {
 		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
 		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
 		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
-		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
 
-		request.setAttribute("imglist", imglist);
 		request.setAttribute("type", type);
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);
@@ -1093,6 +1179,8 @@ public class DetailQnaModel {
 		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
 		List<String> tourtaglist = new ArrayList<String>();
 		List<String> restaglist = new ArrayList<String>();
+		List<DetailTagMappingVO> tourplacetaglist = new ArrayList<DetailTagMappingVO>();
+		List<DetailTagMappingVO> restauranttaglist = new ArrayList<DetailTagMappingVO>();
 		String title = "";
 
 		Map typo = new HashMap();
@@ -1140,7 +1228,14 @@ public class DetailQnaModel {
 			test.put("grade", min);
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
+			tourplacetaglist = dao.DetailTourtagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", tourplacetaglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -1173,7 +1268,15 @@ public class DetailQnaModel {
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
 			
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
+
+			restauranttaglist = dao.DetailRestagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", restauranttaglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -1222,6 +1325,12 @@ public class DetailQnaModel {
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
@@ -1261,9 +1370,7 @@ public class DetailQnaModel {
 		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
 		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
 		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
-		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
 
-		request.setAttribute("imglist", imglist);
 		request.setAttribute("type", type);
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);

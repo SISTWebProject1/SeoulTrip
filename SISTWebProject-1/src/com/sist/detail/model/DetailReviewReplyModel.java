@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
-
+import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.ReplyDAO;
 import com.sist.main.dao.ReviewReplyVO;
 
@@ -32,96 +32,88 @@ public class DetailReviewReplyModel {
 		List<ReviewReplyVO> list = ReplyDAO.replyListData(Integer.parseInt(reviewno), Integer.parseInt(page));
 		
 		int totalpage = ReplyDAO.replyTotalPage(Integer.parseInt(reviewno));
+		
 		request.setAttribute("no", no);
+		request.setAttribute("type", type);
+		request.setAttribute("rvno", reviewno);
 		request.setAttribute("list",list);
 		request.setAttribute("totalpage", totalpage);
 		return "../detail/detail_review_reply.jsp";
 	}
 	
-/*	@RequestMapping("freeboard/reply_insert.do")
-	public String freeboard_reply_insert(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping("detail/detail_review_reply_insert.do")
+	public String detail_review__reply_insert(HttpServletRequest request, HttpServletResponse response){
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		System.out.println("댓글형 게시판 작동");
-		String bno = request.getParameter("bno");
-		String msg = request.getParameter("msg");
-		HttpSession session=request.getSession();	//request => Session, Cookie 활용
-		String id=(String)session.getAttribute("id");
-		String name = (String)session.getAttribute("name");
+		System.out.println("댓글형 게시판 입력");
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		String rvno = request.getParameter("rvno");
+		String replymsg = request.getParameter("msg");
+		//HttpSession session=request.getSession();	//request => Session, Cookie 활용
+		//String id=(String)session.getAttribute("id");
+		//String name = (String)session.getAttribute("name");
+		LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+
+		String memberid = lvo.getMemberId();
+		System.out.println(memberid);
+		ReplyDAO.replyInsert(Integer.parseInt(rvno), memberid, replymsg);
 		
-		//DAO => Map에묶어서 처리 
-		Map map = new HashMap();
-		map.put("pBno", Integer.parseInt(bno));
-		map.put("pId", id);
-		map.put("pName",name);
-		map.put("pMsg", msg);
-		
-		//INSERT 처리
-		FreeBoardReplyDAO.replyInsert(map);
-		
-		return "redirect:../freeboard/detail.do?no="+bno;
+		return "redirect:../detail/detail.do?type="+type+"&no="+no;
 	}
 	
-	@RequestMapping("freeboard/reply_update.do")
-	public String freeboard_reply_update(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping("detail/detail__review_reply_update.do")
+	public String detail_review__reply_update(HttpServletRequest request, HttpServletResponse response){
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		String bno=request.getParameter("bno");
-		String no=request.getParameter("no");
-		String msg=request.getParameter("msg");
-		Map map = new HashMap<>();
-		map.put("pNo", Integer.parseInt(no));
-		map.put("pMsg", msg);
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		String rrno=request.getParameter("rrno");
+		String replyMsg=request.getParameter("msg");
 		
-		FreeBoardReplyDAO.replyUpdate(map);
+		ReplyDAO.replyUpdate(Integer.parseInt(rrno),replyMsg);
 		
-		return "redirect:../freeboard/detail.do?no="+bno;
+		return "redirect:../detail/detail.do?type="+type+"&no="+no;
 	}
 	
-	@RequestMapping("freeboard/reply_reply_insert.do")
-	public String freeboard_reply_reply_insert(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping("detail/detail__review_reply_reply_insert.do")
+	public String detail_review_reply_reply_insert(HttpServletRequest request, HttpServletResponse response){
 		try {
 			request.setCharacterEncoding("UTF-8");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
-		String bno=request.getParameter("bno");
+		System.out.println("대댓글");
+		String no = request.getParameter("no");
+		String type = request.getParameter("type");
+		System.out.println(no);
+		System.out.println(type);
+		String rvno=request.getParameter("rvno");
 		String pno=request.getParameter("pno");
-		String msg=request.getParameter("msg");
-		HttpSession session=request.getSession();
-		String id = (String)session.getAttribute("id");
-		String name = (String)session.getAttribute("name");
-		
-		Map map = new HashMap();
-		map.put("pBno", Integer.parseInt(bno));
-		map.put("pPno", Integer.parseInt(pno));
-		map.put("pId", id);
-		map.put("pName", name);
-		map.put("pMsg",msg);
-		
+		String replymsg=request.getParameter("msg");
+		LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
+		String memberid = lvo.getMemberId();
 		//DAO
-		FreeBoardReplyDAO.replyReplyInsert(map);
+		ReplyDAO.replyReplyInsert(Integer.parseInt(rvno),Integer.parseInt(pno),memberid,replymsg);
 		
-		return "redirect:../freeboard/detail.do?no="+bno;
+		return "redirect:../detail/detail.do?type="+type+"&no="+no;
 	}
 	
-	@RequestMapping("freeboard/reply_delete.do")
+	@RequestMapping("detail/detail_review_reply_delete.do")
 	public String freeboard_reply_delte(HttpServletRequest request, HttpServletResponse response){
 		
 		String no = request.getParameter("no");
-		String bno = request.getParameter("bno");
-		Map map = new HashMap();
-		map.put("pNo", Integer.parseInt(no));
+		String type = request.getParameter("type");
+		String replyNo = request.getParameter("rrno");
 		
-		FreeBoardReplyDAO.replyDelete(map);
+		ReplyDAO.replyDelete(Integer.parseInt(replyNo));
 		
-		return "redirect:../freeboard/detail.do?no="+bno;
-	}*/
+		return "redirect:../detail/detail.do?type="+type+"&no="+no;
+	}
 }

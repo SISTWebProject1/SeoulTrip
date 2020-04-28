@@ -60,7 +60,7 @@
         FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade 
 		FROM (SELECT no,reviewno,title,memberid,content,regdate,expdate,likecount,grade 
 		FROM review WHERE no=#{no} AND type=#{type} ORDER BY regdate DESC)
-        WHERE grade=#{grade} ORDER BY likecount ASC) ORDER BY numm)
+        WHERE grade=#{grade} ORDER BY likecount DESC) ORDER BY numm)
         WHERE numm=#{numm}
  	</select>
 	
@@ -245,8 +245,27 @@
 		WHERE tourtagmapper.tno = tourplace.no AND tourplace.no=#{no})
 		WHERE tourtag.tagcode = ttm
 	</select>
+
+	<select id="getTourTagCode" resultType="String" parameterType="int">
+		SELECT tourtag.tagcode
+		FROM tourtag,(
+		SELECT tourtagmapper.tagcode as ttm, tourplace.no
+		FROM tourtagmapper,tourplace
+		WHERE tourtagmapper.tno = tourplace.no AND tourplace.no=#{no})
+		WHERE tourtag.tagcode = ttm
+	</select>
+
 	<select id="getResTag" resultType="String" parameterType="int">
 		SELECT RESTAURANTTAG.tagname
+		FROM RESTAURANTTAG,(
+		SELECT RESTTAGMAPPER.tagcode as rtm, restaurant.no
+		FROM resttagmapper,restaurant
+		WHERE resttagmapper.rno = restaurant.no AND restaurant.no=#{no})
+		WHERE restauranttag.tagcode = rtm
+	</select>
+	
+	<select id="getResTagCode" resultType="String" parameterType="int">
+		SELECT RESTAURANTTAG.tagcode
 		FROM RESTAURANTTAG,(
 		SELECT RESTTAGMAPPER.tagcode as rtm, restaurant.no
 		FROM resttagmapper,restaurant
@@ -319,6 +338,41 @@
 			#{filepath}
 			)
 	</insert>
+	
+	<select id="DetailReviewHashtag" resultType="DetailReviewHashVO" parameterType="java.util.Map">
+		select no,type,reviewno,tagname,tagcode
+		FROm review_hashtag
+		WHERE no=#{no} AND type=#{type}	
+	</select>
+	
+	<select id="DetailInfoImages" resultType="String" parameterType="java.util.Map">
+		SELECT filepath
+        FROM (SELECT photo.filepath as filepath, rownum as numm
+		FROM PHOTO,(
+		SELECT reviewno as rro, type
+		FROM REVIEW
+		WHERE no=#{no} AND type=#{type})
+		WHERE rro=photo.reviewno)
+ 	</select>
+
+
+	<select id="DetailTourplaceTag" resultType="DetailTagMappingVO" parameterType="int">
+		SELECT tagcode,tagname
+		FROM tourtag,(
+		SELECT tourtagmapper.tagcode as ttm, tourplace.no
+		FROM tourtagmapper,tourplace
+		WHERE tourtagmapper.tno = tourplace.no AND tourplace.no=#{no})
+		WHERE tourtag.tagcode = ttm
+	</select>
+
+	<select id="DetailRestaurantTag" resultType="DetailTagMappingVO" parameterType="int">
+        SELECT tagcode, tagname
+		FROM RESTAURANTTAG,(
+		SELECT RESTTAGMAPPER.tagcode as rtm, restaurant.no
+		FROM resttagmapper,restaurant
+		WHERE resttagmapper.rno = restaurant.no AND restaurant.no=#{no})
+		WHERE restauranttag.tagcode = rtm
+	</select>
 </mapper>
 
 

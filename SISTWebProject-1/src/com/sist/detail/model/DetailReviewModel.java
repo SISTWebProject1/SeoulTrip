@@ -61,6 +61,8 @@ public class DetailReviewModel {
 			request.setAttribute("title", fvo.getFname());
 			request.setAttribute("category", "축제");
 		}
+		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		request.setAttribute("max",today);
 		
 		request.setAttribute("type", type);
 		request.setAttribute("no", no);
