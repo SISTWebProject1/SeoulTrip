@@ -1,6 +1,7 @@
 package com.sist.mypage.model;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class MypageModel {
 		
 		MemberVO_u my_vo = MypageDAO.PassWord_check(id);
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd hh:mm:ss");
 		sdf.applyPattern("yyyy-MM-dd");
 		String birth = sdf.format(my_vo.getBirth());
 		String regdate = sdf.format(my_vo.getRegdate());
@@ -73,11 +74,13 @@ public class MypageModel {
 		// review 정보 확인
 		//wishlist data 값
 		
-		List<WishListVO_u> wish_list = MypageDAO.wishlistData(vo.getMemberId());
 		
 		// wishlist 존재 여부 확인
 		int wish_count =0;
-		wish_count = wish_list.size();
+		wish_count = MypageDAO.wishlist_Totalpage(id);
+		List<WishListVO_u> wish_list = MypageDAO.wishlistData(id);
+		
+		
 		
 		request.setAttribute("totalpage", totalpage);
 		request.setAttribute("curpage", curpage);
@@ -93,8 +96,32 @@ public class MypageModel {
 	@RequestMapping("mypage/review_update_mypage.do")
 	public String mypage_review_update(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
+		String reviewno = request.getParameter("reviewno");
+		String no = request.getParameter("no");
+		ReviewVO_u mrvo = new ReviewVO_u();// mypage_Review_vo
+		Map map = new HashMap();
+		map.put("reviewno", reviewno);
+		map.put("no", no);
 		
+		mrvo = MypageDAO.mypage_reviewDetailData(map);
+		
+		String type=" ";
+		switch(mrvo.getType()){
+		case 1:
+			type="장소";
+			break;
+		case 2:
+			type="음식점";
+			break;
+		case 3:
+			type="축제";
+			break;
+		}
+		
+		request.setAttribute("type", type);
 		request.setAttribute("banner_on", true);
+		request.setAttribute("id", id);
+		request.setAttribute("mrvo", mrvo);
 		request.setAttribute("main_jsp", "../mypage/review_update.jsp");
 		return "../main/index.jsp";
 	}
@@ -151,8 +178,6 @@ public class MypageModel {
 		String day = request.getParameter("day");
 		String birth =year+"-"+month+"-"+day;
 		
-		
-		
 		MemberVO_u my_vo = new MemberVO_u();
 		my_vo.setBirth(Date.valueOf((birth)));
 		my_vo.setMemberId(id);
@@ -175,6 +200,7 @@ public class MypageModel {
 		}catch(Exception ex){
 			ex.printStackTrace();	
 		}
+		
 		try{
 		String id = request.getParameter("id");
 		request.setAttribute("id", id);
@@ -207,10 +233,37 @@ public class MypageModel {
 	@RequestMapping("mypage/bookingList.do")
 	public String bookingList(HttpServletRequest request, HttpServletResponse response){
 		String id = request.getParameter("id");
+		String page= request.getParameter("page");
+		if(page == null){
+			page= "1";
+		}
+		int curpage = Integer.parseInt(page);
+		int rowSize = 5;
+		int start = (rowSize)* curpage-(rowSize-1);
+		int end = rowSize*curpage ;
+		int totalPage= 0;
+		Map map = new HashMap();
+		map.put("id", id);
+		map.put("start", start);
+		map.put("end", end);
+		
+		totalPage = MypageDAO.booking_totalpage(id);
+		if(totalPage ==0){
+			totalPage=1;
+		}
 		List<BookingRestaurantVO_u> Booking_list = new ArrayList<BookingRestaurantVO_u>();		
-		Booking_list = MypageDAO.BookingListData(id);
+		Booking_list = MypageDAO.BookingListData(map);
+		boolean Booking_countkey = false;
+		if(Booking_list.size()<=0){
+			Booking_countkey=true;
+		}
+		
+		request.setAttribute("booking_id", id);
+		request.setAttribute("totalpage", totalPage);
+		request.setAttribute("curpage", curpage);	
 		request.setAttribute("banner_on", true);
 		request.setAttribute("Booking_list", Booking_list);
+		request.setAttribute("Booking_countkey", Booking_countkey);
 		request.setAttribute("main_jsp", "../mypage/booking_table.jsp");
 		return "../main/index.jsp";
 	}
@@ -225,6 +278,58 @@ public class MypageModel {
 		MypageDAO.reservation_del(reservation_no);
 		
 		return "redirect:../mypage/bookingList.do?id="+id;
+	}
+	
+	@RequestMapping("mypage/mypage_review_update_ok.do")
+	public String mypage_reviewUpdate(HttpServletRequest request,HttpServletResponse response){
+		java.util.Date date = new java.util.Date();
+		try{
+			request.setCharacterEncoding("UTF-8");
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		SimpleDateFormat spf = new SimpleDateFormat("yyyy-mm-dd");
+		String regdate = request.getParameter("regdate");
+		spf.applyPattern("yyyy-MM-dd");
+		try {
+			date = spf.parse(regdate);
+		} catch (ParseException e) {
+			System.out.println("날짜 변환 : ");
+			e.printStackTrace();
+		}
+
+		
+		String content = request.getParameter("content");
+		String title = request.getParameter("title"); 
+		String reviewno = request.getParameter("reviewno");
+		String id = request.getParameter("id");
+		
+		
+		System.out.println(date.toString());
+		ReviewVO_u vo = new ReviewVO_u();
+		vo.setContent(content);
+		vo.setTitle(title);
+		vo.setReviewno(Integer.parseInt(reviewno));
+		vo.setRegdate(date);
+		
+		MypageDAO.Mypage_reviewUpdate(vo);
+		
+		
+		return "redirect:../mypage/profile.do?id="+id;
+	}
+	
+	@RequestMapping("mypage/deletewishlist.do")
+	public String mypage_wishlistDelete(HttpServletRequest request, HttpServletResponse response){
+		
+		String id = request.getParameter("id");
+		String no = request.getParameter("no");
+		WishListVO_u wish_vo = new  WishListVO_u();
+		wish_vo.setMemeberId(id);
+		wish_vo.setNo(Integer.parseInt(no));
+		MypageDAO.mypage_wishlistDelete(wish_vo);
+		
+		
+		return "redirect:..mypage/profile.do?id="+id;
 	}
 
 }
