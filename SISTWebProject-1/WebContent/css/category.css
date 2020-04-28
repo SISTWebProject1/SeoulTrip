@@ -59,6 +59,10 @@
 	PADDING-TOP: 0px;
 	HEIGHT: 18px;
 }
+.row.food-catetop {
+	height: 300px;
+}
+
 
 .single-post-item short {
 	position: relative;

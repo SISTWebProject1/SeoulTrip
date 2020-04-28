@@ -8,14 +8,19 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
 $(function () {
-	var foodtagcode = [];
+	$('.check').click(function() {
+		let foodtagcode = "data";
+		let tagnames = "data"; 
+		
 	$('.check:checked').each(function(){
-    	foodtagcode.push($(this).val());
+    	foodtagcode +=","+$(this).val();
+    	tagnames += " | "+$(this).parent().text().trim();
+	});
     	
 		$.ajax({
 			type:"POST",
 			url:"foodtag_content.do",
-			data:{"foodtagcode":foodtagcode},
+			data:{"foodtagcode":foodtagcode,"tagnames":tagnames},
 			success:function(res)
 			{
 				$('#foodtag').html(res);
@@ -39,7 +44,7 @@ $(function () {
 				</div>
 				<div class="col-lg-9 post-list" id="foodtag">
 					<!-- Start food_content Area -->
-					<jsp:include page="food_content.jsp"/>
+					<jsp:include page="foodtag_content.jsp"/>
 					<!-- End food_content Area -->
 				</div>
 			</div>
