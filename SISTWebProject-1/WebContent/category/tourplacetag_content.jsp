@@ -9,7 +9,7 @@
 	<section class="post-area">
 					<div class="col-lg-12">
 						<h3>
-							<p>${ (title eq null) ? "서울의 명소" : title }</p>
+							<p>${ (tagvo.tagname eq null) ? "서울의 명소" : tagvo.tagname }</p>
 						</h3>
 						<div class="body_main_set">
 							<div class="row">
@@ -26,7 +26,7 @@
 											</div>
 										</div>
 										<div class="col-lg-8 col-md-8">
-											<div class="body_main_text_title">${ vo.tname }</div>
+											<div class="body_main_text_title">${ vo.tel }. ${ vo.tname }</div>
 											<div class="body_main_text_info">
 												<div class="grade">
 													<p class="grade2" style="WIDTH: ${ vo.grade }%;"></p>
@@ -61,7 +61,7 @@
 
 								<c:if test="${startPage>1 }">
 									<li class="page-item"><a
-										href="../category/tourplacetag_content.do?page=${startPage-1}"
+										href="../category/tourplace.do?page=${startPage-1}"
 										class="page-link" aria-label="Previous"> <span
 											aria-hidden="true"> <span class="lnr lnr-arrow-left"></span></span>
 									</a></li>
@@ -76,11 +76,11 @@
 										<c:set var="type" value="" />
 									</c:if>
 									<li ${type } class="page-item"><a
-										href="../category/tourplacetag_content.do?page=${i}" class="page-link">${i}</a></li>
+										href="../category/tourplace.do?page=${i}" class="page-link">${i}</a></li>
 								</c:forEach>
 								<c:if test="${endPage<allPage }">
 									<li class="page-item"><a
-										href="../category/tourplacetag_content.do?page=${endPage+1}" class="page-link"
+										href="../category/tourplace.do?page=${endPage+1}" class="page-link"
 										aria-label="Next"> <span aria-hidden="true"> <span
 												class="lnr lnr-arrow-right"></span></span>
 									</a></li>
