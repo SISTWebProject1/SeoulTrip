@@ -8,6 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import com.sist.main.dao.HashTagVO;
+import com.sist.main.dao.HomeItemVO;
+import com.sist.tourplace.model.TourplaceVO;
+
 
 public class FoodDAO {
 	private static SqlSessionFactory ssf;
@@ -87,6 +91,14 @@ public class FoodDAO {
 		try{
 			session = ssf.openSession();
 			tlist = session.selectList("foodData",map);
+			
+			for(FoodVO fdvo : tlist) {
+				HomeItemVO vo = new HomeItemVO();
+				vo.setType(2);
+				vo.setNo(fdvo.getNo());
+				List<HashTagVO> htlist = session.selectList("getHTListByTypeNo", vo);
+				fdvo.setHashtags(htlist.subList(0, 5));
+			}
 		}catch(Exception ex){
 			
 		}finally{
