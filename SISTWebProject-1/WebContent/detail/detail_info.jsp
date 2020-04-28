@@ -62,10 +62,16 @@
 							</c:if>
 						</div>
 					</li>
-					<c:if test="${type==2 }">
-						<c:if test="${ss_member.memberId != null }">
+<%-- 						<c:if test="${ss_member.memberId != null }">
 							<a href="../reservation/reservation.do?no=${no}" class="btn btn-sm btn-danger">&nbsp;예약</a>
-						</c:if>				
+						</c:if>	 --%>	
+					<c:if test="${type==2 }">
+						<div id="reservebtn" 
+							<c:if test="${ empty ss_member }">style="display:inline; visibility:hidden;" </c:if>>
+							<a href="../reservation/reservation.do?no=${no}"><input type="button" class="btn btn-sm btn-danger"
+								style="display:inline;"
+								value="예약"/></a>	
+							</div>
 					</c:if>
 				</ul>
 			</div>
