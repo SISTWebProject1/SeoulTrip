@@ -1,6 +1,10 @@
 package com.sist.category.model;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.sist.detail.dao.DetailReviewVO;
+import com.sist.main.dao.HashTagVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +28,37 @@ public class FoodVO implements Serializable{
 	private int rescheck;
 	private int grade;
 	private String post;
+	private boolean wish;
+	private List<HashTagVO> hashtags;
+	private DetailReviewVO topRv;
+	private DetailReviewVO worstRv;
+	
+	
+	public boolean isWish() {
+		return wish;
+	}
+	public void setWish(boolean wish) {
+		this.wish = wish;
+	}
+	public List<HashTagVO> getHashtags() {
+		return hashtags;
+	}
+	public void setHashtags(List<HashTagVO> hashtags) {
+		this.hashtags = hashtags;
+	}
+	public DetailReviewVO getTopRv() {
+		return topRv;
+	}
+	public void setTopRv(DetailReviewVO topRv) {
+		this.topRv = topRv;
+	}
+	public DetailReviewVO getWorstRv() {
+		return worstRv;
+	}
+	public void setWorstRv(DetailReviewVO worstRv) {
+		this.worstRv = worstRv;
+	}
+	
 	public int getNo() {
 		return no;
 	}
@@ -126,5 +161,4 @@ public class FoodVO implements Serializable{
 	public void setPost(String post) {
 		this.post = post;
 	}
-	
 }
