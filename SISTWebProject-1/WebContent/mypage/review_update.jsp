@@ -15,71 +15,53 @@
 	<div class="row d-flex align-items-center justify-content-center">
 		<div class="about-content col-lg-12">
 			<h1 class="text-white">리뷰 수정페이지</h1>
-			<p class="text-white link-nav">
-				<a href="index.html">Home </a> <span class="lnr lnr-arrow-right"></span>
-				<a href="archive.html"> Archive</a>
-			</p>
 		</div>
 	</div>
 </div>
 </section>
   <div class="container">
-    <h1 class="text-center">리뷰작성</h1>
     <div class="row">
-      <form action="../detail/detail_review_insert_ok.do" method="post" enctype="multipart/form-data">
+      <form action="../mypage/mypage_review_update_ok.do" method="post">
       <table class="table table-hover">
       	<tr>
           <th width=20% class="danger text-right">분류</th>
           <td width=80%>
-            <p> TYPE</p>
+            <p>${ type }</p>
           </td>
         </tr>
         <tr>
           <th width=20% class="danger text-right">장소이름</th>
           <td width=80%>
-             <p>제목</p>
+             <p>${ mrvo.tname }</p>
           </td>
         </tr>
          <tr>
-          <th width=20% class="danger text-right">이름</th>
+          <th width=20% class="danger text-right">ID</th>
           <td width=80%>
-            <p>이름</p>
-            <input type="hidden" name=no value=""/>
-			<input type="hidden" name=type value=""/>
-			<input type="hidden" name=memberid value=""/>
+            <p>${ id }</p>
+            <input type="hidden" name=id value="${id }">
+            <input type="hidden" name=reviewno value="${mrvo.reviewno }">
           </td>
         </tr>
    		<tr>
           <th width=20% class="danger text-right">리뷰제목 </th>
           <td width=80%>
-             <input type=text name=title size=100 class="input-sm" required>
+             <input type=text name=title size=100 class="input-sm" value="${mrvo.title }">
          </td>
         </tr>
         <tr>
-          <th width=20% class="danger text-right">작성날짜</th>
+          <th width=20% class="danger text-right">수정날짜</th>
           <td width=80%>
             <fmt:formatDate value="${now}" pattern="yyyy-MM-dd HH:mm:ss" var="today" />
             <c:out value="${today}"/>
             <input type="hidden" name=regdate value="${today}"/>
           </td>
         </tr>
-        <tr>
-          <th width=20% class="danger text-right">점수</th>
-          <td width=80%>
-            <select class="input-sm" name="grade" required>
-              <option>5</option>
-              <option>4</option>
-              <option>3</option>
-              <option>2</option>
-              <option>1</option>
-            </select>
-          </td>
-        </tr>
         
         <tr>
           <th width=20% class="danger text-right">내용</th>
           <td width=80%>
-            <textarea rows="8" cols="100" name=content required></textarea>
+            <textarea rows="8" cols="100" name=content required>${ mrvo.content }</textarea>
           </td>
         </tr>
         <tr>

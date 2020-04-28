@@ -36,9 +36,14 @@
 	</select>
 	
 	<select id="wishtList" parameterType="string" resultType="WishListVO_u">
-		SELECT * FROM
-		wishlist
-		WHERE memberId=#{memberId}
+		SELECT *FROM wishlist
+		WHERE memberId=#{id}
+
+	</select>
+	
+	<select id="mypage_wishlist_totalPage" parameterType="string" resultType="int">
+		select Trunc(count(*)/5) FROM wishlist
+		where memberId = #{memberId}
 	</select>
 	
 	
@@ -52,10 +57,19 @@
 		WHERE no=#{no }
 	</select>
 	
-	<select id="BookingListData" parameterType="string" resultType="BookingRestaurantVO_u">
-		SELECT * FROM bookingrestaurant
-		where memberId = #{id}
-		ORDER BY bookingnumber
+	<select id="BookingListData" parameterType="hashmap" resultType="BookingRestaurantVO_u">
+		SELECT bookingnumber,memberId,no,reservationdate,time,inwon,name,email,tel,num 
+		FROM (SELECT bookingnumber,memberId,no,reservationdate,time,inwon,name,email,tel,rownum as num 
+		FROM (SELECT bookingnumber,memberId,no,reservationdate,time,inwon,name,email,tel
+		FROM bookingrestaurant
+		WHERE memberId = #{id}
+		ORDER BY bookingnumber ))
+		WHERE num BETWEEN #{start} and #{end}
+	</select>
+	
+	<select id="bookingTotalPage" parameterType="string" resultType="int">
+		SELECT TRUNC(COUNT(*)/5) FROM bookingrestaurant
+		WHERE memberId = #{memberId}
 	</select>
 	
 	<select id="restaurant_reservation_Data" parameterType="int" resultType="com.sist.reservation.model.RestaurantVO">
@@ -77,5 +91,25 @@
 		WHERE memberId =#{id}
 	</select>
 	
+	<select id="reviewDetailData" parameterType="hashmap" resultType="ReviewVO_u">
+		SELECT reviewno,type,no,memberId,title,regdate,expdate,likecount,
+				groupId,groupStep,root,depth,content,grade,
+				(SELECT tname from TOURPLACE WHERE no= #{no}) as tname
+		FROM review
+		WHERE reviewno =#{reviewno}
+	</select>
+	
+	<update id="mypage_reviewUpdate" parameterType="ReviewVO_u">
+		UPDATE review SET
+		title = #{title},
+		content = #{content},
+		regdate = #{regdate}
+		WHERE reviewno = #{reviewno}
+	</update>
+	
+	<delete id ="mypage_wishlistDelete" parameterType="WishListVO_u">
+		DELETE FROM wishlist
+		WHERE memberId=#{memeberId} and no=#{no}
+	</delete>
 	
 </mapper>
