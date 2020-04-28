@@ -16,6 +16,8 @@
 		<typeAlias type="com.sist.detail.dao.DetailRankingRestaurantVO" alias="DetailRankResVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailRankingFestivalVO" alias="DetailRankFestivalVO"/>
 		<typeAlias type="com.sist.detail.dao.DetailReviewCountVO" alias="DetailReviewCountVO"/>
+		<typeAlias type="com.sist.detail.dao.Detail_Review_HashtagVO" alias="DetailReviewHashVO"/>
+		<typeAlias type="com.sist.detail.dao.DetailTagMappingVO" alias="DetailTagMappingVO"/>
 		
     	<typeAlias type="com.sist.main.dao.HomeItemVO" alias="HomeItemVO"/>
     	
@@ -24,12 +26,20 @@
 		<typeAlias type="com.sist.mypage.model.WishListVO_u" alias="WishListVO_u"/>
 		<typeAlias type="com.sist.mypage.model.PhotoVO_u" alias="PhotoVO_u"/>
 		<typeAlias type="com.sist.main.dao.HashTagVO" alias="HashTagVO"/>
+		<typeAlias type="com.sist.mypage.model.BookingRestaurantVO_u"/>
 		<typeAlias type="com.sist.member.model.MemberVO_c" alias="MemberVO_c"/>
 		<typeAlias type="com.sist.member.model.ZipcodeVO" alias="ZipcodeVO"/>
 		
 		<typeAlias type="com.sist.reservation.model.ReservationVO" alias="ReservationVO"/>
 		<typeAlias type="com.sist.reservation.model.MemberVO_r" alias="MemberVO_r"/>
 		<typeAlias type="com.sist.reservation.model.RestaurantVO" alias="RestaurantVO"/>
+		<typeAlias type="com.sist.reservation.model.TagVO" alias="TagVO"/>
+		<typeAlias type="com.sist.main.dao.ReviewReplyVO" alias="ReviewReplyVO"/>
+		<typeAlias type="com.sist.category.model.FoodTagDetailVO" alias="FoodTagDetailVO"/>
+		
+		<typeAlias type="com.sist.tourplace.model.TourplaceVO" alias="TourplaceVO"/>
+		<typeAlias type="com.sist.tourplace.model.TourplaceTagVO" alias="TourplaceTagVO"/>
+		<typeAlias type="com.sist.tourplace.model.TourplaceTagDetailVO" alias="TourplaceTagDetailVO"/>
 	</typeAliases>
 	
 	<environments default="development">
@@ -56,5 +66,6 @@
 		<mapper resource="com/sist/detail/dao/detailQna-mapper.xml"/>
 		<mapper resource="com/sist/member/model/member-mapper.xml"/>
 		<mapper resource="com/sist/reservation/model/reservation-mapper.xml"/>
+		<mapper resource="com/sist/tourplace/model/tourplace-mapper.xml"/>
 	</mappers>
 </configuration>

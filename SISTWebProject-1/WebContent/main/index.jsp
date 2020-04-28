@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -42,6 +43,7 @@
 <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Roboto:400,500" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+
 <style type="text/css">
 	h1,h2,h3,h4,h5,h6,a,p,button,input {
 		font-family: 'Nanum Gothic', sans-serif;
@@ -93,7 +95,7 @@
 						<li class="menu-active"><a href="../home/home.do">Home</a></li>
 						<li><a href="../category/tourplace.do">명소</a></li>
 						<li><a href="../category/food.do">음식점</a></li>
-					
+						<li><a href="../home/festivalList.do">축제</a></li>
 
             <li><a href="../detail/detail.do?type=1&no=198">DetailTest</a>
             <li><a href="../reservation/reservation.do?no=57">ReservationTest</a>
@@ -317,6 +319,8 @@
 	<script src="../js/detail/scrolling.js"></script>
 	<script src="../js/detail/selectBoard.js"></script>
 	<script src="../js/category.js"></script>
-  <script src="../js/search2.js"></script>
+    <script src="../js/search2.js"></script>
+    <script src="../js/reservation/jquery.validate.js"></script>
+    <script src="../js/reservation/jquery.validate.min.js"></script>
 </body>
 </html>
