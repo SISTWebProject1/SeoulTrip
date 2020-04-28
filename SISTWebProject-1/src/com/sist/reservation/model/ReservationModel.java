@@ -22,15 +22,21 @@ public class ReservationModel {
 
 		RestaurantVO vo=ReservationDAO.restaurantData(Integer.parseInt(no));
 		TagVO tvo=ReservationDAO.recommendTag(Integer.parseInt(no));
-		int tagcode=tvo.getTagcode();
+		try {
+			int tagcode=tvo.getTagcode();
+			System.out.println(tagcode);
+			List<RestaurantVO> list=ReservationDAO.getrestInfoTag(tagcode);// 받아온 tagcode로 레스토랑 3개 출력
+			request.setAttribute("list", list); 
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			System.out.println("태그없음");
+		}
+
 		
-		System.out.println(tagcode);
-		List<RestaurantVO> list=ReservationDAO.getrestInfoTag(tagcode);
 
 		request.setAttribute("today",today);
 		request.setAttribute("vo", vo); // 레스토랑 값 읽어오는 용도
 		request.setAttribute("tvo", tvo); // 추천해줄 레스토랑의 tagcode받아오는 용도
-		request.setAttribute("list", list); // 받아온 tagcode로 레스토랑 3개 출력
 		request.setAttribute("main_jsp", "../reservation/reservation.jsp");
 		return "../main/index.jsp";
 	}
