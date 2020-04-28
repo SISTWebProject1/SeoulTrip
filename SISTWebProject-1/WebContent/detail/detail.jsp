@@ -9,6 +9,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 $(function() {
+	$('#memberInfo').click(function(){
+		alert("로그인 성공");
+		$('#reviewbtn').show();
+		$('#qnabtn').show();
+		$('#reservebtn').css("visibility","visible");
+	});
+	
+	
 	var scroll = $('#reviewscroll').val();
 	if(scroll==1400){
 		window.scrollTo({top:scroll, behavior:'smooth'});
