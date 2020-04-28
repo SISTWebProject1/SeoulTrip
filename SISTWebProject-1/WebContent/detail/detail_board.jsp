@@ -10,10 +10,11 @@
 					<div class="Review-search" id="Review_Search">
 						<form class="example" action="#"
 							style="margin: auto; max-width: 300px">
-							<a href="../detail/detail.do?type=${type}&no=${no }&page=${page}">
+							<a href="../detail/detail.do?type=${type}&no=${no }&page=${page}&review=1">
 								<input type="button"
 								style="font-size: 30px; border: none; background: none; text-align: center;"
 								placeholder="Search Posts" value="review" id="Review" />
+								<input type="hidden" name=type id=reviewscroll value="${scroll}" />
 							</a>
 							<!-- onclick="javascript:history.back()" -->
 						</form>
@@ -40,7 +41,7 @@
 	Start Post Area
 	<section class="post-area"> -->
 		<div id="result">
-		<div class="row">
+		<div class="row" id="reviewlist">
 			<div class="col-lg-10">
 				<div class="single-widget search-widget">
 					<form class="example" action="#"
@@ -75,6 +76,12 @@
 					</c:forEach>
 
 					<div style="width: 100%; height: 200px;">${vo.content}</div>
+					
+		 			<c:forEach var="vo3" items="${hashlist }">
+						<c:if test="${vo.reviewno eq vo3.reviewno}">
+							<a href="../home/htitemlist.do?tagcode=${vo3.tagcode }"><input type="button" value="${vo3.tagname }" style="display:inline;"></a>
+						</c:if>	
+					</c:forEach> 
 					<div
 						class="primary-btn text-uppercase mt-15 btnclick" id="r${vo.reviewno}" data-no="${vo.reviewno}">continue Reading</div>
 					<div class="post-box" style="width: 100%" id='mouse_over'>

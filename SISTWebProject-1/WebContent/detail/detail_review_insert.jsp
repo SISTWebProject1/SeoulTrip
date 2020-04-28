@@ -66,7 +66,7 @@
         <tr>
           <th width=20% class="danger text-right">체험날짜</th>
           <td width=80%>
-            <input type=date name=expdate size=50 class="input-sm" required>
+            <input type=date name=expdate size=50 class="input-sm" max="${max}" required>
           </td>
         </tr>
         <tr>

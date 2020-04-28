@@ -39,6 +39,11 @@ public class DetailModel {
 		List<DetailReviewCountVO> rclist = new ArrayList<DetailReviewCountVO>();
 		List<String> tourtaglist = new ArrayList<String>();
 		List<String> restaglist = new ArrayList<String>();
+		List<String> tourtagCodelist = new ArrayList<String>();
+		List<String> restagCodelist = new ArrayList<String>();
+		
+		List<DetailTagMappingVO> tourplacetaglist = new ArrayList<DetailTagMappingVO>();
+		List<DetailTagMappingVO> restauranttaglist = new ArrayList<DetailTagMappingVO>();
 		String title = "";
 
 		
@@ -67,7 +72,14 @@ public class DetailModel {
 			typo.put("no", Integer.parseInt(no));
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
-			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+//			tourtaglist = dao.getTourTag(Integer.parseInt(no));
+			
+/*			tourtagCodelist = dao.getResTagCode(Integer.parseInt(no));
+			request.setAttribute("tagcodelist", tourtagCodelist);*/
+			
+			tourplacetaglist = dao.DetailTourtagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", tourplacetaglist);
+			
 			
 			Map test = new HashMap();
 			int rownum=1;
@@ -87,6 +99,14 @@ public class DetailModel {
 			worst = dao.getReviewWorst(test);
 			request.setAttribute("worst", worst);
 			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
+			
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", tourtaglist);
 			request.setAttribute("totalplace", totalplace);
@@ -94,6 +114,7 @@ public class DetailModel {
 			request.setAttribute("info", tvo);
 			request.setAttribute("title", tvo.getTname());
 			request.setAttribute("category", "명소");
+			
 		}else if(Integer.parseInt(type)==2){
 			rvo = dao.getRestaurantData(Integer.parseInt(no));
 			rrvo = dao.detailRankResData(Integer.parseInt(no));
@@ -118,13 +139,21 @@ public class DetailModel {
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
 			restaglist = dao.getResTag(Integer.parseInt(no));
-			
-			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("taglist", restaglist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rrvo);
 			System.out.println("음식 데이터");
+			
+			restauranttaglist = dao.DetailRestagmapper(Integer.parseInt(no));
+			request.setAttribute("alltaglist", restauranttaglist);
+			
 			Map test = new HashMap();
 			int rownum=1;
 			int max=dao.reviewMax(typo);
@@ -168,6 +197,14 @@ public class DetailModel {
 			typo.put("no", no);
 			totalpage = dao.getTotalReview(typo);
 			rclist = dao.getReviewCount(typo);
+			
+			List<Detail_Review_HashtagVO> hashlist = dao.DetailReviewHash(typo);
+			request.setAttribute("hashlist", hashlist);
+			List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+			request.setAttribute("imglist", imglist);
+			
+			List<String> allimglist = dao.DetailAllImages(typo);
+			request.setAttribute("allimglist", allimglist);
 			request.setAttribute("rclist", rclist);
 			request.setAttribute("totalplace", totalplace);
 			request.setAttribute("rank", rfvo);
@@ -214,10 +251,8 @@ public class DetailModel {
 		map.put("type", type);
 		map.put("start", start);
 		map.put("end", end);
-		
 		List<DetailReviewVO> list = dao.getReviewData(map);
-		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
-
+		
 		//X,Y 좌표 가져오기 
 //		DetailTourplaceVO vo = dao.getXYcoordinate(Integer.parseInt(no));
 		System.out.println(mapx);
@@ -229,8 +264,8 @@ public class DetailModel {
 		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
 		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
 		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
-	
-		
+		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
+		request.setAttribute("imglist", imglist);
 		request.setAttribute("type", type);
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);
@@ -239,7 +274,7 @@ public class DetailModel {
 		request.setAttribute("nearR", nearR);
 		request.setAttribute("nearF", nearF);
 
-		request.setAttribute("imglist", imglist);
+	
 		request.setAttribute("list", list);
 		
 		request.setAttribute("curpage", curpage);
@@ -254,7 +289,16 @@ public class DetailModel {
 
 		//request.setAttribute("banner_on", true);
 		//###############################################################
-		
+		String scroll = request.getParameter("review");
+		System.out.println(scroll);
+		if(scroll!=null){
+			scroll="1400";
+			request.setAttribute("scroll", scroll);
+		}
+			/*		if(scroll.equals("1")){
+			scroll="1800";
+			request.setAttribute("scroll", scroll);
+		}*/
 		//###############################################################
 		
 		MainDAO.addItemToCookies(request, response, Integer.parseInt(type), Integer.parseInt(no));
@@ -270,120 +314,5 @@ public class DetailModel {
 	}
 	
 	// ########################################################################### QNA 보드 입출력 관리 ######################
-	
-/*	@RequestMapping("detail/detail_qna_insert.do")
-	public String detail_qna_insert(HttpServletRequest request,HttpServletResponse response){
-		String no = request.getParameter("no");
-		String type = request.getParameter("type");
-		
-		DetailDAO dao = new DetailDAO();
-		DetailTourplaceVO tvo = new DetailTourplaceVO();
-		DetailRestaurantVO rvo = new DetailRestaurantVO();
-		DetailFestivalVO fvo = new DetailFestivalVO();
-		double mapx = 0;	
-		double mapy = 0;
-
-		String title = "";
-
-		Map typo = new HashMap();
-		
-		if(Integer.parseInt(type)==1){
-			tvo = dao.getTourplaceData(Integer.parseInt(no));
-			mapx = tvo.getMapx();
-			mapy = tvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
-			System.out.println("장소 데이터");
-			request.setAttribute("info", tvo);
-			request.setAttribute("title", tvo.getTname());
-			request.setAttribute("category", "명소");
-		}else if(Integer.parseInt(type)==2){
-			rvo = dao.getRestaurantData(Integer.parseInt(no));
-			mapx = rvo.getMapx();
-			mapy = rvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
-			System.out.println("음식 데이터");
-			request.setAttribute("info", rvo);
-			request.setAttribute("title", rvo.getRname());
-			request.setAttribute("category", "음식점");
-		}else if(Integer.parseInt(type)==3){
-			fvo = dao.getFestivalData(Integer.parseInt(no));
-			mapx = fvo.getMapx();
-			mapy = fvo.getMapy();
-			typo.put("type", type);
-			typo.put("no", no);
-			System.out.println("축제데이터");
-			request.setAttribute("info", fvo);
-			request.setAttribute("title", fvo.getFname());
-			request.setAttribute("category", "축제");
-		}
-	
-		System.out.println("질문게시판 작성");
-		
-		Map map = new HashMap();
-		map.put("no", no);
-		map.put("type", type);
-		
-		Map mapXY = new HashMap();
-		mapXY.put("mapx", mapx);
-		mapXY.put("mapy", mapy);
-//		
-		List<DetailTourplaceVO> nearT = dao.getNearTourplace(mapXY);
-		List<DetailRestaurantVO> nearR = dao.getNearRestaurant(mapXY);
-		List<DetailFestivalVO> nearF = dao.getNearFestival(mapXY);
-		List<Detail_Review_PhotoVO> imglist = dao.getImageForReview(Integer.parseInt(no));
-
-		request.setAttribute("imglist", imglist);
-		request.setAttribute("type", type);
-		request.setAttribute("mapx", mapx);
-		request.setAttribute("mapy", mapy);
-		request.setAttribute("no", no);
-		request.setAttribute("nearT", nearT);
-		request.setAttribute("nearR", nearR);
-		request.setAttribute("nearF", nearF);
-		//################################################################################## info data 출력
-		
-		
-		request.setAttribute("detail_board_jsp","../detail/detail_qna_insert.jsp");
-		request.setAttribute("main_jsp", "../detail/detail.jsp");
-		return "../main/index.jsp";
-	}
-	
-	@RequestMapping("detail/detail_qna_insert_ok.do")
-	public String detail_qna_insert_ok(HttpServletRequest request, HttpServletResponse response){
-		try {
-			request.setCharacterEncoding("UTF-8");  
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		
-		LoginVO vo2 = (LoginVO) request.getSession().getAttribute("ss_member");
-		String no = request.getParameter("no");
-		String type = request.getParameter("type");
-		String memberid = vo2.getMemberId();
-		String name = request.getParameter("name");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
-		String pwd = request.getParameter("pwd");
-		System.out.println(memberid);
-		System.out.println("이 작업 번호는 " + no);
-		
-		
-		DetailQnaVO vo = new DetailQnaVO();
-		vo.setMemberid(memberid);
-		vo.setTitle(title);
-		vo.setContent(content);
-		vo.setPwd(Integer.parseInt(pwd));
-		vo.setNo(Integer.parseInt(no));
-		vo.setType(Integer.parseInt(type));
-		
-		// DAO로 전송 => DAO에서 오라클로 보내준다.
-		DetailDAO dao = new DetailDAO();
-		//insert 요청
-		dao.DetailQnaInsert(vo);
-	
-	return "redirect:../detail/detail.do?type="+type+"&no="+no;
-	}*/
 }
 	

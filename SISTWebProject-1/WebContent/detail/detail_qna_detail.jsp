@@ -15,8 +15,10 @@
 				<img src="../img/detail/qna_Board.jpg"
 					style="width: 700px; height: 150px" />
 			</div>
-		<div class="row text-center">
-			<table class="table">
+		<div class="row justify-content-md-center">
+			<div class="text-center">
+			<form>
+			<table class="table text-center">
 				<tr>
 					<th class="text-center danger" width=20%>번호</th>
 					<td class="text-center" width=30%>${vo.seq}</td>
@@ -47,8 +49,10 @@
 					</td>
 				</tr>
 			</table>
+			</form>
 		</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
