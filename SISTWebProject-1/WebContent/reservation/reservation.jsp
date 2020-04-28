@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 
@@ -48,8 +45,8 @@ span {
 }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-<script type="text/javascript" src="jquery.validate.min.js"></script>
-<script type="text/javascript" src="jquery.validate.js"></script>
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script> -->
 <script type="text/javascript">	
 $(function(){
 	$('#person').click(function(){
@@ -120,46 +117,48 @@ $(function(){
 		})
 	})
 
-	$('#email').keyup(function(){
-		var email=$('#email').val();
+	$('#emails').keyup(function(){
+		var email=$('#emails').val();
 		$.ajax({
 			type:'post',
 			url:'../reservation/reservation.do',
 			success:function(res)
 			{
+				$('#data-email').text(email);
 				$('#email2').val(email);
 			}
 			
 		})
-	}),
-	$('#form').validate({
-			rules : {
-				name : {required:true, minlength:3},
-				tel : {required:true, minlength:10},
-				email : {required:true,email:true, remote:"Validate"}
+	}) 
+	$("#form").validate({
+		rules : {
+			name : {required:true, minlength:3},
+			tel : {required:true, minlength:11},
+			email : {required:true,email:true},
+		},
+		messages :{
+			name : {
+				required: "예약하실 분의 성함을 입력하세요",
+				minlength: "0글자 이상 입력하세요!"
 			},
-			messages :{
-				name : {
-					required: "예약하실 분의 성함을 입력하세요",
-					minlength: jQuery.format("0글자 이상 입력하세요!")
-				},
-				tel : {
-					required: "전화번호를 입력하세요 (예)010-XXXX-XXXX",
-					minlength: jQuery.format("휴대폰번호 11자리를 정확히 입력하세요")
-				},
-				email: {
-					required: "이메일 형식을 지켜서 입력해주세요",
-					email: "이메일 형식을 지켜주세요 (예)sist@sist.co.kr"
-				}
+			tel : {
+				required: "연락을 받으실 휴대폰 번호를 입력해주세요 (예)010-XXXX-XXXX",
+				minlength: "휴대폰번호 11자리를 정확히 입력하세요"
 			},
-			submitHandler:function(frm){
-				frm.submit();
-			},
-			success:function(e)
-			{
-				
+			email: {
+				required: "이메일 형식을 지켜서 입력해주세요  (예)sist@sist.co.kr",
+				email: "연락받으실 이메일 주소를 정확히 입력해주세요"
 			}
-		});
+		},
+		submitHandler:function(frm){
+			frm.submit();
+		},
+		success:function(e)
+		{
+			
+		}
+	});    
+	
 	});	
 
 </script>
@@ -169,8 +168,8 @@ $(function(){
 
 <body>
 <!-- start banner Area -->
-	<section class="banner-area relative">
-		<div class="overlay overlay-bg"></div>
+		<section class="banner-area relative">
+			<div class="overlay overlay-bg"></div>
 		<div class="container">
 			<div class="row d-flex align-items-center justify-content-center">
 				<div class="about-content col-lg-12">
@@ -276,7 +275,7 @@ $(function(){
 						<div class="booking-form col-md-6" style="width:100%;margin-left:10px; margin-top:5px;">
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약인원</span>
-											<select class="form-control" id="person" >
+											<select class="form-control" id="person" name="person">
 												<option selected disabled >인원을 선택해주세요</option>
 											<c:forEach var="i" begin="1" end="10">
 												<option>${i}</option>
@@ -289,7 +288,7 @@ $(function(){
 								
 										<div class="form-group col-sm-6">
 											<span class="form-label">예약시간</span>
-											<select class="form-control" id="time" >
+											<select class="form-control" id="time" name="time" >
 												<option selected disabled>시간을 선택해주세요</option>
 											<c:forEach var="i" begin="11" end="18">
 												<option>${i}:00</option>		
@@ -302,7 +301,7 @@ $(function(){
 									<div class="row" >
 									<div class="col-sm-12">
 										<div class="form-group col-sm-12">
-											<input class="form-control" type="date" id="date"  min="${today }" required>
+											<input class="form-control" type="date" id="date" name="date" min="${today }" >
 											<span class="form-label">예약날짜</span>
 										</div>
 									</div>
@@ -312,14 +311,14 @@ $(function(){
 								<div class="row">	
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="text" id="name"  required>
+											<input class="form-control" type="text" id="name" name="name" >
 											<span class="form-label">예약자명</span>
 										</div>
 									</div>
 									
 									<div class="col-md-6">
 										<div class="form-group">
-											<input class="form-control" type="tel" id="tel" required>
+											<input class="form-control" type="tel" id="tel" name="tel" >
 											<span class="form-label">전화번호</span>
 										</div>
 									</div>
@@ -329,7 +328,7 @@ $(function(){
 								<div class="row">
 									<div class="col-md-12">
 										<div class="form-group">
-											<input  class="form-control" id="email" type="email" required>
+											<input  class="form-control" id="emails" type="email" name="email" 	>
 											<span class="form-label">Email</span>
 										</div>
 									</div>							
@@ -365,11 +364,12 @@ $(function(){
 			<%-- ==========================================Ajax출력단========================================== --%>						
 			<div class="section">		
 					 <div class="booking-form col-md-6 col-md-offset-0" id="result" style="margin-left:15px" ">
-						 <div class="row">예약자명   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-name"></b> </div>
-						 <div class="row" >전화번호   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-tel"></b></div>
-						 <div class="row" >예약시간  &nbsp;&nbsp;  | &nbsp;&nbsp; <b id="data-time"></b></div>
-						 <div class="row" >예약인원   &nbsp;&nbsp; | &nbsp;&nbsp;<b id="data-person"></b></div>
-						 <div class="row" >예약날짜   &nbsp;&nbsp; | &nbsp;&nbsp; <b id="data-date"></b></div>
+						 <div class="row" >예약인원   &nbsp;<b id="data-person"></b></div>
+						 <div class="row" >예약시간  &nbsp;&nbsp;   &nbsp;&nbsp; <b id="data-time"></b></div>
+						 <div class="row" >예약날짜   &nbsp;&nbsp;  &nbsp;&nbsp; <b id="data-date"></b></div>
+						 <div class="row">예약자명   &nbsp;&nbsp;  &nbsp;&nbsp; <b id="data-name"></b> </div>
+						 <div class="row" >전화번호   &nbsp;&nbsp;  &nbsp;&nbsp; <b id="data-tel"></b></div>
+						 <div class="row">E-MAIL  &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp; <b id="data-email"></b></div>
 					</div>
 			</div>
 <!-- ==================================================================================================예약단 -->	
@@ -449,7 +449,7 @@ $(function(){
 
 	</script>
 
-	<script src="jquery.min.js"></script>
+
 	<script>
 		$('.form-control').each(function () {
 			floatedLabel($(this));
