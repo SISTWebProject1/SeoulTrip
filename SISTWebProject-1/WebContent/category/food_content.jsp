@@ -111,9 +111,9 @@
 	</h3>
 	<div class="row">
 		<c:forEach var="vo" items="${list }">
-			<div class="col-lg-3 col-md-3">
+			<div class="col-lg-3 col-md-3" >
 				<div class="single-post-item short">
-					<figure> <a href="foodtag_content.do"><img
+					<figure> <a href="foodtag_content.do"><img style="height:120px; width: 100%;"
 						class="post-img img-fluid" src="${vo.rphoto }"
 						alt=""></a> </figure>
 					<div class="heart">
@@ -213,7 +213,7 @@
 			<c:forEach var="vo" items="${list }">
 				<div class="cate_body">
 					<div class="col-lg-4 col-md-4" style="height: 200px">
-							<a href=""><img class="post-img img-fluid" alt="음식점사진"
+							<a href="../detail/detail.do?type=2&no=${ vo.no }"><img class="post-img img-fluid" alt="음식점사진"
 							style="border-radius: 10px 10px 10px 10px;"
 							src="${vo.rphoto }"></a>
 							<div class="heart">

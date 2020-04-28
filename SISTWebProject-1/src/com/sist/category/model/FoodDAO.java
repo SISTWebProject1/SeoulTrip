@@ -66,9 +66,9 @@ public class FoodDAO {
 		return taglist;
 	}
 	
-	public static List<FoodTagDetailVO> foodTagDetailData(Map map){
+	public static List<FoodVO> foodTagDetailData(Map map){
 		SqlSession session = null;
-		List<FoodTagDetailVO> tlist = new ArrayList<FoodTagDetailVO>();
+		List<FoodVO> tlist = new ArrayList<FoodVO>();
 		try{
 			session = ssf.openSession();
 			tlist = session.selectList("foodTagDetailData",map);
@@ -81,9 +81,9 @@ public class FoodDAO {
 		return tlist;
 	}
 	
-	public static List<FoodTagDetailVO> foodData(Map map){
+	public static List<FoodVO> foodData(Map map){
 		SqlSession session = null;
-		List<FoodTagDetailVO> tlist = new ArrayList<FoodTagDetailVO>();
+		List<FoodVO> tlist = new ArrayList<FoodVO>();
 		try{
 			session = ssf.openSession();
 			tlist = session.selectList("foodData",map);
@@ -102,7 +102,7 @@ public class FoodDAO {
 		
 		try {
 			session = ssf.openSession();
-			foodtagtotal = session.selectOne("foodTagTotalPage"); /*,foodtagtotalcode*/
+			foodtagtotal = session.selectOne("foodTagTotalPage");
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 		} finally {
@@ -110,6 +110,23 @@ public class FoodDAO {
 				session.close();
 		}
 		return foodtagtotal;                                                                                                                                                                                                                                                                                                                            
+	}
+	
+	public static FoodTagVO getFoodTagVO(int tagcode) {
+		SqlSession ss = null;
+		FoodTagVO vo = new FoodTagVO();
+		
+		try {
+			ss = ssf.openSession();
+			vo = ss.selectOne("getFoodTagVO", tagcode);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(ss!=null) ss.close();
+		}
+		
+		return vo;
 	}
 }
 	
