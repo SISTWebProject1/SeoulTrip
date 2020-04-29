@@ -9,7 +9,7 @@
 <script type="text/javascript">
 $(function(){
 	$('.to_page').click(function(){
-		let targetpage = $(this).atrr('page');
+		let targetpage = $(this).attr('page');
 		$('#targetpage').attr('page',targetpage);
 		$('#targetpage').prop('checked',false);
 		$('#targetpage').click();

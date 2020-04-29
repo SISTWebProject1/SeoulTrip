@@ -34,11 +34,18 @@ public class ReservationModel {
 
 		
 
-		request.setAttribute("today",today);
-		request.setAttribute("vo", vo); // 레스토랑 값 읽어오는 용도
-		request.setAttribute("tvo", tvo); // 추천해줄 레스토랑의 tagcode받아오는 용도
-		request.setAttribute("main_jsp", "../reservation/reservation.jsp");
-		return "../main/index.jsp";
+		double mapX=vo.getMapX();
+	      double mapY=vo.getMapY();
+	      System.out.println(mapX);
+	      System.out.println(mapY);
+	      request.setAttribute("today",today);
+	      request.setAttribute("vo", vo); // 레스토랑 값 읽어오는 용도
+	      request.setAttribute("tvo", tvo); // 추천해줄 레스토랑의 tagcode받아오는 용도
+	      request.setAttribute("mapX", mapX);
+	      request.setAttribute("mapY", mapY);
+	      request.setAttribute("main_jsp", "../reservation/reservation.jsp");
+	      return "../main/index.jsp";
+
 	}
 	
 	@RequestMapping("reservation/reserve_ok.do")
