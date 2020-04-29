@@ -23,7 +23,7 @@
 							<section class="post-area">
 								<div class="detail_foodset">
 									<div class="row food-catetop" style="height: auto;">
-										<c:forEach var="fvo" items="${ flist }">
+										<c:forEach var="fvo" items="${ fdlist }">
 											<div class="col-lg-3 col-md-3">
 												<div class="single-post-item short">
 													<figure>

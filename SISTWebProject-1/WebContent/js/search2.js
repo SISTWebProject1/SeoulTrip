@@ -1,9 +1,5 @@
 $(function(){
 	
-	$('body').click(function(){
-		$('#search_result').hide();
-	});
-	
 	$('input[name="search2"]').addClass('search2');
 	
 	$('body').prepend('<div id="search_result" style="width:517px;height:500px;position:fixed;z-index:10;overflow:auto;">'+
@@ -14,7 +10,18 @@ $(function(){
 					+'</div>');
 	$('#search_result').hide();
 	
+	
+	$('body').prepend('<div id="forSearchHide" style="width:100%;height:100%;position:fixed;"></div>')
+	$('#forSearchHide').hide();
+	$('#forSearchHide').click(function(){
+		$(this).css('z-index',-1);
+		$('#search_result').hide();
+	});
+	
 	$('#header .search2').click(function(){
+		$('#forSearchHide').css('z-index',9);
+		$('#forSearchHide').show();
+		
 		$('#search_result').css('position','fixed');
 		$('#search_result').offset({
 			top : $(this).offset().top + 90,
@@ -54,6 +61,9 @@ $(function(){
 	});
 	
 	$('.main-banner .search2').click(function(){
+		$('#forSearchHide').css('z-index',9);
+		$('#forSearchHide').show();
+		
 		$('#search_result').css('position','fixed');
 		$('#search_result').offset({
 			top : $(this).offset().top + 50,
