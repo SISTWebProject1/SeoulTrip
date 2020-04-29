@@ -19,5 +19,6 @@
 				<br>
 			</div>
 			</c:forEach>
+			<input type="checkbox" class="check" id="targetpage" style="display: none;" checked/>
 		</div>
 	</div>

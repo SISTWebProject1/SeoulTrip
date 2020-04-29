@@ -89,12 +89,10 @@ public class FoodModel {
 			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
 			   tmap.put("grade", max);
 			   DetailReviewVO worstRv = dtdao.getReviewWorst(tmap);
-			   
 			   vo.setTopRv(topRv);
 			   vo.setWorstRv(worstRv);
-			   
 		   }
-			   
+			
 		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1; 
 		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -130,7 +128,8 @@ public class FoodModel {
 		return "../main/index.jsp";
 	}
 	@RequestMapping("category/foodtag_content.do")
-	public String category_foodtag(HttpServletRequest request, HttpServletResponse response){		
+	public String category_foodtag(HttpServletRequest request, HttpServletResponse response){
+			
 		List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
 		 try {
 			 wishlist = MainDAO.getWishListsByMemberId(((LoginVO)(request.getSession().getAttribute("ss_member"))).getMemberId());
@@ -138,8 +137,9 @@ public class FoodModel {
 				
 		// 태그 페이지
 		 String page=request.getParameter("page");
-		   if(page==null || page.length() == 0)
+		   if(page == null || page.length() == 0)
 			   page="1";
+		   System.out.println(page);
 		   int curpage=Integer.parseInt(page);
 		   int rowSize=10;
 		   int start=(rowSize*curpage)-(rowSize-1);
@@ -186,7 +186,7 @@ public class FoodModel {
 				   if(vo.getNo()==wlvo.getNo() && wlvo.getType()==2) vo.setWish(true);
 			   }
 			
-				DetailDAO dtdao = new DetailDAO();
+			   DetailDAO dtdao = new DetailDAO();
 			   
 			   tmap.clear();
 			   tmap.put("type", 2);
@@ -195,7 +195,7 @@ public class FoodModel {
 			   int min = dtdao.reviewMin(tmap);
 			   int max = dtdao.reviewMax(tmap);
 			   
-			   tmap.put("numm", 2);
+			   tmap.put("numm", 1);
 			   tmap.put("grade", min);
 			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
 			   tmap.put("grade", max);
@@ -203,8 +203,8 @@ public class FoodModel {
 			   
 			   vo.setTopRv(topRv);
 			   vo.setWorstRv(worstRv);
+			   
 		   }
-		   System.out.println(tlist);
 		   
 		   
 		   final int BLOCK=10;
@@ -220,7 +220,7 @@ public class FoodModel {
 		   request.setAttribute("tagtotalpage", tagtotalpage);
 		   request.setAttribute("BLOCK", BLOCK);
 		   request.setAttribute("startPage", startPage);
-		   request.setAttribute("endPage", endPage);
+		   request.setAttribute("endPage", endPage); 
 		   request.setAttribute("allPage", allPage);
 		   
 		   

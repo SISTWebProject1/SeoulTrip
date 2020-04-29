@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -9,7 +10,7 @@
 		<section class="post-area">
 					<div class="col-lg-12">
 						<h3>
-							<p>${ (title eq null) ? "서울의 음식점" : title }</p>
+							<p>${ (tagvo.tagname eq null) ? "서울의 음식점" : tagvo.tagname }</p>
 						</h3>
 						<div class="body_main_set">
 							<div class="row">
@@ -37,9 +38,9 @@
 												<div class="body_main_text_info_reviewNum">&nbsp;${ vo.rank }건의
 													리뷰</div>
 												<div class="body_main_text_info_foodtype">
-<%-- 													<c:forEach var="hashtag" items="${ vo.hashtags }">
+												<c:forEach var="hashtag" items="${ vo.hashtags }">
 														<a class="btn btn-sm p-0" href="../home/htitemlist.do?tagcode=${ hashtag.tagcode }">#${ hashtag.tagname }</a>
-													</c:forEach> --%>
+													</c:forEach>
 												</div>
 												<div class="body_main_text_info_foodtype">가격대:${vo.price }</div>
 											</div>

@@ -32,7 +32,7 @@ $(function () {
 			error: function () {
 				alert("오류");
 			}
-		})
+		});
      });
 });
 </script>
