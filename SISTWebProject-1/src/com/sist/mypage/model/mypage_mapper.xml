@@ -28,6 +28,7 @@
 		FROM review
 		WHERE memberId= #{id}))
 		where num BETWEEN #{start} and #{end} 
+		ORDER by regdate DESC, expdate DESC
 	</select>
 	
 	<select id ="reviewCount" parameterType="string" resultType="int">
