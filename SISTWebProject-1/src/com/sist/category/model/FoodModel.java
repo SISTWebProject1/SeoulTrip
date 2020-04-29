@@ -85,9 +85,9 @@ public class FoodModel {
 			   int max = dtdao.reviewMax(tmap);
 			   
 			   tmap.put("numm", 1);
-			   tmap.put("grade", min);
-			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
 			   tmap.put("grade", max);
+			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
+			   tmap.put("grade", min);
 			   DetailReviewVO worstRv = dtdao.getReviewWorst(tmap);
 			   vo.setTopRv(topRv);
 			   vo.setWorstRv(worstRv);
@@ -196,9 +196,9 @@ public class FoodModel {
 			   int max = dtdao.reviewMax(tmap);
 			   
 			   tmap.put("numm", 1);
-			   tmap.put("grade", min);
-			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
 			   tmap.put("grade", max);
+			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
+			   tmap.put("grade", min);
 			   DetailReviewVO worstRv = dtdao.getReviewWorst(tmap);
 			   
 			   vo.setTopRv(topRv);

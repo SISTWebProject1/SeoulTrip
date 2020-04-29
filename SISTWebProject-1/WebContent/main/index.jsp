@@ -97,8 +97,8 @@
 						<li><a href="../category/food.do">음식점</a></li>
 						<li><a href="../home/festivalList.do">축제</a></li>
 
-            <li><a href="../detail/detail.do?type=1&no=198">DetailTest</a>
-            <li><a href="../reservation/reservation.do?no=57">ReservationTest</a>
+          <!--   <li><a href="../detail/detail.do?type=1&no=198">DetailTest</a>
+            <li><a href="../reservation/reservation.do?no=57">ReservationTest</a> -->
 						<li class="menu-has-children" id="header_mypage" 
 							<c:if test="${ empty ss_member }">style="display:none;"</c:if>><a 
 							href="../mypage/profile.do">마이페이지</a>

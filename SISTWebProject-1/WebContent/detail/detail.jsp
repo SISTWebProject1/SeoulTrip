@@ -10,7 +10,7 @@
 <script type="text/javascript">
 $(function() {
 	$('#memberInfo').click(function(){
-		alert("로그인 성공");
+
 		$('#reviewbtn').show();
 		$('#qnabtn').show();
 		$('#reservebtn').css("visibility","visible");

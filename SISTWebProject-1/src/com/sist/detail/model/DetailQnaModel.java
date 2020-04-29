@@ -142,7 +142,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(rvo.getNo()==wlvo.getNo() && 2 ==wlvo.getType()) {
 					rvo.setWish(true);
 					break;
 				}
@@ -198,7 +198,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(fvo.getNo()==wlvo.getNo() && 3 ==wlvo.getType()) {
 					fvo.setWish(true);
 					break;
 				}
@@ -385,7 +385,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(rvo.getNo()==wlvo.getNo() && 2 ==wlvo.getType()) {
 					rvo.setWish(true);
 					break;
 				}
@@ -442,7 +442,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(vo2.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(fvo.getNo()==wlvo.getNo() && 3 ==wlvo.getType()) {
 					fvo.setWish(true);
 					break;
 				}
@@ -658,7 +658,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(rvo.getNo()==wlvo.getNo() && 2 ==wlvo.getType()) {
 					rvo.setWish(true);
 					break;
 				}
@@ -715,7 +715,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(fvo.getNo()==wlvo.getNo() && 3 ==wlvo.getType()) {
 					fvo.setWish(true);
 					break;
 				}
@@ -981,7 +981,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(rvo.getNo()==wlvo.getNo() && 2 ==wlvo.getType()) {
 					rvo.setWish(true);
 					break;
 				}
@@ -1035,7 +1035,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(fvo.getNo()==wlvo.getNo() && 3 ==wlvo.getType()) {
 					fvo.setWish(true);
 					break;
 				}
@@ -1254,7 +1254,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(rvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(rvo.getNo()==wlvo.getNo() && 2 ==wlvo.getType()) {
 					rvo.setWish(true);
 					break;
 				}
@@ -1312,7 +1312,7 @@ public class DetailQnaModel {
 				wishlist = MainDAO.getWishListsByMemberId(lvo.getMemberId());
 			} catch (Exception e1) {}
 			for(WishListVO_u wlvo : wishlist) {
-				if(fvo.getNo()==wlvo.getNo() && 1 ==wlvo.getType()) {
+				if(fvo.getNo()==wlvo.getNo() && 3 ==wlvo.getType()) {
 					fvo.setWish(true);
 					break;
 				}
