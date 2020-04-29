@@ -79,18 +79,22 @@ public class HomeModel {
 			e.printStackTrace();
 		}
 		
-		List<FestivalVO> flist = FestivalDAO.festivalDateList(date);
+		List<FestivalVO> fdlist = FestivalDAO.festivalDateList(date);
 		try {
 			LoginVO lvo = (LoginVO) request.getSession().getAttribute("ss_member");
 			String id = lvo.getMemberId();
 			
 			List<WishListVO_u> wishlist = MainDAO.getWishListsByMemberId(id);
-			for(FestivalVO tfvo : flist) {
+			for(FestivalVO tfvo : fdlist) {
+				System.out.println(tfvo.getFname()+":"+tfvo.getFmtStart()+"-"+tfvo.getFmtEnd());
 				for(WishListVO_u wlvo : wishlist) {
 					if(wlvo.getType()==3 && wlvo.getNo()==tfvo.getNo()) tfvo.setWish(true);
 				}
 			}
 		} catch (Exception e) {}
+		request.setAttribute("fdlist", fdlist);
+		
+		List<FestivalVO> flist = FestivalDAO.festivalAllList();
 		request.setAttribute("flist", flist);
 		
 		request.setAttribute("main_jsp", "../home/festivalList.jsp");

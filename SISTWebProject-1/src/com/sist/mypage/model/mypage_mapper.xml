@@ -28,6 +28,7 @@
 		FROM review
 		WHERE memberId= #{id}))
 		where num BETWEEN #{start} and #{end} 
+		ORDER by regdate DESC, expdate DESC
 	</select>
 	
 	<select id ="reviewCount" parameterType="string" resultType="int">
@@ -38,6 +39,7 @@
 	<select id="wishtList" parameterType="string" resultType="WishListVO_u">
 		SELECT *FROM wishlist
 		WHERE memberId=#{id}
+		ORDER BY regdate DESC
 
 	</select>
 	
