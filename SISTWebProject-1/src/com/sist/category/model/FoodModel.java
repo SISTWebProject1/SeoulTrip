@@ -5,8 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.detail.dao.DetailDAO;
+import com.sist.detail.dao.DetailReviewVO;
 import com.sist.main.dao.HomeItemVO;
+import com.sist.main.dao.LoginVO;
 import com.sist.main.dao.MainDAO;
+import com.sist.mypage.model.WishListVO_u;
 
 import java.util.*;
 
@@ -16,6 +20,11 @@ public class FoodModel {
 	@RequestMapping("category/food.do")
 	public String category_food(HttpServletRequest request, HttpServletResponse response) {
 		try{
+			 List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+			 try {
+				 wishlist = MainDAO.getWishListsByMemberId(((LoginVO)(request.getSession().getAttribute("ss_member"))).getMemberId());
+			 } catch (Exception e) {}
+			
 		 String page=request.getParameter("page");
 		   if(page==null)
 			   page="1";
@@ -62,7 +71,28 @@ public class FoodModel {
 			   vo.setGrade(temp.getGrade());
 			   vo.setRank(temp.getReviewCnt());
 			   
+			   for(WishListVO_u wlvo : wishlist) {
+				   if(vo.getNo()==wlvo.getNo() && wlvo.getType()==2) vo.setWish(true);
+			   }
+			   
+			   DetailDAO dtdao = new DetailDAO();
+			   
+			   Map tmap = new HashMap();
+			   tmap.put("type", 2);
+			   tmap.put("no", vo.getNo());
+			   
+			   int min = dtdao.reviewMin(tmap);
+			   int max = dtdao.reviewMax(tmap);
+			   
+			   tmap.put("numm", 1);
+			   tmap.put("grade", min);
+			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
+			   tmap.put("grade", max);
+			   DetailReviewVO worstRv = dtdao.getReviewWorst(tmap);
+			   vo.setTopRv(topRv);
+			   vo.setWorstRv(worstRv);
 		   }
+			
 		   final int BLOCK=10;
 		   int startPage=((curpage-1)/BLOCK*BLOCK)+1; 
 		   int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
@@ -98,11 +128,18 @@ public class FoodModel {
 		return "../main/index.jsp";
 	}
 	@RequestMapping("category/foodtag_content.do")
-	public String category_foodtag(HttpServletRequest request, HttpServletResponse response){		
-		 // 태그 페이지
+	public String category_foodtag(HttpServletRequest request, HttpServletResponse response){
+			
+		List<WishListVO_u> wishlist = new ArrayList<WishListVO_u>();
+		 try {
+			 wishlist = MainDAO.getWishListsByMemberId(((LoginVO)(request.getSession().getAttribute("ss_member"))).getMemberId());
+		 } catch (Exception e) {}
+				
+		// 태그 페이지
 		 String page=request.getParameter("page");
-		   if(page==null || page.length() == 0)
+		   if(page == null || page.length() == 0)
 			   page="1";
+		   System.out.println(page);
 		   int curpage=Integer.parseInt(page);
 		   int rowSize=10;
 		   int start=(rowSize*curpage)-(rowSize-1);
@@ -145,8 +182,29 @@ public class FoodModel {
 			   vo.setGrade(temp.getGrade());
 			   vo.setRank(temp.getReviewCnt());
 			   
+			   for(WishListVO_u wlvo : wishlist) {
+				   if(vo.getNo()==wlvo.getNo() && wlvo.getType()==2) vo.setWish(true);
+			   }
+			
+			   DetailDAO dtdao = new DetailDAO();
+			   
+			   tmap.clear();
+			   tmap.put("type", 2);
+			   tmap.put("no", vo.getNo());
+			   
+			   int min = dtdao.reviewMin(tmap);
+			   int max = dtdao.reviewMax(tmap);
+			   
+			   tmap.put("numm", 1);
+			   tmap.put("grade", min);
+			   DetailReviewVO topRv = dtdao.getReviewTop(tmap);
+			   tmap.put("grade", max);
+			   DetailReviewVO worstRv = dtdao.getReviewWorst(tmap);
+			   
+			   vo.setTopRv(topRv);
+			   vo.setWorstRv(worstRv);
+			   
 		   }
-		   System.out.println(tlist);
 		   
 		   
 		   final int BLOCK=10;
@@ -162,7 +220,7 @@ public class FoodModel {
 		   request.setAttribute("tagtotalpage", tagtotalpage);
 		   request.setAttribute("BLOCK", BLOCK);
 		   request.setAttribute("startPage", startPage);
-		   request.setAttribute("endPage", endPage);
+		   request.setAttribute("endPage", endPage); 
 		   request.setAttribute("allPage", allPage);
 		   
 		   

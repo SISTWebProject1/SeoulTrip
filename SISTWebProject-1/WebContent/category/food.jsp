@@ -11,16 +11,20 @@ $(function () {
 	$('.check').click(function() {
 		let foodtagcode = "data";
 		let tagnames = "data"; 
+		let targetpage;
 		
-	$('.check:checked').each(function(){
-    	foodtagcode +=","+$(this).val();
-    	tagnames += " | "+$(this).parent().text().trim();
-	});
+	if($(this).is(':checked') == false) targetpage = 1;
+	else targetpage = $('#targetpage').attr('page');
+		
+	$('.check:checked:not(:last)').each(function(){
+		foodtagcode += ","+$(this).val();
+	   	tagnames += " | "+$(this).parent().text().trim();
+     });
     	
 		$.ajax({
 			type:"POST",
 			url:"foodtag_content.do",
-			data:{"foodtagcode":foodtagcode,"tagnames":tagnames},
+			data:{"foodtagcode":foodtagcode,"tagnames":tagnames,"page":targetpage},
 			success:function(res)
 			{
 				$('#foodtag').html(res);
@@ -28,7 +32,7 @@ $(function () {
 			error: function () {
 				alert("오류");
 			}
-		})
+		});
      });
 });
 </script>

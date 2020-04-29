@@ -3,9 +3,13 @@ package com.sist.member.model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.sist.controller.Controller;
 import com.sist.controller.RequestMapping;
+import com.sist.main.dao.LoginVO;
+import com.sist.main.dao.MainDAO;
+
 import java.util.*;
 
 @Controller
@@ -103,32 +107,10 @@ public class MemberModel {
 		
 		//insert
 		MemberDAO_c.memberInsert(vo);
-		return "redirect:../main/index.do";
-	}
-	
-	@RequestMapping("member/login.do")
-	public String member_login(HttpServletRequest request,HttpServletResponse response)
-	{
-		String memberid=request.getParameter("memberid"); //name값으로 읽어옴 name=id
-		String pwd=request.getParameter("pwd");
-		// DAO연결 하기
-		MemberVO_c vo=MemberDAO_c.memberLogin(memberid,pwd);
-		if(vo.getMsg().equals("OK")) // 둘다 맞았다면
-		{
-			HttpSession session=request.getSession();
-			session.setAttribute("memberid", memberid);
-			session.setAttribute("name", vo.getName());
-//			session.setAttribute("admin", vo.getAdmin()); // 로그인 하면서 admin인지 아닌지 계속 확인해야함
-		}
-		// DAO연결해서 나온값을 밑의 ../main/login_ok.jsp에 보냄
-		request.setAttribute("msg", vo.getMsg()); // msg 하나에 다 모아놨으니 msg
-		return "../main/login.jsp";
-	}
-	@RequestMapping("member/logout.do")
-	public String member_logout(HttpServletRequest request,HttpServletResponse response)
-	{
-		HttpSession session=request.getSession();
-		session.invalidate();
-		return "redirect:../main/main.do";
+		
+		LoginVO lvo=MainDAO.getLoginInfo(memberid, pwd);
+		request.getSession().setAttribute("ss_member", lvo);
+		
+		return "redirect:../home/home.do";
 	}
 }

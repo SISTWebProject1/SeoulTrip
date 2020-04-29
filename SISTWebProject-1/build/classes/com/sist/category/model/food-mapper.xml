@@ -2,31 +2,56 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sist.category.model.food-mapper">
 	<select id="foodListData" resultType="FoodVO" parameterType="java.util.Map">
-		SELECT no,rname,openhour,rphoto,price,rescheck,grade,num
-		FROM (SELECT no,rname,openhour,rphoto,price,rescheck,grade,rownum as num
-        FROM (SELECT no,rname,openhour,rphoto,price,rescheck,grade
-		FROM restaurant ORDER BY no ASC))
-		WHERE num BETWEEN #{start} AND #{end}
+        SELECT no,rname,rphoto,price,tel
+		FROM (SELECT no,rname,rphoto,price,rownum as tel
+        FROM (SELECT restaurant.no,rname,rphoto,price FROM restaurant,
+		(SELECT restaurant.no AS no, COUNT(*) AS cnt,
+		AVG(review.grade)*Log(10,COUNT(*)/10+10) AS average    
+		FROM restaurant, review
+		WHERE restaurant.no = review.no GROUP BY rname, restaurant.no
+		ORDER BY average DESC, cnt DESC) temp
+		WHERE restaurant.no = temp.no))
+		WHERE tel BETWEEN #{start} AND #{end}
 	</select>
 	
 	<select id="foodTotalPage" resultType="int">
-		SELECT CEIL(COUNT(*)/4.0) FROM restaurant
+		SELECT CEIL(COUNT(*)/10.0) FROM restaurant
 	</select>
 	
-	<select id="foodTagListData" resultType="com.sist.category.model.FoodTagVO" parameterType="java.util.Map">
-		SELECT * FROM restauranttag ORDER BY tagcode
+	<select id="foodTagListData" resultType="com.sist.category.model.FoodTagVO">
+		SELECT * FROM restauranttag ORDER BY tagname
 	</select>
 	
-	<select id="foodtagData" resultType="com.sist.category.model.FoodTagDetailVO" parameterType="java.util.Map">
-		SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade,y.rescheck 
-		FROM resttagmapper x
-		JOIN restaurant y ON x.rno=y.no
-		WHERE x.tagcode=#{foodtagcode} ORDER BY y.no;
+	<select id="getFoodTagVO" resultType="com.sist.category.model.FoodTagVO" parameterType="int">
+		SELECT * FROM restauranttag WHERE tagcode=#{tagcode}
 	</select>
 	
-	<select id="foodtagTotalPage" resultType="int" parameterType="java.util.Map">
-		SELECT CEIL(COUNT(*)/4.0) FROM (SELECT x.tagcode,y.no,y.rname,y.openhour,y.rphoto,y.price,y.rescheck,y.grade FROM resttagmapper x
-		JOIN restaurant y ON x.rno=y.no WHERE x.tagcode=#{foodtagcode});
+	<select id="foodTagDetailData" resultType="FoodVO" parameterType="java.util.Map">
+		CREATE OR REPLACE VIEW FOODTAG_CONTENT AS
+		SELECT fd1.no, rname, rphoto, price
+		FROM (SELECT DISTINCT y1.no,y1.rname,y1.rphoto,y1.price FROM resttagmapper x1
+		JOIN restaurant y1 ON x1.rno=y1.no
+		WHERE x1.tagcode IN (${tagcode})) fd1,
+		(SELECT fd2.no AS no, COUNT(*) AS cnt, AVG(NVL(review.grade,0))*Log(10,COUNT(*)/10+10) AS average    
+		FROM (SELECT DISTINCT y2.no,y2.rname,y2.rphoto,y2.price FROM resttagmapper x2
+		JOIN restaurant y2 ON x2.rno=y2.no
+		WHERE x2.tagcode IN (${tagcode})) fd2 LEFT OUTER JOIN review
+		ON type = 2 AND fd2.no = review.no
+		GROUP BY rname, fd2.no) temp
+		WHERE fd1.no = temp.no
+		ORDER BY average DESC, cnt DESC
+	</select>
+	
+	<select id="foodData" resultType="FoodVO" parameterType="java.util.Map">
+		SELECT no,rname,rphoto,price,tel
+		FROM (SELECT no,rname,rphoto,price,rownum as tel
+		FROM (SELECT no,rname,rphoto,price
+		FROM FOODTAG_CONTENT))
+		WHERE tel BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="foodTagTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/10.0) FROM FOODTAG_CONTENT
 	</select>
 
 </mapper>
