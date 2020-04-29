@@ -39,6 +39,7 @@
 	<select id="wishtList" parameterType="string" resultType="WishListVO_u">
 		SELECT *FROM wishlist
 		WHERE memberId=#{id}
+		ORDER BY regdate DESC
 
 	</select>
 	
